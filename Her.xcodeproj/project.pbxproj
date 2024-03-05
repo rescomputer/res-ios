@@ -14,6 +14,7 @@
 		18D289F42B9713FF008742FB /* HerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D289F32B9713FF008742FB /* HerTests.swift */; };
 		18D289FE2B9713FF008742FB /* HerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D289FD2B9713FF008742FB /* HerUITests.swift */; };
 		18D28A002B9713FF008742FB /* HerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D289FF2B9713FF008742FB /* HerUITestsLaunchTests.swift */; };
+		18D28A0E2B971574008742FB /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = 18D28A0D2B971574008742FB /* Vapi */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,8 @@
 		18D289F92B9713FF008742FB /* HerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D289FD2B9713FF008742FB /* HerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HerUITests.swift; sourceTree = "<group>"; };
 		18D289FF2B9713FF008742FB /* HerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		18D28A0F2B97178E008742FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		18D28A102B971B0A008742FB /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18D28A0E2B971574008742FB /* Vapi in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,8 +98,10 @@
 		18D289E12B9713FE008742FB /* Her */ = {
 			isa = PBXGroup;
 			children = (
+				18D28A0F2B97178E008742FB /* Info.plist */,
 				18D289E22B9713FE008742FB /* HerApp.swift */,
 				18D289E42B9713FE008742FB /* ContentView.swift */,
+				18D28A102B971B0A008742FB /* Config.xcconfig */,
 				18D289E62B9713FF008742FB /* Assets.xcassets */,
 				18D289E82B9713FF008742FB /* Preview Content */,
 			);
@@ -143,6 +149,9 @@
 			dependencies = (
 			);
 			name = Her;
+			packageProductDependencies = (
+				18D28A0D2B971574008742FB /* Vapi */,
+			);
 			productName = Her;
 			productReference = 18D289DF2B9713FE008742FB /* Her.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +224,9 @@
 				Base,
 			);
 			mainGroup = 18D289D62B9713FE008742FB;
+			packageReferences = (
+				18D28A0C2B971574008742FB /* XCRemoteSwiftPackageReference "ios" */,
+			);
 			productRefGroup = 18D289E02B9713FE008742FB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -297,6 +309,7 @@
 /* Begin XCBuildConfiguration section */
 		18D28A012B9713FF008742FB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 18D28A102B971B0A008742FB /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -360,6 +373,7 @@
 		};
 		18D28A022B9713FF008742FB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 18D28A102B971B0A008742FB /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -422,14 +436,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Her/Preview Content\"";
-				DEVELOPMENT_TEAM = N7PR2BW4AX;
+				DEVELOPMENT_TEAM = Y2V76WXBUQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Her/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "The app needs to access your microphone to chat.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -451,14 +467,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Her/Preview Content\"";
-				DEVELOPMENT_TEAM = N7PR2BW4AX;
+				DEVELOPMENT_TEAM = Y2V76WXBUQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Her/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "The app needs to access your microphone to chat.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -588,6 +606,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		18D28A0C2B971574008742FB /* XCRemoteSwiftPackageReference "ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/VapiAI/ios";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		18D28A0D2B971574008742FB /* Vapi */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18D28A0C2B971574008742FB /* XCRemoteSwiftPackageReference "ios" */;
+			productName = Vapi;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 18D289D72B9713FE008742FB /* Project object */;
 }
