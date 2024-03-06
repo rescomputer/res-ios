@@ -1,121 +1,180 @@
 import SwiftUI
-import AVFoundation
+import Vapi
+import Combine
 
-// MARK: - Vapi Service for API Integration
-class VapiService {
-    private let apiKey = "YOUR_API_KEY_HERE"
-    private let baseUrl = "https://api.vapi.com"
-    
-    static let shared = VapiService()
-    
-    private init() {}
-    
-    func startCall(withAssistantId assistantId: String, completion: @escaping (Result<String, Error>) -> Void) {
-        guard let url = URL(string: "\(baseUrl)/startCall") else { return }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue(apiKey, forHTTPHeaderField: "Authorization")
-        let body: [String: Any] = ["assistantId": assistantId]
-        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    completion(.failure(error))
-                    return
-                }
-                
-                guard let data = data, let responseString = String(data: data, encoding: .utf8) else {
-                    completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
-                    return
-                }
-                
-                completion(.success(responseString))
-            }
-        }.resume()
+class CallManager: ObservableObject {
+    enum CallState {
+        case started, loading, ended
     }
-    
-    // Add other methods as needed, e.g., stopCall
-}
 
-// MARK: - Audio Monitor for Microphone Input
-class AudioMonitor {
-    static let shared = AudioMonitor()
-    private var audioEngine: AVAudioEngine?
-    private var inputNode: AVAudioInputNode?
-    
-    private init() {}
-    
-    func requestMicrophoneAccess(completion: @escaping (Bool) -> Void) {
-        AVAudioSession.sharedInstance().requestRecordPermission { granted in
-            DispatchQueue.main.async {
-                completion(granted)
+    @Published var callState: CallState = .ended
+    var vapiEvents = [Vapi.Event]()
+    private var cancellables = Set<AnyCancellable>()
+    let vapi: Vapi
+
+    init() {
+        vapi = Vapi(
+            publicKey: "a9a1bf8c-c389-490b-a82b-29fe9ba081d8"
+        )
+    }
+
+    func setupVapi() {
+        vapi.eventPublisher
+            .sink { [weak self] event in
+                self?.vapiEvents.append(event)
+                switch event {
+                case .callDidStart:
+                    self?.callState = .started
+                case .callDidEnd:
+                    self?.callState = .ended
+                case .speechUpdate:
+                    print(event)
+                case .conversationUpdate:
+                    print(event)
+                case .functionCall:
+                    print(event)
+                case .hang:
+                    print(event)
+                case .metadata:
+                    print(event)
+                case .transcript:
+                    print(event)
+                case .error(let error):
+                    print("Error: \(error)")
+                }
             }
+            .store(in: &cancellables)
+    }
+
+    @MainActor
+    func handleCallAction() async {
+        if callState == .ended {
+            await startCall()
+        } else {
+            endCall()
         }
     }
-    
-    func startMonitoringMicrophone() {
-        audioEngine = AVAudioEngine()
-        guard let audioEngine = audioEngine else { return }
-        
-        inputNode = audioEngine.inputNode
-        let recordingFormat = inputNode!.inputFormat(forBus: 0)
-        inputNode!.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer, when) in
-            // Placeholder for analysis logic
-            // Consider triggering Vapi API call here
-        }
-        
+
+    @MainActor
+    func startCall() async {
+        callState = .loading
+        let assistant = [
+//            "model": [
+//                "provider": "groq",
+//                "model": "mixtral-8x7b-32768",
+//                "messages": [
+//                    ["role":"system", "content":"You are an assistant."]
+//                ],
+//            ],
+//            "firstMessage": "Hey there",
+//            "voice": "jennifer-playht"
+            "model": [
+                "provider": "openai",
+                "model": "gpt-4",
+                "messages": [
+                    ["role":"system", "content":"You are an assistant."]
+                ],
+            ],
+            "firstMessage": "Hello",
+            "voice": "jennifer-playht"
+        ] as [String : Any]
         do {
-            try audioEngine.start()
+            try await vapi.start(assistant: assistant)
         } catch {
-            print("Could not start audio engine: \(error)")
+            print("Error starting call: \(error)")
+            callState = .ended
         }
     }
-    
-    func stopMonitoringMicrophone() {
-        audioEngine?.stop()
-        inputNode?.removeTap(onBus: 0)
-        // Handle stopping Vapi call here if needed
+
+    func endCall() {
+        vapi.stop()
     }
 }
 
-// MARK: - SwiftUI ContentView
 struct ContentView: View {
-    @State private var isMonitoring = false
-    
+    @StateObject private var callManager = CallManager()
+
     var body: some View {
-        VStack {
-            Text(isMonitoring ? "Monitoring..." : "Start Monitoring")
-                .padding()
-                .foregroundColor(.white)
-                .background(isMonitoring ? Color.red : Color.blue)
-                .clipShape(Capsule())
-                .onTapGesture {
-                    if isMonitoring {
-                        AudioMonitor.shared.stopMonitoringMicrophone()
-                    } else {
-                        AudioMonitor.shared.requestMicrophoneAccess { granted in
-                            if granted {
-                                AudioMonitor.shared.startMonitoringMicrophone()
-                            } else {
-                                print("Microphone access denied.")
-                            }
-                        }
+        ZStack {
+            // Background gradient
+            LinearGradient(gradient: Gradient(colors: [
+                Color(red: 221/255, green: 102/255, blue: 58/255),
+                Color(red: 221/255, green: 102/255, blue: 58/255)]), startPoint: .top, endPoint: .bottom)
+                .edgesIgnoringSafeArea(.all)
+
+            VStack(spacing: 20) {
+                Spacer()
+                
+                Image(systemName: "waveform")
+                    .font(.system(size: 112))
+                    .foregroundColor(.white)
+                    .opacity(0.9)
+
+//                Spacer()
+                
+                Text(callManager.callStateText)
+                    .font(.title2)
+                    .foregroundColor(.white)
+                    .padding(.top, 30)
+
+//                Text(callManager.callStateText)
+//                    .font(.title)
+//                    .fontWeight(.semibold)
+//                    .foregroundColor(.white)
+//                    .padding()
+//                    .background(callManager.callStateColor)
+//                    .cornerRadius(10)
+
+                Spacer()
+
+                Button(action: {
+                    Task {
+                        await callManager.handleCallAction()
                     }
-                    isMonitoring.toggle()
+                }) {
+                    Text(callManager.buttonText)
+                        .font(.title3)
+                        .fontWeight(.medium)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(.white.opacity(0.2))
+                        .cornerRadius(10)
                 }
+                .disabled(callManager.callState == .loading)
+                .padding(.horizontal, 40)
+
+                Spacer()
+            }
         }
-        .padding()
+        .onAppear {
+            callManager.setupVapi()
+        }
     }
 }
 
-@main
-struct MyApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
+extension CallManager {
+    var callStateText: String {
+        switch callState {
+        case .started: return "Connected"
+        case .loading: return "Connecting..."
+        case .ended: return "Chat with an AI back-and-forth"
         }
+    }
+
+    var callStateColor: Color {
+        switch callState {
+        case .started: return .green.opacity(0.8)
+        case .loading: return .orange.opacity(0.8)
+        case .ended: return .gray.opacity(0.8)
+        }
+    }
+
+    var buttonText: String {
+        callState == .loading ? "Loading..." : (callState == .ended ? "Start Conversation" : "End Conversation")
+    }
+
+    var buttonColor: Color {
+        callState == .loading ? .gray : (callState == .ended ? .green : .red)
     }
 }
