@@ -1,6 +1,36 @@
 import SwiftUI
 import Vapi
 import Combine
+import AVKit
+
+struct VideoPlayerView: UIViewRepresentable {
+    var videoURL: URL
+    
+    func makeUIView(context: Context) -> UIView {
+        let containerView = UIView(frame: .zero)
+        
+        // Initialize AVPlayer
+        let player = AVPlayer(url: videoURL)
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = containerView.bounds
+        playerLayer.videoGravity = .resizeAspectFill
+        containerView.layer.addSublayer(playerLayer)
+        
+        // Loop the video
+        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: player.currentItem, queue: .main) { _ in
+            player.seek(to: .zero)
+            player.play()
+        }
+        
+        player.play() // Automatically play video
+        
+        return containerView
+    }
+    
+    func updateUIView(_ uiView: UIView, context: Context) {
+        // Update the view when needed
+    }
+}
 
 class CallManager: ObservableObject {
     enum CallState {
@@ -71,8 +101,9 @@ class CallManager: ObservableObject {
             "model": [
                 "provider": "openai",
                 "model": "gpt-4",
+                "maxTokens": 1000,
                 "messages": [
-                    ["role":"system", "content":"You are an assistant."]
+                    ["role":"system", "content":"You are an assistant. You never speak in bullet points. Just straight to the point sentences."]
                 ],
             ],
             "firstMessage": "Hello",
@@ -93,6 +124,13 @@ class CallManager: ObservableObject {
 
 struct ContentView: View {
     @StateObject private var callManager = CallManager()
+    
+    @State private var drawingHeight = true
+    
+       var animation: Animation {
+           return .linear(duration: 0.5).repeatForever()
+       }
+    
 
     var body: some View {
         ZStack {
@@ -103,14 +141,44 @@ struct ContentView: View {
                 .edgesIgnoringSafeArea(.all)
 
             VStack(spacing: 20) {
+                
                 Spacer()
+                
+      
+//                VStack(alignment: .leading) {
+//                     Text("Audio")
+//                         .bold()
+//                     HStack {
+//                         bar(low: 0.4)
+//                             .animation(animation.speed(1.5), value: drawingHeight)
+//                         bar(low: 0.3)
+//                             .animation(animation.speed(1.2), value: drawingHeight)
+//                         bar(low: 0.5)
+//                             .animation(animation.speed(1.0), value: drawingHeight)
+//                         bar(low: 0.3)
+//                             .animation(animation.speed(1.7), value: drawingHeight)
+//                         bar(low: 0.5)
+//                             .animation(animation.speed(1.0), value: drawingHeight)
+//                     }
+//                     .frame(width: 80)
+//                     .onAppear{
+//                         drawingHeight.toggle()
+//                     }
+//                 }
+                
+
+                
+                Spacer()
+                
+//                VideoPlayerView(videoURL: Bundle.main.url(forResource: "HerAnimation", withExtension: "mp4")!)
+//                            .edgesIgnoringSafeArea(.all)
                 
                 Image(systemName: "waveform")
                     .font(.system(size: 112))
                     .foregroundColor(.white)
                     .opacity(0.9)
 
-//                Spacer()
+                Spacer()
                 
                 Text(callManager.callStateText)
                     .font(.title2)
@@ -151,7 +219,16 @@ struct ContentView: View {
             callManager.setupVapi()
         }
     }
+    func bar(low: CGFloat = 0.0, high: CGFloat = 1.0) -> some View {
+        RoundedRectangle(cornerRadius: 3)
+            .fill(.indigo.gradient)
+            .frame(height: (drawingHeight ? high : low) * 64)
+            .frame(height: 64, alignment: .bottom)
+    }
 }
+
+
+
 
 extension CallManager {
     var callStateText: String {

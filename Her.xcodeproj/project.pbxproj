@@ -15,6 +15,9 @@
 		18D289FE2B9713FF008742FB /* HerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D289FD2B9713FF008742FB /* HerUITests.swift */; };
 		18D28A002B9713FF008742FB /* HerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D289FF2B9713FF008742FB /* HerUITestsLaunchTests.swift */; };
 		18D28A0E2B971574008742FB /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = 18D28A0D2B971574008742FB /* Vapi */; };
+		18D28A122B98E67D008742FB /* HerAnimation.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 18D28A112B98E67D008742FB /* HerAnimation.mp4 */; };
+		18D28A132B98E67D008742FB /* HerAnimation.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 18D28A112B98E67D008742FB /* HerAnimation.mp4 */; };
+		18D28A142B98E67D008742FB /* HerAnimation.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 18D28A112B98E67D008742FB /* HerAnimation.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,7 @@
 		18D289FF2B9713FF008742FB /* HerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		18D28A0F2B97178E008742FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		18D28A102B971B0A008742FB /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		18D28A112B98E67D008742FB /* HerAnimation.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = HerAnimation.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,7 @@
 				18D289E42B9713FE008742FB /* ContentView.swift */,
 				18D28A102B971B0A008742FB /* Config.xcconfig */,
 				18D289E62B9713FF008742FB /* Assets.xcassets */,
+				18D28A112B98E67D008742FB /* HerAnimation.mp4 */,
 				18D289E82B9713FF008742FB /* Preview Content */,
 			);
 			path = Her;
@@ -243,6 +248,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18D28A122B98E67D008742FB /* HerAnimation.mp4 in Resources */,
 				18D289EA2B9713FF008742FB /* Preview Assets.xcassets in Resources */,
 				18D289E72B9713FF008742FB /* Assets.xcassets in Resources */,
 			);
@@ -252,6 +258,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18D28A132B98E67D008742FB /* HerAnimation.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +266,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18D28A142B98E67D008742FB /* HerAnimation.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
