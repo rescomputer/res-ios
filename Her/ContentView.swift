@@ -47,6 +47,8 @@ class CallManager: ObservableObject {
             publicKey: "a9a1bf8c-c389-490b-a82b-29fe9ba081d8"
         )
     }
+    
+    @Published var enteredText = ""
 
     func setupVapi() {
         vapi.eventPublisher
@@ -74,7 +76,17 @@ class CallManager: ObservableObject {
                 }
             }
             .store(in: &cancellables)
+        if let savedText = UserDefaults.standard.string(forKey: "enteredText"), !savedText.isEmpty {
+                enteredText = savedText
+            } else {
+                enteredText = "A helpful assistant that gets to the point. Does not speak in bullet points. Answers clearly."
+            }
     }
+    
+    func saveEnteredText() {
+        UserDefaults.standard.set(enteredText, forKey: "enteredText")
+    }
+    
 
     @MainActor
     func handleCallAction() async {
@@ -89,25 +101,27 @@ class CallManager: ObservableObject {
     func startCall() async {
         callState = .loading
         let assistant = [
-//            "model": [
-//                "provider": "groq",
-//                "model": "mixtral-8x7b-32768",
-//                "messages": [
-//                    ["role":"system", "content":"You are an assistant."]
-//                ],
-//            ],
-//            "firstMessage": "Hey there",
-//            "voice": "jennifer-playht"
             "model": [
                 "provider": "openai",
                 "model": "gpt-4",
-                "maxTokens": 1000,
                 "messages": [
-                    ["role":"system", "content":"You are an assistant. You never speak in bullet points. Just straight to the point sentences."]
+                    ["role":"system",
+                     "content":enteredText]
+//                     "content":"A helpful AI assistant. Gets to the point. Never responds with more than 10 sentences."]
                 ],
             ],
-            "firstMessage": "Hello",
-            "voice": "jennifer-playht"
+            "firstMessage": "Hi",
+            "voice": [
+                "voiceId":"jennifer",
+                "provider":"playht",
+                "speed":1.3
+            ],
+            "transcriber": [
+                "language": "en",
+                "model": "nova-2-conversationalai",
+                "provider": "deepgram"
+            ]
+            
         ] as [String : Any]
         do {
             try await vapi.start(assistant: assistant)
@@ -143,36 +157,7 @@ struct ContentView: View {
             VStack(spacing: 20) {
                 
                 Spacer()
-                
-      
-//                VStack(alignment: .leading) {
-//                     Text("Audio")
-//                         .bold()
-//                     HStack {
-//                         bar(low: 0.4)
-//                             .animation(animation.speed(1.5), value: drawingHeight)
-//                         bar(low: 0.3)
-//                             .animation(animation.speed(1.2), value: drawingHeight)
-//                         bar(low: 0.5)
-//                             .animation(animation.speed(1.0), value: drawingHeight)
-//                         bar(low: 0.3)
-//                             .animation(animation.speed(1.7), value: drawingHeight)
-//                         bar(low: 0.5)
-//                             .animation(animation.speed(1.0), value: drawingHeight)
-//                     }
-//                     .frame(width: 80)
-//                     .onAppear{
-//                         drawingHeight.toggle()
-//                     }
-//                 }
-                
 
-                
-                Spacer()
-                
-//                VideoPlayerView(videoURL: Bundle.main.url(forResource: "HerAnimation", withExtension: "mp4")!)
-//                            .edgesIgnoringSafeArea(.all)
-                
                 Image(systemName: "waveform")
                     .font(.system(size: 112))
                     .foregroundColor(.white)
@@ -183,18 +168,21 @@ struct ContentView: View {
                 Text(callManager.callStateText)
                     .font(.title2)
                     .foregroundColor(.white)
-                    .padding(.top, 30)
-
-//                Text(callManager.callStateText)
-//                    .font(.title)
-//                    .fontWeight(.semibold)
-//                    .foregroundColor(.white)
-//                    .padding()
-//                    .background(callManager.callStateColor)
-//                    .cornerRadius(10)
-
+                    .padding(.top, 20)
+                    .padding(.bottom, 10)
+                
+                ZStack(alignment: .leading) {
+                    TextEditor(text: $callManager.enteredText)
+                        .foregroundStyle(.secondary)
+                        .cornerRadius(8)
+                        .padding(.horizontal)
+                        .onChange(of: callManager.enteredText) {
+                            callManager.saveEnteredText()
+                        }
+                }
+                
                 Spacer()
-
+                
                 Button(action: {
                     Task {
                         await callManager.handleCallAction()
@@ -226,9 +214,6 @@ struct ContentView: View {
             .frame(height: 64, alignment: .bottom)
     }
 }
-
-
-
 
 extension CallManager {
     var callStateText: String {

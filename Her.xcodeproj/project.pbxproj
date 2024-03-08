@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		187277062B9B85A20079C460 /* VAPIExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187277052B9B85A20079C460 /* VAPIExampleView.swift */; };
 		18D289E32B9713FE008742FB /* HerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D289E22B9713FE008742FB /* HerApp.swift */; };
 		18D289E52B9713FE008742FB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D289E42B9713FE008742FB /* ContentView.swift */; };
 		18D289E72B9713FF008742FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D289E62B9713FF008742FB /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		187277052B9B85A20079C460 /* VAPIExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAPIExampleView.swift; sourceTree = "<group>"; };
 		18D289DF2B9713FE008742FB /* Her.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Her.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D289E22B9713FE008742FB /* HerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HerApp.swift; sourceTree = "<group>"; };
 		18D289E42B9713FE008742FB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				18D28A0F2B97178E008742FB /* Info.plist */,
 				18D289E22B9713FE008742FB /* HerApp.swift */,
 				18D289E42B9713FE008742FB /* ContentView.swift */,
+				187277052B9B85A20079C460 /* VAPIExampleView.swift */,
 				18D28A102B971B0A008742FB /* Config.xcconfig */,
 				18D289E62B9713FF008742FB /* Assets.xcassets */,
 				18D28A112B98E67D008742FB /* HerAnimation.mp4 */,
@@ -277,6 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				187277062B9B85A20079C460 /* VAPIExampleView.swift in Sources */,
 				18D289E52B9713FE008742FB /* ContentView.swift in Sources */,
 				18D289E32B9713FE008742FB /* HerApp.swift in Sources */,
 			);
