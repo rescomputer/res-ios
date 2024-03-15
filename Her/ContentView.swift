@@ -50,6 +50,18 @@ class CallManager: ObservableObject {
     
     @Published var enteredText = ""
 
+    @Published var speed: Double = 1.0 {
+        didSet {
+            UserDefaults.standard.set(speed, forKey: "speed")
+        }
+    }
+
+    @Published var voice: String = "alloy" { //TODO fix
+        didSet {
+            UserDefaults.standard.set(voice, forKey: "voice")
+        }
+    }
+
     func setupVapi() {
         vapi.eventPublisher
             .sink { [weak self] event in
@@ -81,12 +93,17 @@ class CallManager: ObservableObject {
             } else {
                 enteredText = "A helpful assistant that gets to the point. Does not speak in bullet points. Answers clearly."
             }
+        if let savedSpeed = UserDefaults.standard.object(forKey: "speed") as? Double {
+            speed = savedSpeed
+        }
+        if let savedVoice = UserDefaults.standard.string(forKey: "voice") {
+            voice = savedVoice
+        }
     }
     
     func saveEnteredText() {
         UserDefaults.standard.set(enteredText, forKey: "enteredText")
     }
-    
 
     @MainActor
     func handleCallAction() async {
@@ -107,18 +124,18 @@ class CallManager: ObservableObject {
                 "messages": [
                     ["role":"system",
                      "content":enteredText]
-//                     "content":"A helpful AI assistant. Gets to the point. Never responds with more than 10 sentences."]
                 ],
+                "maxTokens": 1000
             ],
-            "firstMessage": "Hi",
+            "firstMessage": "Hello",
             "voice": [
-                "voiceId":"jennifer",
-                "provider":"playht",
-                "speed":1.3
+                "voiceId": voice,
+                "provider":"openai",
+                "speed":speed
             ],
             "transcriber": [
                 "language": "en",
-                "model": "nova-2-conversationalai",
+                "model": "nova-2",
                 "provider": "deepgram"
             ]
             
@@ -141,47 +158,113 @@ struct ContentView: View {
     
     @State private var drawingHeight = true
     
-       var animation: Animation {
-           return .linear(duration: 0.5).repeatForever()
-       }
+    @FocusState private var isTextFieldFocused: Bool
     
-
+    var animation: Animation {
+        return .linear(duration: 0.5).repeatForever()
+    }
+    
     var body: some View {
-        ZStack {
-            // Background gradient
-            LinearGradient(gradient: Gradient(colors: [
-                Color(red: 221/255, green: 102/255, blue: 58/255),
-                Color(red: 221/255, green: 102/255, blue: 58/255)]), startPoint: .top, endPoint: .bottom)
-                .edgesIgnoringSafeArea(.all)
-
-            VStack(spacing: 20) {
-                
+        
+        ScrollView {    // Background gradient
+            VStack(alignment: .center, spacing: 20) {
                 Spacer()
-
-                Image(systemName: "waveform")
-                    .font(.system(size: 112))
-                    .foregroundColor(.white)
-                    .opacity(0.9)
-
-                Spacer()
+                HStack {
+                    Spacer()
+                    Text("Have a back-and-forth conversation")
+                        .font(.system(.title3, design: .default))
+                        .multilineTextAlignment(.center)
+                    
+                    Spacer()
+                }
                 
-                Text(callManager.callStateText)
-                    .font(.title2)
-                    .foregroundColor(.white)
-                    .padding(.top, 20)
-                    .padding(.bottom, 10)
                 
-                ZStack(alignment: .leading) {
-                    TextEditor(text: $callManager.enteredText)
-                        .foregroundStyle(.secondary)
-                        .cornerRadius(8)
-                        .padding(.horizontal)
-                        .onChange(of: callManager.enteredText) {
-                            callManager.saveEnteredText()
-                        }
+                HStack {
+                    Spacer()
+                    Text("When you talk, it will listen")
+                        .font(.system(.callout, design: .default))
+                        .multilineTextAlignment(.center)
+                    
+                    Spacer()
                 }
                 
                 Spacer()
+                
+                HStack {
+                    Text("Custom Instructions")
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(Color(hue: 0, saturation: 0, brightness: 0.134, opacity: 1))
+                    
+                    Spacer()
+                    //                    Image(systemName: "list.bullet")
+                    //                        .foregroundColor(Color.blue)
+                    
+                    //                    Text("Examples")
+                    //                        .multilineTextAlignment(.leading)
+                    //                        .foregroundColor(Color.blue)
+                    //                        .font(.system(.footnote, design: .default))
+                }
+                .padding(.horizontal)
+                
+                HStack {
+                    CustomTextEditor(text: $callManager.enteredText)
+                        .font(.system(.callout, design: .default))
+                        .background(Color(UIColor.white))
+                        .frame(minHeight: 120)
+//                        .padding(3)
+                    //                            .border(Color.gray, width: 1)
+                        .cornerRadius(10)
+                        
+                    //                        .lin
+                    //                    TextField("Custom Instructions", text: $callManager.enteredText, axis: .vertical)
+                    //                        .textFieldStyle(.roundedBorder)
+                    //                        .lineLimit(8)
+                    //                        .font(.system(.callout, design: .default))
+                    //                        .foregroundColor(Color(hue: 0, saturation: 0, brightness: 0.301, opacity: 1))
+                    //                        .submitLabel(.done) // Set the return key to "Done"
+                    //                                        .onSubmit {
+                    //                                            // Dismiss the keyboard by clearing the focus when "Done" is tapped
+                    //                                            isTextFieldFocused = false
+                    //                                        }
+                }
+                .padding(.horizontal)
+                
+                HStack {
+                    Text("Voice")
+                        .multilineTextAlignment(.leading)
+                    
+                    Spacer()
+                    Picker("Voice", selection: $callManager.voice) {
+                        Text("🇺🇸 Alloy · Gentle American Man").tag("alloy")
+                        Text("🇺🇸 Echo · Deep American Man").tag("echo")
+                        Text("🇬🇧 Fable · Normal British Man").tag("fable")
+                        Text("🇺🇸 Onyx · Deeper American Man").tag("onyx")
+                        Text("🇺🇸 Nova · Gentle American Woman").tag("nova")
+                        Text("🇺🇸 Shimmer · Deep American Woman").tag("shimmer")
+                    }
+                    .onReceive(callManager.$voice) { newVoice in
+                        UserDefaults.standard.set(newVoice, forKey: "voice")
+                    }
+                    .multilineTextAlignment(.leading)
+                }
+                .padding(.horizontal)
+                
+                HStack {
+                    Text("Speed")
+                        .multilineTextAlignment(.leading)
+                    
+                    Spacer()
+                    Picker("Voice", selection: $callManager.speed) {
+                        Text("🐇 Fast").tag(1.3)
+                        Text("💬 Normal").tag(8.0)
+                        Text("🐢 Slow").tag(0.3)
+                        Text("⚡️ Superfast").tag(1.5)
+                            .multilineTextAlignment(.leading)
+                    } .onReceive(callManager.$speed) { newSpeed in
+                        UserDefaults.standard.set(newSpeed, forKey: "speed")
+                    }
+                }
+                .padding(.horizontal)
                 
                 Button(action: {
                     Task {
@@ -189,31 +272,25 @@ struct ContentView: View {
                     }
                 }) {
                     Text(callManager.buttonText)
-                        .font(.title3)
-                        .fontWeight(.medium)
+                        .font(.system(.title2, design: .rounded))
+                        .fontWeight(.bold)
                         .foregroundColor(.white)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(.white.opacity(0.2))
+                        .background(callManager.buttonColor)
                         .cornerRadius(10)
                 }
                 .disabled(callManager.callState == .loading)
-                .padding(.horizontal, 40)
-
+                .padding(.horizontal, 30)
+                
                 Spacer()
             }
-        }
-        .onAppear {
-            callManager.setupVapi()
-        }
+            .onAppear {
+                callManager.setupVapi()
+            }
+        } .background(Color(UIColor.systemGray6))
     }
-    func bar(low: CGFloat = 0.0, high: CGFloat = 1.0) -> some View {
-        RoundedRectangle(cornerRadius: 3)
-            .fill(.indigo.gradient)
-            .frame(height: (drawingHeight ? high : low) * 64)
-            .frame(height: 64, alignment: .bottom)
     }
-}
 
 extension CallManager {
     var callStateText: String {
@@ -223,7 +300,7 @@ extension CallManager {
         case .ended: return "Chat with an AI back-and-forth"
         }
     }
-
+    
     var callStateColor: Color {
         switch callState {
         case .started: return .green.opacity(0.8)
@@ -231,12 +308,61 @@ extension CallManager {
         case .ended: return .gray.opacity(0.8)
         }
     }
-
+    
     var buttonText: String {
         callState == .loading ? "Loading..." : (callState == .ended ? "Start Conversation" : "End Conversation")
     }
-
+    
     var buttonColor: Color {
         callState == .loading ? .gray : (callState == .ended ? .green : .red)
+    }
+}
+
+struct CustomTextEditor: UIViewRepresentable {
+    @Binding var text: String
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    func makeUIView(context: Context) -> UITextView {
+        let textView = UITextView()
+        textView.delegate = context.coordinator
+        
+        // Customize textView...
+        textView.font = UIFont.preferredFont(forTextStyle: .body)
+        textView.isScrollEnabled = true
+        textView.isEditable = true
+        textView.isUserInteractionEnabled = true
+        textView.backgroundColor = UIColor.clear
+        
+        // Toolbar with Done button
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: context.coordinator, action: #selector(Coordinator.dismissKeyboard))
+        toolbar.setItems([doneButton], animated: false)
+        textView.inputAccessoryView = toolbar
+        
+        return textView
+    }
+    
+    func updateUIView(_ uiView: UITextView, context: Context) {
+        uiView.text = text
+    }
+    
+    class Coordinator: NSObject, UITextViewDelegate {
+        var parent: CustomTextEditor
+        
+        init(_ textView: CustomTextEditor) {
+            self.parent = textView
+        }
+        
+        @objc func dismissKeyboard() {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        }
+        
+        func textViewDidChange(_ textView: UITextView) {
+            self.parent.text = textView.text
+        }
     }
 }
