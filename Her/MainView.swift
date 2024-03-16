@@ -33,7 +33,6 @@ struct MainView: View {
                 Text("When you talk, it will listen")
                     .font(.system(.callout, design: .default))
                     .multilineTextAlignment(.center)
-                
                 Spacer()
             }
             .padding(.bottom, 30)
@@ -46,10 +45,13 @@ struct MainView: View {
             .padding(.bottom, -20)
             
             // CustomTextEditor
-            CustomTextEditor(text: $callManager.enteredText)
-                .frame(height: 200)
-                .background(Color(uiColor: .systemBackground))
-                .cornerRadius(10)
+            HStack {
+                CustomTextEditor(text: $callManager.enteredText, isDisabled: callManager.callState != .ended)
+                    .frame(height: 200)
+                    .background(Color(uiColor: .systemBackground))
+                    .cornerRadius(10)
+                    .disabled(callManager.callState != .ended) // TODO get this to work with a custom element
+            }
             
             Spacer()
             
@@ -68,20 +70,23 @@ struct MainView: View {
                 .onReceive(callManager.$voice) { newVoice in
                     UserDefaults.standard.set(newVoice, forKey: "voice")
                 }
+                .disabled(callManager.callState != .ended)
                 
                 // Speed Picker
                 Picker(selection: $callManager.speed) {
                     Text("🐢 Slow").tag(0.3)
-                    Text("💬 Normal").tag(8.0)
+                    Text("💬 Normal").tag(0.8)
                     Text("🐇 Fast").tag(1.3)
                     Text("⚡️ Superfast").tag(1.5)
                 } label: {
                     Text("Speed")
                 }
+                .disabled(callManager.callState != .ended)
             }
             .frame(height: 88)
             .listStyle(.plain)
             .cornerRadius(15)
+            
             
             .onReceive(callManager.$speed) { newSpeed in
                 UserDefaults.standard.set(newSpeed, forKey: "speed")
@@ -108,21 +113,18 @@ struct MainView: View {
         }
         .padding(.horizontal)
         .onAppear { callManager.setupVapi() }
-        
         .background {
-            LinearGradient(gradient: bluePurpleGradient, startPoint: .topLeading, endPoint: .bottomTrailing)
-                .edgesIgnoringSafeArea(.all)
+            Color(uiColor: .systemGray6)
+                .ignoresSafeArea(.all)
         }
-    }
-    
-    private var bluePurpleGradient: Gradient {
-        Gradient(colors: [Color.blue.opacity(0.7), Color.purple.opacity(0.7)])
+        
     }
     
     private var animation: Animation {
         .linear(duration: 0.5).repeatForever()
     }
 }
+
 
 #Preview {
     MainView()

@@ -7,9 +7,6 @@ struct VAPIExampleView: View {
     
     var body: some View {
         ZStack {
-            // Background gradient
-            LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.7), Color.purple.opacity(0.7)]), startPoint: .top, endPoint: .bottom)
-                .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 20) {
                 Text("Vapi Call Interface")
