@@ -96,19 +96,26 @@ class CallManager: ObservableObject {
         callState = .loading
         let assistant = [
             "model": [
+//                "provider": "groq",
+//                "model": "mixtral-8x7b-32768",
                 "provider": "openai",
-                "model": "gpt-4-1106-preview",
+                "model": "gpt-4-0613",
                 "fallbackModels" : [
                   "gpt-4-0125-preview",
-                  "gpt-4-0613"
+                  "gpt-4-1106-preview"
                 ],
                 "messages": [
                     ["role":"system",
                      "content":enteredText]
                 ],
-                "maxTokens": 1000
+                "maxTokens": 1000, //Maximum
             ],
-            "firstMessage": "Hello",
+            "silenceTimeoutSeconds": 120,
+            "maxDurationSeconds": 1800, //Maximum
+            "numWordsToInterruptAssistant": 1,
+            "responseDelaySeconds": 0,
+            "llmRequestDelaySeconds": 0,
+            "firstMessage": "Hey",
             "voice": [
                 "voiceId": voice,
                 "provider":"openai",
@@ -119,7 +126,6 @@ class CallManager: ObservableObject {
                 "model": "nova-2",
                 "provider": "deepgram"
             ]
-            
         ] as [String : Any]
         do {
             try await vapi.start(assistant: assistant)
