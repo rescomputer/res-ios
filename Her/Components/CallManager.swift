@@ -97,7 +97,11 @@ class CallManager: ObservableObject {
         let assistant = [
             "model": [
                 "provider": "openai",
-                "model": "gpt-4",
+                "model": "gpt-4-1106-preview",
+                "fallbackModels" : [
+                  "gpt-4-0125-preview",
+                  "gpt-4-0613"
+                ],
                 "messages": [
                     ["role":"system",
                      "content":enteredText]
