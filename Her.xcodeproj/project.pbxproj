@@ -15,6 +15,16 @@
 		18D28A122B98E67D008742FB /* HerAnimation.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 18D28A112B98E67D008742FB /* HerAnimation.mp4 */; };
 		18D28A132B98E67D008742FB /* HerAnimation.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 18D28A112B98E67D008742FB /* HerAnimation.mp4 */; };
 		18D28A142B98E67D008742FB /* HerAnimation.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 18D28A112B98E67D008742FB /* HerAnimation.mp4 */; };
+		18F7232E2BA95060003F44FA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F7232D2BA95060003F44FA /* WidgetKit.framework */; };
+		18F723302BA95060003F44FA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F7232F2BA95060003F44FA /* SwiftUI.framework */; };
+		18F723332BA95060003F44FA /* Her_ExtensionBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F723322BA95060003F44FA /* Her_ExtensionBundle.swift */; };
+		18F723352BA95060003F44FA /* Her_ExtensionLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F723342BA95060003F44FA /* Her_ExtensionLiveActivity.swift */; };
+		18F723372BA95060003F44FA /* Her_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F723362BA95060003F44FA /* Her_Extension.swift */; };
+		18F723392BA95060003F44FA /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F723382BA95060003F44FA /* AppIntent.swift */; };
+		18F7233B2BA95062003F44FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18F7233A2BA95062003F44FA /* Assets.xcassets */; };
+		18F7233F2BA95062003F44FA /* Her ExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 18F7232B2BA95060003F44FA /* Her ExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		18F723492BA9ED0D003F44FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18F723482BA9ED0D003F44FA /* LaunchScreen.storyboard */; };
+		18F7234D2BA9F3D3003F44FA /* whisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 18F7234C2BA9F3D3003F44FA /* whisp.png */; };
 		B95D2F332BA4EAF5003C7C17 /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F322BA4EAF5003C7C17 /* CallManager.swift */; };
 		B95D2F352BA4EB32003C7C17 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */; };
 		B95D2F392BA4EB58003C7C17 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F382BA4EB58003C7C17 /* VideoPlayerView.swift */; };
@@ -35,7 +45,28 @@
 			remoteGlobalIDString = 18D289DE2B9713FE008742FB;
 			remoteInfo = Her;
 		};
+		18F7233D2BA95062003F44FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18D289D72B9713FE008742FB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 18F7232A2BA95060003F44FA;
+			remoteInfo = "Her ExtensionExtension";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		18F723432BA95062003F44FA /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				18F7233F2BA95062003F44FA /* Her ExtensionExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		187277052B9B85A20079C460 /* VAPIExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAPIExampleView.swift; sourceTree = "<group>"; };
@@ -48,6 +79,17 @@
 		18D28A0F2B97178E008742FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		18D28A102B971B0A008742FB /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		18D28A112B98E67D008742FB /* HerAnimation.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = HerAnimation.mp4; sourceTree = "<group>"; };
+		18F7232B2BA95060003F44FA /* Her ExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Her ExtensionExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18F7232D2BA95060003F44FA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		18F7232F2BA95060003F44FA /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		18F723322BA95060003F44FA /* Her_ExtensionBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Her_ExtensionBundle.swift; sourceTree = "<group>"; };
+		18F723342BA95060003F44FA /* Her_ExtensionLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Her_ExtensionLiveActivity.swift; sourceTree = "<group>"; };
+		18F723362BA95060003F44FA /* Her_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Her_Extension.swift; sourceTree = "<group>"; };
+		18F723382BA95060003F44FA /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		18F7233A2BA95062003F44FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		18F7233C2BA95062003F44FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18F723482BA9ED0D003F44FA /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Her/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		18F7234C2BA9F3D3003F44FA /* whisp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whisp.png; sourceTree = "<group>"; };
 		B95D2F322BA4EAF5003C7C17 /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		B95D2F382BA4EB58003C7C17 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
@@ -76,13 +118,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		18F723282BA95060003F44FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18F723302BA95060003F44FA /* SwiftUI.framework in Frameworks */,
+				18F7232E2BA95060003F44FA /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		18D289D62B9713FE008742FB = {
 			isa = PBXGroup;
 			children = (
+				18F723482BA9ED0D003F44FA /* LaunchScreen.storyboard */,
 				18D289E12B9713FE008742FB /* Her */,
+				18F723312BA95060003F44FA /* Her Extension */,
+				18F7232C2BA95060003F44FA /* Frameworks */,
 				18D289E02B9713FE008742FB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -93,6 +147,7 @@
 				18D289DF2B9713FE008742FB /* Her.app */,
 				18D289EF2B9713FF008742FB /* HerTests.xctest */,
 				18D289F92B9713FF008742FB /* HerUITests.xctest */,
+				18F7232B2BA95060003F44FA /* Her ExtensionExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -106,9 +161,32 @@
 				18D28A0F2B97178E008742FB /* Info.plist */,
 				18D28A102B971B0A008742FB /* Config.xcconfig */,
 				18D289E62B9713FF008742FB /* Assets.xcassets */,
+				18F7234C2BA9F3D3003F44FA /* whisp.png */,
 				18D28A112B98E67D008742FB /* HerAnimation.mp4 */,
 			);
 			path = Her;
+			sourceTree = "<group>";
+		};
+		18F7232C2BA95060003F44FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				18F7232D2BA95060003F44FA /* WidgetKit.framework */,
+				18F7232F2BA95060003F44FA /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		18F723312BA95060003F44FA /* Her Extension */ = {
+			isa = PBXGroup;
+			children = (
+				18F723322BA95060003F44FA /* Her_ExtensionBundle.swift */,
+				18F723342BA95060003F44FA /* Her_ExtensionLiveActivity.swift */,
+				18F723362BA95060003F44FA /* Her_Extension.swift */,
+				18F723382BA95060003F44FA /* AppIntent.swift */,
+				18F7233A2BA95062003F44FA /* Assets.xcassets */,
+				18F7233C2BA95062003F44FA /* Info.plist */,
+			);
+			path = "Her Extension";
 			sourceTree = "<group>";
 		};
 		B95D2F3A2BA4F35F003C7C17 /* Components */ = {
@@ -132,10 +210,12 @@
 				18D289DB2B9713FE008742FB /* Sources */,
 				18D289DC2B9713FE008742FB /* Frameworks */,
 				18D289DD2B9713FE008742FB /* Resources */,
+				18F723432BA95062003F44FA /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				18F7233E2BA95062003F44FA /* PBXTargetDependency */,
 			);
 			name = Her;
 			packageProductDependencies = (
@@ -181,6 +261,23 @@
 			productReference = 18D289F92B9713FF008742FB /* HerUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		18F7232A2BA95060003F44FA /* Her ExtensionExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18F723402BA95062003F44FA /* Build configuration list for PBXNativeTarget "Her ExtensionExtension" */;
+			buildPhases = (
+				18F723272BA95060003F44FA /* Sources */,
+				18F723282BA95060003F44FA /* Frameworks */,
+				18F723292BA95060003F44FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Her ExtensionExtension";
+			productName = "Her ExtensionExtension";
+			productReference = 18F7232B2BA95060003F44FA /* Her ExtensionExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -188,7 +285,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1520;
+				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					18D289DE2B9713FE008742FB = {
@@ -201,6 +298,9 @@
 					18D289F82B9713FF008742FB = {
 						CreatedOnToolsVersion = 15.2;
 						TestTargetID = 18D289DE2B9713FE008742FB;
+					};
+					18F7232A2BA95060003F44FA = {
+						CreatedOnToolsVersion = 15.3;
 					};
 				};
 			};
@@ -223,6 +323,7 @@
 				18D289DE2B9713FE008742FB /* Her */,
 				18D289EE2B9713FF008742FB /* HerTests */,
 				18D289F82B9713FF008742FB /* HerUITests */,
+				18F7232A2BA95060003F44FA /* Her ExtensionExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -232,8 +333,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18F723492BA9ED0D003F44FA /* LaunchScreen.storyboard in Resources */,
 				18D28A122B98E67D008742FB /* HerAnimation.mp4 in Resources */,
 				18D289E72B9713FF008742FB /* Assets.xcassets in Resources */,
+				18F7234D2BA9F3D3003F44FA /* whisp.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +353,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				18D28A142B98E67D008742FB /* HerAnimation.mp4 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18F723292BA95060003F44FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18F7233B2BA95062003F44FA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +394,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		18F723272BA95060003F44FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18F723352BA95060003F44FA /* Her_ExtensionLiveActivity.swift in Sources */,
+				18F723392BA95060003F44FA /* AppIntent.swift in Sources */,
+				18F723372BA95060003F44FA /* Her_Extension.swift in Sources */,
+				18F723332BA95060003F44FA /* Her_ExtensionBundle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -295,6 +417,11 @@
 			isa = PBXTargetDependency;
 			target = 18D289DE2B9713FE008742FB /* Her */;
 			targetProxy = 18D289FA2B9713FF008742FB /* PBXContainerItemProxy */;
+		};
+		18F7233E2BA95062003F44FA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 18F7232A2BA95060003F44FA /* Her ExtensionExtension */;
+			targetProxy = 18F7233D2BA95062003F44FA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -423,6 +550,7 @@
 		18D28A042B9713FF008742FB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -439,7 +567,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -463,6 +592,7 @@
 		18D28A052B9713FF008742FB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -479,7 +609,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -576,6 +707,62 @@
 			};
 			name = Release;
 		};
+		18F723412BA95062003F44FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y2V76WXBUQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Her Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Her Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.balance.Her.Her-Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		18F723422BA95062003F44FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y2V76WXBUQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Her Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Her Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.balance.Her.Her-Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -611,6 +798,15 @@
 			buildConfigurations = (
 				18D28A0A2B9713FF008742FB /* Debug */,
 				18D28A0B2B9713FF008742FB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18F723402BA95062003F44FA /* Build configuration list for PBXNativeTarget "Her ExtensionExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18F723412BA95062003F44FA /* Debug */,
+				18F723422BA95062003F44FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
