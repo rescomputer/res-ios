@@ -7,6 +7,7 @@
 
 import WidgetKit
 import SwiftUI
+import UIKit
 
 struct Provider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
@@ -41,12 +42,15 @@ struct Her_ExtensionEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        VStack {
-            Text("Start a Conversation")
-//            Text(entry.date, style: .time)
-//
-//            Text("Favorite Emoji:")
-//            Text(entry.configuration.favoriteEmoji)
+        ZStack {
+            Image("flow")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .opacity(0.3)
+                .offset(y: -20)
+                .scaleEffect(1.3)
+            
+            Text("Start Conversation")
         }
     }
 }
@@ -59,6 +63,9 @@ struct Her_Extension: Widget {
             Her_ExtensionEntryView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
         }
+        .description(Text("Start a conversation with Her. Chat to your AI over voice."))
+        .configurationDisplayName(Text("Her"))
+//        .supportedFamilies([.systemSmall]) //TODO cannot get *just* the small widget to work with out errors
     }
 }
 
