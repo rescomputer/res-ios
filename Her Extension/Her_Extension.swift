@@ -38,7 +38,30 @@ struct SimpleEntry: TimelineEntry {
     let configuration: ConfigurationAppIntent
 }
 
-struct Her_ExtensionEntryView : View {
+struct HerEntryView: View {
+    var entry: Provider.Entry
+
+    @Environment(\.widgetFamily) var family
+
+    var body: some View {
+        switch family {
+        case .systemSmall:
+            HerSmallEntryView(entry: entry)
+        case .systemMedium:
+            HerMediumEntryView(entry: entry)
+        case .systemLarge:
+            HerLargeEntryView(entry: entry)
+        case .accessoryRectangular:
+            HerAccessoryRectangularEntryView(entry: entry)
+        case .accessoryCircular:
+            HerAccessoryCircularEntryView(entry: entry)
+        @unknown default:
+            fatalError("Unsupported widget family")
+        }
+    }
+}
+
+struct HerSmallEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
@@ -47,25 +70,144 @@ struct Her_ExtensionEntryView : View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .opacity(0.3)
-                .offset(y: -20)
                 .scaleEffect(1.3)
             
             Text("Start Conversation")
         }
+        .containerBackground(for: .widget) {
+            // Customize the background view for the small widget
+            Color.white
+        }
     }
 }
+
+struct HerMediumEntryView: View {
+    var entry: Provider.Entry
+
+    var body: some View {
+        ZStack {
+            Image("flow")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .opacity(0.3)
+                .scaleEffect(1.3)
+            
+            Text("Start Conversation")
+        }
+        .containerBackground(for: .widget) {
+            // Customize the background view for the medium widget
+            Color.white
+        }
+    }
+}
+
+struct HerLargeEntryView: View {
+    var entry: Provider.Entry
+
+    var body: some View {
+        ZStack {
+            Image("flow")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .opacity(0.3)
+                .scaleEffect(1.3)
+            
+            Text("Start Conversation")
+        }
+        .containerBackground(for: .widget) {
+            // Customize the background view for the large widget
+            Color.white
+        }
+    }
+}
+
+struct HerAccessoryRectangularEntryView: View {
+    var entry: Provider.Entry
+
+    var body: some View {
+        ZStack {
+            Image("flow")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .opacity(0.3)
+                .scaleEffect(1.3)
+            
+            Text("Start Conversation")
+        }
+        .containerBackground(for: .widget) {
+            // Customize the background view for the accessory rectangular widget
+            Color.white
+        }
+    }
+}
+
+struct HerAccessoryCircularEntryView: View {
+    var entry: Provider.Entry
+
+    var body: some View {
+        ZStack {
+            Image("flow")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .opacity(0.3)
+                .scaleEffect(1.3)
+            
+            Text("Chat")
+        }
+        .containerBackground(for: .widget) {
+            // Customize the background view for the accessory rectangular widget
+            Color.white
+        }
+    }
+}
+
+//struct HerAccessorySquareEntryView: View {
+//    var entry: Provider.Entry
+//
+//    var body: some View {
+//        ZStack {
+//            Image("flow")
+//                .resizable()
+//                .aspectRatio(contentMode: .fill)
+//                .opacity(0.3)
+//                .scaleEffect(1.3)
+//            
+//            Text("Chat")
+//        }
+//        .containerBackground(for: .widget) {
+//            // Customize the background view for the accessory rectangular widget
+//            Color.white
+//        }
+//    }
+//}
+
+//struct Her_ExtensionEntryView : View {
+//    var entry: Provider.Entry
+//
+//    var body: some View {
+//        ZStack {
+//            Image("flow")
+//                .resizable()
+//                .aspectRatio(contentMode: .fill)
+//                .opacity(0.3)
+//                .offset(y: -20)
+//                .scaleEffect(1.3)
+//            
+//            Text("Start Conversation")
+//        }
+//    }
+//}
 
 struct Her_Extension: Widget {
     let kind: String = "Her_Extension"
 
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
-            Her_ExtensionEntryView(entry: entry)
-                .containerBackground(.fill.tertiary, for: .widget)
+            HerEntryView(entry: entry)
         }
-        .description(Text("Start a conversation with Her. Chat to your AI over voice."))
-        .configurationDisplayName(Text("Her"))
-//        .supportedFamilies([.systemSmall]) //TODO cannot get *just* the small widget to work with out errors
+        .configurationDisplayName("Her Widget")
+        .description("Start a conversation with Her")
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .accessoryRectangular, .accessoryCircular])
     }
 }
 
