@@ -12,7 +12,7 @@ import ActivityKit
 
 struct Her_ExtensionAttributes: ActivityAttributes {
     struct ContentState: Codable, Hashable {
-        var emoji: String
+        var sfSymbolName: String
     }
     
     var name: String
@@ -44,7 +44,7 @@ class CallManager: ObservableObject {
         }
     }
     
-    @Published var voice: String = "alloy" { //TODO fix
+    @Published var voice: String = "alloy" {
         didSet {
             UserDefaults.standard.set(voice, forKey: "voice")
         }
@@ -108,8 +108,6 @@ class CallManager: ObservableObject {
         callState = .loading
         let assistant = [
             "model": [
-//                "provider": "groq",
-//                "model": "mixtral-8x7b-32768",
                 "provider": "openai",
                 "model": "gpt-4-0613",
                 "fallbackModels" : [
@@ -143,7 +141,7 @@ class CallManager: ObservableObject {
             try await vapi.start(assistant: assistant)
             // Start the live activity
             let activityAttributes = Her_ExtensionAttributes(name: "Conversation")
-            let initialContentState = Her_ExtensionAttributes.ContentState(emoji: "🗣️")
+            let initialContentState = Her_ExtensionAttributes.ContentState(sfSymbolName: "ellipsis")
             activity = try Activity<Her_ExtensionAttributes>.request(
                 attributes: activityAttributes,
                 contentState: initialContentState
@@ -155,21 +153,24 @@ class CallManager: ObservableObject {
     }
     
     func updateLiveActivity() {
-        guard let activity = activity else { return }
-        
-        let emoji: String
         switch callState {
         case .started:
-            emoji = "🟢"
+            let sfSymbolName = "waveform.and.person.filled"
+            let updatedContentState = Her_ExtensionAttributes.ContentState(sfSymbolName: sfSymbolName)
+            Task {
+                await activity?.update(using: updatedContentState)
+            }
         case .loading:
-            emoji = "🔄"
+            let sfSymbolName = "ellipsis"
+            let updatedContentState = Her_ExtensionAttributes.ContentState(sfSymbolName: sfSymbolName)
+            Task {
+                await activity?.update(using: updatedContentState)
+            }
         case .ended:
-            emoji = "🔴"
-        }
-        
-        let updatedContentState = Her_ExtensionAttributes.ContentState(emoji: emoji)
-        Task {
-            await activity.update(using: updatedContentState)
+            Task {
+                await activity?.end(dismissalPolicy: .immediate)
+                activity = nil
+            }
         }
     }
     
