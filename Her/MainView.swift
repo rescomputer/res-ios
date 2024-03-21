@@ -60,7 +60,7 @@ struct MainView: View {
                     .frame(height: 100)
                     .background(Color(uiColor: .systemBackground))
                     .cornerRadius(10)
-                    .disabled(callManager.callState != .ended) // TODO get this to work with a custom element
+                    .disabled(callManager.callState != .ended) // TODO get this to work with a custom elementCustomTextEditor
             }
             
             
@@ -156,21 +156,25 @@ struct OptionRow: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 24, height: 24)
                 .padding(.top, 4)
+                .foregroundColor(Color(uiColor: .label))
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(option.title)
                     .font(.system(size: 17, weight: .semibold))
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(Color(uiColor: .label))
                 
                 Text(option.description)
                     .font(.system(size: 14))
                     .foregroundColor(.gray)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(Color(uiColor: .secondaryLabel))
             }
         }
         .padding(.vertical, 12)
         .padding(.horizontal, 16)
+        .background(Color(uiColor: .systemBackground))
     }
 }
 
@@ -194,10 +198,11 @@ struct OptionsMenu: View {
                             selectedOption = option
                         }
                         .id(option.id)
-                        .background(Color.white)
                 }
             }
         }
+        .frame(maxHeight: .infinity)
+        .background(Color(uiColor: .systemBackground))
     }
 }
 
