@@ -24,31 +24,29 @@ struct Her_ExtensionLiveActivity: Widget {
         ActivityConfiguration(for: Her_ExtensionAttributes.self) { context in
             // Lock screen/banner UI goes here
             VStack {
-                Text("Hello \(context.state.emoji)")
+                Text("Conversation Status: \(context.state.emoji)")
             }
             .activityBackgroundTint(Color.cyan)
             .activitySystemActionForegroundColor(Color.black)
-
         } dynamicIsland: { context in
             DynamicIsland {
-                // Expanded UI goes here.  Compose the expanded UI through
-                // various regions, like leading/trailing/center/bottom
+                // Expanded UI goes here
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("Leading")
+                    Text("Status: \(context.state.emoji)")
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text("Trailing")
+                    Text("Her")
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text("Bottom \(context.state.emoji)")
+                    Text("Conversation in progress")
                     // more content
                 }
             } compactLeading: {
-                Text("L")
+                Text("\(context.state.emoji)")
             } compactTrailing: {
-                Text("T \(context.state.emoji)")
+                Text("Her")
             } minimal: {
-                Text(context.state.emoji)
+                Text("\(context.state.emoji)")
             }
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)

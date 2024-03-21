@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import ActivityKit
 
 struct MainView: View {
     
