@@ -8,6 +8,15 @@
 import Combine
 import SwiftUI
 import Vapi
+import ActivityKit
+
+struct Her_ExtensionAttributes: ActivityAttributes {
+    struct ContentState: Codable, Hashable {
+        var emoji: String
+    }
+    
+    var name: String
+}
 
 class CallManager: ObservableObject {
     enum CallState {
@@ -26,6 +35,8 @@ class CallManager: ObservableObject {
     }
     
     @Published var enteredText = ""
+    
+    @Published var activity: Activity<Her_ExtensionAttributes>?
     
     @Published var speed: Double = 1.0 {
         didSet {
@@ -63,6 +74,7 @@ class CallManager: ObservableObject {
                     case .error(let error):
                         print("Error: \(error)")
                 }
+                self?.updateLiveActivity()
             }
             .store(in: &cancellables)
         if let savedText = UserDefaults.standard.string(forKey: "enteredText"), !savedText.isEmpty {
@@ -87,7 +99,7 @@ class CallManager: ObservableObject {
         if callState == .ended {
             await startCall()
         } else {
-            endCall()
+            await endCall()
         }
     }
     
@@ -129,14 +141,46 @@ class CallManager: ObservableObject {
         ] as [String : Any]
         do {
             try await vapi.start(assistant: assistant)
+            // Start the live activity
+            let activityAttributes = Her_ExtensionAttributes(name: "Conversation")
+            let initialContentState = Her_ExtensionAttributes.ContentState(emoji: "🗣️")
+            activity = try Activity<Her_ExtensionAttributes>.request(
+                attributes: activityAttributes,
+                contentState: initialContentState
+            )
         } catch {
-            print("Error starting call: \(error)")
+            print("Error starting call or requesting activity: \(error)")
             callState = .ended
         }
     }
     
-    func endCall() {
+    func updateLiveActivity() {
+        guard let activity = activity else { return }
+        
+        let emoji: String
+        switch callState {
+        case .started:
+            emoji = "🟢"
+        case .loading:
+            emoji = "🔄"
+        case .ended:
+            emoji = "🔴"
+        }
+        
+        let updatedContentState = Her_ExtensionAttributes.ContentState(emoji: emoji)
+        Task {
+            await activity.update(using: updatedContentState)
+        }
+    }
+    
+    func endCall()  {
         vapi.stop()
+        Task {
+            await activity?.end(dismissalPolicy: .immediate)
+            DispatchQueue.main.async {
+                self.activity = nil
+            }
+        }
     }
 }
 

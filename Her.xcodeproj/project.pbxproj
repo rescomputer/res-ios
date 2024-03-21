@@ -11,7 +11,6 @@
 		18D289E32B9713FE008742FB /* HerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D289E22B9713FE008742FB /* HerApp.swift */; };
 		18D289E52B9713FE008742FB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D289E42B9713FE008742FB /* MainView.swift */; };
 		18D289E72B9713FF008742FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D289E62B9713FF008742FB /* Assets.xcassets */; };
-		18D28A0E2B971574008742FB /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = 18D28A0D2B971574008742FB /* Vapi */; };
 		18D28A122B98E67D008742FB /* HerAnimation.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 18D28A112B98E67D008742FB /* HerAnimation.mp4 */; };
 		18D28A132B98E67D008742FB /* HerAnimation.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 18D28A112B98E67D008742FB /* HerAnimation.mp4 */; };
 		18D28A142B98E67D008742FB /* HerAnimation.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 18D28A112B98E67D008742FB /* HerAnimation.mp4 */; };
@@ -25,6 +24,9 @@
 		18F7233F2BA95062003F44FA /* Her ExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 18F7232B2BA95060003F44FA /* Her ExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		18F723492BA9ED0D003F44FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18F723482BA9ED0D003F44FA /* LaunchScreen.storyboard */; };
 		18F7234D2BA9F3D3003F44FA /* whisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 18F7234C2BA9F3D3003F44FA /* whisp.png */; };
+		18F723892BAC2695003F44FA /* ActivityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F723882BAC2694003F44FA /* ActivityKit.framework */; };
+		18F7238B2BAC2C17003F44FA /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = 18F7238A2BAC2C17003F44FA /* Vapi */; };
+		18F7238D2BAC2C3C003F44FA /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = 18F7238C2BAC2C3C003F44FA /* Vapi */; };
 		B95D2F332BA4EAF5003C7C17 /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F322BA4EAF5003C7C17 /* CallManager.swift */; };
 		B95D2F352BA4EB32003C7C17 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */; };
 		B95D2F392BA4EB58003C7C17 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F382BA4EB58003C7C17 /* VideoPlayerView.swift */; };
@@ -90,6 +92,7 @@
 		18F7233C2BA95062003F44FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18F723482BA9ED0D003F44FA /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Her/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18F7234C2BA9F3D3003F44FA /* whisp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whisp.png; sourceTree = "<group>"; };
+		18F723882BAC2694003F44FA /* ActivityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActivityKit.framework; path = System/Library/Frameworks/ActivityKit.framework; sourceTree = SDKROOT; };
 		B95D2F322BA4EAF5003C7C17 /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		B95D2F382BA4EB58003C7C17 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
@@ -100,7 +103,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18D28A0E2B971574008742FB /* Vapi in Frameworks */,
+				18F7238D2BAC2C3C003F44FA /* Vapi in Frameworks */,
+				18F723892BAC2695003F44FA /* ActivityKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +128,7 @@
 			files = (
 				18F723302BA95060003F44FA /* SwiftUI.framework in Frameworks */,
 				18F7232E2BA95060003F44FA /* WidgetKit.framework in Frameworks */,
+				18F7238B2BAC2C17003F44FA /* Vapi in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,6 +175,7 @@
 		18F7232C2BA95060003F44FA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18F723882BAC2694003F44FA /* ActivityKit.framework */,
 				18F7232D2BA95060003F44FA /* WidgetKit.framework */,
 				18F7232F2BA95060003F44FA /* SwiftUI.framework */,
 			);
@@ -219,7 +225,7 @@
 			);
 			name = Her;
 			packageProductDependencies = (
-				18D28A0D2B971574008742FB /* Vapi */,
+				18F7238C2BAC2C3C003F44FA /* Vapi */,
 			);
 			productName = Her;
 			productReference = 18D289DF2B9713FE008742FB /* Her.app */;
@@ -274,6 +280,9 @@
 			dependencies = (
 			);
 			name = "Her ExtensionExtension";
+			packageProductDependencies = (
+				18F7238A2BAC2C17003F44FA /* Vapi */,
+			);
 			productName = "Her ExtensionExtension";
 			productReference = 18F7232B2BA95060003F44FA /* Her ExtensionExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -479,7 +488,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -537,7 +546,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -555,7 +564,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = Y2V76WXBUQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -564,6 +573,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCameraUsageDescription = "The camera is needed for some of the audio libraries.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "The app needs to access your microphone to chat.";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -571,7 +581,7 @@
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -597,7 +607,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = Y2V76WXBUQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -606,6 +616,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCameraUsageDescription = "The camera is needed for some of the audio libraries.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "The app needs to access your microphone to chat.";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -613,7 +624,7 @@
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -833,7 +844,12 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		18D28A0D2B971574008742FB /* Vapi */ = {
+		18F7238A2BAC2C17003F44FA /* Vapi */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18D28A0C2B971574008742FB /* XCRemoteSwiftPackageReference "ios" */;
+			productName = Vapi;
+		};
+		18F7238C2BAC2C3C003F44FA /* Vapi */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 18D28A0C2B971574008742FB /* XCRemoteSwiftPackageReference "ios" */;
 			productName = Vapi;
