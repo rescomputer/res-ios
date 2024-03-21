@@ -9,7 +9,6 @@ import SwiftUI
 import UIKit
 
 struct MainView: View {
-    
     @StateObject private var callManager = CallManager()
     @FocusState private var isTextFieldFocused: Bool
     @State private var drawingHeight = true
@@ -160,12 +159,12 @@ struct OptionRow: View {
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(option.title)
-                    .font(.system(size: 17, weight: .semibold))
+                    .font(.system(.headline))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(Color(uiColor: .label))
                 
                 Text(option.description)
-                    .font(.system(size: 14))
+                    .font(.system(.subheadline))
                     .foregroundColor(.gray)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity, alignment: .leading)
