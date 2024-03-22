@@ -44,12 +44,12 @@ struct CustomTextEditor: UIViewRepresentable {
         if isDisabled {
             uiView.textColor = UIColor.lightGray
         } else {
-            uiView.textColor = colorScheme == .dark ? UIColor.white : UIColor.black
+            uiView.textColor = colorScheme == .dark ? UIColor.black : UIColor.black
         }
     }
 
     private func updateColors(in textView: UITextView) {
-        textView.backgroundColor = colorScheme == .dark ? UIColor.systemBackground : UIColor.clear
+        textView.backgroundColor = colorScheme == .dark ? UIColor.clear : UIColor.clear
     }
 
     class Coordinator: NSObject, UITextViewDelegate {
