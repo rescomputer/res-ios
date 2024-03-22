@@ -22,15 +22,6 @@ struct MainView: View {
         VStack(spacing: 25) {
             // Top Nav
             HStack {
-                Button(action: {
-                    self.activeModal = .voiceSettingsModal
-                }) {
-                    Image(systemName: "waveform")
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .foregroundColor(Color.white.opacity(0.5))
-                        .padding()
-                }
                 Spacer()
                 Button(action: {
                     withAnimation(.easeInOut(duration: 0.2)) {
@@ -60,6 +51,22 @@ struct MainView: View {
             Spacer()
 
             // Start Button
+            HStack {
+                Button(action: {
+                        self.activeModal = .voiceSettingsModal
+                    }) {
+                        HStack {
+                            Image(systemName: "waveform")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(Color.white.opacity(0.5))
+                                // .padding()
+                            Text("Personality & Voice")
+                                .font(.system(size: 18))
+                                .foregroundColor(Color.white.opacity(0.6))    
+                        }
+                    }
+            }
             Button {
                 Task {  await callManager.handleCallAction() }
             } label: {
@@ -77,7 +84,7 @@ struct MainView: View {
                     )
             }
             .padding(.horizontal)
-            .padding(.vertical)
+            .padding(.bottom, 10)
             .pressAnimation()
             
             .disabled(callManager.callState == .loading)

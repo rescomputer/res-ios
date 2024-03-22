@@ -43,10 +43,11 @@ struct AppSettingsView: View {
                     }
                     Spacer()
                     
-                    Text("App Settings")
+                    Text("Settings")
                         .bold()
                         .font(.system(size: 20, design: .rounded))
                         .foregroundColor(Color.white.opacity(0.8))
+                    
                     
                     Spacer()
 
@@ -55,17 +56,49 @@ struct AppSettingsView: View {
                         let impactMed = UIImpactFeedbackGenerator(style: .soft)
                         impactMed.impactOccurred()
                     }) {
-                        HStack {
-                            Image(systemName: "party.popper.fill")
-                                .font(.system(size: 20))
-                                .bold()
-                                .foregroundColor(.white.opacity(0.3))
-                        }
+                        // HStack {
+                        //     Image(systemName: "party.popper.fill")
+                        //         .font(.system(size: 20))
+                        //         .bold()
+                        //         .foregroundColor(.white.opacity(0.3))
+                        // }
                     }
                 }
                 .padding(.bottom, 20)
-//                SettingsCard
-//                    .pressAnimation()
+
+                VStack(alignment: .leading, spacing: 10) {
+                        Text("This app is built using:")
+                            .font(.body)
+                            .foregroundColor(.white.opacity(0.6))
+                        
+                        Link("VAPI · Voice API", destination: URL(string: "https://vapi.ai")!)
+                            .font(.body)
+                            .foregroundColor(.white.opacity(0.8))
+                        
+                        Link("Daily · Calling API", destination: URL(string: "https://www.daily.co")!)
+                            .font(.body)
+                            .foregroundColor(.white.opacity(0.8))
+                        
+                        Link("Deepgram · Speech-to-Text API", destination: URL(string: "https://deepgram.com")!)
+                            .font(.body)
+                            .foregroundColor(.white.opacity(0.8))
+                        
+                        Link("OpenAI · Voice-to-Text API", destination: URL(string: "https://openai.com")!)
+                            .font(.body)
+                            .foregroundColor(.white.opacity(0.8))
+                        
+                        Text("Your conversations are being routed through their servers. They are not private.")
+                            .font(.footnote)
+                            .foregroundColor(.white.opacity(0.6))
+                        
+                        Text("We never store personal information about you. However, the conversations are logged.")
+                            .font(.footnote)
+                            .foregroundColor(.white.opacity(0.6))
+                        
+                        Text("We will delete the logs on our end.")
+                            .font(.footnote)
+                            .foregroundColor(.white.opacity(0.6))
+                    }
                 Spacer()
                 Spacer()
 
