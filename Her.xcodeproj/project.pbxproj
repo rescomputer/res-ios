@@ -168,6 +168,8 @@
 		18D289E12B9713FE008742FB /* Her */ = {
 			isa = PBXGroup;
 			children = (
+				F3B5AB232BAD35BD009CDBB5 /* Views */,
+				F3B5AB222BAD358D009CDBB5 /* Managers */,
 				F3B5AB1F2BAD08CA009CDBB5 /* Utilities */,
 				18D289E22B9713FE008742FB /* HerApp.swift */,
 				18D289E42B9713FE008742FB /* MainView.swift */,
@@ -208,12 +210,10 @@
 			isa = PBXGroup;
 			children = (
 				187277052B9B85A20079C460 /* VAPIExampleView.swift */,
-				B95D2F322BA4EAF5003C7C17 /* CallManager.swift */,
 				B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */,
 				B95D2F382BA4EB58003C7C17 /* VideoPlayerView.swift */,
 				F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */,
 				F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */,
-				F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -224,6 +224,22 @@
 				F3B5AB202BAD08F1009CDBB5 /* AnimationUtility.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		F3B5AB222BAD358D009CDBB5 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				B95D2F322BA4EAF5003C7C17 /* CallManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		F3B5AB232BAD35BD009CDBB5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -512,7 +528,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -570,7 +586,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

@@ -70,10 +70,15 @@ struct MainView: View {
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(callManager.buttonColor)
-                    .cornerRadius(10)
+                    .cornerRadius(50)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 50)
+                            .stroke(Color.black.opacity(1), lineWidth: 1)
+                    )
             }
             .padding(.horizontal)
             .padding(.vertical)
+            .pressAnimation()
             
             .disabled(callManager.callState == .loading)
             
@@ -302,9 +307,6 @@ extension MainView {
                         }
                     } label: {
                         HStack {
-                            // Image(systemName: "app.gift") 
-                            //     .font(.system(size: 20))
-                            //     .foregroundColor(.black.opacity(1))
                             Text(callManager.voiceDisplayName) 
                                 .font(.system(size: 14))
                                 .foregroundColor(.black.opacity(1))
@@ -334,9 +336,6 @@ extension MainView {
                         }
                     } label: {
                         HStack {
-                            // Image(systemName: "app.gift") 
-                            //     .font(.system(size: 20))
-                            //     .foregroundColor(.black.opacity(1))
                             Text(callManager.speedDisplayName) 
                                 .font(.system(size: 14))
                                 .foregroundColor(.black.opacity(1))

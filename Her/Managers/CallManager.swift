@@ -228,6 +228,6 @@ extension CallManager {
     }
     
     var buttonColor: Color {
-        callState == .loading ? .gray : (callState == .ended ? .green : .red)
+        callState == .loading ? Color(red: 1, green: 0.8, blue: 0.49) : (callState == .ended ? Color(red: 0.106, green: 0.149, blue: 0.149) : Color(red: 0.957, green: 0.298, blue: 0.424))
     }
 }
