@@ -49,7 +49,7 @@ struct MainView: View {
             VStack {
                 Text("Let’s have a back and forth conversation 🙂")
                     .bold()
-                    .font(.system(size: 30))
+                    .font(.system(size: 30, design: .rounded))
                     .foregroundColor(Color.white.opacity(1))
                     .multilineTextAlignment(.center)
                 Text("When you talk, I listen...")
@@ -224,8 +224,8 @@ extension MainView {
                     HStack {
                         VStack {
                             Text("Who do you want to talk to?")
+                                .font(.system(size: 20, design: .rounded))
                                 .bold()
-                                .font(.system(size: 20))
                                 .foregroundColor(Color.black.opacity(1))
                             Text("Choose a preset prompt or create your own persona to converse with.")
                                 .font(.system(size: 14))

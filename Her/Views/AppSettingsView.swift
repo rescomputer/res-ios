@@ -45,7 +45,7 @@ struct AppSettingsView: View {
                     
                     Text("App Settings")
                         .bold()
-                        .font(.system(size: 18))
+                        .font(.system(size: 20, design: .rounded))
                         .foregroundColor(Color.white.opacity(0.8))
                     
                     Spacer()
