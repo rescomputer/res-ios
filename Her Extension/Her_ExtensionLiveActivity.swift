@@ -1,55 +1,70 @@
-//
-//  Her_ExtensionLiveActivity.swift
-//  Her Extension
-//
-//  Created by Richard Burton on 19/03/2024.
-//
-
 import ActivityKit
 import WidgetKit
 import SwiftUI
 
 struct Her_ExtensionAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
-        // Dynamic stateful properties about your activity go here!
-        var emoji: String
+        var sfSymbolName: String
     }
-
-    // Fixed non-changing properties about your activity go here!
+    
     var name: String
 }
 
 struct Her_ExtensionLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: Her_ExtensionAttributes.self) { context in
-            // Lock screen/banner UI goes here
-            VStack {
-                Text("Conversation Status: \(context.state.emoji)")
+            VStack(alignment: .leading) {
+                HStack {
+                    Image(systemName: context.state.sfSymbolName)
+                        .imageScale(.large)
+                        .font(.system(size: 30))
+                        .foregroundColor(context.state.sfSymbolName == "ellipsis" ? .gray : .green)
+                    
+                    Text("Conversation with Her")
+                        .font(.headline)
+                        .padding(.leading, 8)
+                }
             }
-            .activityBackgroundTint(Color.cyan)
+            .padding()
+            .activityBackgroundTint(Color.black)
             .activitySystemActionForegroundColor(Color.black)
         } dynamicIsland: { context in
             DynamicIsland {
-                // Expanded UI goes here
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("Status: \(context.state.emoji)")
+                    HStack(alignment: .top) {
+                        Image(systemName: context.state.sfSymbolName)
+                            .imageScale(.large)
+                            .font(.system(size: 30))
+                            .foregroundColor(context.state.sfSymbolName == "ellipsis" ? .gray : .green)
+                        
+                        Text("Conversation with Her")
+                            .font(.headline)
+                            .padding(.leading, 8)
+                    }
                 }
+                
                 DynamicIslandExpandedRegion(.trailing) {
                     Text("Her")
+                        .font(.subheadline)
                 }
+                
                 DynamicIslandExpandedRegion(.bottom) {
                     Text("Conversation in progress")
-                    // more content
+                        .font(.caption)
+                        .foregroundColor(.secondary)
                 }
             } compactLeading: {
-                Text("\(context.state.emoji)")
+                Image(systemName: context.state.sfSymbolName)
+                    .imageScale(.small)
+                    .foregroundColor(context.state.sfSymbolName == "ellipsis" ? .gray : .green)
             } compactTrailing: {
                 Text("Her")
+                    .font(.caption)
             } minimal: {
-                Text("\(context.state.emoji)")
+                Image(systemName: context.state.sfSymbolName)
+                    .imageScale(.small)
+                    .foregroundColor(context.state.sfSymbolName == "ellipsis" ? .gray : .green)
             }
-            .widgetURL(URL(string: "http://www.apple.com"))
-            .keylineTint(Color.red)
         }
     }
 }
@@ -61,18 +76,18 @@ extension Her_ExtensionAttributes {
 }
 
 extension Her_ExtensionAttributes.ContentState {
-    fileprivate static var smiley: Her_ExtensionAttributes.ContentState {
-        Her_ExtensionAttributes.ContentState(emoji: "😀")
-     }
-     
-     fileprivate static var starEyes: Her_ExtensionAttributes.ContentState {
-         Her_ExtensionAttributes.ContentState(emoji: "🤩")
-     }
+    fileprivate static var connecting: Her_ExtensionAttributes.ContentState {
+        Her_ExtensionAttributes.ContentState(sfSymbolName: "ellipsis")
+    }
+    
+    fileprivate static var activeCall: Her_ExtensionAttributes.ContentState {
+        Her_ExtensionAttributes.ContentState(sfSymbolName: "waveform.and.person.filled")
+    }
 }
 
 #Preview("Notification", as: .content, using: Her_ExtensionAttributes.preview) {
-   Her_ExtensionLiveActivity()
+    Her_ExtensionLiveActivity()
 } contentStates: {
-    Her_ExtensionAttributes.ContentState.smiley
-    Her_ExtensionAttributes.ContentState.starEyes
+    Her_ExtensionAttributes.ContentState.connecting
+    Her_ExtensionAttributes.ContentState.activeCall
 }
