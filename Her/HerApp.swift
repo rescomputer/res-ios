@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct HerApp: App {
+    @State private var isAppSettingsViewShowing = false
+    
     var body: some Scene {
         WindowGroup {
-            MainView()
+            MainView(isAppSettingsViewShowing: $isAppSettingsViewShowing)
         }
     }
 }

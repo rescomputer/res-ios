@@ -49,6 +49,28 @@ class CallManager: ObservableObject {
             UserDefaults.standard.set(voice, forKey: "voice")
         }
     }
+
+    var voiceDisplayName: String {
+        switch voice {
+        case "alloy": return "🇺🇸 Alloy"
+        case "echo": return "🇺🇸 Echo"
+        case "fable": return "🇬🇧 Fable"
+        case "onyx": return "🇺🇸 Onyx"
+        case "nova": return "🇺🇸 Nova"
+        case "shimmer": return "🇺🇸 Shimmer"
+        default: return "Voice Type"
+        }
+    }
+
+    var speedDisplayName: String {
+        switch speed {
+        case 0.3: return "🐢 Slow"
+        case 1.0: return "💬 Normal"
+        case 1.3: return "🐇 Fast"
+        case 1.5: return "⚡️ Superfast"
+        default: return "Voice Speed"
+        }
+    }
     
     func setupVapi() {
         vapi.eventPublisher

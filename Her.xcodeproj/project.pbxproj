@@ -30,6 +30,10 @@
 		B95D2F332BA4EAF5003C7C17 /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F322BA4EAF5003C7C17 /* CallManager.swift */; };
 		B95D2F352BA4EB32003C7C17 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */; };
 		B95D2F392BA4EB58003C7C17 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F382BA4EB58003C7C17 /* VideoPlayerView.swift */; };
+		F3B5AB182BACDB8A009CDBB5 /* HalfModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */; };
+		F3B5AB1A2BACE488009CDBB5 /* XMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */; };
+		F3B5AB1E2BAD062D009CDBB5 /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */; };
+		F3B5AB212BAD08F1009CDBB5 /* AnimationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB202BAD08F1009CDBB5 /* AnimationUtility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +100,10 @@
 		B95D2F322BA4EAF5003C7C17 /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		B95D2F382BA4EB58003C7C17 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
+		F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalView.swift; sourceTree = "<group>"; };
+		F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMarkButton.swift; sourceTree = "<group>"; };
+		F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsView.swift; sourceTree = "<group>"; };
+		F3B5AB202BAD08F1009CDBB5 /* AnimationUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationUtility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +168,7 @@
 		18D289E12B9713FE008742FB /* Her */ = {
 			isa = PBXGroup;
 			children = (
+				F3B5AB1F2BAD08CA009CDBB5 /* Utilities */,
 				18D289E22B9713FE008742FB /* HerApp.swift */,
 				18D289E42B9713FE008742FB /* MainView.swift */,
 				B95D2F3A2BA4F35F003C7C17 /* Components */,
@@ -202,8 +211,19 @@
 				B95D2F322BA4EAF5003C7C17 /* CallManager.swift */,
 				B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */,
 				B95D2F382BA4EB58003C7C17 /* VideoPlayerView.swift */,
+				F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */,
+				F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */,
+				F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		F3B5AB1F2BAD08CA009CDBB5 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				F3B5AB202BAD08F1009CDBB5 /* AnimationUtility.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -380,12 +400,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3B5AB212BAD08F1009CDBB5 /* AnimationUtility.swift in Sources */,
 				187277062B9B85A20079C460 /* VAPIExampleView.swift in Sources */,
 				18D289E52B9713FE008742FB /* MainView.swift in Sources */,
 				18D289E32B9713FE008742FB /* HerApp.swift in Sources */,
+				F3B5AB1E2BAD062D009CDBB5 /* AppSettingsView.swift in Sources */,
+				F3B5AB1A2BACE488009CDBB5 /* XMarkButton.swift in Sources */,
 				B95D2F332BA4EAF5003C7C17 /* CallManager.swift in Sources */,
 				B95D2F352BA4EB32003C7C17 /* CustomTextEditor.swift in Sources */,
 				B95D2F392BA4EB58003C7C17 /* VideoPlayerView.swift in Sources */,
+				F3B5AB182BACDB8A009CDBB5 /* HalfModalView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,7 +589,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 12;
-				DEVELOPMENT_TEAM = Y2V76WXBUQ;
+				DEVELOPMENT_TEAM = GZ2BM4VMQU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Her/Info.plist;
@@ -608,7 +632,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 12;
-				DEVELOPMENT_TEAM = Y2V76WXBUQ;
+				DEVELOPMENT_TEAM = GZ2BM4VMQU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Her/Info.plist;
@@ -725,7 +749,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y2V76WXBUQ;
+				DEVELOPMENT_TEAM = GZ2BM4VMQU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Her Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Her AI";
@@ -757,7 +781,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y2V76WXBUQ;
+				DEVELOPMENT_TEAM = GZ2BM4VMQU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Her Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Her AI";
