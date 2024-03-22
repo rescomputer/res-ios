@@ -38,7 +38,7 @@ struct MainView: View {
             
             Spacer()
             VStack {
-                Text("Let’s have a back and forth conversation 🙂")
+                Text("Let’s have a back & forth conversation 🙂")
                     .bold()
                     .font(.system(size: 30, design: .rounded))
                     .foregroundColor(Color.white.opacity(1))
@@ -202,8 +202,7 @@ struct OptionsMenu: View {
                 }
             }
         }
-        .frame(maxHeight: .infinity)
-        // .background(Color(uiColor: .systemBackground))
+        .frame(maxHeight: 90)
     }
 }
 
@@ -234,26 +233,32 @@ extension MainView {
                                 .font(.system(size: 20, design: .rounded))
                                 .bold()
                                 .foregroundColor(Color.black.opacity(1))
+                                .padding(.bottom, 4)
                             Text("Choose a preset prompt or create your own persona to converse with.")
                                 .font(.system(size: 14))
                                 .foregroundColor(Color.black.opacity(0.5))
                         }
-                        .padding(.top, 30)
+                        .alignmentGuide(.top, computeValue: { dimension in
+                            dimension[.top]
+                        })
+                        // .padding(.top, 10)
 
                         Spacer()
-
-                        XMarkButton {
-                            withAnimation {
-                                self.activeModal = nil
+                        VStack {
+                            XMarkButton {
+                                withAnimation {
+                                    self.activeModal = nil
+                                }
                             }
                         }
-                        .padding(.trailing, 10)
-                        .padding(.top, 10)
+                        .alignmentGuide(.top, computeValue: { dimension in
+                            dimension[.top]
+                        })
                     }
                     .padding(.bottom, 20)
                     
                 HStack {
-                    Text("Custom Voice Prompt")
+                    Text("Custom Prompt")
                         .bold()
                         .font(.system(size: 14))
                         .foregroundColor(Color.black.opacity(0.5))
@@ -281,14 +286,15 @@ extension MainView {
                 }
                 
                 // OptionsMenu
-                OptionsMenu(selectedOption: $selectedOption)
-                    .frame(height: 80)
-                    .onChange(of: selectedOption) { newOption in
-                            if let newOption = newOption {
-                                callManager.enteredText = newOption.description
+                HStack{
+                    OptionsMenu(selectedOption: $selectedOption)
+                        .frame(height: 90)
+                        .onChange(of: selectedOption) { newOption in
+                                if let newOption = newOption {
+                                    callManager.enteredText = newOption.description
+                                }
                             }
-                        }
-                
+                }
                 
                 // Pickers
                 HStack {
@@ -393,8 +399,7 @@ extension MainView {
                 // .listStyle(.plain)
                 // .cornerRadius(15)
             }
-            .padding(.horizontal, 20)
-
+            .padding(.horizontal, 25)
         }
     }
 
