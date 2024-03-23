@@ -52,22 +52,6 @@ struct MainView: View {
             Spacer()
 
             // Start Button
-            HStack {
-                Button(action: {
-                        self.activeModal = .voiceSettingsModal
-                    }) {
-                        HStack {
-                            Image(systemName: "waveform")
-                                .resizable()
-                                .frame(width: 24, height: 24)
-                                .foregroundColor(Color.white.opacity(0.5))
-                                // .padding()
-                            Text("Personality & Voice")
-                                .font(.system(size: 18))
-                                .foregroundColor(Color.white.opacity(0.6))    
-                        }
-                    }
-            }
             Button {
                 Task {  await callManager.handleCallAction() }
             } label: {
@@ -85,10 +69,27 @@ struct MainView: View {
                     )
             }
             .padding(.horizontal)
-            .padding(.bottom, 10)
             .pressAnimation()
             
             .disabled(callManager.callState == .loading)
+            
+            HStack {
+                Button(action: {
+                        self.activeModal = .voiceSettingsModal
+                    }) {
+                        HStack {
+                            Image(systemName: "waveform")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(Color.white.opacity(0.5))
+                                // .padding()
+                            Text("Personality & Voice")
+                                .font(.system(size: 18))
+                                .foregroundColor(Color.white.opacity(0.6))
+                    }
+                }
+            }
+            .padding(.bottom, 10)
             
         }
         .padding(.horizontal)
@@ -156,7 +157,7 @@ struct OptionRow: View {
             ZStack{
                 RoundedRectangle(cornerRadius: 12)
                     .fill(Color.black.opacity(0.05))
-                    .frame(width: 59, height: 59)
+                    .frame(width: 53, height: 53)
                 Image(systemName: option.icon)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 24, height: 24)
@@ -246,8 +247,8 @@ extension MainView {
                                     .foregroundColor(Color.black.opacity(0.5))
 
                             }
-                            .padding(.horizontal)
-
+                            .padding(.horizontal, 20)
+                            .offset(x: -12)
                         }
                     }
                     .overlay(
@@ -375,7 +376,7 @@ extension MainView {
                             }
                         }                      
                 }
-                .padding(.horizontal) 
+                .padding(.horizontal,25) 
             }
         }
     }
