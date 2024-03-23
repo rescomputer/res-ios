@@ -7,12 +7,14 @@
 
 import Foundation
 import SwiftUI
+import UIKit 
+import AVFoundation
 
 struct AppSettingsView: View {
     @Binding var isPresented: Bool
+    @State private var isMicrophoneEnabled = false
+    @State private var showingSettingsAlert = false
 
-    @Namespace var animation
-    
     var body: some View {
         ZStack {
             LinearGradient(
@@ -66,6 +68,20 @@ struct AppSettingsView: View {
                 }
                 .padding(.bottom, 20)
 
+                VStack {
+                     HStack {
+                        Text("Permissions")
+                            .bold()
+                            .font(.system(size: 14))
+                            .foregroundColor(Color.white.opacity(0.5))
+                        Spacer()
+                    }
+                    CustomToggle(title: "Microphone", systemImageName: "mic.fill", isOn: $isMicrophoneEnabled)
+                        .onChange(of: isMicrophoneEnabled) { newValue in
+                            handleMicrophonePermission(isEnabled: newValue)
+                        }
+                }
+
                 VStack(alignment: .leading, spacing: 10) {
                         Text("This app is built using:")
                             .font(.body)
@@ -103,9 +119,28 @@ struct AppSettingsView: View {
                 Spacer()
 
 
-            }.padding()
-            
-            
+            }
+            .padding()
+            .onAppear {
+                 checkMicrophonePermission()
+            }
+            .alert(isPresented: $showingSettingsAlert) { 
+                Alert(
+                    title: Text("Microphone Permission"),
+                    message: Text("To disable the microphone, please go to Settings and turn off permissions for this app."),
+                    primaryButton: .default(Text("Settings")) {
+                        // Action to open app settings
+                        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString),
+                            UIApplication.shared.canOpenURL(settingsUrl) else {
+                            return
+                        }
+                        UIApplication.shared.open(settingsUrl)
+                    },
+                    secondaryButton: .cancel {
+                        self.isMicrophoneEnabled = true
+                    }
+                )
+            }          
         }
     }
 }
@@ -114,39 +149,33 @@ struct AppSettingsView: View {
 
 extension AppSettingsView {
     
-    private var SettingsCard: some View {
-        VStack(alignment: .leading) {
-            VStack(alignment: .leading) {
-                HStack {
-                    VStack {
-                        ZStack {
-                            Circle()
-                                .foregroundColor(.black.opacity(0.1))
-                                .frame(width: 40, height: 40)
-                            
-                                Image(systemName: "heart.fill")
-                                    .font(.system(size: 23))
-                                    .foregroundColor(.black.opacity(0.6))
-                                    .padding(6)
-                                    .background(Color.clear)
-                                    .clipShape(Circle())
-                        }
-                        Spacer()
-                    }
-                    Spacer()
-                    Spacer()
-                    
-                }
-                Spacer()
-            }
+    private func checkMicrophonePermission() {
+        switch AVAudioSession.sharedInstance().recordPermission {
+        case .granted:
+            isMicrophoneEnabled = true
+        case .denied, .undetermined:
+            isMicrophoneEnabled = false
+        @unknown default:
+            isMicrophoneEnabled = false
         }
-        .matchedGeometryEffect(id: "card", in: animation)
-        .frame(width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height / 3.7)
-        .padding(.horizontal, 15)
-        .padding(.vertical, 12)
-        .background(Color.white)
-        .cornerRadius(25)
+    }
 
+    private func handleMicrophonePermission(isEnabled: Bool) {
+        if isEnabled {
+            // Request permission if the toggle is turned on
+            AVAudioSession.sharedInstance().requestRecordPermission { granted in
+                DispatchQueue.main.async {
+                    if granted {
+                        self.isMicrophoneEnabled = true
+                    } else {
+                        self.isMicrophoneEnabled = false
+                        // Optionally, show an alert or guide the user to the app settings
+                    }
+                }
+            }
+        } else {
+            showingSettingsAlert = true
+        }
     }
 
 }

@@ -38,13 +38,14 @@ struct MainView: View {
             
             Spacer()
             VStack {
-                Text("Let’s have a back & forth conversation 🙂")
+                Text("Let’s have some back and forth conversation.")
                     .bold()
                     .font(.system(size: 30, design: .rounded))
                     .foregroundColor(Color.white.opacity(1))
                     .multilineTextAlignment(.center)
-                Text("When you talk, I listen...")
-                    .font(.system(size: 20))
+                    .padding(.bottom, 10)
+                Text("When you talk, I listen 🙂")
+                    .font(.system(size: 22, design: .rounded))
                     .foregroundColor(Color.white.opacity(0.5))
             }
             .padding(.horizontal, 20)
@@ -226,185 +227,138 @@ extension MainView {
                 self.activeModal = nil
             }
         }) {
-            VStack(alignment: .center, spacing: 10){
+            VStack{  
                     HStack {
-                        VStack {
-                            Text("Who do you want to talk to?")
-                                .font(.system(size: 20, design: .rounded))
-                                .bold()
-                                .foregroundColor(Color.black.opacity(1))
-                                .padding(.bottom, 4)
-                            Text("Choose a preset prompt or create your own persona to converse with.")
-                                .font(.system(size: 14))
-                                .foregroundColor(Color.black.opacity(0.5))
-                        }
-                        .alignmentGuide(.top, computeValue: { dimension in
-                            dimension[.top]
-                        })
-                        // .padding(.top, 10)
+                        ZStack {
+                            HStack {
+                                Image(systemName: "waveform")
+                                    .resizable()
+                                    .foregroundColor(.black.opacity(0.1))
+                                    .frame(width: 85, height: 85)
+                                Spacer()
+                            }
+                        
+                            VStack(alignment: .leading) {
+                                Text("Who do you want to talk to?")
+                                    .font(.system(size: 20, design: .rounded))
+                                    .bold()
+                                    .foregroundColor(Color.black.opacity(1))
+                                    .padding(.bottom, 4)
+                                Text("Choose a preset prompt or create your own persona to converse with.")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(Color.black.opacity(0.5))
+                            }
+                        }                          
 
                         Spacer()
-                        VStack {
-                            XMarkButton {
-                                withAnimation {
-                                    self.activeModal = nil
+                        XMarkButton {
+                            withAnimation {
+                                self.activeModal = nil
                                 }
                             }
-                        }
-                        .alignmentGuide(.top, computeValue: { dimension in
-                            dimension[.top]
-                        })
                     }
-                    .padding(.bottom, 20)
-                    
-                HStack {
+                    .padding(.horizontal, 20)                
+
+                VStack(alignment: .leading) {
                     Text("Custom Prompt")
                         .bold()
                         .font(.system(size: 14))
                         .foregroundColor(Color.black.opacity(0.5))
-                    Spacer()
-                }
-                // CustomTextEditor
-                HStack {
-                    CustomTextEditor(text: $callManager.enteredText, isDisabled: callManager.callState != .ended)
-                        .frame(height: 100)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 5)
-                        .background(Color.black.opacity(0.05))
-                        .cornerRadius(15)
-                        .disabled(callManager.callState != .ended) // TODO get this to work with a custom element
-                }
+        
+                    // CustomTextEditor
+                    HStack {
+                        CustomTextEditor(text: $callManager.enteredText, isDisabled: callManager.callState != .ended)
+                            .frame(height: 100)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 5)
+                            .background(Color.black.opacity(0.05))
+                            .cornerRadius(15)
+                            .disabled(callManager.callState != .ended) // TODO get this to work with a custom element
+                    }
+    
+                        // Text Label
+                            Text("Prompt Presets")
+                                .bold()
+                                .font(.system(size: 14))
+                                .foregroundColor(Color.black.opacity(0.5))
+                        
+                        // OptionsMenu
+                        HStack{
+                            OptionsMenu(selectedOption: $selectedOption)
+                                .frame(height: 90)
+                                .onChange(of: selectedOption) { newOption in
+                                        if let newOption = newOption {
+                                            callManager.enteredText = newOption.description
+                                        }
+                                    }
+                        }
+                        
+                        // Pickers
+                        Text("Voice Settings")
+                            .bold()
+                            .font(.system(size: 14))
+                            .foregroundColor(Color.black.opacity(0.5))
 
-                // Text Label
-                HStack {
-                    Text("Prompt Presets")
-                        .bold()
-                        .font(.system(size: 14))
-                        .foregroundColor(Color.black.opacity(0.5))
-                    Spacer()
-
-                }
-                
-                // OptionsMenu
-                HStack{
-                    OptionsMenu(selectedOption: $selectedOption)
-                        .frame(height: 90)
-                        .onChange(of: selectedOption) { newOption in
-                                if let newOption = newOption {
-                                    callManager.enteredText = newOption.description
+                        HStack {
+                            Menu {
+                                Picker("Voice", selection: $callManager.voice) {
+                                    Text("🇺🇸 Alloy · Gentle Man").tag("alloy")
+                                    Text("🇺🇸 Echo · Deep Man").tag("echo")
+                                    Text("🇬🇧 Fable · Normal Man").tag("fable")
+                                    Text("🇺🇸 Onyx · Deeper Man").tag("onyx")
+                                    Text("🇺🇸 Nova · Gentle Woman").tag("nova")
+                                    Text("🇺🇸 Shimmer · Deep Woman").tag("shimmer")
                                 }
+                                .onChange(of: callManager.voice) { newVoice in
+                                    UserDefaults.standard.set(newVoice, forKey: "voice")
+                                }
+                            } label: {
+                                HStack {
+                                    Text(callManager.voiceDisplayName) 
+                                        .font(.system(size: 14))
+                                        .foregroundColor(.black.opacity(1))
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding(.horizontal, 24)
+                                .padding(.vertical, 8)
+                                .background(Color.black.opacity(0.05))
+                                .clipShape(RoundedRectangle(cornerRadius: 50))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 50)
+                                        .stroke(Color.black.opacity(0.05), lineWidth: 1)
+                                )
                             }
-                }
-                
-                // Pickers
-                HStack {
-                    Text("Voice Settings")
-                        .bold()
-                        .font(.system(size: 14))
-                        .foregroundColor(Color.black.opacity(0.5))
-                    Spacer()
 
+                            Menu {
+                                Picker("Speed", selection: $callManager.speed) {
+                                    Text("🐢 Slow").tag(0.3)
+                                    Text("💬 Normal").tag(1.0)
+                                    Text("🐇 Fast").tag(1.3)
+                                    Text("⚡️ Superfast").tag(1.5)
+                                }
+                                .onChange(of: callManager.speed) { newSpeed in
+                                    UserDefaults.standard.set(newSpeed, forKey: "speed")
+                                }
+                            } label: {
+                                HStack {
+                                    Text(callManager.speedDisplayName) 
+                                        .font(.system(size: 14))
+                                        .foregroundColor(.black.opacity(1))
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding(.horizontal, 24)
+                                .padding(.vertical, 8)
+                                .background(Color.black.opacity(0.05))
+                                .clipShape(RoundedRectangle(cornerRadius: 50))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 50)
+                                        .stroke(Color.black.opacity(0.05), lineWidth: 1)
+                                )
+                            }
+                        }                      
                 }
-                HStack {
-                    Menu {
-                        Picker("Voice", selection: $callManager.voice) {
-                            Text("🇺🇸 Alloy · Gentle Man").tag("alloy")
-                            Text("🇺🇸 Echo · Deep Man").tag("echo")
-                            Text("🇬🇧 Fable · Normal Man").tag("fable")
-                            Text("🇺🇸 Onyx · Deeper Man").tag("onyx")
-                            Text("🇺🇸 Nova · Gentle Woman").tag("nova")
-                            Text("🇺🇸 Shimmer · Deep Woman").tag("shimmer")
-                        }
-                        .onChange(of: callManager.voice) { newVoice in
-                            UserDefaults.standard.set(newVoice, forKey: "voice")
-                        }
-                    } label: {
-                        HStack {
-                            Text(callManager.voiceDisplayName) 
-                                .font(.system(size: 14))
-                                .foregroundColor(.black.opacity(1))
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding(.horizontal, 24)
-                        .padding(.vertical, 8)
-                        .background(Color.black.opacity(0.05))
-                        .clipShape(RoundedRectangle(cornerRadius: 50))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 50)
-                                .stroke(Color.black.opacity(0.05), lineWidth: 1)
-                        )
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .pressAnimation()
-
-                    Menu {
-                        Picker("Speed", selection: $callManager.speed) {
-                            Text("🐢 Slow").tag(0.3)
-                            Text("💬 Normal").tag(1.0)
-                            Text("🐇 Fast").tag(1.3)
-                            Text("⚡️ Superfast").tag(1.5)
-                        }
-                        .onChange(of: callManager.speed) { newSpeed in
-                            UserDefaults.standard.set(newSpeed, forKey: "speed")
-                        }
-                    } label: {
-                        HStack {
-                            Text(callManager.speedDisplayName) 
-                                .font(.system(size: 14))
-                                .foregroundColor(.black.opacity(1))
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding(.horizontal, 24)
-                        .padding(.vertical, 8)
-                        .background(Color.black.opacity(0.05))
-                        .clipShape(RoundedRectangle(cornerRadius: 50))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 50)
-                                .stroke(Color.black.opacity(0.05), lineWidth: 1)
-                        )
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .pressAnimation()
-                }
-                
-                // List {         
-                //     // Voice Picker
-                //     Picker("Voice", selection: $callManager.voice) {
-                //         Text("🇺🇸 Alloy · Gentle Man").tag("alloy")
-                //         Text("🇺🇸 Echo · Deep Man").tag("echo")
-                //         Text("🇬🇧 Fable · Normal Man").tag("fable")
-                //         Text("🇺🇸 Onyx · Deeper Man").tag("onyx")
-                //         Text("🇺🇸 Nova · Gentle Woman").tag("nova")
-                //         Text("🇺🇸 Shimmer · Deep Woman").tag("shimmer")
-                //         .onReceive(callManager.$voice) { newVoice in
-                //             UserDefaults.standard.set(newVoice, forKey: "voice")
-                //         }
-                //     }
-
-                //     .disabled(callManager.callState != .ended)
-                    
-                //     // Speed Picker
-                //     Picker("Speed", selection: $callManager.speed) {
-                //         Text("🐢 Slow").tag(0.3)
-                //         Text("💬 Normal").tag(1.0)
-                //         Text("🐇 Fast").tag(1.3)
-                //         Text("⚡️ Superfast").tag(1.5)
-                //         .onReceive(callManager.$speed) {  newSpeed in
-                //             UserDefaults.standard.set(newSpeed, forKey: "speed")
-                //         }
-                //     }
-                //     .disabled(callManager.callState != .ended)
-                // }
-                // .frame(height: 88)
-                // .listStyle(.plain)
-                // .cornerRadius(15)
+                .padding(.horizontal, 20) 
             }
-            .padding(.horizontal, 25)
         }
     }
-
 }
-
-//#Preview {
-//    MainView(isAppSettingsViewShowing: $isAppSettingsViewShowing)
-//}

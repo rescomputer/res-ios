@@ -96,6 +96,8 @@ struct HalfModalView<Content: View>: View {
                             offset = UIScreen.main.bounds.height / 2
                         }
                 }
+                .clipped()
+
         }
         .offset(y: max(minHeight + offset, minHeight))
         .frame(width: screenSize.width, height: screenSize.height)
