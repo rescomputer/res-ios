@@ -65,18 +65,26 @@ struct HerSmallEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
-        ZStack {
-            Image("flow")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .opacity(0.3)
-                .scaleEffect(1.3)
-            
-            Text("Start Conversation")
-        }
+            HStack{
+                Image(systemName: "waveform")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(.white)
+                
+                Spacer()
+            }       
+            HStack {
+                Text("Start Conversation")
+                    .foregroundColor(.white)
+                    .font(.system(size: 20, design: .rounded))
+
+                Spacer()
+            }
         .containerBackground(for: .widget) {
             // Customize the background view for the small widget
-            Color.white
+            Color(red: 0.25, green: 0.60, blue: 0.93)
+                .edgesIgnoringSafeArea(.all)
         }
     }
 }
@@ -84,19 +92,28 @@ struct HerSmallEntryView: View {
 struct HerMediumEntryView: View {
     var entry: Provider.Entry
 
-    var body: some View {
-        ZStack {
-            Image("flow")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .opacity(0.3)
-                .scaleEffect(1.3)
-            
-            Text("Start Conversation")
-        }
+      var body: some View {
+            HStack{
+                Spacer()
+                Image(systemName: "waveform")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(.white)
+                
+                Spacer()
+            }       
+            HStack {
+                Spacer()
+                Text("Start Conversation")
+                    .foregroundColor(.white)
+                    .font(.system(size: 26, design: .rounded))
+                Spacer()
+            }
         .containerBackground(for: .widget) {
-            // Customize the background view for the medium widget
-            Color.white
+            // Customize the background view for the small widget
+            Color(red: 0.25, green: 0.60, blue: 0.93)
+                .edgesIgnoringSafeArea(.all)
         }
     }
 }
@@ -105,18 +122,27 @@ struct HerLargeEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
-        ZStack {
-            Image("flow")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .opacity(0.3)
-                .scaleEffect(1.3)
-            
-            Text("Start Conversation")
-        }
+            HStack{
+                Spacer()
+                Image(systemName: "waveform")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 40, height: 40)
+                        .foregroundColor(.white)
+                
+                Spacer()
+            }       
+            HStack {
+                Spacer()
+                Text("Start Conversation")
+                    .foregroundColor(.white)
+                    .font(.system(size: 30, design: .rounded))
+                Spacer()
+            }
         .containerBackground(for: .widget) {
-            // Customize the background view for the large widget
-            Color.white
+            // Customize the background view for the small widget
+            Color(red: 0.25, green: 0.60, blue: 0.93)
+                .edgesIgnoringSafeArea(.all)
         }
     }
 }
@@ -125,18 +151,22 @@ struct HerAccessoryRectangularEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
-        ZStack {
-            Image("flow")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .opacity(0.3)
-                .scaleEffect(1.3)
-            
-            Text("Start Conversation")
+        GeometryReader { geometry in
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .mask(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.thickMaterial).opacity(0.3)
+                    )
+
+                Text("Start Conversation")
+                    .font(.system(size: 14, design: .rounded))
+            }
         }
         .containerBackground(for: .widget) {
             // Customize the background view for the accessory rectangular widget
-            Color.white
         }
     }
 }
@@ -145,18 +175,18 @@ struct HerAccessoryCircularEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
-        ZStack {
-            Image("flow")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .opacity(0.3)
-                .scaleEffect(1.3)
-            
-            Text("Chat")
+         GeometryReader { geometry in
+            ZStack {
+                Circle()
+                    .fill(Color.white.opacity(0.3))
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+//                    .background(.ultraThinMaterial)
+                Text("Talk")
+                    .font(.system(size: 14, design: .rounded))
+            }
         }
         .containerBackground(for: .widget) {
-            // Customize the background view for the accessory rectangular widget
-            Color.white
+            // Customize the background view for the accessory circular widget
         }
     }
 }
