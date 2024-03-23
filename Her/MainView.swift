@@ -281,6 +281,8 @@ extension MainView {
                         .bold()
                         .font(.system(size: 14))
                         .foregroundColor(Color.black.opacity(0.5))
+                        .padding(.top, 5)
+
                     // CustomTextEditor
                     HStack {
                         CustomTextEditor(text: $callManager.enteredText, isDisabled: callManager.callState != .ended)
