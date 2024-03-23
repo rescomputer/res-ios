@@ -14,7 +14,9 @@ struct AppSettingsView: View {
     @Binding var isPresented: Bool
     @State private var isMicrophoneEnabled = false
     @State private var showingSettingsAlert = false
+    @State private var infoModal: InfoModal?
 
+    
     var body: some View {
         ZStack {
             LinearGradient(
@@ -54,16 +56,16 @@ struct AppSettingsView: View {
                     Spacer()
 
                     Button(action: {
-                        //action
+                        self.infoModal = .aboutHerModal
                         let impactMed = UIImpactFeedbackGenerator(style: .soft)
                         impactMed.impactOccurred()
                     }) {
-                        // HStack {
-                        //     Image(systemName: "party.popper.fill")
-                        //         .font(.system(size: 20))
-                        //         .bold()
-                        //         .foregroundColor(.white.opacity(0.3))
-                        // }
+                        HStack {
+                            Image(systemName: "party.popper.fill")
+                                .font(.system(size: 20))
+                                .bold()
+                                .foregroundColor(.white.opacity(0.3))
+                        }
                     }
                 }
                 .padding(.bottom, 20)
@@ -81,40 +83,6 @@ struct AppSettingsView: View {
                             handleMicrophonePermission(isEnabled: newValue)
                         }
                 }
-
-                VStack(alignment: .leading, spacing: 10) {
-                        Text("This app is built using:")
-                            .font(.body)
-                            .foregroundColor(.white.opacity(0.6))
-                        
-                        Link("VAPI · Voice API", destination: URL(string: "https://vapi.ai")!)
-                            .font(.body)
-                            .foregroundColor(.white.opacity(0.8))
-                        
-                        Link("Daily · Calling API", destination: URL(string: "https://www.daily.co")!)
-                            .font(.body)
-                            .foregroundColor(.white.opacity(0.8))
-                        
-                        Link("Deepgram · Speech-to-Text API", destination: URL(string: "https://deepgram.com")!)
-                            .font(.body)
-                            .foregroundColor(.white.opacity(0.8))
-                        
-                        Link("OpenAI · Voice-to-Text API", destination: URL(string: "https://openai.com")!)
-                            .font(.body)
-                            .foregroundColor(.white.opacity(0.8))
-                        
-                        Text("Your conversations are being routed through their servers. They are not private.")
-                            .font(.footnote)
-                            .foregroundColor(.white.opacity(0.6))
-                        
-                        Text("We never store personal information about you. However, the conversations are logged.")
-                            .font(.footnote)
-                            .foregroundColor(.white.opacity(0.6))
-                        
-                        Text("We will delete the logs on our end.")
-                            .font(.footnote)
-                            .foregroundColor(.white.opacity(0.6))
-                    }
                 Spacer()
                 Spacer()
 
@@ -142,12 +110,226 @@ struct AppSettingsView: View {
                 )
             }          
         }
+        .overlay {
+            if let infoModal = infoModal {
+                switch infoModal {
+                case .aboutHerModal:
+                    showAboutHerModal()
+                }
+            }
+        }
     }
 }
 
 
 
 extension AppSettingsView {
+
+    enum InfoModal {
+        case aboutHerModal
+    }
+
+        private func showAboutHerModal() -> some View {
+
+        HalfModalView(isShown: Binding<Bool>(
+            get: { self.infoModal == .aboutHerModal },
+            set: { newValue in
+                if !newValue {
+                    self.infoModal = nil
+                }
+            }
+        ), onDismiss: {
+            withAnimation(.easeInOut(duration: 0.15)) {
+                self.infoModal = nil
+            }
+        }) {
+            VStack{  
+                ZStack {
+                    HStack {
+                        ZStack {
+                            HStack {
+                                Image(systemName: "party.popper.fill")
+                                    .resizable()
+                                    .foregroundColor(.black.opacity(0.05))
+                                    .frame(width: 85, height: 85)
+                                Spacer()
+                            }
+                            .offset(x: 10, y: -20)
+
+                        
+                            VStack(alignment: .leading) {
+                                Text("We’re building Her for fun")
+                                    .font(.system(size: 20, design: .rounded))
+                                    .bold()
+                                    .foregroundColor(Color.black.opacity(1))
+                                    .padding(.bottom, 2)
+                                Text("Learn more about “Her” and what it's all about.")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(Color.black.opacity(0.5))
+
+                            }
+                            .padding(.horizontal, 20)
+                            .offset(x: -12)
+                        }
+                    }
+                    .overlay(
+                        Rectangle()
+                            .frame(height: 1)
+                            .foregroundColor(Color.black.opacity(0.1)),
+                        alignment: .bottom
+                    )
+                }
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .fill(Color.black.opacity(0.05))
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 130),
+                        alignment: .bottom
+                    )
+                .overlay(
+                    XMarkButton {
+                        withAnimation(.easeOut(duration: 0.15)) {
+                            self.infoModal = nil
+                        }
+                    }
+                    .offset(x: -20, y: -5),
+                    alignment: .topTrailing
+                    )
+                
+                        ScrollView {
+                           VStack(alignment:.leading, spacing: 10) {   
+                             Text("""
+                                "Her" is an open-source project aimed at exploring the intricacies of AI and human interaction.
+                                """)
+                            .font(.footnote)
+                            .bold()
+                            .foregroundColor(.black.opacity(0.6))
+
+                            Text("The goal is to create a application where users can engage in meaningful conversations with AI, enhancing our understanding of natural language processing and its applications.")
+                            .font(.footnote)
+                            .foregroundColor(.black.opacity(0.6))
+
+                            VStack(alignment: .leading){
+                                Text("Her is powered by:")
+                                    .font(.footnote)
+                                    .bold()
+                                    .foregroundColor(.black.opacity(0.6))
+
+                                HStack(spacing: 20) {
+                                    Link(destination: URL(string: "https://vapi.ai")!) {
+                                        VStack {
+                                            ZStack {
+                                                RoundedRectangle(cornerRadius: 12)
+                                                    .fill(Color.black.opacity(0.05))
+                                                    .frame(width: 64, height: 64)
+                                                Image("vapi")
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(width: 24, height: 24)
+                                                    .padding(.top, 4)
+                                                    .foregroundColor(Color.black.opacity(0.8))                                            
+                                            }
+                                            Text("VAPI")
+                                                .font(.system(size: 10, weight: .bold))
+                                                .foregroundColor(Color.black.opacity(0.3))
+                                        }
+                                    }
+                                    .foregroundColor(.black.opacity(0.6))
+
+                                    Link(destination: URL(string: "https://www.daily.co")!) {
+                                        VStack {
+                                            ZStack{
+                                                RoundedRectangle(cornerRadius: 12)
+                                                    .fill(Color.black.opacity(0.05))
+                                                    .frame(width: 64, height: 64)    
+                                                Image("daily")
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(width: 24, height: 24)
+                                                    .padding(.top, 4)
+                                                    .foregroundColor(Color.black.opacity(0.8))                                                                                         
+                                            }
+                                            Text("Daily")
+                                                .font(.system(size: 10, weight: .bold))
+                                                .foregroundColor(Color.black.opacity(0.3))                                        
+                                        }
+                                    }
+                                    .foregroundColor(.black.opacity(0.6))
+
+                                    Link(destination: URL(string: "https://deepgram.com")!) {
+                                        VStack {
+                                            ZStack{
+                                                RoundedRectangle(cornerRadius: 12)
+                                                    .fill(Color.black.opacity(0.05))
+                                                    .frame(width: 64, height: 64) 
+                                                Image("deepgram")
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(width: 24, height: 24)
+                                                    .padding(.top, 4)
+                                                    .foregroundColor(Color.black.opacity(0.8))                                              
+                                            }
+                                            Text("Deepgram")
+                                                .font(.system(size: 10, weight: .bold))
+                                                .foregroundColor(Color.black.opacity(0.3))                                        
+                                        }
+                                    }
+                                    .foregroundColor(.black.opacity(0.6))
+
+                                    Link(destination: URL(string: "https://openai.com")!) {
+                                        VStack {
+                                            ZStack {
+                                                RoundedRectangle(cornerRadius: 12)
+                                                    .fill(Color.black.opacity(0.05))
+                                                    .frame(width: 64, height: 64)                                             
+                                                Image("openai")
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(width: 24, height: 24)
+                                                    .padding(.top, 4)
+                                                    .foregroundColor(Color.black.opacity(0.8))  
+                                            }
+                                            Text("OpenAI")
+                                                .font(.system(size: 10, weight: .bold))
+                                                .foregroundColor(Color.black.opacity(0.3))                                        
+                                        }
+                                    }
+                                    .foregroundColor(.black.opacity(0.6))
+                                }
+                            }
+
+                            
+                            Text("Your conversations are being routed through their servers. They are not private.")
+                                .font(.footnote)
+                                .foregroundColor(.black.opacity(0.6))
+                            
+                            Text("We never store personal information about you. However, the conversations are logged.")
+                                .font(.footnote)
+                                .foregroundColor(.black.opacity(0.6))
+                            
+                            Text("We will delete the logs on our end.")
+                                .font(.footnote)
+                                .foregroundColor(.black.opacity(0.6))
+                         }
+                         .padding()
+                    }
+                    .frame(maxHeight: 270)
+                    
+                    // Got it Button
+                    Button {
+                        self.infoModal = nil
+                    } label: {
+                        Text("Got it!")
+                            .font(.system(.title2, design: .rounded))
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color(red: 0.106, green: 0.149, blue: 0.149))
+                            .cornerRadius(50)
+                    }
+                    .padding(.horizontal)
+                    .pressAnimation()
+                    
+                }
+            }
+        }
     
     private func checkMicrophonePermission() {
         switch AVAudioSession.sharedInstance().recordPermission {

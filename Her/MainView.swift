@@ -24,9 +24,11 @@ struct MainView: View {
             HStack {
                 Spacer()
                 Button(action: {
-                    withAnimation(.easeInOut(duration: 0.2)) {
+                    withAnimation(.easeInOut(duration: 0.15)) {
                         isAppSettingsViewShowing = true
                     }
+                    let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                    impactMed.impactOccurred()
                 }) {
                     Image(systemName: "gearshape.fill")
                         .resizable()
@@ -76,6 +78,8 @@ struct MainView: View {
             HStack {
                 Button(action: {
                         self.activeModal = .voiceSettingsModal
+                        let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                        impactMed.impactOccurred()
                     }) {
                         HStack {
                             Image(systemName: "waveform")
@@ -229,7 +233,7 @@ extension MainView {
                             HStack {
                                 Image(systemName: "waveform")
                                     .resizable()
-                                    .foregroundColor(.black.opacity(0.1))
+                                    .foregroundColor(.black.opacity(0.05))
                                     .frame(width: 85, height: 85)
                                 Spacer()
                             }
@@ -271,7 +275,7 @@ extension MainView {
                             self.activeModal = nil
                         }
                     }
-                    .offset(x: -20, y: -20),
+                    .offset(x: -20, y: -15),
                     alignment: .topTrailing
                 )               
 
