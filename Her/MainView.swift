@@ -152,11 +152,11 @@ struct OptionRow: View {
     let option: Option
     
     var body: some View {
-        VStack(spacing: 5) {
+        VStack(spacing: 2) {
             ZStack{
-                RoundedRectangle(cornerRadius: 15)
+                RoundedRectangle(cornerRadius: 12)
                     .fill(Color.black.opacity(0.05))
-                    .frame(width: 57, height: 57)
+                    .frame(width: 54, height: 54)
                 Image(systemName: option.icon)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 24, height: 24)
@@ -166,15 +166,9 @@ struct OptionRow: View {
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(option.title)
-                    .font(.system(size: 11, weight: .bold))
-                    .foregroundColor(Color.black.opacity(0.2))
+                    .font(.system(size: 10, weight: .bold))
+                    .foregroundColor(Color.black.opacity(0.3))
 
-                // Text(option.description)
-                //     .font(.system(size: 14))
-                //     .foregroundColor(.gray)
-                //     .fixedSize(horizontal: false, vertical: true)
-                //     .frame(maxWidth: .infinity, alignment: .leading)
-                //     .foregroundColor(Color(uiColor: .secondaryLabel))
             }
         }
     }
@@ -250,27 +244,33 @@ extension MainView {
                             }
                         }                          
 
-                        Spacer()
                         XMarkButton {
                             withAnimation {
                                 self.activeModal = nil
                                 }
                             }
+                            .offset(y: -50)
                     }
-                    .padding(.horizontal, 20)                
+                    .padding(.horizontal, 20)  
+                    // .overlay(
+                    //     Rectangle()
+                    //         .frame(height: 1)
+                    //         .foregroundColor(Color.black.opacity(0.1)),
+                    //     alignment: .bottom
+                    // )                                 
 
                 VStack(alignment: .leading) {
+
                     Text("Custom Prompt")
                         .bold()
                         .font(.system(size: 14))
                         .foregroundColor(Color.black.opacity(0.5))
-        
                     // CustomTextEditor
                     HStack {
                         CustomTextEditor(text: $callManager.enteredText, isDisabled: callManager.callState != .ended)
                             .frame(height: 100)
                             .padding(.horizontal, 10)
-                            .padding(.vertical, 5)
+                            .padding(.vertical, 3)
                             .background(Color.black.opacity(0.05))
                             .cornerRadius(15)
                             .disabled(callManager.callState != .ended) // TODO get this to work with a custom element
@@ -281,11 +281,12 @@ extension MainView {
                                 .bold()
                                 .font(.system(size: 14))
                                 .foregroundColor(Color.black.opacity(0.5))
+                                .padding(.top, 5)
                         
                         // OptionsMenu
                         HStack{
                             OptionsMenu(selectedOption: $selectedOption)
-                                .frame(height: 90)
+                                .frame(height: 70)
                                 .onChange(of: selectedOption) { newOption in
                                         if let newOption = newOption {
                                             callManager.enteredText = newOption.description
@@ -298,6 +299,8 @@ extension MainView {
                             .bold()
                             .font(.system(size: 14))
                             .foregroundColor(Color.black.opacity(0.5))
+                            .padding(.top, 5)
+
 
                         HStack {
                             Menu {
@@ -357,7 +360,7 @@ extension MainView {
                             }
                         }                      
                 }
-                .padding(.horizontal, 20) 
+                .padding(.horizontal, 25) 
             }
         }
     }

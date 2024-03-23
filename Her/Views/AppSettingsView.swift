@@ -162,14 +162,12 @@ extension AppSettingsView {
 
     private func handleMicrophonePermission(isEnabled: Bool) {
         if isEnabled {
-            // Request permission if the toggle is turned on
             AVAudioSession.sharedInstance().requestRecordPermission { granted in
                 DispatchQueue.main.async {
                     if granted {
                         self.isMicrophoneEnabled = true
                     } else {
                         self.isMicrophoneEnabled = false
-                        // Optionally, show an alert or guide the user to the app settings
                     }
                 }
             }
