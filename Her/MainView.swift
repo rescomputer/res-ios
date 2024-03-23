@@ -156,7 +156,7 @@ struct OptionRow: View {
             ZStack{
                 RoundedRectangle(cornerRadius: 12)
                     .fill(Color.black.opacity(0.05))
-                    .frame(width: 54, height: 54)
+                    .frame(width: 59, height: 59)
                 Image(systemName: option.icon)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 24, height: 24)
@@ -222,6 +222,7 @@ extension MainView {
             }
         }) {
             VStack{  
+                ZStack {
                     HStack {
                         ZStack {
                             HStack {
@@ -231,33 +232,47 @@ extension MainView {
                                     .frame(width: 85, height: 85)
                                 Spacer()
                             }
+                            .offset(x: 10, y: -20)
+
                         
                             VStack(alignment: .leading) {
                                 Text("Who do you want to talk to?")
                                     .font(.system(size: 20, design: .rounded))
                                     .bold()
                                     .foregroundColor(Color.black.opacity(1))
-                                    .padding(.bottom, 4)
+                                    .padding(.bottom, 2)
                                 Text("Choose a preset prompt or create your own persona to converse with.")
                                     .font(.system(size: 14))
                                     .foregroundColor(Color.black.opacity(0.5))
-                            }
-                        }                          
 
-                        XMarkButton {
-                            withAnimation {
-                                self.activeModal = nil
-                                }
                             }
-                            .offset(y: -50)
+                            .padding(.horizontal)
+
+                        }
                     }
-                    .padding(.horizontal, 20)  
-                    // .overlay(
-                    //     Rectangle()
-                    //         .frame(height: 1)
-                    //         .foregroundColor(Color.black.opacity(0.1)),
-                    //     alignment: .bottom
-                    // )                                 
+                    .overlay(
+                        Rectangle()
+                            .frame(height: 1)
+                            .foregroundColor(Color.black.opacity(0.1)),
+                        alignment: .bottom
+                    )                     
+                }
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .fill(Color.black.opacity(0.05))
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 130),
+                        alignment: .bottom
+                    ) 
+                .overlay(
+                    XMarkButton {
+                        withAnimation(.easeOut(duration: 0.15)) {
+                            self.activeModal = nil
+                        }
+                    }
+                    .offset(x: -20, y: -20),
+                    alignment: .topTrailing
+                )               
 
                 VStack(alignment: .leading) {
 
@@ -360,7 +375,7 @@ extension MainView {
                             }
                         }                      
                 }
-                .padding(.horizontal, 25) 
+                .padding(.horizontal) 
             }
         }
     }
