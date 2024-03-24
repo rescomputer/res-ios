@@ -13,9 +13,9 @@ struct XMarkButton: View {
     var body: some View {
         Button(action: action) {
             Image(systemName: "xmark")
-                .font(.system(size: 16, weight: .bold))
-                .foregroundColor(Color.black.opacity(0.2))
-                .padding(10)
+                .font(.system(size: 13, weight: .bold))
+                .foregroundColor(Color.black.opacity(0.3))
+                .padding(8)
         }
         .background(Color.black.opacity(0.1))
         .clipShape(Circle())

@@ -58,7 +58,7 @@ struct HalfModalView<Content: View>: View {
                     content
                         .padding(.bottom, max(offset, 0))
                         .animation(.easeOut(duration: 0.2), value: keyboard.currentHeight)
-                        .frame(width: screenSize.width * 0.94, height: screenSize.width * 1.23)
+                        .frame(width: screenSize.width * 0.92, height: screenSize.width * 1.23)
                         .background(
                             RoundedRectangle(cornerRadius: 40)
                                 .fill(Color.white)
@@ -96,6 +96,8 @@ struct HalfModalView<Content: View>: View {
                             offset = UIScreen.main.bounds.height / 2
                         }
                 }
+                .clipped()
+
         }
         .offset(y: max(minHeight + offset, minHeight))
         .frame(width: screenSize.width, height: screenSize.height)
