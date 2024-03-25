@@ -73,15 +73,15 @@ struct HalfModalView<Content: View>: View {
                             .onEnded { value in
                                 let threshold = minHeight * 0.2
                                 if value.translation.height > threshold {
-                                    withAnimation(.easeOut(duration: 0.2)) {
+                                    withAnimation(.easeOut(duration: 0.1)) {
                                         offset = UIScreen.main.bounds.height
                                     }
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                         isShown = false
                                         onDismiss()
                                     }
                                 } else {
-                                    withAnimation(.easeOut(duration: 0.2)) {
+                                    withAnimation(.easeOut(duration: 0.1)) {
                                         offset = 0
                                     }
                                 }
@@ -102,7 +102,7 @@ struct HalfModalView<Content: View>: View {
         .offset(y: max(minHeight + offset, minHeight))
         .frame(width: screenSize.width, height: screenSize.height)
         .edgesIgnoringSafeArea(.all)
-        .background(isShown ? Color.black.opacity(0.6) : Color.clear)
-        .animation(.spring(response: 0.2, dampingFraction: 0.8), value: offset)
+        .background(isShown ? Color.black.opacity(0.3) : Color.clear)
+        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: offset)
     }
 }

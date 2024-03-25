@@ -246,7 +246,7 @@ extension MainView {
                                     .bold()
                                     .foregroundColor(Color.black.opacity(1))
                                     .padding(.bottom, 2)
-                                Text("Choose a preset prompt or create your own persona to converse with.")
+                                Text("Choose a preset prompt or create your own custom instructions to change how the AI responds.")
                                     .font(.system(size: 14))
                                     .foregroundColor(Color.black.opacity(0.5))
 
