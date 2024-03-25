@@ -9,6 +9,7 @@ import Combine
 import SwiftUI
 import Vapi
 import ActivityKit
+import AVFoundation
 
 struct Her_ExtensionAttributes: ActivityAttributes {
     struct ContentState: Codable, Hashable {
@@ -19,6 +20,12 @@ struct Her_ExtensionAttributes: ActivityAttributes {
 }
 
 class CallManager: ObservableObject {
+    @Published var userAudioLevels: [CGFloat] = []
+    @Published var aiAudioLevels: [CGFloat] = []
+
+    var audioEngine = AVAudioEngine()
+
+    
     enum CallState {
         case started, loading, ended
     }
@@ -32,6 +39,7 @@ class CallManager: ObservableObject {
         vapi = Vapi(
             publicKey: "a9a1bf8c-c389-490b-a82b-29fe9ba081d8"
         )
+        configureAudioSession()
     }
     
     @Published var enteredText = ""
@@ -172,6 +180,7 @@ class CallManager: ObservableObject {
             print("Error starting call or requesting activity: \(error)")
             callState = .ended
         }
+        startAudioCapture()
     }
     
     func updateLiveActivity() {
@@ -197,6 +206,12 @@ class CallManager: ObservableObject {
     }
     
     func endCall()  {
+        stopAudioCapture()
+        // Reset audio levels
+        DispatchQueue.main.async {
+            self.userAudioLevels.removeAll()
+            self.aiAudioLevels.removeAll()
+        }
         vapi.stop()
         Task {
             await activity?.end(dismissalPolicy: .immediate)
@@ -208,6 +223,66 @@ class CallManager: ObservableObject {
 }
 
 extension CallManager {
+
+    func configureAudioSession() {
+        do {
+            let audioSession = AVAudioSession.sharedInstance()
+            try audioSession.setCategory(.playAndRecord, mode: .voiceChat, options: [])
+            try audioSession.setActive(true)
+        } catch {
+            print("Failed to set up audio session: \(error)")
+        }
+    }
+    
+    func startAudioCapture() {
+        let inputNode = audioEngine.inputNode
+        // Remove any existing taps
+        inputNode.removeTap(onBus: 0)
+        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { [weak self] (buffer, when) in
+            guard let channelData = buffer.floatChannelData else { return }
+            
+            let channelDataValue = channelData.pointee
+            let channelDataValueArray = stride(from: 0,
+                                            to: Int(buffer.frameLength),
+                                            by: buffer.stride).map { channelDataValue[$0] }
+            
+            let rms = sqrt(channelDataValueArray.map { $0 * $0 }.reduce(0, +) / Float(buffer.frameLength))
+            let avgPower = 20 * log10(rms)
+            
+            let normalizedLevel = min(max((avgPower + 80) / 80, 0), 1)
+            
+            DispatchQueue.main.async {
+                self?.userAudioLevels.append(CGFloat(normalizedLevel * 100)) // Adjust as needed
+                // Keep only the last 20 levels to avoid the array growing indefinitely
+                if self?.userAudioLevels.count ?? 0 > 20 {
+                    self?.userAudioLevels.removeFirst()
+                }
+            }
+        }
+        do {
+            try audioEngine.start()
+        } catch {
+            print("Error starting audio engine: \(error)")
+        }
+    }
+
+    func stopAudioCapture() {
+        audioEngine.inputNode.removeTap(onBus: 0)
+        audioEngine.stop()
+        do {
+            try AVAudioSession.sharedInstance().setActive(false)
+        } catch {
+            print("Error deactivating audio session: \(error)")
+        }
+    }
+
+    func simulateAudioLevels() {
+        // Simulate audio level changes
+        userAudioLevels = (0..<20).map { _ in CGFloat.random(in: 20...100) }
+        aiAudioLevels = (0..<20).map { _ in CGFloat.random(in: 20...100) }
+    }
+
     var callStateText: String {
         switch callState {
             case .started: return "Connected"

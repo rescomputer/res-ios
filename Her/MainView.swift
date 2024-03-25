@@ -17,6 +17,7 @@ struct MainView: View {
     @State private var selectedOption: Option?
     @State private var activeModal: ActiveModal?
     @Binding var isAppSettingsViewShowing: Bool
+    @State private var isConversationStarted: Bool = false
 
     var body: some View {
         VStack(spacing: 25) {
@@ -39,6 +40,11 @@ struct MainView: View {
             }
             
             Spacer()
+            if isConversationStarted {
+                AudioVisualizationView(userAudioLevels: callManager.userAudioLevels, aiAudioLevels: callManager.aiAudioLevels)
+                    .frame(height: 100)
+                    .padding(.horizontal)
+            } else {
             VStack {
                 Text("Let’s have some back and forth conversation.")
                     .bold()
@@ -51,11 +57,21 @@ struct MainView: View {
                     .foregroundColor(Color.white.opacity(0.5))
             }
             .padding(.horizontal, 20)
+            }
             Spacer()
 
             // Start Button
             Button {
-                Task {  await callManager.handleCallAction() }
+                Task {
+                    if callManager.callState == .ended {
+                        await callManager.handleCallAction()
+                        callManager.simulateAudioLevels() // Simulate audio levels
+                        isConversationStarted = true
+                    } else {
+                        await callManager.handleCallAction()
+                        isConversationStarted = false // Reset to show the original text prompt
+                    }
+                }
             } label: {
                 Text(callManager.buttonText)
                     .font(.system(.title2, design: .rounded))
@@ -132,7 +148,6 @@ struct MainView: View {
             }
             if isAppSettingsViewShowing {
                 AppSettingsView(isPresented: $isAppSettingsViewShowing)
-                    //.matchedGeometryEffect(id: "settings", in: animation)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .edgesIgnoringSafeArea(.all)
                     .fadeInEffect()
