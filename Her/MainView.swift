@@ -252,7 +252,7 @@ extension MainView {
 
                             }
                             .padding(.horizontal, 20)
-                            .offset(x: -12)
+//                            .offset(x: -12)
                         }
                     }
                     .overlay(
@@ -266,8 +266,8 @@ extension MainView {
                     RoundedRectangle(cornerRadius: 0)
                         .fill(Color.black.opacity(0.05))
                         .frame(maxWidth: .infinity)
-                        .frame(height: 130),
-                        alignment: .bottom
+                        .frame(height: 140),
+                         alignment: .bottom
                     ) 
                 .overlay(
                     XMarkButton {

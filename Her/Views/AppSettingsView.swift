@@ -61,7 +61,7 @@ struct AppSettingsView: View {
                         impactMed.impactOccurred()
                     }) {
                         HStack {
-                            Image(systemName: "party.popper.fill")
+                            Image(systemName: "info.circle.fill")
                                 .font(.system(size: 20))
                                 .bold()
                                 .foregroundColor(.white.opacity(0.3))
@@ -74,15 +74,60 @@ struct AppSettingsView: View {
                      HStack {
                         Text("Permissions")
                             .bold()
-                            .font(.system(size: 14))
-                            .foregroundColor(Color.white.opacity(0.5))
+                            .font(.system(size: 16))
+                            .foregroundColor(Color.white.opacity(0.7))
                         Spacer()
                     }
                     CustomToggle(title: "Microphone", systemImageName: "mic.fill", isOn: $isMicrophoneEnabled)
                         .onChange(of: isMicrophoneEnabled) { newValue in
                             handleMicrophonePermission(isEnabled: newValue)
                         }
-                }
+                    Text("You are only being recorded when you Start a Conversation. The app is never listening to you in the background.")
+                        .font(.system(size: 14))
+                        .padding(.vertical, 10)
+                        .foregroundColor(Color.white.opacity(0.5))
+                    HStack {
+                        Text("Home Screen Widgets")
+                            .bold()
+                            .font(.system(size: 16))
+                            .foregroundColor(Color.white.opacity(0.7))
+                        Spacer()
+                    }
+                    .padding(.top, 20)
+                    Text("You can add widgets to your home screen with a long-press anywhere among your apps & looking in the top left.")
+                        .font(.system(size: 14))
+                        .foregroundColor(Color.white.opacity(0.5))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 5)
+                    //TODO add images or video of what the final widgets look like
+                    Image("widget-example")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                        .padding(.top, 10)
+                    }
+                                        HStack {
+                        Text("Lock Screen Widgets")
+                            .bold()
+                            .font(.system(size: 16))
+                            .foregroundColor(Color.white.opacity(0.7))
+                        Spacer()
+                    }
+                    .padding(.top, 20)
+                    Text("You can add widgets to your lock screen by long pressing on it, selecting customise, tap on the lock screen, then Add Widget.")
+                        .font(.system(size: 14))
+                        .foregroundColor(Color.white.opacity(0.5))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 5)
+                    //TODO add images or video of what the final widgets look like
+                    Image("lock-screen-widget-example")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                        .padding(.top, 10)
+
+                //TODO show if the widget is enabled?
+                //TODO 
                 Spacer()
                 Spacer()
 
@@ -148,7 +193,7 @@ extension AppSettingsView {
                     HStack {
                         ZStack {
                             HStack {
-                                Image(systemName: "party.popper.fill")
+                                Image(systemName: "info.circle.fill")
                                     .resizable()
                                     .foregroundColor(.black.opacity(0.05))
                                     .frame(width: 85, height: 85)
@@ -205,7 +250,7 @@ extension AppSettingsView {
                             .bold()
                             .foregroundColor(.black.opacity(0.6))
 
-                            Text("The goal is to create a application where users can engage in meaningful conversations with AI, enhancing our understanding of natural language processing and its applications.")
+                            Text("The goal is to create a application where users can engage in meaningful conversations with the latest AI models. We want to offer power user features like interruption, speed selection, custom prompt modification, and a wide range of voices.")
                             .font(.footnote)
                             .foregroundColor(.black.opacity(0.6))
 
