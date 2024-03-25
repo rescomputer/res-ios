@@ -126,6 +126,7 @@ class CallManager: ObservableObject {
     
     @MainActor
     func handleCallAction() async {
+        print("Current call state: \(callState)")
         if callState == .ended {
             await startCall()
         } else {
@@ -135,6 +136,7 @@ class CallManager: ObservableObject {
     
     @MainActor
     func startCall() async {
+        print("Starting call...")
         callState = .loading
         let assistant = [
             "model": [
@@ -184,6 +186,8 @@ class CallManager: ObservableObject {
     }
     
     func updateLiveActivity() {
+        print("Updating live activity for call state: \(callState)")
+
         switch callState {
         case .started:
             let sfSymbolName = "waveform.and.person.filled"
@@ -206,6 +210,7 @@ class CallManager: ObservableObject {
     }
     
     func endCall()  {
+        print("Ending call...")
         stopAudioCapture()
         // Reset audio levels
         DispatchQueue.main.async {
@@ -229,12 +234,14 @@ extension CallManager {
             let audioSession = AVAudioSession.sharedInstance()
             try audioSession.setCategory(.playAndRecord, mode: .voiceChat, options: [])
             try audioSession.setActive(true)
+            print("Audio session configured successfully.")
         } catch {
             print("Failed to set up audio session: \(error)")
         }
     }
     
     func startAudioCapture() {
+        print("Attempting to start audio capture...")
         let inputNode = audioEngine.inputNode
         // Remove any existing taps
         inputNode.removeTap(onBus: 0)
@@ -262,18 +269,26 @@ extension CallManager {
         }
         do {
             try audioEngine.start()
+            print("Audio engine started successfully.")
+
         } catch {
             print("Error starting audio engine: \(error)")
         }
     }
 
     func stopAudioCapture() {
-        audioEngine.inputNode.removeTap(onBus: 0)
-        audioEngine.stop()
-        do {
-            try AVAudioSession.sharedInstance().setActive(false)
-        } catch {
-            print("Error deactivating audio session: \(error)")
+        print("Attempting to stop audio capture...")
+        if audioEngine.isRunning {
+            audioEngine.inputNode.removeTap(onBus: 0)
+            audioEngine.stop()
+            do {
+                try AVAudioSession.sharedInstance().setActive(false)
+                print("Audio capture stopped and session deactivated successfully.")
+            } catch {
+                print("Error deactivating audio session: \(error)")
+            }
+        } else {
+            print("Audio engine was not running.")
         }
     }
 
