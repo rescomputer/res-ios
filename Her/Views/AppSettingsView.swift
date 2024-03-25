@@ -79,7 +79,7 @@ struct AppSettingsView: View {
                         Spacer()
                     }
                     CustomToggle(title: "Microphone", systemImageName: "mic.fill", isOn: $isMicrophoneEnabled)
-                        .onChange(of: isMicrophoneEnabled) { newValue in
+                        .onChange(of: isMicrophoneEnabled) { oldvalue, newValue in
                             handleMicrophonePermission(isEnabled: newValue)
                         }
                 }

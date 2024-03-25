@@ -309,7 +309,7 @@ extension MainView {
                         HStack{
                             OptionsMenu(selectedOption: $selectedOption)
                                 .frame(height: 70)
-                                .onChange(of: selectedOption) { newOption in
+                                .onChange(of: selectedOption) { oldValue, newOption in
                                         if let newOption = newOption {
                                             callManager.enteredText = newOption.description
                                         }
@@ -334,7 +334,7 @@ extension MainView {
                                     Text("🇺🇸 Nova · Gentle Woman").tag("nova")
                                     Text("🇺🇸 Shimmer · Deep Woman").tag("shimmer")
                                 }
-                                .onChange(of: callManager.voice) { newVoice in
+                                .onChange(of: callManager.voice) { oldValue, newVoice in
                                     UserDefaults.standard.set(newVoice, forKey: "voice")
                                 }
                             } label: {
@@ -361,7 +361,7 @@ extension MainView {
                                     Text("🐇 Fast").tag(1.3)
                                     Text("⚡️ Superfast").tag(1.5)
                                 }
-                                .onChange(of: callManager.speed) { newSpeed in
+                                .onChange(of: callManager.speed) { oldValue, newSpeed in
                                     UserDefaults.standard.set(newSpeed, forKey: "speed")
                                 }
                             } label: {
