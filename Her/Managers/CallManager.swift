@@ -33,6 +33,16 @@ class CallManager: ObservableObject {
             publicKey: "a9a1bf8c-c389-490b-a82b-29fe9ba081d8"
         )
     }
+
+    func startCallFromShortcut() {
+        DispatchQueue.main.async {
+            Task {
+                if self.callState == .ended {
+                    await self.startCall()
+                }
+            }
+        }
+    }
     
     @Published var enteredText = ""
     
@@ -118,10 +128,16 @@ class CallManager: ObservableObject {
     
     @MainActor
     func handleCallAction() async {
-        if callState == .ended {
+        switch callState {
+        case .ended:
+            // Start a new call
             await startCall()
-        } else {
+        case .started:
+            // End the current call
             await endCall()
+        case .loading:
+            // Do nothing if the call is already loading
+            break
         }
     }
     
@@ -172,6 +188,7 @@ class CallManager: ObservableObject {
             print("Error starting call or requesting activity: \(error)")
             callState = .ended
         }
+        // callState = .started
     }
     
     func updateLiveActivity() {
@@ -204,31 +221,52 @@ class CallManager: ObservableObject {
                 self.activity = nil
             }
         }
+        // callState = .ended
     }
 }
 
 extension CallManager {
     var callStateText: String {
         switch callState {
-            case .started: return "Connected"
-            case .loading: return "Connecting..."
-            case .ended: return "Chat with an AI back-and-forth"
+        case .started:
+            return "Connected"
+        case .loading:
+            return "Connecting..."
+        case .ended:
+            return "Chat with an AI back-and-forth"
         }
     }
     
     var callStateColor: Color {
         switch callState {
-            case .started: return .green.opacity(0.8)
-            case .loading: return .orange.opacity(0.8)
-            case .ended: return .gray.opacity(0.8)
+        case .started:
+            return .green.opacity(0.8)
+        case .loading:
+            return .orange.opacity(0.8)
+        case .ended:
+            return .gray.opacity(0.8)
         }
     }
     
     var buttonText: String {
-        callState == .loading ? "Loading..." : (callState == .ended ? "Start Conversation" : "End Conversation")
+        switch callState {
+        case .started:
+            return "End Conversation"
+        case .loading:
+            return "Connecting..."
+        case .ended:
+            return "Start Conversation"
+        }
     }
     
     var buttonColor: Color {
-        callState == .loading ? Color(red: 1, green: 0.8, blue: 0.49) : (callState == .ended ? Color(red: 0.106, green: 0.149, blue: 0.149) : Color(red: 0.957, green: 0.298, blue: 0.424))
+        switch callState {
+        case .started:
+            return Color(red: 0.957, green: 0.298, blue: 0.424)
+        case .loading:
+            return Color(red: 1, green: 0.8, blue: 0.49)
+        case .ended:
+            return Color(red: 0.106, green: 0.149, blue: 0.149)
+        }
     }
 }

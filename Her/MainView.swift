@@ -11,12 +11,14 @@ import ActivityKit
 
 struct MainView: View {
     
-    @StateObject private var callManager = CallManager()
+//    @StateObject private var callManager = CallManager()
+    @EnvironmentObject var callManager: CallManager
     @FocusState private var isTextFieldFocused: Bool
     @State private var drawingHeight = true
     @State private var selectedOption: Option?
     @State private var activeModal: ActiveModal?
     @Binding var isAppSettingsViewShowing: Bool
+    
 
     var body: some View {
         VStack(spacing: 25) {
@@ -55,7 +57,7 @@ struct MainView: View {
 
             // Start Button
             Button {
-                Task {  await callManager.handleCallAction() }
+                Task { await callManager.handleCallAction() }
             } label: {
                 Text(callManager.buttonText)
                     .font(.system(.title2, design: .rounded))
@@ -72,6 +74,11 @@ struct MainView: View {
             }
             .padding(.horizontal)
             .pressAnimation()
+            .disabled(callManager.callState == .loading)
+            .onChange(of: callManager.callState) { _ in
+                // Update the button state based on the callManager's state
+                callManager.objectWillChange.send()
+            }
             
             .disabled(callManager.callState == .loading)
             
@@ -106,14 +113,7 @@ struct MainView: View {
                     endPoint: .bottom
                 )
                 .edgesIgnoringSafeArea(.all)
-//                RadialGradient(gradient: Gradient(colors: [Color(red: 0.247, green: 0.106, blue: 0.153), Color(red: 0.133, green: 0.067, blue: 0.118)]), center: .trailing, startRadius: 5, endRadius: 400)
-//                
-//                RadialGradient(gradient: Gradient(colors: [Color.blue.opacity(0.5), Color.purple.opacity(0.5)]), center: .leading, startRadius: 2, endRadius: 500)
-//                    .opacity(0.9)
-//                
-//                RadialGradient(gradient: Gradient(colors: [Color.green.opacity(0.4), Color.yellow.opacity(0.5)]), center: .bottom, startRadius: 1, endRadius: 600)
-//                    .opacity(0.8)
-                
+
                 Image("flow")
                     .resizable()
                     .aspectRatio(contentMode: .fit)

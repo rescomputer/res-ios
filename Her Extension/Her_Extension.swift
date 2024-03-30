@@ -75,10 +75,11 @@ struct HerSmallEntryView: View {
                 Spacer()
             }       
             HStack {
-                Text("Start Conversation")
-                    .foregroundColor(.white)
-                    .font(.system(size: 20, design: .rounded))
-
+                Link(destination: URL(string: "her://startCall")!) {
+                    Text("Start Conversation")
+                        .foregroundColor(.white)
+                        .font(.system(size: 20, design: .rounded))
+                }
                 Spacer()
             }
         .containerBackground(for: .widget) {
@@ -105,9 +106,11 @@ struct HerMediumEntryView: View {
             }       
             HStack {
                 Spacer()
-                Text("Start Conversation")
-                    .foregroundColor(.white)
-                    .font(.system(size: 26, design: .rounded))
+                Link(destination: URL(string: "her://startCall")!) {
+                    Text("Start Conversation")
+                        .foregroundColor(.white)
+                        .font(.system(size: 26, design: .rounded))
+                }
                 Spacer()
             }
         .containerBackground(for: .widget) {
@@ -134,9 +137,11 @@ struct HerLargeEntryView: View {
             }       
             HStack {
                 Spacer()
-                Text("Start Conversation")
-                    .foregroundColor(.white)
-                    .font(.system(size: 30, design: .rounded))
+                Link(destination: URL(string: "her://startCall")!) {
+                    Text("Start Conversation")
+                        .foregroundColor(.white)
+                        .font(.system(size: 30, design: .rounded))
+                }
                 Spacer()
             }
         .containerBackground(for: .widget) {
@@ -160,9 +165,10 @@ struct HerAccessoryRectangularEntryView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(.thickMaterial).opacity(0.3)
                     )
-
-                Text("Start Conversation")
-                    .font(.system(size: 14, design: .rounded))
+                Link(destination: URL(string: "her://startCall")!) {
+                    Text("Start Conversation")
+                        .font(.system(size: 14, design: .rounded))
+                }
             }
         }
         .containerBackground(for: .widget) {
@@ -181,8 +187,10 @@ struct HerAccessoryCircularEntryView: View {
                     .fill(Color.white.opacity(0.3))
                     .frame(width: geometry.size.width, height: geometry.size.height)
 //                    .background(.ultraThinMaterial)
-                Text("Talk")
-                    .font(.system(size: 14, design: .rounded))
+                Link(destination: URL(string: "her://startCall")!) {
+                    Text("Talk")
+                        .font(.system(size: 14, design: .rounded))
+                }
             }
         }
         .containerBackground(for: .widget) {
@@ -190,43 +198,6 @@ struct HerAccessoryCircularEntryView: View {
         }
     }
 }
-
-//struct HerAccessorySquareEntryView: View {
-//    var entry: Provider.Entry
-//
-//    var body: some View {
-//        ZStack {
-//            Image("flow")
-//                .resizable()
-//                .aspectRatio(contentMode: .fill)
-//                .opacity(0.3)
-//                .scaleEffect(1.3)
-//            
-//            Text("Chat")
-//        }
-//        .containerBackground(for: .widget) {
-//            // Customize the background view for the accessory rectangular widget
-//            Color.white
-//        }
-//    }
-//}
-
-//struct Her_ExtensionEntryView : View {
-//    var entry: Provider.Entry
-//
-//    var body: some View {
-//        ZStack {
-//            Image("flow")
-//                .resizable()
-//                .aspectRatio(contentMode: .fill)
-//                .opacity(0.3)
-//                .offset(y: -20)
-//                .scaleEffect(1.3)
-//            
-//            Text("Start Conversation")
-//        }
-//    }
-//}
 
 struct Her_Extension: Widget {
     let kind: String = "Her_Extension"
