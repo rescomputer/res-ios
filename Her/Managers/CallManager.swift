@@ -34,6 +34,8 @@ class CallManager: ObservableObject {
         )
     }
 
+    
+    
     func startCallFromShortcut() {
         DispatchQueue.main.async {
             Task {
@@ -188,7 +190,6 @@ class CallManager: ObservableObject {
             print("Error starting call or requesting activity: \(error)")
             callState = .ended
         }
-        // callState = .started
     }
     
     func updateLiveActivity() {
@@ -219,9 +220,9 @@ class CallManager: ObservableObject {
             await activity?.end(dismissalPolicy: .immediate)
             DispatchQueue.main.async {
                 self.activity = nil
+                self.callState = .ended
             }
         }
-        // callState = .ended
     }
 }
 
