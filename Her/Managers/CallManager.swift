@@ -225,7 +225,14 @@ extension CallManager {
     }
     
     var buttonText: String {
-        callState == .loading ? "Loading..." : (callState == .ended ? "Start Conversation" : "End Conversation")
+        switch callState {
+        case .loading:
+            return "Loading..."
+        case .ended:
+            return "Start Conversation"
+        case .started:
+            return "End Conversation"
+        }
     }
     
     var buttonColor: Color {
