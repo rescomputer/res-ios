@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		181832782BB88F82007BA1DC /* View+ColorEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181832772BB88F82007BA1DC /* View+ColorEffect.swift */; };
+		1818327A2BB88FBA007BA1DC /* Color.metal in Sources */ = {isa = PBXBuildFile; fileRef = 181832792BB88FBA007BA1DC /* Color.metal */; };
 		187277062B9B85A20079C460 /* VAPIExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187277052B9B85A20079C460 /* VAPIExampleView.swift */; };
 		18D289E32B9713FE008742FB /* HerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D289E22B9713FE008742FB /* HerApp.swift */; };
 		18D289E52B9713FE008742FB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D289E42B9713FE008742FB /* MainView.swift */; };
@@ -76,6 +78,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		181832772BB88F82007BA1DC /* View+ColorEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "View+ColorEffect.swift"; path = "Her/Utilities/View+ColorEffect.swift"; sourceTree = SOURCE_ROOT; };
+		181832792BB88FBA007BA1DC /* Color.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Color.metal; sourceTree = "<group>"; };
 		187277052B9B85A20079C460 /* VAPIExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAPIExampleView.swift; sourceTree = "<group>"; };
 		18D289DF2B9713FE008742FB /* Her.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Her.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D289E22B9713FE008742FB /* HerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HerApp.swift; sourceTree = "<group>"; };
@@ -224,6 +228,8 @@
 		F3B5AB1F2BAD08CA009CDBB5 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				181832772BB88F82007BA1DC /* View+ColorEffect.swift */,
+				181832792BB88FBA007BA1DC /* Color.metal */,
 				F3B5AB202BAD08F1009CDBB5 /* AnimationUtility.swift */,
 			);
 			path = Utilities;
@@ -426,10 +432,12 @@
 				F3B5AB1E2BAD062D009CDBB5 /* AppSettingsView.swift in Sources */,
 				F3B5AB1A2BACE488009CDBB5 /* XMarkButton.swift in Sources */,
 				B95D2F332BA4EAF5003C7C17 /* CallManager.swift in Sources */,
+				1818327A2BB88FBA007BA1DC /* Color.metal in Sources */,
 				B95D2F352BA4EB32003C7C17 /* CustomTextEditor.swift in Sources */,
 				F3B5AB252BAE91E3009CDBB5 /* CustomLinkView.swift in Sources */,
 				B95D2F392BA4EB58003C7C17 /* VideoPlayerView.swift in Sources */,
 				F3B5AB182BACDB8A009CDBB5 /* HalfModalView.swift in Sources */,
+				181832782BB88F82007BA1DC /* View+ColorEffect.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

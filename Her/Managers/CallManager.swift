@@ -229,6 +229,13 @@ extension CallManager {
     }
     
     var buttonColor: Color {
-        callState == .loading ? Color(red: 1, green: 0.8, blue: 0.49) : (callState == .ended ? Color(red: 0.106, green: 0.149, blue: 0.149) : Color(red: 0.957, green: 0.298, blue: 0.424))
+        switch callState {
+        case .loading:
+            return Color(red: 0.0, green: 0.0, blue: 0.5)
+        case .ended:
+            return Color(red: 0.106, green: 0.149, blue: 0.149)
+        default:
+            return Color(red: 0.957, green: 0.298, blue: 0.424)
+        }
     }
 }
