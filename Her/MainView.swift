@@ -252,7 +252,7 @@ extension MainView {
 
                             }
                             .padding(.horizontal, 20)
-//                            .offset(x: -12)
+                            .offset(x: -12)
                         }
                     }
                     .overlay(

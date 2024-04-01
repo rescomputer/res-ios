@@ -214,7 +214,6 @@ extension AppSettingsView {
 
                             }
                             .padding(.horizontal, 20)
-                            .offset(x: -12)
                         }
                     }
                     .overlay(
@@ -355,6 +354,8 @@ extension AppSettingsView {
                          .padding()
                     }
                     .frame(maxHeight: 270)
+                    .padding(.horizontal, 20)
+
                     
                     // Got it Button
                     Button {
