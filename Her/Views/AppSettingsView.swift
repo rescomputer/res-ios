@@ -226,7 +226,7 @@ extension AppSettingsView {
                                 Image(systemName: "waveform.badge.exclamationmark")
                                     .resizable()
                                     .foregroundColor(.black.opacity(0.05))
-                                    .frame(width: 65, height: 85)
+                                    .frame(width: 85, height: 85)
                                 Spacer()
                             }
                             .offset(x: 10, y: -20)
