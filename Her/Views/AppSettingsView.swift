@@ -291,7 +291,7 @@ extension AppSettingsView {
                             .font(.footnote)
                             .foregroundColor(.black.opacity(0.6))
                                
-                            Text("Your call conversations are being routed through different servers only when a conversation is initiated. This means they are not private")
+                            Text("Your conversations are being routed through different servers only when a call is started, this means they are not private.")
                                 .font(.footnote)
                                 .foregroundColor(.black.opacity(0.6))
 
@@ -381,11 +381,11 @@ extension AppSettingsView {
                             }
 
                             
-                            Text("We never store personal information about you. However, the conversations are logged.")
+                            Text("We take user privacy very seriously and never store personal information about you. However, the conversations are logged.")
                                 .font(.footnote)
                                 .foregroundColor(.black.opacity(0.6))
                             
-                            Text("All logs are deleted on our end.")
+                            Text("All logs are deleted on our end daily.")
                                 .font(.footnote)
                                 .bold()
                                 .foregroundColor(.black.opacity(0.6))
