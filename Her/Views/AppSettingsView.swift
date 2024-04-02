@@ -30,11 +30,13 @@ struct AppSettingsView: View {
             VStack {
                 
                 Spacer()
-                    .frame(height: 50)
+                    .frame(height: 60)
                 
                 HStack {
                     Button(action: {
-                        isPresented = false
+                        withAnimation(.easeOut(duration: 0.1)) {
+                            isPresented = false
+                        }
                         let impactMed = UIImpactFeedbackGenerator(style: .soft)
                         impactMed.impactOccurred()
                     }) {
@@ -71,21 +73,9 @@ struct AppSettingsView: View {
                 .padding(.bottom, 20)
 
                 VStack {
-                     HStack {
-                        Text("Permissions")
-                            .bold()
-                            .font(.system(size: 16))
-                            .foregroundColor(Color.white.opacity(0.7))
-                        Spacer()
-                    }
-                    CustomToggle(title: "Microphone", systemImageName: "mic.fill", isOn: $isMicrophoneEnabled)
-                        .onChange(of: isMicrophoneEnabled) { newValue in
-                            handleMicrophonePermission(isEnabled: newValue)
-                        }
-                    Text("You are only being recorded when you Start a Conversation. The app is never listening to you in the background.")
-                        .font(.system(size: 14))
-                        .padding(.vertical, 10)
-                        .foregroundColor(Color.white.opacity(0.5))
+
+                    micPermissions()
+
                     HStack {
                         Text("Home Screen Widgets")
                             .bold()
@@ -106,7 +96,7 @@ struct AppSettingsView: View {
                         .cornerRadius(10)
                         .padding(.top, 10)
                     }
-                                        HStack {
+                    HStack {
                         Text("Lock Screen Widgets")
                             .bold()
                             .font(.system(size: 16))
@@ -134,6 +124,7 @@ struct AppSettingsView: View {
 
             }
             .padding()
+            .padding(.horizontal, 10)
             .onAppear {
                  checkMicrophonePermission()
             }
@@ -155,14 +146,18 @@ struct AppSettingsView: View {
                 )
             }          
         }
+        .slideDown()
         .overlay {
             if let infoModal = infoModal {
                 switch infoModal {
                 case .aboutHerModal:
                     showAboutHerModal()
-                }
+                case .recordingHerModal:
+                    showRecordingHerModal()
+                } 
             }
         }
+
     }
 }
 
@@ -172,12 +167,47 @@ extension AppSettingsView {
 
     enum InfoModal {
         case aboutHerModal
+        case recordingHerModal
     }
 
-        private func showAboutHerModal() -> some View {
+    private func micPermissions() -> some View {
+                    VStack{
+                        HStack {
+                            Text("Permissions")
+                                .bold()
+                                .font(.system(size: 16))
+                                .foregroundColor(Color.white.opacity(0.7))
+                            Spacer()
+                        }
+                        CustomToggle(title: "Microphone", systemImageName: "mic.fill", isOn: $isMicrophoneEnabled)
+                            .onChange(of: isMicrophoneEnabled) { oldValue ,newValue in
+                                handleMicrophonePermission(isEnabled: newValue)
+                            }
+                        Button(action: {
+                            self.infoModal = .recordingHerModal
+                            let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                            impactMed.impactOccurred()
+                        }) {
+                            HStack {
+                                Text("How does audio recording work?")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(Color.white.opacity(0.3))
+                                Image(systemName: "info.circle")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(.white.opacity(0.3))
+                            }
+                            .padding(.vertical, 10)
 
+                        }
+                        .pressAnimation()
+                                                
+                    }
+                    .padding(.bottom, 20)
+    }
+
+    private func showRecordingHerModal() -> some View {
         HalfModalView(isShown: Binding<Bool>(
-            get: { self.infoModal == .aboutHerModal },
+            get: { self.infoModal == .recordingHerModal },
             set: { newValue in
                 if !newValue {
                     self.infoModal = nil
@@ -188,27 +218,27 @@ extension AppSettingsView {
                 self.infoModal = nil
             }
         }) {
-            VStack{  
-                ZStack {
+            VStack {
+                 ZStack {
                     HStack {
                         ZStack {
                             HStack {
-                                Image(systemName: "info.circle.fill")
+                                Image(systemName: "waveform.badge.exclamationmark")
                                     .resizable()
                                     .foregroundColor(.black.opacity(0.05))
-                                    .frame(width: 85, height: 85)
+                                    .frame(width: 65, height: 85)
                                 Spacer()
                             }
                             .offset(x: 10, y: -20)
 
                         
                             VStack(alignment: .leading) {
-                                Text("We’re building Her for fun")
+                                Text("Audio Permissions & Privacy")
                                     .font(.system(size: 20, design: .rounded))
                                     .bold()
                                     .foregroundColor(Color.black.opacity(1))
                                     .padding(.bottom, 2)
-                                Text("Learn more about “Her” and what it's all about.")
+                                Text("How we handle conversation audio within “Her”.")
                                     .font(.system(size: 14))
                                     .foregroundColor(Color.black.opacity(0.5))
 
@@ -232,26 +262,25 @@ extension AppSettingsView {
                     )
                 .overlay(
                     XMarkButton {
-                        withAnimation(.easeOut(duration: 0.15)) {
+                        withAnimation(.easeOut(duration: 0.1)) {
                             self.infoModal = nil
                         }
                     }
-                    .offset(x: -20, y: -5),
+                    .offset(x: -20, y: 0),
                     alignment: .topTrailing
-                    )
+                    ) 
                 
-                        ScrollView {
+                                ScrollView {
                            VStack(alignment:.leading, spacing: 10) {   
                              Text("""
-                                "Her" is an open-source project aimed at exploring the intricacies of AI and human interaction.
+                                Her uses AI to help make conversations more engaging and meaningful.
                                 """)
                             .font(.footnote)
-                            .bold()
                             .foregroundColor(.black.opacity(0.6))
-
-                            Text("The goal is to create a application where users can engage in meaningful conversations with the latest AI models. We want to offer power user features like interruption, speed selection, custom prompt modification, and a wide range of voices.")
-                            .font(.footnote)
-                            .foregroundColor(.black.opacity(0.6))
+                               
+                            Text("Your call conversations are being routed through different servers only when a conversation is initiated. This means they are not private")
+                                .font(.footnote)
+                                .foregroundColor(.black.opacity(0.6))
 
                             VStack(alignment: .leading){
                                 Text("Her is powered by:")
@@ -339,22 +368,122 @@ extension AppSettingsView {
                             }
 
                             
-                            Text("Your conversations are being routed through their servers. They are not private.")
-                                .font(.footnote)
-                                .foregroundColor(.black.opacity(0.6))
-                            
                             Text("We never store personal information about you. However, the conversations are logged.")
                                 .font(.footnote)
                                 .foregroundColor(.black.opacity(0.6))
                             
-                            Text("We will delete the logs on our end.")
+                            Text("All logs are deleted on our end.")
                                 .font(.footnote)
+                                .bold()
                                 .foregroundColor(.black.opacity(0.6))
                          }
                          .padding()
                     }
-                    .frame(maxHeight: 270)
+                    .frame(maxHeight: 300)
                     .padding(.horizontal, 20)
+
+                // Got it Button
+                    Button {
+                        self.infoModal = nil
+                    } label: {
+                        Text("Got it!")
+                            .font(.system(.title2, design: .rounded))
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color(red: 0.106, green: 0.149, blue: 0.149))
+                            .cornerRadius(50)
+                    }
+                    .padding(.horizontal)
+                    .pressAnimation()                
+            }
+            .padding(.vertical)
+
+      
+        }
+    }
+
+    private func showAboutHerModal() -> some View {
+
+        HalfModalView(isShown: Binding<Bool>(
+            get: { self.infoModal == .aboutHerModal },
+            set: { newValue in
+                if !newValue {
+                    self.infoModal = nil
+                }
+            }
+        ), onDismiss: {
+            withAnimation(.easeInOut(duration: 0.15)) {
+                self.infoModal = nil
+            }
+        }) {
+            VStack{  
+                ZStack {
+                    HStack {
+                        ZStack {
+                            HStack {
+                                Image(systemName: "info.circle.fill")
+                                    .resizable()
+                                    .foregroundColor(.black.opacity(0.05))
+                                    .frame(width: 85, height: 85)
+                                Spacer()
+                            }
+                            .offset(x: 10, y: -20)
+
+                        
+                            VStack(alignment: .leading) {
+                                Text("We’re building Her for fun")
+                                    .font(.system(size: 20, design: .rounded))
+                                    .bold()
+                                    .foregroundColor(Color.black.opacity(1))
+                                    .padding(.bottom, 2)
+                                Text("Learn more about “Her” and what it's all about.")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(Color.black.opacity(0.5))
+
+                            }
+                            .padding(.horizontal, 20)
+                        }
+                    }
+                    .overlay(
+                        Rectangle()
+                            .frame(height: 1)
+                            .foregroundColor(Color.black.opacity(0.1)),
+                        alignment: .bottom
+                    )
+                }
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .fill(Color.black.opacity(0.05))
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 130),
+                        alignment: .bottom
+                    )
+                .overlay(
+                    XMarkButton {
+                        withAnimation(.easeOut(duration: 0.15)) {
+                            self.infoModal = nil
+                        }
+                    }
+                    .offset(x: -20, y: 0),
+                    alignment: .topTrailing
+                    )
+                
+                        VStack(alignment:.leading, spacing: 10) {   
+                             Text("""
+                                "Her" is an open-source project aimed at exploring the intricacies of AI and human interaction.
+                                """)
+                            .font(.footnote)
+                            .bold()
+                            .foregroundColor(.black.opacity(0.6))
+
+                            Text("The goal is to create a application where users can engage in meaningful conversations with the latest AI models. We want to offer power user features like interruption, speed selection, custom prompt modification, and a wide range of voices.")
+                            .font(.footnote)
+                            .foregroundColor(.black.opacity(0.6))
+                         }
+                         .frame(height: 200)
+                         .padding(.horizontal, 20)
 
                     
                     // Got it Button
@@ -373,9 +502,11 @@ extension AppSettingsView {
                     .padding(.horizontal)
                     .pressAnimation()
                     
-                }
             }
+            .padding(.vertical)
+
         }
+    }
     
     private func checkMicrophonePermission() {
         switch AVAudioSession.sharedInstance().recordPermission {

@@ -14,14 +14,11 @@ extension View {
     func fadeInEffect() -> some View {
         self.modifier(FadeInEffect())
     }
-    func animatedGradient() -> some View {
-        self.modifier(AnimatedGradient())
-    }
-    func wiggle() -> some View {
-        self.modifier(Wiggle())
-    }
     func slideUp() -> some View {
         self.modifier(SlideUp())
+    }
+    func slideDown() -> some View {
+        self.modifier(SlideDown())
     }
     func slideLeft() -> some View {
         self.modifier(SlideLeft())
@@ -31,40 +28,6 @@ extension View {
     }
     func pressAnimation() -> some View {
         self.modifier(PressAnimation())
-    }
-    func scaleUpAnimation() -> some View {
-        self.modifier(ScaleUpAnimation())
-    }
-}
-
-struct WiggleEffect: GeometryEffect {
-    var isActive: Bool
-    var times: CGFloat = 5
-    var amplitude: CGFloat = 10.0
-    
-    var animatableData: CGFloat {
-        get { isActive ? 1 : 0 }
-        set { }
-    }
-    
-    func effectValue(size: CGSize) -> ProjectionTransform {
-        guard isActive else { return ProjectionTransform() }
-        let wiggle = sin(animatableData * .pi * times) * amplitude
-        return ProjectionTransform(CGAffineTransform(translationX: wiggle, y: 0))
-    }
-}
-
-struct ScaleUpAnimation: ViewModifier {
-    @State private var isAnimating = false
-
-    func body(content: Content) -> some View {
-        content
-            .scaleEffect(isAnimating ? 2.0 : 1.0)
-            .onAppear {
-                withAnimation(Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
-                    isAnimating = true
-                }
-            }
     }
 }
 
@@ -94,6 +57,26 @@ struct SlideUp: ViewModifier {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     withAnimation(.easeOut(duration: 0.1)) {
                         self.slideUpAnimation = true
+                        isShowing = true
+
+                    }
+                }
+            }
+    }
+}
+
+struct SlideDown: ViewModifier {
+    @State private var slideDownAnimation = false
+    @State private var isShowing = false
+
+    func body(content: Content) -> some View {
+        content
+            .offset(y: slideDownAnimation ? 0 : -20)
+            .opacity(isShowing ? 1 : 0)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    withAnimation(.easeOut(duration: 0.1)) {
+                        self.slideDownAnimation = true
                         isShowing = true
 
                     }
@@ -142,33 +125,12 @@ struct SlideRight: ViewModifier {
     }
 
 
-struct AnimatedGradient: ViewModifier {
-    @State private var isAnimating = false
-
-    func body(content: Content) -> some View {
-        content
-            .overlay(
-                LinearGradient(
-                    gradient: Gradient(colors: isAnimating ? [Color.blue, Color.yellow] : [Color.orange, Color.purple]),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            )
-            .mask(content)
-            .onAppear {
-                withAnimation(Animation.linear(duration: 2.0).repeatForever(autoreverses: true)) {
-                    isAnimating = true
-                }
-            }
-    }
-}
-
 struct PressAnimation: ViewModifier {
     @State private var isPressed = false
 
     func body(content: Content) -> some View {
         content
-            .scaleEffect(isPressed ? 0.96 : 1)
+            .scaleEffect(isPressed ? 0.98 : 1)
             .animation(.easeInOut(duration: 0.1), value: isPressed)
             .onLongPressGesture(minimumDuration: .infinity, pressing: { pressing in
                 withAnimation {
@@ -178,20 +140,6 @@ struct PressAnimation: ViewModifier {
     }
 }
 
-
-struct Wiggle: ViewModifier {
-    @State private var isAnimating = false
-
-    func body(content: Content) -> some View {
-        content
-            .rotationEffect(.degrees(isAnimating ? 10 : -10))
-            .onAppear {
-                withAnimation(Animation.easeInOut(duration: 0.15).repeatForever(autoreverses: true)) {
-                    isAnimating = true
-                }
-            }
-    }
-}
 
 struct AnimationUtility {
 

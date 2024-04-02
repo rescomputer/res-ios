@@ -51,14 +51,15 @@ struct HalfModalView<Content: View>: View {
 
     var body: some View {
         let screenSize = UIScreen.main.bounds.size
-        let minHeight: CGFloat = screenSize.height * (keyboard.currentHeight > 0 ? 0.05 : 0.16)
+        let minHeight: CGFloat = screenSize.height * (keyboard.currentHeight > 0 ? 0.3 : 0.16)
 
-        return VStack {
+    GeometryReader { geometry in 
+        VStack {
                 ZStack {
                     content
                         .padding(.bottom, max(offset, 0))
                         .animation(.easeOut(duration: 0.2), value: keyboard.currentHeight)
-                        .frame(width: screenSize.width * 0.92, height: screenSize.width * 1.23)
+                        .frame(width: screenSize.width * 0.92)
                         .background(
                             RoundedRectangle(cornerRadius: 40)
                                 .fill(Color.white)
@@ -103,6 +104,9 @@ struct HalfModalView<Content: View>: View {
         .frame(width: screenSize.width, height: screenSize.height)
         .edgesIgnoringSafeArea(.all)
         .background(isShown ? Color.black.opacity(0.3) : Color.clear)
-        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: offset)
+        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: offset)    
+    }
+
+
     }
 }

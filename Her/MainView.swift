@@ -31,10 +31,9 @@ struct MainView: View {
                     impactMed.impactOccurred()
                 }) {
                     Image(systemName: "gearshape.fill")
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .foregroundColor(Color.white.opacity(0.5))
-                        .padding()
+                        .font(.system(size: 20))
+                        .bold()
+                        .foregroundColor(.white.opacity(0.3))
                 }
             }
             
@@ -50,7 +49,6 @@ struct MainView: View {
                     .font(.system(size: 22, design: .rounded))
                     .foregroundColor(Color.white.opacity(0.5))
             }
-            .padding(.horizontal, 20)
             Spacer()
 
             // Start Button
@@ -70,7 +68,6 @@ struct MainView: View {
                             .stroke(Color.black.opacity(1), lineWidth: 1)
                     )
             }
-            .padding(.horizontal)
             .pressAnimation()
             
             .disabled(callManager.callState == .loading)
@@ -96,7 +93,8 @@ struct MainView: View {
             .padding(.bottom, 10)
             
         }
-        .padding(.horizontal)
+        .padding()
+        .padding(.horizontal, 10)
         .onAppear { callManager.setupVapi() }
         .background {
             ZStack {
@@ -275,7 +273,7 @@ extension MainView {
                             self.activeModal = nil
                         }
                     }
-                    .offset(x: -20, y: -15),
+                    .offset(x: -20, y: 0),
                     alignment: .topTrailing
                 )               
 
@@ -309,7 +307,7 @@ extension MainView {
                         HStack{
                             OptionsMenu(selectedOption: $selectedOption)
                                 .frame(height: 70)
-                                .onChange(of: selectedOption) { newOption in
+                                .onChange(of: selectedOption) {oldValue , newOption in
                                         if let newOption = newOption {
                                             callManager.enteredText = newOption.description
                                         }
@@ -334,7 +332,7 @@ extension MainView {
                                     Text("🇺🇸 Nova · Gentle Woman").tag("nova")
                                     Text("🇺🇸 Shimmer · Deep Woman").tag("shimmer")
                                 }
-                                .onChange(of: callManager.voice) { newVoice in
+                                .onChange(of: callManager.voice) {oldValue , newVoice in
                                     UserDefaults.standard.set(newVoice, forKey: "voice")
                                 }
                             } label: {
@@ -361,7 +359,7 @@ extension MainView {
                                     Text("🐇 Fast").tag(1.3)
                                     Text("⚡️ Superfast").tag(1.5)
                                 }
-                                .onChange(of: callManager.speed) { newSpeed in
+                                .onChange(of: callManager.speed) {oldValue , newSpeed in
                                     UserDefaults.standard.set(newSpeed, forKey: "speed")
                                 }
                             } label: {
@@ -380,10 +378,28 @@ extension MainView {
                                         .stroke(Color.black.opacity(0.05), lineWidth: 1)
                                 )
                             }
-                        }                      
+                        } 
+                        
+                        // Save Button
+                        Button {
+                            self.activeModal = nil
+                        } label: {
+                            Text("Save Settings")
+                                .font(.system(.title2, design: .rounded))
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color(red: 0.106, green: 0.149, blue: 0.149))
+                                .cornerRadius(50)
+                        }
+                        .pressAnimation() 
+                        .padding(.top, 5)                       
                 }
-                .padding(.horizontal,25) 
+                .padding(.horizontal,20) 
             }
+            .padding(.vertical)
+
         }
     }
 }
