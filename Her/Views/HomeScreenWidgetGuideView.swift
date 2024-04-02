@@ -84,6 +84,20 @@ struct HomeScreenWidgetGuideView: View {
                     .frame(maxWidth: .infinity, maxHeight: 150, alignment: .center)
 
                     ScrollView {
+                        homescreenContent()
+                    }                                 
+                }
+                .padding()
+                .padding(.horizontal, 10)
+                .slideLeft()
+
+        }               
+    }
+}
+
+extension HomeScreenWidgetGuideView {
+
+    private func homescreenContent() -> some View {
                     VStack(alignment: .leading, spacing: 10) {  
                         HStack {
                             RoundedRectangle(cornerRadius: 13)
@@ -167,17 +181,6 @@ struct HomeScreenWidgetGuideView: View {
                             .padding(.bottom, 20)
                     }
                     .padding(.top, 10)                         
-                    }                
-   
-
-                 Spacer()    
-                 Spacer()                     
-                 
                 }
-                .padding()
-                .padding(.horizontal, 10)
-                .slideLeft()
 
-        }               
-    }
 }
