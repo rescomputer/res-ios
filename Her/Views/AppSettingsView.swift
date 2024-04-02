@@ -390,7 +390,6 @@ extension AppSettingsView {
                                 .bold()
                                 .foregroundColor(.black.opacity(0.6))
                          }
-                         .padding()
                     }
                     .frame(maxHeight: 300)
                     .padding(.horizontal, 20)
