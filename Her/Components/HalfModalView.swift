@@ -55,7 +55,7 @@ struct HalfModalView<Content: View>: View {
 
     var body: some View {
         let screenSize = UIScreen.main.bounds.size
-        let minHeight: CGFloat = screenSize.height * (keyboard.currentHeight > 0 ? -0.1 : modalHeightMultiplier)
+        let minHeight: CGFloat = screenSize.height * (keyboard.currentHeight > 0 ? -0.2 : modalHeightMultiplier)
 
     GeometryReader { geometry in 
         VStack {

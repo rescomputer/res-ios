@@ -12,6 +12,8 @@ import ActivityKit
 struct MainView: View {
     
     @StateObject private var callManager = CallManager()
+    @StateObject private var keyboardResponder = KeyboardResponder()
+
     @FocusState private var isTextFieldFocused: Bool
     @State private var drawingHeight = true
     @State private var selectedOption: Option?
@@ -127,7 +129,7 @@ struct MainView: View {
             if let activeModal = activeModal {
                 switch activeModal {
                 case .voiceSettingsModal:
-                    showVoiceSettingsModal()
+                    showVoiceSettingsModal(keyboardResponder: keyboardResponder)
                 }
             }
             if isAppSettingsViewShowing {
@@ -222,7 +224,7 @@ extension MainView {
         }
     }
 
-    private func showVoiceSettingsModal() -> some View {
+    private func showVoiceSettingsModal(keyboardResponder: KeyboardResponder) -> some View {
 
         HalfModalView(isShown: Binding<Bool>(
             get: { self.activeModal == .voiceSettingsModal },
@@ -308,9 +310,10 @@ extension MainView {
                             .cornerRadius(15)
                             .disabled(callManager.callState != .ended) // TODO get this to work with a custom element
                     }
-    
+
+                    if keyboardResponder.currentHeight == 0 {
                         // Text Label
-                            Text("Prompt Presets")
+                        Text("Prompt Presets")
                                 .bold()
                                 .font(.system(size: 14))
                                 .foregroundColor(Color.black.opacity(0.5))
@@ -325,7 +328,9 @@ extension MainView {
                                             callManager.enteredText = newOption.description
                                         }
                                     }
-                        }
+                        }                        
+                    }
+
                         
                         // Pickers
                         Text("Voice Settings")
