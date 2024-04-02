@@ -75,7 +75,7 @@ struct SlideDown: ViewModifier {
             .opacity(isShowing ? 1 : 0)
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    withAnimation(.easeOut(duration: 0.1)) {
+                    withAnimation(.easeIn(duration: 0.1)) {
                         self.slideDownAnimation = true
                         isShowing = true
 

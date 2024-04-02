@@ -69,6 +69,8 @@ struct MainView: View {
                     )
             }
             .pressAnimation()
+            .buttonStyle(PlainButtonStyle())
+
             
             .disabled(callManager.callState == .loading)
             
@@ -405,7 +407,8 @@ extension MainView {
                                 .cornerRadius(50)
                         }
                         .pressAnimation() 
-                        .padding(.top, 5)                       
+                        .buttonStyle(PlainButtonStyle())
+                        .padding(.top, 5)
                 }
                 .padding(.horizontal,20) 
             }

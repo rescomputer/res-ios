@@ -408,7 +408,9 @@ extension AppSettingsView {
                             .cornerRadius(50)
                     }
                     .padding(.horizontal)
-                    .pressAnimation()                
+                    .pressAnimation()   
+                    .buttonStyle(PlainButtonStyle())
+
             }
             .padding(.vertical)
 
@@ -514,6 +516,8 @@ extension AppSettingsView {
                     }
                     .padding(.horizontal)
                     .pressAnimation()
+                    .buttonStyle(PlainButtonStyle())
+
                     
             }
             .padding(.vertical)
