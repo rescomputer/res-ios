@@ -170,6 +170,18 @@ extension AppSettingsView {
         case recordingHerModal
     }
 
+    enum ModalHeightMultiplier {
+        case aboutHerModal
+        case recordingHerModal
+
+        var value: CGFloat {
+            switch self {
+            case .aboutHerModal: return 0.26
+            case .recordingHerModal: return 0.17
+            }
+        }
+    }
+
     private func micPermissions() -> some View {
                     VStack{
                         HStack {
@@ -217,7 +229,8 @@ extension AppSettingsView {
             withAnimation(.easeInOut(duration: 0.15)) {
                 self.infoModal = nil
             }
-        }) {
+        }, modalHeightMultiplier: AppSettingsView.ModalHeightMultiplier.recordingHerModal.value
+        ) {
             VStack {
                  ZStack {
                     HStack {
@@ -417,7 +430,8 @@ extension AppSettingsView {
             withAnimation(.easeInOut(duration: 0.15)) {
                 self.infoModal = nil
             }
-        }) {
+        }, modalHeightMultiplier: AppSettingsView.ModalHeightMultiplier.aboutHerModal.value
+        ) {
             VStack{  
                 ZStack {
                     HStack {
@@ -482,7 +496,7 @@ extension AppSettingsView {
                             .font(.footnote)
                             .foregroundColor(.black.opacity(0.6))
                          }
-                         .frame(height: 200)
+                         .frame(height: 150)
                          .padding(.horizontal, 20)
 
                     

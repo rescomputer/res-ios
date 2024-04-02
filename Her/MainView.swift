@@ -209,6 +209,16 @@ extension MainView {
     enum ActiveModal {
         case voiceSettingsModal
     }
+    
+    enum ModalHeightMultiplier {
+        case voiceSettingsModal
+
+        var value: CGFloat {
+            switch self {
+            case .voiceSettingsModal: return 0.16
+            }
+        }
+    }
 
     private func showVoiceSettingsModal() -> some View {
 
@@ -223,8 +233,9 @@ extension MainView {
             withAnimation(.easeInOut(duration: 0.15)) {
                 self.activeModal = nil
             }
-        }) {
-            VStack{  
+        }, modalHeightMultiplier: MainView.ModalHeightMultiplier.voiceSettingsModal.value
+        ) {
+            VStack{
                 ZStack {
                     HStack {
                         ZStack {

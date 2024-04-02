@@ -40,18 +40,22 @@ struct HalfModalView<Content: View>: View {
     @Binding var isShown: Bool
     @State private var offset: CGFloat = UIScreen.main.bounds.height / 2
 
+    var modalHeightMultiplier: CGFloat
+
+
     let onDismiss: () -> Void
     let content: Content
     
-    init(isShown: Binding<Bool>, onDismiss: @escaping () -> Void, @ViewBuilder content: () -> Content) {
+    init(isShown: Binding<Bool>, onDismiss: @escaping () -> Void, modalHeightMultiplier: CGFloat, @ViewBuilder content: () -> Content) {
         self._isShown = isShown
         self.onDismiss = onDismiss
+        self.modalHeightMultiplier = modalHeightMultiplier
         self.content = content()
     }
 
     var body: some View {
         let screenSize = UIScreen.main.bounds.size
-        let minHeight: CGFloat = screenSize.height * (keyboard.currentHeight > 0 ? 0.3 : 0.16)
+        let minHeight: CGFloat = screenSize.height * (keyboard.currentHeight > 0 ? -0.1 : modalHeightMultiplier)
 
     GeometryReader { geometry in 
         VStack {
