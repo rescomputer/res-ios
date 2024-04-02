@@ -68,18 +68,18 @@ struct HomeScreenWidgetGuideView: View {
                     ZStack {
                         Image("homescreen-widget-topper")
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
+                            .aspectRatio(contentMode: .fill)
+                            .cornerRadius(15)
                             //.padding(.bottom, 10)
                         
-                        VStack {
-                            Text("Add a home screen widget to your home screen to access Her quickly.")
-                                .bold()
-                                .font(.system(size: 18, design: .rounded))
-                                .foregroundColor(Color.white.opacity(0.7))
-                                .multilineTextAlignment(.center)
-                                .frame(maxWidth: .infinity)
-                        }
+                        // VStack {
+                        //     Text("Add a home screen widget to your home screen to access Her quickly.")
+                        //         .bold()
+                        //         .font(.system(size: 18, design: .rounded))
+                        //         .foregroundColor(Color.white.opacity(0.7))
+                        //         .multilineTextAlignment(.center)
+                        //         .frame(maxWidth: .infinity)
+                        // }
                     }
                     .frame(maxWidth: .infinity, maxHeight: 150, alignment: .center)
 
@@ -90,7 +90,7 @@ struct HomeScreenWidgetGuideView: View {
                                 .frame(width: 40, height: 40)
                                 .foregroundColor(Color.white.opacity(0.1))
                                 .overlay(
-                                    Image(systemName: "hand.tap")
+                                    Image(systemName: "hand.tap.fill")
                                         .font(.system(size: 18))
                                         .foregroundColor(.white.opacity(0.5))
 
@@ -102,7 +102,7 @@ struct HomeScreenWidgetGuideView: View {
                         Image("homescreen-step-one")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
+                            .cornerRadius(15)
                             .padding(.bottom, 20)
                         
                         HStack {
@@ -122,7 +122,7 @@ struct HomeScreenWidgetGuideView: View {
                         Image("homescreen-step-two")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
+                            .cornerRadius(15)
                             .padding(.bottom, 20) 
 
                         HStack {
@@ -142,22 +142,29 @@ struct HomeScreenWidgetGuideView: View {
                         Image("homescreen-step-three")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
+                            .cornerRadius(15)
                             .padding(.bottom, 20)
-                        // HStack {
-                        //     RoundedRectangle(cornerRadius: 13)
-                        //         .frame(width: 40, height: 40)
-                        //         .foregroundColor(Color.white.opacity(0.1))
-                        //         .overlay(
-                        //             Image(systemName: "plus.square.on.square")
-                        //                 .font(.system(size: 18))
-                        //                 .foregroundColor(.white.opacity(0.5))
 
-                        //         )
-                        //     Text("Add to Home Screen: Tap 'Add Widget' to add the widget to your home screen. Drag it to your desired location and exit jiggle mode to enjoy instant access to your app's functionality.")
-                        //         .font(.system(size: 14))
-                        //         .foregroundColor(Color.white.opacity(0.5))
-                        // }
+                        HStack {
+                            RoundedRectangle(cornerRadius: 13)
+                                .frame(width: 40, height: 40)
+                                .foregroundColor(Color.white.opacity(0.1))
+                                .overlay(
+                                    Image(systemName: "hand.draw.fill")
+                                        .font(.system(size: 18))
+                                        .foregroundColor(.white.opacity(0.5))
+
+                                )
+                            Text("Drag it to your desired location and exit jiggle mode to enjoy instant access to her when ever you want to talk.")
+                                .font(.system(size: 14))
+                                .foregroundColor(Color.white.opacity(0.5))
+                        }
+
+                        Image("homescreen-step-four")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .cornerRadius(15)
+                            .padding(.bottom, 20)
                     }
                     .padding(.top, 10)                         
                     }                

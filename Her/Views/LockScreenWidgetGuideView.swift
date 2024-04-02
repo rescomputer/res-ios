@@ -68,18 +68,18 @@ struct LockScreenWidgetGuideView: View {
                     ZStack {
                         Image("lockscreen-widget-topper")
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
+                            .aspectRatio(contentMode: .fill)
+                            .cornerRadius(15)
                             //.padding(.bottom, 10)
                         
-                        VStack {
-                            Text("Add a lock screen widget to your lock screen to access Her quickly when locked.")
-                                .bold()
-                                .font(.system(size: 18, design: .rounded))
-                                .foregroundColor(Color.white.opacity(0.7))
-                                .multilineTextAlignment(.center)
-                                .frame(maxWidth: .infinity)
-                        }
+                        // VStack {
+                        //     Text("Add a lock screen widget to your lock screen to access Her quickly.")
+                        //         .bold()
+                        //         .font(.system(size: 18, design: .rounded))
+                        //         .foregroundColor(Color.white.opacity(0.7))
+                        //         .multilineTextAlignment(.center)
+                        //         .frame(maxWidth: .infinity)
+                        // }
                     }
                     .frame(maxWidth: .infinity, maxHeight: 150, alignment: .center)
 
@@ -90,21 +90,41 @@ struct LockScreenWidgetGuideView: View {
                                 .frame(width: 40, height: 40)
                                 .foregroundColor(Color.white.opacity(0.1))
                                 .overlay(
-                                    Image(systemName: "hand.tap")
+                                    Image(systemName: "lock.fill")
                                         .font(.system(size: 18))
                                         .foregroundColor(.white.opacity(0.5))
 
                                 )
-                            Text("Long-press on an empty space on your home screen an look for the '+' icon at the top-left corner of the screen. ")
+                            Text("Wake your iPhone and press and hold on the lock screen, press customize at the bottom.")
                                 .font(.system(size: 14))
                                 .foregroundColor(Color.white.opacity(0.5))
                         }
-                        Image("homescreen-step-one")
+                        Image("lockscreen-step-one")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
+                            .cornerRadius(15)
                             .padding(.bottom, 20)
                         
+                        HStack {
+                            RoundedRectangle(cornerRadius: 13)
+                                .frame(width: 40, height: 40)
+                                .foregroundColor(Color.white.opacity(0.1))
+                                .overlay(
+                                    Image(systemName: "plus.circle.fill")
+                                        .font(.system(size: 18))
+                                        .foregroundColor(.white.opacity(0.5))
+
+                                )
+                            Text("Add a widget to your lock screen, by selecting the Add Widget option.")
+                                .font(.system(size: 14))
+                                .foregroundColor(Color.white.opacity(0.5))
+                        }
+                        Image("lockscreen-step-two")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .cornerRadius(15)
+                            .padding(.bottom, 20) 
+
                         HStack {
                             RoundedRectangle(cornerRadius: 13)
                                 .frame(width: 40, height: 40)
@@ -119,30 +139,31 @@ struct LockScreenWidgetGuideView: View {
                                 .font(.system(size: 14))
                                 .foregroundColor(Color.white.opacity(0.5))
                         }
-                        Image("homescreen-step-two")
+                        Image("lockscreen-step-three")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
-                            .padding(.bottom, 20) 
+                            .cornerRadius(15)
+                            .padding(.bottom, 20)
 
-                        HStack {
+                       HStack {
                             RoundedRectangle(cornerRadius: 13)
                                 .frame(width: 40, height: 40)
                                 .foregroundColor(Color.white.opacity(0.1))
                                 .overlay(
-                                    Image(systemName: "rectangle.grid.1x2")
+                                    Image(systemName: "hand.draw.fill")
                                         .font(.system(size: 18))
                                         .foregroundColor(.white.opacity(0.5))
 
                                 )
-                            Text("Choose the size that suits your preference – small, medium, or large – by tapping on it.")
+                            Text("Drag it to your desired location and exit the lockscreen custimzation mode.")
                                 .font(.system(size: 14))
                                 .foregroundColor(Color.white.opacity(0.5))
                         }
-                        Image("homescreen-step-three")
+
+                        Image("lockscreen-step-four")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
+                            .cornerRadius(15)
                             .padding(.bottom, 20)
                     }
                     .padding(.top, 10)                         
