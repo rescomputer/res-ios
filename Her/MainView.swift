@@ -134,7 +134,6 @@ struct MainView: View {
             }
             if isAppSettingsViewShowing {
                 AppSettingsView(isPresented: $isAppSettingsViewShowing)
-                    //.matchedGeometryEffect(id: "settings", in: animation)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .edgesIgnoringSafeArea(.all)
                     .fadeInEffect()

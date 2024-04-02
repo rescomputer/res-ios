@@ -15,7 +15,7 @@ struct AppSettingsView: View {
     @State private var isMicrophoneEnabled = false
     @State private var showingSettingsAlert = false
     @State private var infoModal: InfoModal?
-
+    @State private var selectedGuide: GuideType?
     
     var body: some View {
         ZStack {
@@ -76,51 +76,11 @@ struct AppSettingsView: View {
 
                     micPermissions()
 
-                    HStack {
-                        Text("Home Screen Widgets")
-                            .bold()
-                            .font(.system(size: 16))
-                            .foregroundColor(Color.white.opacity(0.7))
-                        Spacer()
-                    }
-                    .padding(.top, 20)
-                    Text("You can add widgets to your home screen with a long-press anywhere among your apps & looking in the top left.")
-                        .font(.system(size: 14))
-                        .foregroundColor(Color.white.opacity(0.5))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.top, 5)
-                    //TODO add images or video of what the final widgets look like
-                    Image("widget-example")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(10)
-                        .padding(.top, 10)
-                    }
-                    HStack {
-                        Text("Lock Screen Widgets")
-                            .bold()
-                            .font(.system(size: 16))
-                            .foregroundColor(Color.white.opacity(0.7))
-                        Spacer()
-                    }
-                    .padding(.top, 20)
-                    Text("You can add widgets to your lock screen by long pressing on it, selecting customise, tap on the lock screen, then Add Widget.")
-                        .font(.system(size: 14))
-                        .foregroundColor(Color.white.opacity(0.5))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.top, 5)
-                    //TODO add images or video of what the final widgets look like
-                    Image("lock-screen-widget-example")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(10)
-                        .padding(.top, 10)
+                    widgetSettings()
 
-                //TODO show if the widget is enabled?
-                //TODO 
-                Spacer()
-                Spacer()
-
+                    }
+                    Spacer()
+                    Spacer()
 
             }
             .padding()
@@ -144,7 +104,7 @@ struct AppSettingsView: View {
                         self.isMicrophoneEnabled = true
                     }
                 )
-            }          
+            }       
         }
         .slideDown()
         .overlay {
@@ -156,14 +116,42 @@ struct AppSettingsView: View {
                     showRecordingHerModal()
                 } 
             }
+            if let selectedGuide = selectedGuide {
+                switch selectedGuide {
+                case .homeScreen:
+                    HomeScreenWidgetGuideView(dismissAction: {
+                            self.selectedGuide = nil
+                        })
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .edgesIgnoringSafeArea(.all)
+                        .transition(.opacity)
+                case .lockScreen:
+                    LockScreenWidgetGuideView(dismissAction: {
+                            self.selectedGuide = nil
+                        })
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .edgesIgnoringSafeArea(.all)
+                        .transition(.opacity)
+                }
+            }
         }
-
     }
 }
 
 
 
 extension AppSettingsView {
+
+     enum GuideType: Identifiable {
+         case homeScreen, lockScreen
+
+         var id: Int {
+             switch self {
+             case .homeScreen: return 0
+             case .lockScreen: return 1
+             }
+         }
+     }
 
     enum InfoModal {
         case aboutHerModal
@@ -179,6 +167,24 @@ extension AppSettingsView {
             case .aboutHerModal: return 0.26
             case .recordingHerModal: return 0.17
             }
+        }
+    }
+
+    private func widgetSettings() -> some View {
+        VStack {
+                HStack {
+                    Text("Widgets")
+                        .bold()
+                        .font(.system(size: 16))
+                        .foregroundColor(Color.white.opacity(0.7))
+                    Spacer()
+                }
+                CustomLinkView(iconName: "rectangle.fill.on.rectangle.angled.fill", title: "Setup Home Screen Widgets", action: {}, navigateTo: {
+                    self.selectedGuide = .homeScreen
+                }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
+                CustomLinkView(iconName: "lock.square.fill", title: "Setup Lock Screen Widgets", action: {}, navigateTo: {
+                    self.selectedGuide = .lockScreen
+                }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
         }
     }
 
@@ -283,7 +289,7 @@ extension AppSettingsView {
                     alignment: .topTrailing
                     ) 
                 
-                                ScrollView {
+                    ScrollView {
                            VStack(alignment:.leading, spacing: 10) {   
                              Text("""
                                 Her uses AI to help make conversations more engaging and meaningful.

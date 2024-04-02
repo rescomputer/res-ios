@@ -94,8 +94,8 @@ struct SlideLeft: ViewModifier {
             .offset(x: slideLeftAnimation ? 0 : 20)
             .opacity(isShowing ? 1 : 0)
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    withAnimation(.easeOut(duration: 0.1)) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    withAnimation(.easeIn(duration: 0.1)) {
                         self.slideLeftAnimation = true
                         isShowing = true
 

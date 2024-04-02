@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "widget-example.png",
+      "filename" : "homescreen-widget-topper.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "widget-example 1.png",
+      "filename" : "homescreen-widget-topper@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "widget-example 2.png",
+      "filename" : "homescreen-widget-topper@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

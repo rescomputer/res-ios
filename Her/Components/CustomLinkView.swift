@@ -43,6 +43,7 @@ struct CustomLinkView: View {
     var iconName: String
     var title: String
     var action: () -> Void
+    var navigateTo: () -> Void
     var screenSize: CGSize
     var offset: CGFloat
     var minHeight: CGFloat
@@ -55,7 +56,9 @@ struct CustomLinkView: View {
     
 
     var body: some View {
-        Button(action: action) {
+        Button(action: {
+            self.navigateTo()
+        }) {
             HStack {
                 Image(systemName: iconName)
                     .font(.system(size: 16))
