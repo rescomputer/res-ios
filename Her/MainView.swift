@@ -342,15 +342,49 @@ extension MainView {
                         HStack {
                             Menu {
                                 Picker("Voice", selection: $callManager.voice) {
-                                    Text("🇺🇸 Alloy · Gentle Man").tag("alloy")
-                                    Text("🇺🇸 Echo · Deep Man").tag("echo")
-                                    Text("🇬🇧 Fable · Normal Man").tag("fable")
-                                    Text("🇺🇸 Onyx · Deeper Man").tag("onyx")
-                                    Text("🇺🇸 Nova · Gentle Woman").tag("nova")
-                                    Text("🇺🇸 Shimmer · Deep Woman").tag("shimmer")
+                                    ForEach(callManager.voices.values.flatMap { $0 }, id: \.id) { voice in
+                                        switch voice.id {
+                                        case "alloy":
+                                            Text("🇺🇸 Alloy · Gentle American Man").tag(voice)
+                                        case "echo":
+                                            Text("🇺🇸 Echo · Deep American Man").tag(voice)
+                                        case "fable":
+                                            Text("🇬🇧 Fable · Normal British Man").tag(voice)
+                                        case "onyx":
+                                            Text("🇺🇸 Onyx · Deeper American Man").tag(voice)
+                                        case "nova":
+                                            Text("🇺🇸 Nova · Gentle American Woman").tag(voice)
+                                        case "shimmer":
+                                            Text("🇺🇸 Shimmer · Deep American Woman").tag(voice)
+                                        case "jennifer":
+                                            Text("🇺🇸 Jennifer · American Woman").tag(voice)
+                                        case "will":
+                                            Text("🇺🇸 Will · Deep American Man").tag(voice)
+                                        case "michael":
+                                            Text("🇺🇸 Michael · Normal American Man").tag(voice)
+                                        case "ruby":
+                                            Text("🇦🇺 Ruby · Australian Woman").tag(voice)
+                                        case "eva":
+                                            Text("🇺🇸 Eva · American Woman").tag(voice)
+                                        case "madison":
+                                            Text("🇺🇸 Madison · American Woman").tag(voice)
+                                        case "selena":
+                                            Text("🇺🇸 Selena · American Woman").tag(voice)
+                                        case "colin":
+                                            Text("🇺🇸 Colin · American Man").tag(voice)
+                                        case "nicholas":
+                                            Text("🇺🇸 Nicholas · American Man").tag(voice)
+                                        case "sharon":
+                                            Text("🇬🇧 Sharon · British Woman").tag(voice)
+                                        case "maya":
+                                            Text("🇬🇧 Maya · British Woman").tag(voice)
+                                        default:
+                                            Text(voice.name).tag(voice)
+                                        }
+                                    }
                                 }
-                                .onChange(of: callManager.voice) {oldValue , newVoice in
-                                    UserDefaults.standard.set(newVoice, forKey: "voice")
+                                .onChange(of: callManager.voice) { voice in
+                                    callManager.voiceProvider = callManager.voices.first { $0.value.contains(where: { $0.id == voice.id }) }?.key ?? .openai
                                 }
                             } label: {
                                 HStack {
@@ -371,12 +405,12 @@ extension MainView {
 
                             Menu {
                                 Picker("Speed", selection: $callManager.speed) {
-                                    Text("🐢 Slow").tag(0.3)
-                                    Text("💬 Normal").tag(1.0)
-                                    Text("🐇 Fast").tag(1.3)
-                                    Text("⚡️ Superfast").tag(1.5)
+                                    let presets = callManager.speedPresets[callManager.voiceProvider] ?? [:]
+                                    ForEach(presets.sorted(by: <), id: \.key) { name, speed in
+                                        Text(name).tag(speed)
+                                    }
                                 }
-                                .onChange(of: callManager.speed) {oldValue , newSpeed in
+                                .onChange(of: callManager.speed) { newSpeed in
                                     UserDefaults.standard.set(newSpeed, forKey: "speed")
                                 }
                             } label: {

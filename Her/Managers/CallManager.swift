@@ -44,33 +44,79 @@ class CallManager: ObservableObject {
         }
     }
     
-    @Published var voice: String = "alloy" {
+    enum VoiceProvider: String, CaseIterable {
+        case openai, playht, rimeAi
+    }
+
+    struct Voice: Hashable {
+        let id: String
+        let name: String
+    }
+
+    @Published var voiceProvider: VoiceProvider = .openai {
         didSet {
-            UserDefaults.standard.set(voice, forKey: "voice")
+            UserDefaults.standard.set(voiceProvider.rawValue, forKey: "voiceProvider")
         }
     }
 
-    var voiceDisplayName: String {
-        switch voice {
-        case "alloy": return "🇺🇸 Alloy"
-        case "echo": return "🇺🇸 Echo"
-        case "fable": return "🇬🇧 Fable"
-        case "onyx": return "🇺🇸 Onyx"
-        case "nova": return "🇺🇸 Nova"
-        case "shimmer": return "🇺🇸 Shimmer"
-        default: return "Voice Type"
+    @Published var voice: Voice = Voice(id: "alloy", name: "Alloy · Gentle American Man") {
+        didSet {
+            UserDefaults.standard.set(voice.id, forKey: "voice")
         }
     }
 
-    var speedDisplayName: String {
-        switch speed {
-        case 0.3: return "🐢 Slow"
-        case 1.0: return "💬 Normal"
-        case 1.3: return "🐇 Fast"
-        case 1.5: return "⚡️ Superfast"
-        default: return "Voice Speed"
-        }
-    }
+    let voices: [VoiceProvider: [Voice]] = [
+        .openai: [
+            Voice(id: "alloy", name: "Alloy · Gentle American Man"),
+            Voice(id: "echo", name: "Echo · Deep American Man"),
+            Voice(id: "fable", name: "Fable · Normal British Man"),
+            Voice(id: "onyx", name: "Onyx · Deeper American Man"),
+            Voice(id: "nova", name: "Nova · Gentle American Woman"),
+            Voice(id: "shimmer", name: "Shimmer · Deep American Woman")
+        ],
+        .playht: [
+            Voice(id: "jennifer", name: "Jennifer · American Woman"),
+            Voice(id: "will", name: "Will · Deep American Man"),
+            Voice(id: "michael", name: "Michael · Normal American Man"),
+            Voice(id: "ruby", name: "Ruby · Australian Woman")
+        ],
+        .rimeAi: [
+            Voice(id: "eva", name: "Eva · American Woman"),
+            Voice(id: "madison", name: "Madison · American Woman"),
+            Voice(id: "selena", name: "Selena · American Woman"),
+            Voice(id: "colin", name: "Colin · American Man"),
+            Voice(id: "nicholas", name: "Nicholas · American Man"),
+            Voice(id: "sharon", name: "Sharon · British Woman"),
+            Voice(id: "maya", name: "Maya · British Woman")
+        ]
+    ]
+
+    let speedRanges: [VoiceProvider: ClosedRange<Double>] = [
+        .openai: 0.0...2.0,
+        .playht: 0.0...5.0,
+        .rimeAi: 0.0...2.0
+    ]
+
+    let speedPresets: [VoiceProvider: [String: Double]] = [
+        .openai: [
+            "🐢 Slow": 0.3,
+      "💬 Normal": 1.0,
+            "🐇 Fast": 1.3,
+            "⚡️ Superfast": 1.5
+        ],
+        .playht: [
+            "🐢 Slow": 2.0,
+            "💬 Normal": 2.5,
+            "🐇 Fast": 3.0,
+            "⚡️ Superfast": 3.5
+        ],
+        .rimeAi: [
+            "🐢 Slow": 1.5,
+            "💬 Normal": 1.0,
+            "🐇 Fast": 0.8,
+            "⚡️ Superfast": 0.6
+        ]
+    ]
     
     func setupVapi() {
         vapi.eventPublisher
@@ -107,8 +153,11 @@ class CallManager: ObservableObject {
         if let savedSpeed = UserDefaults.standard.object(forKey: "speed") as? Double {
             speed = savedSpeed
         }
+        if let savedVoiceProvider = UserDefaults.standard.string(forKey: "voiceProvider") {
+            voiceProvider = VoiceProvider(rawValue: savedVoiceProvider) ?? .openai
+        }
         if let savedVoice = UserDefaults.standard.string(forKey: "voice") {
-            voice = savedVoice
+            voice = voices[voiceProvider]?.first(where: { $0.id == savedVoice }) ?? Voice(id: "alloy", name: "Alloy · Gentle American Man")
         }
     }
     
@@ -130,7 +179,7 @@ class CallManager: ObservableObject {
         callState = .loading
         let assistant = [
             "model": [
-                "provider": "openai",
+                "provider": voiceProvider.rawValue,
                 "model": "gpt-4-0613",
                 "fallbackModels" : [
                   "gpt-4-0125-preview",
@@ -149,9 +198,9 @@ class CallManager: ObservableObject {
             "llmRequestDelaySeconds": 0,
             "firstMessage": "Hey",
             "voice": [
-                "voiceId": voice,
-                "provider":"openai",
-                "speed":speed
+                "voiceId": voice.id,
+                "provider": voiceProvider.rawValue,
+                "speed": speed
             ],
             "transcriber": [
                 "language": "en",
@@ -190,20 +239,27 @@ class CallManager: ObservableObject {
             }
         case .ended:
             Task {
-                await activity?.end(dismissalPolicy: .immediate)
-                activity = nil
+                await activity?.end(using: Her_ExtensionAttributes.ContentState(sfSymbolName: "checkmark"), dismissalPolicy: .default)
             }
         }
     }
     
-    func endCall()  {
-        vapi.stop()
-        Task {
-            await activity?.end(dismissalPolicy: .immediate)
-            DispatchQueue.main.async {
-                self.activity = nil
-            }
+    @MainActor
+    func endCall() async {
+        do {
+            try await vapi.stop()
+        } catch {
+            print("Error ending call: \(error)")
         }
+    }
+    
+    var voiceDisplayName: String {
+        voice.name
+    }
+    
+    var speedDisplayName: String {
+        let presets = speedPresets[voiceProvider] ?? [:]
+        return presets.first(where: { $0.value == speed })?.key ?? "Voice Speed"
     }
 }
 
