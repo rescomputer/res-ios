@@ -182,7 +182,7 @@ extension AppSettingsView {
                 CustomLinkView(iconName: "rectangle.fill.on.rectangle.angled.fill", title: "Setup Home Screen Widgets", action: {}, navigateTo: {
                     self.selectedGuide = .homeScreen
                 }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
-                CustomLinkView(iconName: "lock.square.fill", title: "Setup Lock Screen Widgets", action: {}, navigateTo: {
+                CustomLinkView(iconName: "lock.rectangle.on.rectangle.fill", title: "Setup Lock Screen Widgets", action: {}, navigateTo: {
                     self.selectedGuide = .lockScreen
                 }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
         }

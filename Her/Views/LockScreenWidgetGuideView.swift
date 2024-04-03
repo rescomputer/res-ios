@@ -68,12 +68,12 @@ struct LockScreenWidgetGuideView: View {
                     ZStack {
                         Image("lockscreen-widget-topper")
                             .resizable()
-                            .aspectRatio(contentMode: .fill)
+                            .aspectRatio(contentMode: .fit)
                             .cornerRadius(15)
-                            //.padding(.bottom, 10)
+                            .padding(.bottom, 5)
                         
                         // VStack {
-                        //     Text("Add a lock screen widget to your lock screen to access Her quickly.")
+                        //     Text("Add a widget to your lock screen to access Her quickly on the go.")
                         //         .bold()
                         //         .font(.system(size: 18, design: .rounded))
                         //         .foregroundColor(Color.white.opacity(0.7))
@@ -81,7 +81,7 @@ struct LockScreenWidgetGuideView: View {
                         //         .frame(maxWidth: .infinity)
                         // }
                     }
-                    .frame(maxWidth: .infinity, maxHeight: 150, alignment: .center)
+                    .frame(maxWidth: .infinity, maxHeight: 120, alignment: .center)
 
                     ScrollView {
                         lockscreenContent()

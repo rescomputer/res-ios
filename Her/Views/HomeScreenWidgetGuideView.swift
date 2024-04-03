@@ -68,12 +68,12 @@ struct HomeScreenWidgetGuideView: View {
                     ZStack {
                         Image("homescreen-widget-topper")
                             .resizable()
-                            .aspectRatio(contentMode: .fill)
+                            .aspectRatio(contentMode: .fit)
                             .cornerRadius(15)
-                            //.padding(.bottom, 10)
+                            .padding(.bottom, 5)
                         
                         // VStack {
-                        //     Text("Add a home screen widget to your home screen to access Her quickly.")
+                        //     Text("Add a widget to your home screen to open Her quickly.")
                         //         .bold()
                         //         .font(.system(size: 18, design: .rounded))
                         //         .foregroundColor(Color.white.opacity(0.7))
@@ -81,7 +81,7 @@ struct HomeScreenWidgetGuideView: View {
                         //         .frame(maxWidth: .infinity)
                         // }
                     }
-                    .frame(maxWidth: .infinity, maxHeight: 150, alignment: .center)
+                    .frame(maxWidth: .infinity, maxHeight: 120, alignment: .center)
 
                     ScrollView {
                         homescreenContent()
