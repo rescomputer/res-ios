@@ -40,25 +40,30 @@ struct HalfModalView<Content: View>: View {
     @Binding var isShown: Bool
     @State private var offset: CGFloat = UIScreen.main.bounds.height / 2
 
+    var modalHeightMultiplier: CGFloat
+
+
     let onDismiss: () -> Void
     let content: Content
     
-    init(isShown: Binding<Bool>, onDismiss: @escaping () -> Void, @ViewBuilder content: () -> Content) {
+    init(isShown: Binding<Bool>, onDismiss: @escaping () -> Void, modalHeightMultiplier: CGFloat, @ViewBuilder content: () -> Content) {
         self._isShown = isShown
         self.onDismiss = onDismiss
+        self.modalHeightMultiplier = modalHeightMultiplier
         self.content = content()
     }
 
     var body: some View {
         let screenSize = UIScreen.main.bounds.size
-        let minHeight: CGFloat = screenSize.height * (keyboard.currentHeight > 0 ? 0.05 : 0.16)
+        let minHeight: CGFloat = screenSize.height * (keyboard.currentHeight > 0 ? -0.2 : modalHeightMultiplier)
 
-        return VStack {
+    GeometryReader { geometry in 
+        VStack {
                 ZStack {
                     content
                         .padding(.bottom, max(offset, 0))
                         .animation(.easeOut(duration: 0.2), value: keyboard.currentHeight)
-                        .frame(width: screenSize.width * 0.92, height: screenSize.width * 1.23)
+                        .frame(width: screenSize.width * 0.92)
                         .background(
                             RoundedRectangle(cornerRadius: 40)
                                 .fill(Color.white)
@@ -102,7 +107,10 @@ struct HalfModalView<Content: View>: View {
         .offset(y: max(minHeight + offset, minHeight))
         .frame(width: screenSize.width, height: screenSize.height)
         .edgesIgnoringSafeArea(.all)
-        .background(isShown ? Color.black.opacity(0.3) : Color.clear)
-        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: offset)
+        .background(isShown ? Color.black.opacity(0.4) : Color.clear)
+        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: offset)    
+    }
+
+
     }
 }

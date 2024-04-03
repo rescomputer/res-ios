@@ -14,14 +14,11 @@ extension View {
     func fadeInEffect() -> some View {
         self.modifier(FadeInEffect())
     }
-    func animatedGradient() -> some View {
-        self.modifier(AnimatedGradient())
-    }
-    func wiggle() -> some View {
-        self.modifier(Wiggle())
-    }
     func slideUp() -> some View {
         self.modifier(SlideUp())
+    }
+    func slideDown() -> some View {
+        self.modifier(SlideDown())
     }
     func slideLeft() -> some View {
         self.modifier(SlideLeft())
@@ -32,39 +29,11 @@ extension View {
     func pressAnimation() -> some View {
         self.modifier(PressAnimation())
     }
-    func scaleUpAnimation() -> some View {
-        self.modifier(ScaleUpAnimation())
+    func applyScrollViewEdgeFadeDark() -> some View {
+        self.modifier(ScrollViewEdgeFadeDark())
     }
-}
-
-struct WiggleEffect: GeometryEffect {
-    var isActive: Bool
-    var times: CGFloat = 5
-    var amplitude: CGFloat = 10.0
-    
-    var animatableData: CGFloat {
-        get { isActive ? 1 : 0 }
-        set { }
-    }
-    
-    func effectValue(size: CGSize) -> ProjectionTransform {
-        guard isActive else { return ProjectionTransform() }
-        let wiggle = sin(animatableData * .pi * times) * amplitude
-        return ProjectionTransform(CGAffineTransform(translationX: wiggle, y: 0))
-    }
-}
-
-struct ScaleUpAnimation: ViewModifier {
-    @State private var isAnimating = false
-
-    func body(content: Content) -> some View {
-        content
-            .scaleEffect(isAnimating ? 2.0 : 1.0)
-            .onAppear {
-                withAnimation(Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
-                    isAnimating = true
-                }
-            }
+    func applyScrollViewEdgeFadeLight() -> some View {
+        self.modifier(ScrollViewEdgeFadeLight())
     }
 }
 
@@ -102,6 +71,26 @@ struct SlideUp: ViewModifier {
     }
 }
 
+struct SlideDown: ViewModifier {
+    @State private var slideDownAnimation = false
+    @State private var isShowing = false
+
+    func body(content: Content) -> some View {
+        content
+            .offset(y: slideDownAnimation ? 0 : -20)
+            .opacity(isShowing ? 1 : 0)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    withAnimation(.easeIn(duration: 0.1)) {
+                        self.slideDownAnimation = true
+                        isShowing = true
+
+                    }
+                }
+            }
+    }
+}
+
 struct SlideLeft: ViewModifier {
     @State private var slideLeftAnimation = false
     @State private var isShowing = false
@@ -111,8 +100,8 @@ struct SlideLeft: ViewModifier {
             .offset(x: slideLeftAnimation ? 0 : 20)
             .opacity(isShowing ? 1 : 0)
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    withAnimation(.easeOut(duration: 0.1)) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    withAnimation(.easeIn(duration: 0.1)) {
                         self.slideLeftAnimation = true
                         isShowing = true
 
@@ -142,33 +131,12 @@ struct SlideRight: ViewModifier {
     }
 
 
-struct AnimatedGradient: ViewModifier {
-    @State private var isAnimating = false
-
-    func body(content: Content) -> some View {
-        content
-            .overlay(
-                LinearGradient(
-                    gradient: Gradient(colors: isAnimating ? [Color.blue, Color.yellow] : [Color.orange, Color.purple]),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            )
-            .mask(content)
-            .onAppear {
-                withAnimation(Animation.linear(duration: 2.0).repeatForever(autoreverses: true)) {
-                    isAnimating = true
-                }
-            }
-    }
-}
-
 struct PressAnimation: ViewModifier {
     @State private var isPressed = false
 
     func body(content: Content) -> some View {
         content
-            .scaleEffect(isPressed ? 0.96 : 1)
+            .scaleEffect(isPressed ? 0.98 : 1)
             .animation(.easeInOut(duration: 0.1), value: isPressed)
             .onLongPressGesture(minimumDuration: .infinity, pressing: { pressing in
                 withAnimation {
@@ -178,20 +146,6 @@ struct PressAnimation: ViewModifier {
     }
 }
 
-
-struct Wiggle: ViewModifier {
-    @State private var isAnimating = false
-
-    func body(content: Content) -> some View {
-        content
-            .rotationEffect(.degrees(isAnimating ? 10 : -10))
-            .onAppear {
-                withAnimation(Animation.easeInOut(duration: 0.15).repeatForever(autoreverses: true)) {
-                    isAnimating = true
-                }
-            }
-    }
-}
 
 struct AnimationUtility {
 
@@ -204,6 +158,50 @@ struct AnimationUtility {
 
     static func fadeAnimation() -> Animation {
         return Animation.easeInOut(duration: fadeDuration).delay(sunriseDuration)
+    }
+}
+
+//scrollViewfades
+
+struct ScrollViewEdgeFadeDark: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .overlay(
+                LinearGradient(
+                    gradient: Gradient(stops: [
+                        .init(color: Color(red: 0.047, green: 0.071, blue: 0.071), location: 0),
+                        .init(color: Color(red: 0.047, green: 0.071, blue: 0.071).opacity(0.03), location: 0.03),
+                        .init(color: Color(red: 0.047, green: 0.071, blue: 0.071).opacity(0.01), location: 0.95),
+                        .init(color: Color(red: 0.047, green: 0.071, blue: 0.071).opacity(0.01), location: 0.95),
+                        .init(color: Color(red: 0.047, green: 0.071, blue: 0.071).opacity(0.03), location: 0.97),
+                        .init(color: .clear, location: 1)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .allowsHitTesting(false),
+                alignment: .center
+            )
+    }
+}
+
+struct ScrollViewEdgeFadeLight: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .overlay(
+                LinearGradient(
+                    gradient: Gradient(stops: [
+                        .init(color: .white, location: 0),
+                        .init(color: .white.opacity(0.05), location: 0.05),
+                        .init(color: .white.opacity(0.05), location: 0.95),
+                        .init(color: .white, location: 1)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .allowsHitTesting(false),
+                alignment: .center
+            )
     }
 }
 

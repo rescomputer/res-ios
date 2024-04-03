@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "lock-screen-widget-example 2.png",
+      "filename" : "lockscreen-step-three.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "lock-screen-widget-example.png",
+      "filename" : "lockscreen-step-three@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "lock-screen-widget-example 1.png",
+      "filename" : "lockscreen-step-three@2x 1.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

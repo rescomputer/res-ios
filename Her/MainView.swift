@@ -12,6 +12,8 @@ import ActivityKit
 struct MainView: View {
     
     @StateObject private var callManager = CallManager()
+    @StateObject private var keyboardResponder = KeyboardResponder()
+
     @FocusState private var isTextFieldFocused: Bool
     @State private var drawingHeight = true
     @State private var selectedOption: Option?
@@ -31,10 +33,9 @@ struct MainView: View {
                     impactMed.impactOccurred()
                 }) {
                     Image(systemName: "gearshape.fill")
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .foregroundColor(Color.white.opacity(0.5))
-                        .padding()
+                        .font(.system(size: 20))
+                        .bold()
+                        .foregroundColor(.white.opacity(0.3))
                 }
             }
             
@@ -50,7 +51,6 @@ struct MainView: View {
                     .font(.system(size: 22, design: .rounded))
                     .foregroundColor(Color.white.opacity(0.5))
             }
-            .padding(.horizontal, 20)
             Spacer()
 
             // Start Button
@@ -70,8 +70,9 @@ struct MainView: View {
                             .stroke(Color.black.opacity(1), lineWidth: 1)
                     )
             }
-            .padding(.horizontal)
             .pressAnimation()
+            .buttonStyle(PlainButtonStyle())
+
             
             .disabled(callManager.callState == .loading)
             
@@ -96,7 +97,8 @@ struct MainView: View {
             .padding(.bottom, 10)
             
         }
-        .padding(.horizontal)
+        .padding()
+        .padding(.horizontal, 10)
         .onAppear { callManager.setupVapi() }
         .background {
             ZStack {
@@ -127,12 +129,11 @@ struct MainView: View {
             if let activeModal = activeModal {
                 switch activeModal {
                 case .voiceSettingsModal:
-                    showVoiceSettingsModal()
+                    showVoiceSettingsModal(keyboardResponder: keyboardResponder)
                 }
             }
             if isAppSettingsViewShowing {
                 AppSettingsView(isPresented: $isAppSettingsViewShowing)
-                    //.matchedGeometryEffect(id: "settings", in: animation)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .edgesIgnoringSafeArea(.all)
                     .fadeInEffect()
@@ -211,8 +212,18 @@ extension MainView {
     enum ActiveModal {
         case voiceSettingsModal
     }
+    
+    enum ModalHeightMultiplier {
+        case voiceSettingsModal
 
-    private func showVoiceSettingsModal() -> some View {
+        var value: CGFloat {
+            switch self {
+            case .voiceSettingsModal: return 0.16
+            }
+        }
+    }
+
+    private func showVoiceSettingsModal(keyboardResponder: KeyboardResponder) -> some View {
 
         HalfModalView(isShown: Binding<Bool>(
             get: { self.activeModal == .voiceSettingsModal },
@@ -225,8 +236,9 @@ extension MainView {
             withAnimation(.easeInOut(duration: 0.15)) {
                 self.activeModal = nil
             }
-        }) {
-            VStack{  
+        }, modalHeightMultiplier: MainView.ModalHeightMultiplier.voiceSettingsModal.value
+        ) {
+            VStack{
                 ZStack {
                     HStack {
                         ZStack {
@@ -252,7 +264,7 @@ extension MainView {
 
                             }
                             .padding(.horizontal, 20)
-//                            .offset(x: -12)
+                            .offset(x: UIScreen.isLargeDevice ? 0 : -12)
                         }
                     }
                     .overlay(
@@ -275,7 +287,7 @@ extension MainView {
                             self.activeModal = nil
                         }
                     }
-                    .offset(x: -20, y: -15),
+                    .offset(x: -20, y: 0),
                     alignment: .topTrailing
                 )               
 
@@ -297,9 +309,10 @@ extension MainView {
                             .cornerRadius(15)
                             .disabled(callManager.callState != .ended) // TODO get this to work with a custom element
                     }
-    
+
+                    if keyboardResponder.currentHeight == 0 {
                         // Text Label
-                            Text("Prompt Presets")
+                        Text("Prompt Presets")
                                 .bold()
                                 .font(.system(size: 14))
                                 .foregroundColor(Color.black.opacity(0.5))
@@ -309,12 +322,14 @@ extension MainView {
                         HStack{
                             OptionsMenu(selectedOption: $selectedOption)
                                 .frame(height: 70)
-                                .onChange(of: selectedOption) { newOption in
+                                .onChange(of: selectedOption) {oldValue , newOption in
                                         if let newOption = newOption {
                                             callManager.enteredText = newOption.description
                                         }
                                     }
-                        }
+                        }                        
+                    }
+
                         
                         // Pickers
                         Text("Voice Settings")
@@ -334,7 +349,7 @@ extension MainView {
                                     Text("🇺🇸 Nova · Gentle Woman").tag("nova")
                                     Text("🇺🇸 Shimmer · Deep Woman").tag("shimmer")
                                 }
-                                .onChange(of: callManager.voice) { newVoice in
+                                .onChange(of: callManager.voice) {oldValue , newVoice in
                                     UserDefaults.standard.set(newVoice, forKey: "voice")
                                 }
                             } label: {
@@ -361,7 +376,7 @@ extension MainView {
                                     Text("🐇 Fast").tag(1.3)
                                     Text("⚡️ Superfast").tag(1.5)
                                 }
-                                .onChange(of: callManager.speed) { newSpeed in
+                                .onChange(of: callManager.speed) {oldValue , newSpeed in
                                     UserDefaults.standard.set(newSpeed, forKey: "speed")
                                 }
                             } label: {
@@ -380,10 +395,29 @@ extension MainView {
                                         .stroke(Color.black.opacity(0.05), lineWidth: 1)
                                 )
                             }
-                        }                      
+                        } 
+                        
+                        // Save Button
+                        Button {
+                            self.activeModal = nil
+                        } label: {
+                            Text("Save Settings")
+                                .font(.system(.title2, design: .rounded))
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color(red: 0.106, green: 0.149, blue: 0.149))
+                                .cornerRadius(50)
+                        }
+                        .pressAnimation() 
+                        .buttonStyle(PlainButtonStyle())
+                        .padding(.top, 5)
                 }
-                .padding(.horizontal,25) 
+                .padding(.horizontal,20) 
             }
+            .padding(.vertical)
+
         }
     }
 }
