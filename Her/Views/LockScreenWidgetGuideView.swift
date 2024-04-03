@@ -85,7 +85,8 @@ struct LockScreenWidgetGuideView: View {
 
                     ScrollView {
                         lockscreenContent()
-                    }                
+                    }
+                    .applyScrollViewEdgeFadeDark()               
    
 
                  Spacer()    

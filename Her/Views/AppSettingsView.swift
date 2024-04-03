@@ -294,6 +294,7 @@ extension AppSettingsView {
                              Text("""
                                 Her uses AI to help make conversations more engaging and meaningful.
                                 """)
+                            .bold()
                             .font(.footnote)
                             .foregroundColor(.black.opacity(0.6))
                                
@@ -396,9 +397,11 @@ extension AppSettingsView {
                                 .bold()
                                 .foregroundColor(.black.opacity(0.6))
                          }
+                        //  .padding(.top, 10)
                     }
                     .frame(maxHeight: 300)
                     .padding(.horizontal, 20)
+                    // .applyScrollViewEdgeFadeLight()
 
                 // Got it Button
                     Button {

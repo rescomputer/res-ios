@@ -29,6 +29,12 @@ extension View {
     func pressAnimation() -> some View {
         self.modifier(PressAnimation())
     }
+    func applyScrollViewEdgeFadeDark() -> some View {
+        self.modifier(ScrollViewEdgeFadeDark())
+    }
+    func applyScrollViewEdgeFadeLight() -> some View {
+        self.modifier(ScrollViewEdgeFadeLight())
+    }
 }
 
 struct FadeInEffect: ViewModifier {
@@ -152,6 +158,50 @@ struct AnimationUtility {
 
     static func fadeAnimation() -> Animation {
         return Animation.easeInOut(duration: fadeDuration).delay(sunriseDuration)
+    }
+}
+
+//scrollViewfades
+
+struct ScrollViewEdgeFadeDark: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .overlay(
+                LinearGradient(
+                    gradient: Gradient(stops: [
+                        .init(color: Color(red: 0.047, green: 0.071, blue: 0.071), location: 0),
+                        .init(color: Color(red: 0.047, green: 0.071, blue: 0.071).opacity(0.03), location: 0.03),
+                        .init(color: Color(red: 0.047, green: 0.071, blue: 0.071).opacity(0.01), location: 0.95),
+                        .init(color: Color(red: 0.047, green: 0.071, blue: 0.071).opacity(0.01), location: 0.95),
+                        .init(color: Color(red: 0.047, green: 0.071, blue: 0.071).opacity(0.03), location: 0.97),
+                        .init(color: .clear, location: 1)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .allowsHitTesting(false),
+                alignment: .center
+            )
+    }
+}
+
+struct ScrollViewEdgeFadeLight: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .overlay(
+                LinearGradient(
+                    gradient: Gradient(stops: [
+                        .init(color: .white, location: 0),
+                        .init(color: .white.opacity(0.05), location: 0.05),
+                        .init(color: .white.opacity(0.05), location: 0.95),
+                        .init(color: .white, location: 1)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .allowsHitTesting(false),
+                alignment: .center
+            )
     }
 }
 

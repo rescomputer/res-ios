@@ -85,7 +85,8 @@ struct HomeScreenWidgetGuideView: View {
 
                     ScrollView {
                         homescreenContent()
-                    }                                 
+                    } 
+                    .applyScrollViewEdgeFadeDark()
                 }
                 .padding()
                 .padding(.horizontal, 10)

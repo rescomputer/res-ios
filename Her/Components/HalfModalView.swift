@@ -107,7 +107,7 @@ struct HalfModalView<Content: View>: View {
         .offset(y: max(minHeight + offset, minHeight))
         .frame(width: screenSize.width, height: screenSize.height)
         .edgesIgnoringSafeArea(.all)
-        .background(isShown ? Color.black.opacity(0.3) : Color.clear)
+        .background(isShown ? Color.black.opacity(0.4) : Color.clear)
         .animation(.spring(response: 0.3, dampingFraction: 0.8), value: offset)    
     }
 
