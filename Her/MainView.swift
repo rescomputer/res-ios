@@ -264,7 +264,7 @@ extension MainView {
 
                             }
                             .padding(.horizontal, 20)
-                            .offset(x: -12)
+                            .offset(x: UIScreen.isLargeDevice ? 0 : -12)
                         }
                     }
                     .overlay(

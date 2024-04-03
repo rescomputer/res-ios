@@ -248,7 +248,7 @@ extension AppSettingsView {
                                     .frame(width: 85, height: 85)
                                 Spacer()
                             }
-                            .offset(x: 10, y: -20)
+                            .offset(x: 10, y: -15)
 
                         
                             VStack(alignment: .leading) {
@@ -263,6 +263,7 @@ extension AppSettingsView {
 
                             }
                             .padding(.horizontal, 20)
+                            .offset(x: UIScreen.isLargeDevice ? -20 : 0)
                         }
                     }
                     .overlay(
@@ -453,7 +454,7 @@ extension AppSettingsView {
                                     .frame(width: 85, height: 85)
                                 Spacer()
                             }
-                            .offset(x: 10, y: -20)
+                            .offset(x: 10, y: -15)
 
                         
                             VStack(alignment: .leading) {
@@ -468,6 +469,8 @@ extension AppSettingsView {
 
                             }
                             .padding(.horizontal, 20)
+                            .offset(x: UIScreen.isLargeDevice ? -20 : 0)
+
                         }
                     }
                     .overlay(
