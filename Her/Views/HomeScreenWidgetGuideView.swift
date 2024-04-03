@@ -144,7 +144,7 @@ extension HomeScreenWidgetGuideView {
                                 .frame(width: 40, height: 40)
                                 .foregroundColor(Color.white.opacity(0.1))
                                 .overlay(
-                                    Image(systemName: "rectangle.grid.1x2")
+                                    Image(systemName: "rectangle.stack.fill")
                                         .font(.system(size: 18))
                                         .foregroundColor(.white.opacity(0.5))
 
