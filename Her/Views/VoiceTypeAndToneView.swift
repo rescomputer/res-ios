@@ -84,21 +84,41 @@ struct VoiceTypeAndToneView: View {
                 }
             }
         // Save Button
-        Button {
-                self.activeModal = nil
-            } label: {
-                Text("Save Settings")
-                    .font(.system(.title2, design: .rounded))
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color(red: 0.106, green: 0.149, blue: 0.149))
-                    .cornerRadius(50)
-            }
-            .pressAnimation()
-            .buttonStyle(PlainButtonStyle())
-            .padding(.top, 5)
+        // Button {
+        //         self.activeModal = nil
+        //     } label: {
+        //         Text("Save Settings")
+        //             .font(.system(.title2, design: .rounded))
+        //             .fontWeight(.bold)
+        //             .foregroundColor(.white)
+        //             .padding()
+        //             .frame(maxWidth: .infinity)
+        //             .background(Color(red: 0.106, green: 0.149, blue: 0.149))
+        //             .cornerRadius(50)
+        //     }
+        //     .pressAnimation()
+        //     .buttonStyle(.plain)
+        //     .padding(.top, 5)
+        //     .opacity(1)
+        //     .animation(nil)
+            
+            // Save Button
+            ZStack {
+                    RoundedRectangle(cornerRadius: 50)
+                        .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
+                        .frame(height: 60)
+                        .animation(nil)
+                    Text("Save Settings")
+                        .font(.system(.title2, design: .rounded))
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                }
+                .onTapGesture {
+                    self.activeModal = nil
+                }
+                .padding(.top, 5)
+                .pressAnimation()
+                .opacity(1)
         }
         .padding(.horizontal, 20)
     }

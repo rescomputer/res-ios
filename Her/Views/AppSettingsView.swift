@@ -403,22 +403,39 @@ extension AppSettingsView {
                     // .applyScrollViewEdgeFadeLight()
 
                 // Got it Button
-                    Button {
-                        self.infoModal = nil
-                    } label: {
-                        Text("Got it!")
-                            .font(.system(.title2, design: .rounded))
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color(red: 0.106, green: 0.149, blue: 0.149))
-                            .cornerRadius(50)
-                    }
-                    .padding(.horizontal)
-                    .pressAnimation()   
-                    .buttonStyle(PlainButtonStyle())
-
+                    // Button {
+                    //     self.infoModal = nil
+                    // } label: {
+                    //     Text("Got it!")
+                    //         .font(.system(.title2, design: .rounded))
+                    //         .fontWeight(.bold)
+                    //         .foregroundColor(.white)
+                    //         .padding()
+                    //         .frame(maxWidth: .infinity)
+                    //         .background(Color(red: 0.106, green: 0.149, blue: 0.149))
+                    //         .cornerRadius(50)
+                    // }
+                    // .padding(.horizontal)
+                    // .pressAnimation()   
+                    // .buttonStyle(PlainButtonStyle())
+                    
+                    // Got it Button
+                    ZStack {
+                            RoundedRectangle(cornerRadius: 50)
+                                .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
+                                .frame(height: 60)
+                                .animation(nil)
+                            Text("Got it!")
+                                .font(.system(.title2, design: .rounded))
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        }
+                        .onTapGesture {
+                            self.infoModal = nil
+                        }
+                        .padding(.top, 5)
+                        .pressAnimation()
+                        .opacity(1)
             }
             .padding(.vertical)
             .background(
@@ -514,21 +531,39 @@ extension AppSettingsView {
 
                     
                     // Got it Button
-                    Button {
-                        self.infoModal = nil
-                    } label: {
-                        Text("Got it!")
-                            .font(.system(.title2, design: .rounded))
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color(red: 0.106, green: 0.149, blue: 0.149))
-                            .cornerRadius(50)
-                    }
-                    .padding(.horizontal)
-                    .pressAnimation()
-                    .buttonStyle(PlainButtonStyle())
+                    // Button {
+                    //     self.infoModal = nil
+                    // } label: {
+                    //     Text("Got it!")
+                    //         .font(.system(.title2, design: .rounded))
+                    //         .fontWeight(.bold)
+                    //         .foregroundColor(.white)
+                    //         .padding()
+                    //         .frame(maxWidth: .infinity)
+                    //         .background(Color(red: 0.106, green: 0.149, blue: 0.149))
+                    //         .cornerRadius(50)
+                    // }
+                    // .padding(.horizontal)
+                    // .pressAnimation()
+                    // .buttonStyle(PlainButtonStyle())
+                    
+                    // Got it Button
+                    ZStack {
+                            RoundedRectangle(cornerRadius: 50)
+                                .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
+                                .frame(height: 60)
+                                .animation(nil)
+                            Text("Got it!")
+                                .font(.system(.title2, design: .rounded))
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        }
+                        .onTapGesture {
+                            self.infoModal = nil
+                        }
+                        .padding(.top, 5)
+                        .pressAnimation()
+                        .opacity(1)
 
                     
             }
