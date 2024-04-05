@@ -35,6 +35,8 @@
 		B95D2F352BA4EB32003C7C17 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */; };
 		B95D2F392BA4EB58003C7C17 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F382BA4EB58003C7C17 /* VideoPlayerView.swift */; };
 		F31C49412BBE75C70075477D /* VoiceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C49402BBE75C70075477D /* VoiceSettingsView.swift */; };
+		F31C49432BBF85890075477D /* CustomTextPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C49422BBF85890075477D /* CustomTextPromptView.swift */; };
+		F31C49452BBF86950075477D /* VoiceTypeAndToneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C49442BBF86950075477D /* VoiceTypeAndToneView.swift */; };
 		F3B5AB182BACDB8A009CDBB5 /* HalfModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */; };
 		F3B5AB1A2BACE488009CDBB5 /* XMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */; };
 		F3B5AB1E2BAD062D009CDBB5 /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */; };
@@ -111,6 +113,8 @@
 		B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		B95D2F382BA4EB58003C7C17 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		F31C49402BBE75C70075477D /* VoiceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceSettingsView.swift; sourceTree = "<group>"; };
+		F31C49422BBF85890075477D /* CustomTextPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextPromptView.swift; sourceTree = "<group>"; };
+		F31C49442BBF86950075477D /* VoiceTypeAndToneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceTypeAndToneView.swift; sourceTree = "<group>"; };
 		F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalView.swift; sourceTree = "<group>"; };
 		F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMarkButton.swift; sourceTree = "<group>"; };
 		F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsView.swift; sourceTree = "<group>"; };
@@ -256,6 +260,8 @@
 				1849A5482BBDD6FF00A4BCF1 /* LockScreenWidgetGuideView.swift */,
 				F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */,
 				F31C49402BBE75C70075477D /* VoiceSettingsView.swift */,
+				F31C49422BBF85890075477D /* CustomTextPromptView.swift */,
+				F31C49442BBF86950075477D /* VoiceTypeAndToneView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -447,9 +453,11 @@
 				B95D2F332BA4EAF5003C7C17 /* CallManager.swift in Sources */,
 				B95D2F352BA4EB32003C7C17 /* CustomTextEditor.swift in Sources */,
 				F3B5AB252BAE91E3009CDBB5 /* CustomLinkView.swift in Sources */,
+				F31C49452BBF86950075477D /* VoiceTypeAndToneView.swift in Sources */,
 				B95D2F392BA4EB58003C7C17 /* VideoPlayerView.swift in Sources */,
 				1849A54D2BBDDF7100A4BCF1 /* LaunchScreenViewController.swift in Sources */,
 				F3B5AB182BACDB8A009CDBB5 /* HalfModalView.swift in Sources */,
+				F31C49432BBF85890075477D /* CustomTextPromptView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -629,7 +637,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 16;
-				DEVELOPMENT_TEAM = Y2V76WXBUQ;
+				DEVELOPMENT_TEAM = GZ2BM4VMQU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Her/Info.plist;
@@ -672,7 +680,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 16;
-				DEVELOPMENT_TEAM = Y2V76WXBUQ;
+				DEVELOPMENT_TEAM = GZ2BM4VMQU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Her/Info.plist;
@@ -789,7 +797,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y2V76WXBUQ;
+				DEVELOPMENT_TEAM = GZ2BM4VMQU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Her Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Her AI";
@@ -821,7 +829,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y2V76WXBUQ;
+				DEVELOPMENT_TEAM = GZ2BM4VMQU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Her Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Her AI";
