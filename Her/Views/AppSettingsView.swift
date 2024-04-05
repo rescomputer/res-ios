@@ -420,22 +420,26 @@ extension AppSettingsView {
                     // .buttonStyle(PlainButtonStyle())
                     
                     // Got it Button
-                    ZStack {
-                            RoundedRectangle(cornerRadius: 50)
-                                .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
-                                .frame(height: 60)
-                                .animation(nil)
-                            Text("Got it!")
-                                .font(.system(.title2, design: .rounded))
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                        }
-                        .onTapGesture {
-                            self.infoModal = nil
-                        }
-                        .padding(.top, 5)
-                        .pressAnimation()
-                        .opacity(1)
+                    VStack{
+                        ZStack {
+                                RoundedRectangle(cornerRadius: 50)
+                                    .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
+                                    .frame(height: 60)
+                                    .animation(nil)
+                                Text("Got it!")
+                                    .font(.system(.title2, design: .rounded))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            }
+                            .onTapGesture {
+                                self.infoModal = nil
+                            }
+                            .padding(.top, 5)
+                            .pressAnimation()
+                            .opacity(1)                        
+                    }
+                    .padding(.horizontal, 20)
+
             }
             .padding(.vertical)
             .background(
@@ -548,22 +552,25 @@ extension AppSettingsView {
                     // .buttonStyle(PlainButtonStyle())
                     
                     // Got it Button
-                    ZStack {
-                            RoundedRectangle(cornerRadius: 50)
-                                .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
-                                .frame(height: 60)
-                                .animation(nil)
-                            Text("Got it!")
-                                .font(.system(.title2, design: .rounded))
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                        }
-                        .onTapGesture {
-                            self.infoModal = nil
-                        }
-                        .padding(.top, 5)
-                        .pressAnimation()
-                        .opacity(1)
+                    VStack{
+                        ZStack {
+                                RoundedRectangle(cornerRadius: 50)
+                                    .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
+                                    .frame(height: 60)
+                                    .animation(nil)
+                                Text("Got it!")
+                                    .font(.system(.title2, design: .rounded))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            }
+                            .onTapGesture {
+                                self.infoModal = nil
+                            }
+                            .padding(.top, 5)
+                            .pressAnimation()
+                            .opacity(1)                        
+                    }
+                    .padding(.horizontal, 20)
 
                     
             }
