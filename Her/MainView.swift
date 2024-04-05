@@ -218,7 +218,7 @@ extension MainView {
 
         var value: CGFloat {
             switch self {
-            case .voiceSettingsModal: return 0.16
+            case .voiceSettingsModal: return 0.06
             }
         }
     }
@@ -239,6 +239,10 @@ extension MainView {
         }, modalHeightMultiplier: MainView.ModalHeightMultiplier.voiceSettingsModal.value
         ) {
             VoiceSettingsView(activeModal: $activeModal, selectedOption: $selectedOption, callManager: callManager, keyboardResponder: keyboardResponder)
+                .background(
+                    RoundedRectangle(cornerRadius: 40)
+                        .fill(Color.white)
+                )
         }
     }
 }

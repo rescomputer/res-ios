@@ -138,8 +138,6 @@ struct AppSettingsView: View {
     }
 }
 
-
-
 extension AppSettingsView {
 
      enum GuideType: Identifiable {
@@ -164,8 +162,8 @@ extension AppSettingsView {
 
         var value: CGFloat {
             switch self {
-            case .aboutHerModal: return 0.26
-            case .recordingHerModal: return 0.17
+            case .aboutHerModal: return -0.02
+            case .recordingHerModal: return -0.02
             }
         }
     }
@@ -217,8 +215,7 @@ extension AppSettingsView {
                             .padding(.vertical, 10)
 
                         }
-                        .pressAnimation()
-                                                
+                        .pressAnimation()                          
                     }
                     .padding(.bottom, 20)
     }
@@ -237,6 +234,7 @@ extension AppSettingsView {
             }
         }, modalHeightMultiplier: AppSettingsView.ModalHeightMultiplier.recordingHerModal.value
         ) {
+
             VStack {
                  ZStack {
                     HStack {
@@ -423,8 +421,10 @@ extension AppSettingsView {
 
             }
             .padding(.vertical)
-
-      
+            .background(
+                    RoundedRectangle(cornerRadius: 40)
+                        .fill(Color.white)
+            )
         }
     }
 
@@ -533,7 +533,10 @@ extension AppSettingsView {
                     
             }
             .padding(.vertical)
-
+            .background(
+                    RoundedRectangle(cornerRadius: 40)
+                        .fill(Color.white)
+            )
         }
     }
     

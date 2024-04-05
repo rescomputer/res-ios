@@ -61,7 +61,7 @@ struct VoiceSettingsView: View {
             .overlay(
                 XMarkButton {
                         if currentStep == 2 {
-                            withAnimation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0)) {
+                            withAnimation(.spring(response: 0.25, dampingFraction: 0.7, blendDuration: 0)) {
                                 currentStep = 1
                             }
                         } else {
@@ -76,7 +76,7 @@ struct VoiceSettingsView: View {
 
             if currentStep == 1 {
                 CustomTextPromptView(selectedOption: $selectedOption, callManager: callManager, keyboardResponder: keyboardResponder) {
-                    withAnimation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0)) {
+                    withAnimation(.spring(response: 0.25, dampingFraction: 0.7, blendDuration: 0)) {
                         currentStep = 2
                     }
                 }
