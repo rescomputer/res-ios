@@ -53,24 +53,6 @@ struct CustomTextPromptView: View {
                                 }
                     }
                 }
-                // Continue Button
-                // Button {
-                //         continueAction()
-                //     } label: {
-                //         Text("Continue")
-                //             .font(.system(.title2, design: .rounded))
-                //             .fontWeight(.bold)
-                //             .foregroundColor(.white)
-                //             .padding()
-                //             .frame(maxWidth: .infinity)
-                //             .background(Color(red: 0.106, green: 0.149, blue: 0.149))
-                //             .cornerRadius(50)
-                //     }
-                //     .pressAnimation()
-                //     .padding(.top, 5)
-                //     .buttonStyle(.plain)
-                //     .opacity(1)
-                //     .animation(nil)
 
                 // Custom Continue Button
                 ZStack {

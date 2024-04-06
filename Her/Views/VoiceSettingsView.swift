@@ -81,11 +81,19 @@ struct VoiceSettingsView: View {
                     }
                 }
             } else if currentStep == 2 {
-                VoiceTypeAndToneView(activeModal: $activeModal, selectedOption: $selectedOption, callManager: callManager, keyboardResponder: keyboardResponder) {
-                    withAnimation(.easeOut(duration: 0.15)) {
-                        activeModal = nil
-                    }
-                }
+                VoiceTypeAndToneView(
+                    activeModal: $activeModal, 
+                    selectedOption: $selectedOption, 
+                    callManager: callManager, 
+                    keyboardResponder: keyboardResponder, 
+                    showSaveButton: true,
+                    saveSettingsAction: {
+                        withAnimation(.easeOut(duration: 0.15)) {
+                            activeModal = nil
+                        }
+                    }, 
+                    backgroundContext: .white
+                )
             }
         }
         .padding(.vertical)  

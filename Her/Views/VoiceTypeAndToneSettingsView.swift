@@ -88,11 +88,19 @@ struct VoiceTypeAndToneSettingsView: View {
                     .frame(maxWidth: .infinity, maxHeight: 120, alignment: .center)
 
                     VStack {
-                        VoiceTypeAndToneView(activeModal: $activeModal, selectedOption: $selectedOption, callManager: callManager, keyboardResponder: keyboardResponder){
-                            withAnimation(.easeOut(duration: 0.15)) {
-                                self.dismissAction()                        
-                            }
-                        }
+                        VoiceTypeAndToneView(
+                            activeModal: $activeModal, 
+                            selectedOption: $selectedOption, 
+                            callManager: callManager, 
+                            keyboardResponder: keyboardResponder, 
+                            showSaveButton: false,
+                            saveSettingsAction: {
+                                withAnimation(.easeOut(duration: 0.15)) {
+                                    self.dismissAction()                        
+                                }
+                            }, 
+                            backgroundContext: .black
+                        )
                     }             
    
 

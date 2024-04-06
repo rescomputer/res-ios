@@ -81,9 +81,10 @@ struct AppSettingsView: View {
 
                     micPermissions()
 
+                    voiceTypeAndToneSettings()
+
                     widgetSettings()
 
-                    voiceTypeAndToneSettings()
 
                     }
                     Spacer()
@@ -192,16 +193,18 @@ extension AppSettingsView {
      private func voiceTypeAndToneSettings() -> some View {
         VStack {
                 HStack {
-                    Text("Voice Settings")
+                    Text("Voice")
                         .bold()
                         .font(.system(size: 16))
                         .foregroundColor(Color.white.opacity(0.7))
                     Spacer()
                 }
-                CustomLinkView(iconName: "waveform.and.person.filled", title: "Voice Type & Tone", action: {}, navigateTo: {
+                CustomLinkView(iconName: "face.dashed.fill", title: "Type & Speed", action: {}, navigateTo: {
                     self.selectedSetting = .voiceTypeAndTone
                 }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
         }
+        .padding(.bottom, 20)
+
     }   
 
     private func widgetSettings() -> some View {
