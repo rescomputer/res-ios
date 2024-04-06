@@ -27,34 +27,87 @@ struct VoiceTypeAndToneView: View {
 
 
             VStack {
-                Menu {
-                    Picker("Voice", selection: $callManager.voice) {
-                        Text("🇺🇸 Alloy · Gentle Man").tag("alloy")
-                        Text("🇺🇸 Echo · Deep Man").tag("echo")
-                        Text("🇬🇧 Fable · Normal Man").tag("fable")
-                        Text("🇺🇸 Onyx · Deeper Man").tag("onyx")
-                        Text("🇺🇸 Nova · Gentle Woman").tag("nova")
-                        Text("🇺🇸 Shimmer · Deep Woman").tag("shimmer")
+                //audio picker
+                HStack {
+                    Menu {
+                        Picker("Voice", selection: $callManager.voice) {
+                            Text("🇺🇸 Alloy · Gentle Man").tag("alloy")
+                            Text("🇺🇸 Echo · Deep Man").tag("echo")
+                            Text("🇬🇧 Fable · Normal Man").tag("fable")
+                            Text("🇺🇸 Onyx · Deeper Man").tag("onyx")
+                            Text("🇺🇸 Nova · Gentle Woman").tag("nova")
+                            Text("🇺🇸 Shimmer · Deep Woman").tag("shimmer")
+                        }
+                        .onChange(of: callManager.voice) { oldValue, newVoice in
+                            UserDefaults.standard.set(newVoice, forKey: "voice")
+                        }
+                    } label: {
+                        HStack {
+                            Text(callManager.voiceDisplayName)
+                                .font(.system(size: 14))
+                                .foregroundColor(.black.opacity(1))
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 8)
+                        .background(Color.black.opacity(0.05))
+                        .clipShape(RoundedRectangle(cornerRadius: 50))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 50)
+                                .stroke(Color.black.opacity(0.05), lineWidth: 1)
+                        )
                     }
-                    .onChange(of: callManager.voice) {oldValue , newVoice in
-                        UserDefaults.standard.set(newVoice, forKey: "voice")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .layoutPriority(3)
+
+                    Button(action: {
+                        callManager.playVoicePreview()
+                    }) {
+                        Image(systemName: "waveform")
+                            .font(.system(size: 22))
+                            .foregroundColor(.black.opacity(0.4))
+                            .padding(4)
                     }
-                } label: {
-                    HStack {
-                        Text(callManager.voiceDisplayName)
-                            .font(.system(size: 14))
-                            .foregroundColor(.black.opacity(1))
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 8)
                     .background(Color.black.opacity(0.05))
-                    .clipShape(RoundedRectangle(cornerRadius: 50))
+                    .clipShape(Circle())
                     .overlay(
                         RoundedRectangle(cornerRadius: 50)
                             .stroke(Color.black.opacity(0.05), lineWidth: 1)
                     )
+                    .layoutPriority(1)
                 }
+                // Audio Visualizer
+                AudioVisualizerView()
+                    .frame(height: 80)
+                    .padding(.vertical, 10)
+                // Menu {
+                //     Picker("Voice", selection: $callManager.voice) {
+                //         Text("🇺🇸 Alloy · Gentle Man").tag("alloy")
+                //         Text("🇺🇸 Echo · Deep Man").tag("echo")
+                //         Text("🇬🇧 Fable · Normal Man").tag("fable")
+                //         Text("🇺🇸 Onyx · Deeper Man").tag("onyx")
+                //         Text("🇺🇸 Nova · Gentle Woman").tag("nova")
+                //         Text("🇺🇸 Shimmer · Deep Woman").tag("shimmer")
+                //     }
+                //     .onChange(of: callManager.voice) {oldValue , newVoice in
+                //         UserDefaults.standard.set(newVoice, forKey: "voice")
+                //     }
+                // } label: {
+                //     HStack {
+                //         Text(callManager.voiceDisplayName)
+                //             .font(.system(size: 14))
+                //             .foregroundColor(.black.opacity(1))
+                //     }
+                //     .frame(maxWidth: .infinity)
+                //     .padding(.horizontal, 24)
+                //     .padding(.vertical, 8)
+                //     .background(Color.black.opacity(0.05))
+                //     .clipShape(RoundedRectangle(cornerRadius: 50))
+                //     .overlay(
+                //         RoundedRectangle(cornerRadius: 50)
+                //             .stroke(Color.black.opacity(0.05), lineWidth: 1)
+                //     )
+                // }
 
                 VStack(alignment: .leading) {
                     Text("Voice Speed")

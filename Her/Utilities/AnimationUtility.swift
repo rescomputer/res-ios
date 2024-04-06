@@ -120,7 +120,7 @@ struct SlideRight: ViewModifier {
             .offset(x: slideRightAnimation ? 0 : -20)
             .opacity(isShowing ? 1 : 0)
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                     withAnimation(.easeOut(duration: 0.1)) {
                         self.slideRightAnimation = true
                         isShowing = true
