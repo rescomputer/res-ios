@@ -58,28 +58,28 @@ struct VoiceTypeAndToneView: View {
                         )
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .layoutPriority(3)
+                    //.layoutPriority(3)
 
-                    Button(action: {
-                        callManager.playVoicePreview()
-                    }) {
-                        Image(systemName: "waveform")
-                            .font(.system(size: 22))
-                            .foregroundColor(.black.opacity(0.4))
-                            .padding(4)
-                    }
-                    .background(Color.black.opacity(0.05))
-                    .clipShape(Circle())
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 50)
-                            .stroke(Color.black.opacity(0.05), lineWidth: 1)
-                    )
-                    .layoutPriority(1)
+                    // Button(action: {
+                    //     callManager.playVoicePreview()
+                    // }) {
+                    //     Image(systemName: "waveform")
+                    //         .font(.system(size: 22))
+                    //         .foregroundColor(.black.opacity(0.4))
+                    //         .padding(4)
+                    // }
+                    // .background(Color.black.opacity(0.05))
+                    // .clipShape(Circle())
+                    // .overlay(
+                    //     RoundedRectangle(cornerRadius: 50)
+                    //         .stroke(Color.black.opacity(0.05), lineWidth: 1)
+                    // )
+                    // .layoutPriority(1)
                 }
                 // Audio Visualizer
-                AudioVisualizerView()
-                    .frame(height: 80)
-                    .padding(.vertical, 10)
+                // AudioVisualizerView()
+                //     .frame(height: 80)
+                //     .padding(.vertical, 10)
                 // Menu {
                 //     Picker("Voice", selection: $callManager.voice) {
                 //         Text("🇺🇸 Alloy · Gentle Man").tag("alloy")

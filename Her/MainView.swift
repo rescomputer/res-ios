@@ -133,7 +133,13 @@ struct MainView: View {
                 }
             }
             if isAppSettingsViewShowing {
-                AppSettingsView(isPresented: $isAppSettingsViewShowing)
+                AppSettingsView(
+                    isPresented: $isAppSettingsViewShowing,
+                    activeModal: $activeModal, 
+                    selectedOption: $selectedOption, 
+                    callManager: callManager, 
+                    keyboardResponder: keyboardResponder
+                )
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .edgesIgnoringSafeArea(.all)
                     .fadeInEffect()

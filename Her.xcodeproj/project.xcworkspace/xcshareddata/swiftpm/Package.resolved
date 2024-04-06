@@ -1,0 +1,24 @@
+{
+  "originHash" : "9d9591f16061c4b2c14ba7eebb9494f540296aaea3ec0841d1f8feb01ed8aa5c",
+  "pins" : [
+    {
+      "identity" : "daily-client-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/daily-co/daily-client-ios",
+      "state" : {
+        "revision" : "6255856a21e43ce3e9f10087c7bfc86e0c0fc213",
+        "version" : "0.18.0"
+      }
+    },
+    {
+      "identity" : "ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/VapiAI/ios",
+      "state" : {
+        "branch" : "main",
+        "revision" : "d958eaa950ab67eb22bc308c2b0620329207b427"
+      }
+    }
+  ],
+  "version" : 3
+}

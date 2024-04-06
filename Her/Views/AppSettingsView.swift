@@ -15,7 +15,12 @@ struct AppSettingsView: View {
     @State private var isMicrophoneEnabled = false
     @State private var showingSettingsAlert = false
     @State private var infoModal: InfoModal?
-    @State private var selectedGuide: GuideType?
+    @State private var selectedSetting: SettingType?
+
+    @Binding var activeModal: MainView.ActiveModal?
+    @Binding var selectedOption: Option?
+    @ObservedObject var callManager: CallManager
+    @ObservedObject var keyboardResponder: KeyboardResponder  
     
     var body: some View {
         ZStack {
@@ -78,6 +83,8 @@ struct AppSettingsView: View {
 
                     widgetSettings()
 
+                    voiceTypeAndToneSettings()
+
                     }
                     Spacer()
                     Spacer()
@@ -116,22 +123,35 @@ struct AppSettingsView: View {
                     showRecordingHerModal()
                 } 
             }
-            if let selectedGuide = selectedGuide {
-                switch selectedGuide {
+            if let selectedSetting = selectedSetting {
+                switch selectedSetting {
                 case .homeScreen:
                     HomeScreenWidgetGuideView(dismissAction: {
-                            self.selectedGuide = nil
+                            self.selectedSetting = nil
                         })
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .edgesIgnoringSafeArea(.all)
                         .transition(.opacity)
                 case .lockScreen:
                     LockScreenWidgetGuideView(dismissAction: {
-                            self.selectedGuide = nil
+                            self.selectedSetting = nil
                         })
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .edgesIgnoringSafeArea(.all)
                         .transition(.opacity)
+                case .voiceTypeAndTone:
+                    VoiceTypeAndToneSettingsView(
+                        dismissAction: {
+                            self.selectedSetting = nil
+                        },
+                        activeModal: $activeModal,
+                        selectedOption: $selectedOption,
+                        callManager: callManager,
+                        keyboardResponder: keyboardResponder
+                    )
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .edgesIgnoringSafeArea(.all)
+                    .transition(.opacity)
                 }
             }
         }
@@ -140,13 +160,14 @@ struct AppSettingsView: View {
 
 extension AppSettingsView {
 
-     enum GuideType: Identifiable {
-         case homeScreen, lockScreen
+     enum SettingType: Identifiable {
+         case homeScreen, lockScreen, voiceTypeAndTone
 
          var id: Int {
              switch self {
              case .homeScreen: return 0
              case .lockScreen: return 1
+             case .voiceTypeAndTone: return 2
              }
          }
      }
@@ -168,6 +189,21 @@ extension AppSettingsView {
         }
     }
 
+     private func voiceTypeAndToneSettings() -> some View {
+        VStack {
+                HStack {
+                    Text("Voice Settings")
+                        .bold()
+                        .font(.system(size: 16))
+                        .foregroundColor(Color.white.opacity(0.7))
+                    Spacer()
+                }
+                CustomLinkView(iconName: "waveform.and.person.filled", title: "Voice Type & Tone", action: {}, navigateTo: {
+                    self.selectedSetting = .voiceTypeAndTone
+                }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
+        }
+    }   
+
     private func widgetSettings() -> some View {
         VStack {
                 HStack {
@@ -178,12 +214,14 @@ extension AppSettingsView {
                     Spacer()
                 }
                 CustomLinkView(iconName: "rectangle.fill.on.rectangle.angled.fill", title: "Setup Home Screen Widgets", action: {}, navigateTo: {
-                    self.selectedGuide = .homeScreen
+                    self.selectedSetting = .homeScreen
                 }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
                 CustomLinkView(iconName: "lock.rectangle.on.rectangle.fill", title: "Setup Lock Screen Widgets", action: {}, navigateTo: {
-                    self.selectedGuide = .lockScreen
+                    self.selectedSetting = .lockScreen
                 }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
         }
+        .padding(.bottom, 20)
+
     }
 
     private func micPermissions() -> some View {
