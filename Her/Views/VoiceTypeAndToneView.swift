@@ -136,6 +136,6 @@ struct VoiceTypeAndToneView: View {
             }         
 
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, backgroundContext == .white ? 20 : 0)
     }
 }

@@ -13,6 +13,8 @@ struct VoiceTypeAndToneSettingsView: View {
     @Binding var selectedOption: Option?
     @ObservedObject var callManager: CallManager
     @ObservedObject var keyboardResponder: KeyboardResponder
+    @State private var isModalStepTwoEnabled = false
+
 
     var body: some View {
 
@@ -88,6 +90,8 @@ struct VoiceTypeAndToneSettingsView: View {
                     .frame(maxWidth: .infinity, maxHeight: 120, alignment: .center)
 
                     VStack {
+                        modalStepTwoToggle()
+
                         VoiceTypeAndToneView(
                             activeModal: $activeModal, 
                             selectedOption: $selectedOption, 
@@ -113,5 +117,42 @@ struct VoiceTypeAndToneSettingsView: View {
                 .slideLeft()
 
         }   
+    }
+}
+
+extension VoiceTypeAndToneSettingsView {
+
+    private func modalStepTwoToggle() -> some View {
+                    VStack{
+                        HStack {
+                            Text("")
+                                .bold()
+                                .font(.system(size: 16))
+                                .foregroundColor(Color.white.opacity(0.7))
+                            Spacer()
+                        }
+                        CustomToggle(title: "Microphone", systemImageName: "eye.slash.fill", isOn: $isModalStepTwoEnabled)
+                            // .onChange(of: isMicrophoneEnabled) { oldValue ,newValue in
+                            //     handleMicrophonePermission(isEnabled: newValue)
+                            // }
+                        // Button(action: {
+                        //     //self.infoModal = .recordingHerModal
+                        //     let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                        //     impactMed.impactOccurred()
+                        // }) {
+                        //     HStack {
+                        //         Text("How does audio recording work?")
+                        //             .font(.system(size: 14))
+                        //             .foregroundColor(Color.white.opacity(0.3))
+                        //         Image(systemName: "info.circle")
+                        //             .font(.system(size: 14))
+                        //             .foregroundColor(.white.opacity(0.3))
+                        //     }
+                        //     .padding(.vertical, 10)
+
+                        // }
+                        // .pressAnimation()                          
+                    }
+                    .padding(.bottom, 20)
     }
 }
