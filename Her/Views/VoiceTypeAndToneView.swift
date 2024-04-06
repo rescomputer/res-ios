@@ -66,21 +66,6 @@ struct VoiceTypeAndToneView: View {
                     HStack {
                         Image(systemName: "tortoise.fill")
                             .foregroundColor(.black.opacity(0.3))
-
-                       // ZStack{
-                            // GeometryReader { geometry in
-                            //     Path { path in
-                            //         let steps: Int = Int((1.5 - 0.3) / 0.1)
-                            //         let spacing = geometry.size.width / CGFloat(steps)
-                            //         for i in 0...steps {
-                            //             let x = CGFloat(i) * spacing
-                            //             path.move(to: CGPoint(x: x, y: 0))
-                            //             path.addLine(to: CGPoint(x: x, y: 20))
-                            //         }
-                            //     }
-                            //     .stroke(Color(red: 0.894, green: 0.894, blue: 0.902), lineWidth: 2)
-                            // }
-                            // .frame(height: 20)
                             
                             Slider(value: $callManager.speed, in: 0.3...1.5, step: 0.1) { changing in
                                 if !changing {
@@ -90,8 +75,6 @@ struct VoiceTypeAndToneView: View {
                                 }
                             }
                             .accentColor(Color(red: 0.106, green: 0.149, blue: 0.149))                            
-                       // }
-
 
                         Image(systemName: "hare.fill")
                             .foregroundColor(.black.opacity(0.3))
@@ -100,33 +83,6 @@ struct VoiceTypeAndToneView: View {
                     .padding(.vertical, 8)
                 }
                 .frame(maxWidth: .infinity)
-
-                // Menu {
-                //     Picker("Speed", selection: $callManager.speed) {
-                //         Text("🐢 Slow").tag(0.3)
-                //         Text("💬 Normal").tag(1.0)
-                //         Text("🐇 Fast").tag(1.3)
-                //         Text("⚡️ Superfast").tag(1.5)
-                //     }
-                //     .onChange(of: callManager.speed) {oldValue , newSpeed in
-                //         UserDefaults.standard.set(newSpeed, forKey: "speed")
-                //     }
-                // } label: {
-                //     HStack {
-                //         Text(callManager.speedDisplayName)
-                //             .font(.system(size: 14))
-                //             .foregroundColor(.black.opacity(1))
-                //     }
-                //     .frame(maxWidth: .infinity)
-                //     .padding(.horizontal, 24)
-                //     .padding(.vertical, 8)
-                //     .background(Color.black.opacity(0.05))
-                //     .clipShape(RoundedRectangle(cornerRadius: 50))
-                //     .overlay(
-                //         RoundedRectangle(cornerRadius: 50)
-                //             .stroke(Color.black.opacity(0.05), lineWidth: 1)
-                //     )
-                // }
             }
         // Save Button
         // Button {

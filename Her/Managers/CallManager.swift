@@ -71,7 +71,7 @@ class CallManager: ObservableObject {
         default: return "Voice Speed"
         }
     }
-    
+        
     func setupVapi() {
         vapi.eventPublisher
             .sink { [weak self] event in
