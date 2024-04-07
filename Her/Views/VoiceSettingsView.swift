@@ -10,6 +10,7 @@ import SwiftUI
 struct VoiceSettingsView: View {
     @Binding var activeModal: MainView.ActiveModal?
     @Binding var selectedOption: Option?
+    @Binding var isModalStepTwoEnabled: Bool
     @ObservedObject var callManager: CallManager
     @ObservedObject var keyboardResponder: KeyboardResponder
     @State private var currentStep: Int = 1
@@ -75,7 +76,12 @@ struct VoiceSettingsView: View {
             )
 
             if currentStep == 1 {
-                CustomTextPromptView(selectedOption: $selectedOption, callManager: callManager, keyboardResponder: keyboardResponder) {
+                CustomTextPromptView(
+                    activeModal: $activeModal, 
+                    selectedOption: $selectedOption, 
+                    isModalStepTwoEnabled: $isModalStepTwoEnabled,
+                    callManager: callManager, 
+                    keyboardResponder: keyboardResponder) {
                     withAnimation(.spring(response: 0.25, dampingFraction: 0.7, blendDuration: 0)) {
                         currentStep = 2
                     }

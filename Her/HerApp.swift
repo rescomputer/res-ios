@@ -10,10 +10,11 @@ import SwiftUI
 @main
 struct HerApp: App {
     @State private var isAppSettingsViewShowing = false
+    @State private var isModalStepTwoEnabled = false
     
     var body: some Scene {
         WindowGroup {
-            MainView(isAppSettingsViewShowing: $isAppSettingsViewShowing)
+            MainView(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled)
         }
     }
 }

@@ -11,10 +11,9 @@ struct VoiceTypeAndToneSettingsView: View {
     var dismissAction: () -> Void
     @Binding var activeModal: MainView.ActiveModal?
     @Binding var selectedOption: Option?
+    @Binding var isModalStepTwoEnabled: Bool
     @ObservedObject var callManager: CallManager
     @ObservedObject var keyboardResponder: KeyboardResponder
-    @State private var isModalStepTwoEnabled = false
-
 
     var body: some View {
 
@@ -131,10 +130,11 @@ extension VoiceTypeAndToneSettingsView {
                                 .foregroundColor(Color.white.opacity(0.7))
                             Spacer()
                         }
-                        CustomToggle(title: "Microphone", systemImageName: "eye.slash.fill", isOn: $isModalStepTwoEnabled)
-                            // .onChange(of: isMicrophoneEnabled) { oldValue ,newValue in
-                            //     handleMicrophonePermission(isEnabled: newValue)
-                            // }
+                        CustomToggle(
+                            title: "Modal Step Two", 
+                            systemImageName: "eye.slash.fill", 
+                            isOn: $isModalStepTwoEnabled
+                            )
                         // Button(action: {
                         //     //self.infoModal = .recordingHerModal
                         //     let impactMed = UIImpactFeedbackGenerator(style: .soft)

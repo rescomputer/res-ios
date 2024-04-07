@@ -9,16 +9,15 @@ import SwiftUI
 import UIKit
 import ActivityKit
 
-struct MainView: View {
-    
+struct MainView: View { 
     @StateObject private var callManager = CallManager()
     @StateObject private var keyboardResponder = KeyboardResponder()
-
     @FocusState private var isTextFieldFocused: Bool
     @State private var drawingHeight = true
     @State private var selectedOption: Option?
     @State private var activeModal: ActiveModal?
     @Binding var isAppSettingsViewShowing: Bool
+    @Binding var isModalStepTwoEnabled: Bool
 
     var body: some View {
         VStack(spacing: 25) {
@@ -137,6 +136,7 @@ struct MainView: View {
                     isPresented: $isAppSettingsViewShowing,
                     activeModal: $activeModal, 
                     selectedOption: $selectedOption, 
+                    isModalStepTwoEnabled: $isModalStepTwoEnabled,
                     callManager: callManager, 
                     keyboardResponder: keyboardResponder
                 )
@@ -184,7 +184,12 @@ extension MainView {
             }
         }, modalHeightMultiplier: MainView.ModalHeightMultiplier.voiceSettingsModal.value
         ) {
-            VoiceSettingsView(activeModal: $activeModal, selectedOption: $selectedOption, callManager: callManager, keyboardResponder: keyboardResponder)
+            VoiceSettingsView(
+                activeModal: $activeModal, 
+                selectedOption: $selectedOption,
+                isModalStepTwoEnabled: $isModalStepTwoEnabled,
+                callManager: callManager, 
+                keyboardResponder: keyboardResponder)
                 .background(
                     RoundedRectangle(cornerRadius: 40)
                         .fill(Color.white)

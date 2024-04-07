@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct CustomTextPromptView: View {
+    @Binding var activeModal: MainView.ActiveModal?
     @Binding var selectedOption: Option?
+    @Binding var isModalStepTwoEnabled: Bool
     @ObservedObject var callManager: CallManager
     @ObservedObject var keyboardResponder: KeyboardResponder
     @State private var currentStep: Int = 1
@@ -60,13 +62,24 @@ struct CustomTextPromptView: View {
                         .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
                         .frame(height: 60)
                         .animation(nil)
-                    Text("Continue")
+                    if isModalStepTwoEnabled {
+                       Text("Save Settings")
                         .font(.system(.title2, design: .rounded))
                         .fontWeight(.bold)
                         .foregroundColor(.white)
+                    } else {
+                       Text("Continue")
+                        .font(.system(.title2, design: .rounded))
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                    } 
                 }
                 .onTapGesture {
-                    continueAction()
+                    if isModalStepTwoEnabled {
+                        self.activeModal = nil
+                    } else {
+                        continueAction()
+                    }                
                 }
                 .padding(.top, 5)
                 .pressAnimation()
