@@ -76,15 +76,6 @@ struct VoiceTypeAndToneSettingsView: View {
                             .aspectRatio(contentMode: .fit)
                             .cornerRadius(15)
                             .padding(.bottom, 5)
-                        
-                        // VStack {
-                        //     Text("Add a widget to your lock screen to access Her quickly on the go.")
-                        //         .bold()
-                        //         .font(.system(size: 18, design: .rounded))
-                        //         .foregroundColor(Color.white.opacity(0.7))
-                        //         .multilineTextAlignment(.center)
-                        //         .frame(maxWidth: .infinity)
-                        // }
                     }
                     .frame(maxWidth: .infinity, maxHeight: 120, alignment: .center)
 
@@ -132,9 +123,11 @@ extension VoiceTypeAndToneSettingsView {
                         }
                         CustomToggle(
                             title: "Modal Step Two", 
-                            systemImageName: "eye.slash.fill", 
+                            systemImageName: isModalStepTwoEnabled ? "eye.slash.fill" : "eye.fill", 
                             isOn: $isModalStepTwoEnabled
-                            )
+                        )
+                        .contentTransition(.symbolEffect(.replace.offUp.byLayer))
+                            
                         // Button(action: {
                         //     //self.infoModal = .recordingHerModal
                         //     let impactMed = UIImpactFeedbackGenerator(style: .soft)
