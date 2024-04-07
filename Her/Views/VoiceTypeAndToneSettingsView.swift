@@ -121,8 +121,8 @@ extension VoiceTypeAndToneSettingsView {
                             Spacer()
                         }
                         CustomToggle(
-                            title: "Modal Step Two", 
-                            systemImageName: isModalStepTwoEnabled ? "eye.slash.fill" : "eye.fill", 
+                            title: "Modal: Step Two",
+                            systemImageName: isModalStepTwoEnabled ? "eye.slash.fill" : "eye.fill",
                             isOn: $isModalStepTwoEnabled
                         )
                         .contentTransition(.symbolEffect(.replace.offUp.byLayer))

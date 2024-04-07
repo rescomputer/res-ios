@@ -237,7 +237,12 @@ extension AppSettingsView {
                                 .foregroundColor(Color.white.opacity(0.7))
                             Spacer()
                         }
-                        CustomToggle(title: "Microphone", systemImageName: "mic.fill", isOn: $isMicrophoneEnabled)
+                        CustomToggle(
+                            title: "Microphone", 
+                            systemImageName: isMicrophoneEnabled ? "mic.fill" : "mic.slash.fill",
+                            isOn: $isMicrophoneEnabled
+                            )
+                            .contentTransition(.symbolEffect(.replace.offUp.byLayer))
                             .onChange(of: isMicrophoneEnabled) { oldValue ,newValue in
                                 handleMicrophonePermission(isEnabled: newValue)
                             }
