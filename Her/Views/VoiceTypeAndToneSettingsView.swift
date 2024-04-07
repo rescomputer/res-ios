@@ -69,15 +69,14 @@ struct VoiceTypeAndToneSettingsView: View {
                 }
                 .padding(.bottom, 20)
 
-                    //TODO add images or video of what the final widgets look like
-                    ZStack {
-                        Image("lockscreen-widget-topper")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(15)
-                            .padding(.bottom, 5)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: 120, alignment: .center)
+                    // ZStack {
+                    //     Image("lockscreen-widget-topper")
+                    //         .resizable()
+                    //         .aspectRatio(contentMode: .fit)
+                    //         .cornerRadius(15)
+                    //         .padding(.bottom, 5)
+                    // }
+                    // .frame(maxWidth: .infinity, maxHeight: 120, alignment: .center)
 
                     VStack {
                         modalStepTwoToggle()
