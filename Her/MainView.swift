@@ -52,11 +52,18 @@ struct MainView: View {
             }
             Spacer()
 
-            // Start Button
-            Button {
-                Task {  await callManager.handleCallAction() }
-            } label: {
-                Text(callManager.buttonText)
+                // Start Button
+                ZStack {
+                        if callManager.callState == .loading {
+                            HStack(spacing: 10) {
+                                Loader()
+                                    .frame(width: 20, height: 20)
+                                Text(callManager.buttonText)
+                            }
+                        } else {
+                            Text(callManager.buttonText)
+                        }
+                    }
                     .font(.system(.title2, design: .rounded))
                     .fontWeight(.bold)
                     .foregroundColor(.white)
@@ -68,9 +75,32 @@ struct MainView: View {
                         RoundedRectangle(cornerRadius: 50)
                             .stroke(Color.black.opacity(1), lineWidth: 1)
                     )
-            }
-            .pressAnimation()
-            .buttonStyle(PlainButtonStyle())
+                    .onTapGesture {
+                        Task {  await callManager.handleCallAction() }
+                    }
+                    .padding(.top, 5)
+                    .pressAnimation()
+                    .opacity(1)                
+            
+            //old button
+            // Button {
+            //     Task {  await callManager.handleCallAction() }
+            // } label: {
+            //     Text(callManager.buttonText)
+            //         .font(.system(.title2, design: .rounded))
+            //         .fontWeight(.bold)
+            //         .foregroundColor(.white)
+            //         .padding()
+            //         .frame(maxWidth: .infinity)
+            //         .background(callManager.buttonColor)
+            //         .cornerRadius(50)
+            //         .overlay(
+            //             RoundedRectangle(cornerRadius: 50)
+            //                 .stroke(Color.black.opacity(1), lineWidth: 1)
+            //         )
+            // }
+            // .pressAnimation()
+            // .buttonStyle(PlainButtonStyle())
 
             
             .disabled(callManager.callState == .loading)

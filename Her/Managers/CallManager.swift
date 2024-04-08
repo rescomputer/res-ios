@@ -230,7 +230,7 @@ extension CallManager {
     }
     
     var buttonText: String {
-        callState == .loading ? "Loading..." : (callState == .ended ? "Start Conversation" : "End Conversation")
+        callState == .loading ? "Connecting" : (callState == .ended ? "Start Conversation" : "End Conversation")
     }
     
     var buttonColor: Color {

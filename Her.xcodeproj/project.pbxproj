@@ -39,6 +39,7 @@
 		F31C49452BBF86950075477D /* VoiceTypeAndToneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C49442BBF86950075477D /* VoiceTypeAndToneView.swift */; };
 		F31C49472BC0DDC60075477D /* AudioVisualizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C49462BC0DDC60075477D /* AudioVisualizerView.swift */; };
 		F31C49492BC111180075477D /* VoiceTypeAndToneSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C49482BC111180075477D /* VoiceTypeAndToneSettingsView.swift */; };
+		F31C494B2BC37C080075477D /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C494A2BC37C080075477D /* Loader.swift */; };
 		F3B5AB182BACDB8A009CDBB5 /* HalfModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */; };
 		F3B5AB1A2BACE488009CDBB5 /* XMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */; };
 		F3B5AB1E2BAD062D009CDBB5 /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */; };
@@ -119,6 +120,7 @@
 		F31C49442BBF86950075477D /* VoiceTypeAndToneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceTypeAndToneView.swift; sourceTree = "<group>"; };
 		F31C49462BC0DDC60075477D /* AudioVisualizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioVisualizerView.swift; sourceTree = "<group>"; };
 		F31C49482BC111180075477D /* VoiceTypeAndToneSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceTypeAndToneSettingsView.swift; sourceTree = "<group>"; };
+		F31C494A2BC37C080075477D /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalView.swift; sourceTree = "<group>"; };
 		F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMarkButton.swift; sourceTree = "<group>"; };
 		F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsView.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */,
 				F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */,
 				F3B5AB242BAE91E3009CDBB5 /* CustomLinkView.swift */,
+				F31C494A2BC37C080075477D /* Loader.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				1849A5472BBDD68A00A4BCF1 /* UIScreen+Extensions.swift in Sources */,
 				187277062B9B85A20079C460 /* VAPIExampleView.swift in Sources */,
 				18D289E52B9713FE008742FB /* MainView.swift in Sources */,
+				F31C494B2BC37C080075477D /* Loader.swift in Sources */,
 				F31C49412BBE75C70075477D /* VoiceSettingsView.swift in Sources */,
 				18D289E32B9713FE008742FB /* HerApp.swift in Sources */,
 				F3B5AB1E2BAD062D009CDBB5 /* AppSettingsView.swift in Sources */,
