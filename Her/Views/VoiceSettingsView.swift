@@ -66,9 +66,13 @@ struct VoiceSettingsView: View {
                                 currentStep = 1
                             }
                         } else {
-                           withAnimation(.easeOut(duration: 0.15)) {
-                                self.activeModal = nil
-                           }
+                            withAnimation(.easeOut(duration: 0.15)) {
+                                    if keyboardResponder.currentHeight > 0 {
+                                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                    } else {
+                                        self.activeModal = nil
+                                    }
+                            }
                         }
                 }
                 .offset(x: -20, y: 0),

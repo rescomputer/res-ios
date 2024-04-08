@@ -78,7 +78,12 @@ struct CustomTextPromptView: View {
                     if isModalStepTwoEnabled {
                         self.activeModal = nil
                     } else {
-                        continueAction()
+                        if keyboardResponder.currentHeight > 0 {
+                            continueAction()
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        } else {
+                            continueAction()
+                        }
                     }                
                 }
                 .padding(.top, 5)
