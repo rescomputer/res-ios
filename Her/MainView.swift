@@ -81,6 +81,8 @@ struct MainView: View {
                     )
                     .onTapGesture {
                         Task {  await callManager.handleCallAction() }
+                        let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                        impactMed.impactOccurred()
                     }
                     .padding(.top, 5)
                     .pressAnimation()
@@ -115,12 +117,10 @@ struct MainView: View {
                         let impactMed = UIImpactFeedbackGenerator(style: .soft)
                         impactMed.impactOccurred()
                     }) {
-                        HStack {
+                        HStack(spacing: 10) {
                             Image(systemName: "waveform")
-                                .resizable()
-                                .frame(width: 24, height: 24)
+                                .font(.system(size: 22))
                                 .foregroundColor(Color.white.opacity(0.5))
-                                // .padding()
                             Text("Personality & Voice")
                                 .font(.system(size: 18))
                                 .foregroundColor(Color.white.opacity(0.6))
