@@ -9,16 +9,15 @@ import SwiftUI
 import UIKit
 import ActivityKit
 
-struct MainView: View {
-    
+struct MainView: View { 
     @StateObject private var callManager = CallManager()
     @StateObject private var keyboardResponder = KeyboardResponder()
-
     @FocusState private var isTextFieldFocused: Bool
     @State private var drawingHeight = true
     @State private var selectedOption: Option?
     @State private var activeModal: ActiveModal?
     @Binding var isAppSettingsViewShowing: Bool
+    @Binding var isModalStepTwoEnabled: Bool
 
     var body: some View {
         VStack(spacing: 25) {
@@ -133,7 +132,14 @@ struct MainView: View {
                 }
             }
             if isAppSettingsViewShowing {
-                AppSettingsView(isPresented: $isAppSettingsViewShowing)
+                AppSettingsView(
+                    isPresented: $isAppSettingsViewShowing,
+                    activeModal: $activeModal, 
+                    selectedOption: $selectedOption, 
+                    isModalStepTwoEnabled: $isModalStepTwoEnabled,
+                    callManager: callManager, 
+                    keyboardResponder: keyboardResponder
+                )
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .edgesIgnoringSafeArea(.all)
                     .fadeInEffect()
@@ -144,66 +150,6 @@ struct MainView: View {
     
     private var animation: Animation {
         .linear(duration: 0.5).repeatForever()
-    }
-}
-
-struct Option: Identifiable, Equatable {
-    let id = UUID()
-    let icon: String
-    let title: String
-    let description: String
-}
-
-struct OptionRow: View {
-    let option: Option
-    
-    var body: some View {
-        VStack(spacing: 2) {
-            ZStack{
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(Color.black.opacity(0.05))
-                    .frame(width: 53, height: 53)
-                Image(systemName: option.icon)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24)
-                    .padding(.top, 4)
-                    .foregroundColor(Color.black.opacity(0.8))                
-            }
-            
-            VStack(alignment: .leading, spacing: 4) {
-                Text(option.title)
-                    .font(.system(size: 10, weight: .bold))
-                    .foregroundColor(Color.black.opacity(0.3))
-
-            }
-        }
-    }
-}
-
-struct OptionsMenu: View {
-    let options = [
-        Option(icon: "atom", title: "Assistant", description: "A helpful assistant that gets to the point. No bullet points. Answer in less than 5 sentences."),
-        Option(icon: "graduationcap.fill", title: "Educator", description: "A teacher that deeply understands topics and wants to help you learn. Break things down step by step."),
-        Option(icon: "figure.run", title: "Trainer", description: "You are a fitness instructor trying to help me get fitter & stronger. You can give me advice on how to be healthy."),
-        Option(icon: "person.fill.questionmark", title: "Debater", description: "You always argue the opposite of what I say. You provide the other side of the argument. You push back on everything with an alternate perspective."),
-        Option(icon: "person.and.background.dotted", title: "Guru", description: "You are an empathetic listener. You hear what I am sharing and try to offer useful advice. You help me with important decisions in life.")
-    ]
-    
-    @Binding var selectedOption: Option?
-    
-    var body: some View {
-        ScrollView(.horizontal) {
-            HStack(spacing: 11) {
-                ForEach(options) { option in
-                    OptionRow(option: option)
-                        .onTapGesture {
-                            selectedOption = option
-                        }
-                        .id(option.id)
-                }
-            }
-        }
-        .frame(maxHeight: 90)
     }
 }
 
@@ -218,7 +164,7 @@ extension MainView {
 
         var value: CGFloat {
             switch self {
-            case .voiceSettingsModal: return 0.16
+            case .voiceSettingsModal: return 0.06
             }
         }
     }
@@ -238,186 +184,16 @@ extension MainView {
             }
         }, modalHeightMultiplier: MainView.ModalHeightMultiplier.voiceSettingsModal.value
         ) {
-            VStack{
-                ZStack {
-                    HStack {
-                        ZStack {
-                            HStack {
-                                Image(systemName: "waveform")
-                                    .resizable()
-                                    .foregroundColor(.black.opacity(0.05))
-                                    .frame(width: 85, height: 85)
-                                Spacer()
-                            }
-                            .offset(x: 10, y: -20)
-
-                        
-                            VStack(alignment: .leading) {
-                                Text("Who do you want to talk to?")
-                                    .font(.system(size: 20, design: .rounded))
-                                    .bold()
-                                    .foregroundColor(Color.black.opacity(1))
-                                    .padding(.bottom, 2)
-                                Text("Choose a preset prompt or create your own custom Ai to converse with.")
-                                    .font(.system(size: 14))
-                                    .foregroundColor(Color.black.opacity(0.5))
-
-                            }
-                            .padding(.horizontal, 20)
-                            .offset(x: UIScreen.isLargeDevice ? 0 : -12)
-                        }
-                    }
-                    .overlay(
-                        Rectangle()
-                            .frame(height: 1)
-                            .foregroundColor(Color.black.opacity(0.1)),
-                        alignment: .bottom
-                    )                     
-                }
-                .overlay(
-                    RoundedRectangle(cornerRadius: 0)
-                        .fill(Color.black.opacity(0.05))
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 140),
-                         alignment: .bottom
-                    ) 
-                .overlay(
-                    XMarkButton {
-                        withAnimation(.easeOut(duration: 0.15)) {
-                            self.activeModal = nil
-                        }
-                    }
-                    .offset(x: -20, y: 0),
-                    alignment: .topTrailing
-                )               
-
-                VStack(alignment: .leading) {
-
-                    Text("Custom Prompt")
-                        .bold()
-                        .font(.system(size: 14))
-                        .foregroundColor(Color.black.opacity(0.5))
-                        .padding(.top, 5)
-
-                    // CustomTextEditor
-                    HStack {
-                        CustomTextEditor(text: $callManager.enteredText, isDisabled: callManager.callState != .ended)
-                            .frame(height: 100)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 3)
-                            .background(Color.black.opacity(0.05))
-                            .cornerRadius(15)
-                            .disabled(callManager.callState != .ended) // TODO get this to work with a custom element
-                    }
-
-                    if keyboardResponder.currentHeight == 0 {
-                        // Text Label
-                        Text("Prompt Presets")
-                                .bold()
-                                .font(.system(size: 14))
-                                .foregroundColor(Color.black.opacity(0.5))
-                                .padding(.top, 5)
-                        
-                        // OptionsMenu
-                        HStack{
-                            OptionsMenu(selectedOption: $selectedOption)
-                                .frame(height: 70)
-                                .onChange(of: selectedOption) {oldValue , newOption in
-                                        if let newOption = newOption {
-                                            callManager.enteredText = newOption.description
-                                        }
-                                    }
-                        }                        
-                    }
-
-                        
-                        // Pickers
-                        Text("Voice Settings")
-                            .bold()
-                            .font(.system(size: 14))
-                            .foregroundColor(Color.black.opacity(0.5))
-                            .padding(.top, 5)
-
-
-                        HStack {
-                            Menu {
-                                Picker("Voice", selection: $callManager.voice) {
-                                    Text("🇺🇸 Alloy · Gentle Man").tag("alloy")
-                                    Text("🇺🇸 Echo · Deep Man").tag("echo")
-                                    Text("🇬🇧 Fable · Normal Man").tag("fable")
-                                    Text("🇺🇸 Onyx · Deeper Man").tag("onyx")
-                                    Text("🇺🇸 Nova · Gentle Woman").tag("nova")
-                                    Text("🇺🇸 Shimmer · Deep Woman").tag("shimmer")
-                                }
-                                .onChange(of: callManager.voice) {oldValue , newVoice in
-                                    UserDefaults.standard.set(newVoice, forKey: "voice")
-                                }
-                            } label: {
-                                HStack {
-                                    Text(callManager.voiceDisplayName) 
-                                        .font(.system(size: 14))
-                                        .foregroundColor(.black.opacity(1))
-                                }
-                                .frame(maxWidth: .infinity)
-                                .padding(.horizontal, 24)
-                                .padding(.vertical, 8)
-                                .background(Color.black.opacity(0.05))
-                                .clipShape(RoundedRectangle(cornerRadius: 50))
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 50)
-                                        .stroke(Color.black.opacity(0.05), lineWidth: 1)
-                                )
-                            }
-
-                            Menu {
-                                Picker("Speed", selection: $callManager.speed) {
-                                    Text("🐢 Slow").tag(0.3)
-                                    Text("💬 Normal").tag(1.0)
-                                    Text("🐇 Fast").tag(1.3)
-                                    Text("⚡️ Superfast").tag(1.5)
-                                }
-                                .onChange(of: callManager.speed) {oldValue , newSpeed in
-                                    UserDefaults.standard.set(newSpeed, forKey: "speed")
-                                }
-                            } label: {
-                                HStack {
-                                    Text(callManager.speedDisplayName) 
-                                        .font(.system(size: 14))
-                                        .foregroundColor(.black.opacity(1))
-                                }
-                                .frame(maxWidth: .infinity)
-                                .padding(.horizontal, 24)
-                                .padding(.vertical, 8)
-                                .background(Color.black.opacity(0.05))
-                                .clipShape(RoundedRectangle(cornerRadius: 50))
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 50)
-                                        .stroke(Color.black.opacity(0.05), lineWidth: 1)
-                                )
-                            }
-                        } 
-                        
-                        // Save Button
-                        Button {
-                            self.activeModal = nil
-                        } label: {
-                            Text("Save Settings")
-                                .font(.system(.title2, design: .rounded))
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                .background(Color(red: 0.106, green: 0.149, blue: 0.149))
-                                .cornerRadius(50)
-                        }
-                        .pressAnimation() 
-                        .buttonStyle(PlainButtonStyle())
-                        .padding(.top, 5)
-                }
-                .padding(.horizontal,20) 
-            }
-            .padding(.vertical)
-
+            VoiceSettingsView(
+                activeModal: $activeModal, 
+                selectedOption: $selectedOption,
+                isModalStepTwoEnabled: $isModalStepTwoEnabled,
+                callManager: callManager, 
+                keyboardResponder: keyboardResponder)
+                .background(
+                    RoundedRectangle(cornerRadius: 40)
+                        .fill(Color.white)
+                )
         }
     }
 }

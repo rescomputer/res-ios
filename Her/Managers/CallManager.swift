@@ -71,7 +71,7 @@ class CallManager: ObservableObject {
         default: return "Voice Speed"
         }
     }
-    
+        
     func setupVapi() {
         vapi.eventPublisher
             .sink { [weak self] event in
@@ -114,6 +114,11 @@ class CallManager: ObservableObject {
     
     func saveEnteredText() {
         UserDefaults.standard.set(enteredText, forKey: "enteredText")
+    }
+
+    func playVoicePreview() {
+    // Implementation depends on the capabilities of Vapi or another audio library.
+    // This method should generate and play a short audio clip using the selected voice and speed settings.
     }
     
     @MainActor

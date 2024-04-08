@@ -15,7 +15,12 @@ struct AppSettingsView: View {
     @State private var isMicrophoneEnabled = false
     @State private var showingSettingsAlert = false
     @State private var infoModal: InfoModal?
-    @State private var selectedGuide: GuideType?
+    @State private var selectedSetting: SettingType?
+    @Binding var activeModal: MainView.ActiveModal?
+    @Binding var selectedOption: Option?
+    @Binding var isModalStepTwoEnabled: Bool
+    @ObservedObject var callManager: CallManager
+    @ObservedObject var keyboardResponder: KeyboardResponder  
     
     var body: some View {
         ZStack {
@@ -76,7 +81,10 @@ struct AppSettingsView: View {
 
                     micPermissions()
 
+                    voiceTypeAndToneSettings()
+
                     widgetSettings()
+
 
                     }
                     Spacer()
@@ -116,39 +124,52 @@ struct AppSettingsView: View {
                     showRecordingHerModal()
                 } 
             }
-            if let selectedGuide = selectedGuide {
-                switch selectedGuide {
+            if let selectedSetting = selectedSetting {
+                switch selectedSetting {
                 case .homeScreen:
                     HomeScreenWidgetGuideView(dismissAction: {
-                            self.selectedGuide = nil
+                            self.selectedSetting = nil
                         })
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .edgesIgnoringSafeArea(.all)
                         .transition(.opacity)
                 case .lockScreen:
                     LockScreenWidgetGuideView(dismissAction: {
-                            self.selectedGuide = nil
+                            self.selectedSetting = nil
                         })
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .edgesIgnoringSafeArea(.all)
                         .transition(.opacity)
+                case .voiceTypeAndTone:
+                    VoiceTypeAndToneSettingsView(
+                        dismissAction: {
+                            self.selectedSetting = nil
+                        },
+                        activeModal: $activeModal,
+                        selectedOption: $selectedOption,
+                        isModalStepTwoEnabled: $isModalStepTwoEnabled,
+                        callManager: callManager,
+                        keyboardResponder: keyboardResponder
+                    )
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .edgesIgnoringSafeArea(.all)
+                    .transition(.opacity)
                 }
             }
         }
     }
 }
 
-
-
 extension AppSettingsView {
 
-     enum GuideType: Identifiable {
-         case homeScreen, lockScreen
+     enum SettingType: Identifiable {
+         case homeScreen, lockScreen, voiceTypeAndTone
 
          var id: Int {
              switch self {
              case .homeScreen: return 0
              case .lockScreen: return 1
+             case .voiceTypeAndTone: return 2
              }
          }
      }
@@ -164,11 +185,28 @@ extension AppSettingsView {
 
         var value: CGFloat {
             switch self {
-            case .aboutHerModal: return 0.26
-            case .recordingHerModal: return 0.17
+            case .aboutHerModal: return -0.02
+            case .recordingHerModal: return -0.02
             }
         }
     }
+
+     private func voiceTypeAndToneSettings() -> some View {
+        VStack {
+                HStack {
+                    Text("Voice")
+                        .bold()
+                        .font(.system(size: 16))
+                        .foregroundColor(Color.white.opacity(0.7))
+                    Spacer()
+                }
+                CustomLinkView(iconName: "face.dashed.fill", title: "Type & Speed", action: {}, navigateTo: {
+                    self.selectedSetting = .voiceTypeAndTone
+                }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
+        }
+        .padding(.bottom, 20)
+
+    }   
 
     private func widgetSettings() -> some View {
         VStack {
@@ -180,12 +218,14 @@ extension AppSettingsView {
                     Spacer()
                 }
                 CustomLinkView(iconName: "rectangle.fill.on.rectangle.angled.fill", title: "Setup Home Screen Widgets", action: {}, navigateTo: {
-                    self.selectedGuide = .homeScreen
+                    self.selectedSetting = .homeScreen
                 }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
                 CustomLinkView(iconName: "lock.rectangle.on.rectangle.fill", title: "Setup Lock Screen Widgets", action: {}, navigateTo: {
-                    self.selectedGuide = .lockScreen
+                    self.selectedSetting = .lockScreen
                 }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
         }
+        .padding(.bottom, 20)
+
     }
 
     private func micPermissions() -> some View {
@@ -197,7 +237,12 @@ extension AppSettingsView {
                                 .foregroundColor(Color.white.opacity(0.7))
                             Spacer()
                         }
-                        CustomToggle(title: "Microphone", systemImageName: "mic.fill", isOn: $isMicrophoneEnabled)
+                        CustomToggle(
+                            title: "Microphone", 
+                            systemImageName: isMicrophoneEnabled ? "mic.fill" : "mic.slash.fill",
+                            isOn: $isMicrophoneEnabled
+                            )
+                            .contentTransition(.symbolEffect(.replace.offUp.byLayer))
                             .onChange(of: isMicrophoneEnabled) { oldValue ,newValue in
                                 handleMicrophonePermission(isEnabled: newValue)
                             }
@@ -217,8 +262,7 @@ extension AppSettingsView {
                             .padding(.vertical, 10)
 
                         }
-                        .pressAnimation()
-                                                
+                        .pressAnimation()                          
                     }
                     .padding(.bottom, 20)
     }
@@ -237,6 +281,7 @@ extension AppSettingsView {
             }
         }, modalHeightMultiplier: AppSettingsView.ModalHeightMultiplier.recordingHerModal.value
         ) {
+
             VStack {
                  ZStack {
                     HStack {
@@ -405,26 +450,49 @@ extension AppSettingsView {
                     // .applyScrollViewEdgeFadeLight()
 
                 // Got it Button
-                    Button {
-                        self.infoModal = nil
-                    } label: {
-                        Text("Got it!")
-                            .font(.system(.title2, design: .rounded))
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color(red: 0.106, green: 0.149, blue: 0.149))
-                            .cornerRadius(50)
+                    // Button {
+                    //     self.infoModal = nil
+                    // } label: {
+                    //     Text("Got it!")
+                    //         .font(.system(.title2, design: .rounded))
+                    //         .fontWeight(.bold)
+                    //         .foregroundColor(.white)
+                    //         .padding()
+                    //         .frame(maxWidth: .infinity)
+                    //         .background(Color(red: 0.106, green: 0.149, blue: 0.149))
+                    //         .cornerRadius(50)
+                    // }
+                    // .padding(.horizontal)
+                    // .pressAnimation()   
+                    // .buttonStyle(PlainButtonStyle())
+                    
+                    // Got it Button
+                    VStack{
+                        ZStack {
+                                RoundedRectangle(cornerRadius: 50)
+                                    .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
+                                    .frame(height: 60)
+                                    .animation(nil)
+                                Text("Got it!")
+                                    .font(.system(.title2, design: .rounded))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            }
+                            .onTapGesture {
+                                self.infoModal = nil
+                            }
+                            .padding(.top, 5)
+                            .pressAnimation()
+                            .opacity(1)                        
                     }
-                    .padding(.horizontal)
-                    .pressAnimation()   
-                    .buttonStyle(PlainButtonStyle())
+                    .padding(.horizontal, 20)
 
             }
             .padding(.vertical)
-
-      
+            .background(
+                    RoundedRectangle(cornerRadius: 40)
+                        .fill(Color.white)
+            )
         }
     }
 
@@ -514,26 +582,50 @@ extension AppSettingsView {
 
                     
                     // Got it Button
-                    Button {
-                        self.infoModal = nil
-                    } label: {
-                        Text("Got it!")
-                            .font(.system(.title2, design: .rounded))
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color(red: 0.106, green: 0.149, blue: 0.149))
-                            .cornerRadius(50)
+                    // Button {
+                    //     self.infoModal = nil
+                    // } label: {
+                    //     Text("Got it!")
+                    //         .font(.system(.title2, design: .rounded))
+                    //         .fontWeight(.bold)
+                    //         .foregroundColor(.white)
+                    //         .padding()
+                    //         .frame(maxWidth: .infinity)
+                    //         .background(Color(red: 0.106, green: 0.149, blue: 0.149))
+                    //         .cornerRadius(50)
+                    // }
+                    // .padding(.horizontal)
+                    // .pressAnimation()
+                    // .buttonStyle(PlainButtonStyle())
+                    
+                    // Got it Button
+                    VStack{
+                        ZStack {
+                                RoundedRectangle(cornerRadius: 50)
+                                    .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
+                                    .frame(height: 60)
+                                    .animation(nil)
+                                Text("Got it!")
+                                    .font(.system(.title2, design: .rounded))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            }
+                            .onTapGesture {
+                                self.infoModal = nil
+                            }
+                            .padding(.top, 5)
+                            .pressAnimation()
+                            .opacity(1)                        
                     }
-                    .padding(.horizontal)
-                    .pressAnimation()
-                    .buttonStyle(PlainButtonStyle())
+                    .padding(.horizontal, 20)
 
                     
             }
             .padding(.vertical)
-
+            .background(
+                    RoundedRectangle(cornerRadius: 40)
+                        .fill(Color.white)
+            )
         }
     }
     

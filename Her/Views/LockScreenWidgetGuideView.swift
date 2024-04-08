@@ -102,90 +102,52 @@ struct LockScreenWidgetGuideView: View {
 }
 
 extension LockScreenWidgetGuideView {
+
     private func lockscreenContent() -> some View {
-                    VStack(alignment: .leading, spacing: 10) {  
-                        HStack {
-                            RoundedRectangle(cornerRadius: 13)
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color.white.opacity(0.1))
-                                .overlay(
-                                    Image(systemName: "lock.fill")
-                                        .font(.system(size: 18))
-                                        .foregroundColor(.white.opacity(0.5))
+        VStack {
+            // Step 1
+            timelineStep(iconName: "lock.fill", description: "Wake your iPhone and press and hold on the lock screen, press customize at the bottom.", imageName: "lockscreen-step-one")
+            
+            // Step 2
+            timelineStep(iconName: "plus.circle.fill", description: "Add a widget to your lock screen, by selecting the Add Widget option.", imageName: "lockscreen-step-two")
+            
+            // Step 3
+            timelineStep(iconName: "sparkle.magnifyingglass", description: "Search for Her in the widget gallery and tap on it to see the widget options.", imageName: "lockscreen-step-three")
+            
+            // Step 4
+            timelineStep(iconName: "hand.draw.fill", description: "Drag it to your desired location and exit the lockscreen customization mode.", imageName: "lockscreen-step-four", isLastStep: true)
+        }
+        .padding(.top, 10)
+    }
 
-                                )
-                            Text("Wake your iPhone and press and hold on the lock screen, press customize at the bottom.")
-                                .font(.system(size: 14))
-                                .foregroundColor(Color.white.opacity(0.5))
-                        }
-                        Image("lockscreen-step-one")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(15)
-                            .padding(.bottom, 20)
-                        
-                        HStack {
-                            RoundedRectangle(cornerRadius: 13)
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color.white.opacity(0.1))
-                                .overlay(
-                                    Image(systemName: "plus.circle.fill")
-                                        .font(.system(size: 18))
-                                        .foregroundColor(.white.opacity(0.5))
-
-                                )
-                            Text("Add a widget to your lock screen, by selecting the Add Widget option.")
-                                .font(.system(size: 14))
-                                .foregroundColor(Color.white.opacity(0.5))
-                        }
-                        Image("lockscreen-step-two")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(15)
-                            .padding(.bottom, 20) 
-
-                        HStack {
-                            RoundedRectangle(cornerRadius: 13)
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color.white.opacity(0.1))
-                                .overlay(
-                                    Image(systemName: "sparkle.magnifyingglass")
-                                        .font(.system(size: 18))
-                                        .foregroundColor(.white.opacity(0.5))
-
-                                )
-                            Text("Search for Her in the widget gallery and tap on it to see the widget options.")
-                                .font(.system(size: 14))
-                                .foregroundColor(Color.white.opacity(0.5))
-                        }
-                        Image("lockscreen-step-three")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(15)
-                            .padding(.bottom, 20)
-
-                       HStack {
-                            RoundedRectangle(cornerRadius: 13)
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color.white.opacity(0.1))
-                                .overlay(
-                                    Image(systemName: "hand.draw.fill")
-                                        .font(.system(size: 18))
-                                        .foregroundColor(.white.opacity(0.5))
-
-                                )
-                            Text("Drag it to your desired location and exit the lockscreen custimzation mode.")
-                                .font(.system(size: 14))
-                                .foregroundColor(Color.white.opacity(0.5))
-                        }
-
-                        Image("lockscreen-step-four")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(15)
-                            .padding(.bottom, 20)
-                    }
-                    .padding(.top, 10)   
+    private func timelineStep(iconName: String, description: String, imageName: String, isLastStep: Bool = false) -> some View {
+        HStack(alignment: .top, spacing: 15) {
+            VStack {
+                RoundedRectangle(cornerRadius: 13)
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(Color.white.opacity(0.1))
+                    .overlay(
+                        Image(systemName: iconName)
+                            .font(.system(size: 18))
+                            .foregroundColor(.white.opacity(0.5))
+                    )
+                RoundedRectangle(cornerRadius: 25)
+                    .frame(width: 3, height: isLastStep ? 0 : .infinity)
+                    .foregroundColor(Color.white.opacity(0.07))
+            }
+            .frame(width: 40)
+            
+            VStack(alignment: .leading, spacing: 10) {
+                Text(description)
+                    .font(.system(size: 14))
+                    .foregroundColor(Color.white.opacity(0.5))
+                Image(imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .cornerRadius(15)
+                    .padding(.bottom, 20)
+            }
+        }
     }
 }
 

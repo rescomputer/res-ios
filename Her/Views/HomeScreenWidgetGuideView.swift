@@ -99,89 +99,50 @@ struct HomeScreenWidgetGuideView: View {
 extension HomeScreenWidgetGuideView {
 
     private func homescreenContent() -> some View {
-                    VStack(alignment: .leading, spacing: 10) {  
-                        HStack {
-                            RoundedRectangle(cornerRadius: 13)
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color.white.opacity(0.1))
-                                .overlay(
-                                    Image(systemName: "hand.tap.fill")
-                                        .font(.system(size: 18))
-                                        .foregroundColor(.white.opacity(0.5))
+        VStack {
+            // Step 1
+            timelineStep(iconName: "hand.tap.fill", description: "Long-press on an empty space on your home screen and look for the '+' icon at the top-left corner of the screen.", imageName: "homescreen-step-one")
+            
+            // Step 2
+            timelineStep(iconName: "sparkle.magnifyingglass", description: "Search for Her in the widget gallery and tap on it to see the widget options.", imageName: "homescreen-step-two")
+            
+            // Step 3
+            timelineStep(iconName: "rectangle.stack.fill", description: "Choose the size that suits your preference – small, medium, or large – by tapping on it.", imageName: "homescreen-step-three")
+            
+            // Step 4
+            timelineStep(iconName: "hand.draw.fill", description: "Drag it to your desired location and exit jiggle mode to enjoy instant access to her whenever you want to talk.", imageName: "homescreen-step-four", isLastStep: true)
+        }
+        .padding(.top, 10)
+    }
 
-                                )
-                            Text("Long-press on an empty space on your home screen an look for the '+' icon at the top-left corner of the screen. ")
-                                .font(.system(size: 14))
-                                .foregroundColor(Color.white.opacity(0.5))
-                        }
-                        Image("homescreen-step-one")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(15)
-                            .padding(.bottom, 20)
-                        
-                        HStack {
-                            RoundedRectangle(cornerRadius: 13)
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color.white.opacity(0.1))
-                                .overlay(
-                                    Image(systemName: "sparkle.magnifyingglass")
-                                        .font(.system(size: 18))
-                                        .foregroundColor(.white.opacity(0.5))
+    private func timelineStep(iconName: String, description: String, imageName: String, isLastStep: Bool = false) -> some View {
+        HStack(alignment: .top, spacing: 15) {
+            VStack {
+                RoundedRectangle(cornerRadius: 13)
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(Color.white.opacity(0.1))
+                    .overlay(
+                        Image(systemName: iconName)
+                            .font(.system(size: 18))
+                            .foregroundColor(.white.opacity(0.5))
 
-                                )
-                            Text("Search for Her in the widget gallery and tap on it to see the widget options.")
-                                .font(.system(size: 14))
-                                .foregroundColor(Color.white.opacity(0.5))
-                        }
-                        Image("homescreen-step-two")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(15)
-                            .padding(.bottom, 20) 
-
-                        HStack {
-                            RoundedRectangle(cornerRadius: 13)
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color.white.opacity(0.1))
-                                .overlay(
-                                    Image(systemName: "rectangle.stack.fill")
-                                        .font(.system(size: 18))
-                                        .foregroundColor(.white.opacity(0.5))
-
-                                )
-                            Text("Choose the size that suits your preference – small, medium, or large – by tapping on it.")
-                                .font(.system(size: 14))
-                                .foregroundColor(Color.white.opacity(0.5))
-                        }
-                        Image("homescreen-step-three")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(15)
-                            .padding(.bottom, 20)
-
-                        HStack {
-                            RoundedRectangle(cornerRadius: 13)
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color.white.opacity(0.1))
-                                .overlay(
-                                    Image(systemName: "hand.draw.fill")
-                                        .font(.system(size: 18))
-                                        .foregroundColor(.white.opacity(0.5))
-
-                                )
-                            Text("Drag it to your desired location and exit jiggle mode to enjoy instant access to her when ever you want to talk.")
-                                .font(.system(size: 14))
-                                .foregroundColor(Color.white.opacity(0.5))
-                        }
-
-                        Image("homescreen-step-four")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(15)
-                            .padding(.bottom, 20)
-                    }
-                    .padding(.top, 10)                         
-                }
-
+                    )
+                RoundedRectangle(cornerRadius: 25)
+                    .frame(width: 3, height: isLastStep ? 0 : .infinity)
+                    .foregroundColor(Color.white.opacity(0.07))
+            }
+            .frame(width: 40)
+            
+            VStack(alignment: .leading, spacing: 10) {
+                Text(description)
+                    .font(.system(size: 14))
+                    .foregroundColor(Color.white.opacity(0.5))
+                Image(imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .cornerRadius(15)
+                    .padding(.bottom, 20)
+            }
+        }
+    }
 }
