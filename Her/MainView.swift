@@ -54,15 +54,19 @@ struct MainView: View {
 
                 // Start Button
                 ZStack {
-                        if callManager.callState == .loading {
-                            HStack(spacing: 10) {
-                                Loader()
-                                    .frame(width: 20, height: 20)
-                                Text(callManager.buttonText)
+                            if callManager.callState == .loading {
+                                HStack(spacing: 10) {
+                                    Loader()
+                                        .frame(width: 17, height: 17)
+                                        .scaleUpAnimation()
+                                    Text(callManager.buttonText)
+                                        .fadeInEffect()
+
+                                }
+                            } else {
+                                    Text(callManager.buttonText)
+                                        .fadeInEffect()
                             }
-                        } else {
-                            Text(callManager.buttonText)
-                        }
                     }
                     .font(.system(.title2, design: .rounded))
                     .fontWeight(.bold)
