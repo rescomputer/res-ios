@@ -72,12 +72,32 @@ struct MainView: View {
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding()
+                    .frame(height: 60)
                     .frame(maxWidth: .infinity)
                     .background(callManager.buttonColor)
                     .cornerRadius(50)
                     .overlay(
+                    // Inner dark stroke
                         RoundedRectangle(cornerRadius: 50)
                             .stroke(Color.black.opacity(1), lineWidth: 1)
+                    )
+                    .overlay(
+                    // Inner light stroke
+                        RoundedRectangle(cornerRadius: 50, style: .continuous)
+                            .strokeBorder(
+                                LinearGradient(
+                                colors: [
+                                    Color.white.opacity(0.5),
+                                    Color.white.opacity(0),
+                                    Color.black.opacity(0.5)
+                                ],
+                                startPoint: .top,
+                                endPoint: .bottom
+                                ),
+                                lineWidth: 2
+                            )
+                            .blendMode(.overlay)
+                            //.opacity(0.3)
                     )
                     .onTapGesture {
                         Task {  await callManager.handleCallAction() }
@@ -87,27 +107,6 @@ struct MainView: View {
                     .padding(.top, 5)
                     .pressAnimation()
                     .opacity(1)                
-            
-            //old button
-            // Button {
-            //     Task {  await callManager.handleCallAction() }
-            // } label: {
-            //     Text(callManager.buttonText)
-            //         .font(.system(.title2, design: .rounded))
-            //         .fontWeight(.bold)
-            //         .foregroundColor(.white)
-            //         .padding()
-            //         .frame(maxWidth: .infinity)
-            //         .background(callManager.buttonColor)
-            //         .cornerRadius(50)
-            //         .overlay(
-            //             RoundedRectangle(cornerRadius: 50)
-            //                 .stroke(Color.black.opacity(1), lineWidth: 1)
-            //         )
-            // }
-            // .pressAnimation()
-            // .buttonStyle(PlainButtonStyle())
-
             
             .disabled(callManager.callState == .loading)
             
@@ -121,9 +120,15 @@ struct MainView: View {
                             Image(systemName: "waveform")
                                 .font(.system(size: 22))
                                 .foregroundColor(Color.white.opacity(0.5))
+                        if isModalStepTwoEnabled {
+                            Text("Personality")
+                                .font(.system(size: 18))
+                                .foregroundColor(Color.white.opacity(0.6))
+                        } else {
                             Text("Personality & Voice")
                                 .font(.system(size: 18))
                                 .foregroundColor(Color.white.opacity(0.6))
+                        }
                     }
                 }
             }

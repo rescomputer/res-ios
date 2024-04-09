@@ -89,8 +89,6 @@ struct CustomTextPromptView: View {
                 .padding(.top, 5)
                 .pressAnimation()
                 .opacity(1)
-
-
         }
         .padding(.horizontal,20)
     }
