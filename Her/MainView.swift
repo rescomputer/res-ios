@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 import ActivityKit
+import CoreLocation
 
 struct MainView: View { 
     @StateObject private var callManager = CallManager()
@@ -18,6 +19,8 @@ struct MainView: View {
     @State private var activeModal: ActiveModal?
     @Binding var isAppSettingsViewShowing: Bool
     @Binding var isModalStepTwoEnabled: Bool
+    @StateObject private var locationManager = LocationManager()
+    @State private var locationDescription = ""
 
     var body: some View {
         VStack(spacing: 25) {
@@ -49,6 +52,18 @@ struct MainView: View {
                 Text("When you talk, I listen 🙂")
                     .font(.system(size: 22, design: .rounded))
                     .foregroundColor(Color.white.opacity(0.5))
+            }
+            VStack {
+                // Your existing UI components
+
+                // Display the location as plain text
+                Text(locationDescription)
+                    .onAppear {
+                        locationManager.requestLocation()
+                    }
+            }
+            .onChange(of: locationManager.currentAddress) { newAddress in
+                locationDescription = newAddress
             }
             Spacer()
 
@@ -153,6 +168,35 @@ struct MainView: View {
     }
 }
 
+class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    private let geocoder = CLGeocoder()
+    private let locationManager = CLLocationManager()
+    @Published var currentAddress = ""
+
+    override init() {
+        super.init()
+        locationManager.delegate = self
+    }
+
+    func requestLocation() {
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            geocoder.reverseGeocodeLocation(location) { [weak self] (placemarks, error) in
+                if let place = placemarks?.first {
+                    self?.currentAddress = "\(place.locality ?? ""), \(place.administrativeArea ?? ""), \(place.country ?? "")"
+                }
+            }
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
+}
 extension MainView {
 
     enum ActiveModal {
