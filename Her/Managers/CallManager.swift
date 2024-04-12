@@ -26,13 +26,7 @@ class CallManager: ObservableObject {
     @Published var callState: CallState = .ended
     var vapiEvents = [Vapi.Event]()
     private var cancellables = Set<AnyCancellable>()
-    let vapi: Vapi
-    
-    init() {
-        vapi = Vapi(
-            publicKey: "a9a1bf8c-c389-490b-a82b-29fe9ba081d8"
-        )
-    }
+    var vapi: Vapi?
     
     @Published var enteredText = ""
     
@@ -73,6 +67,14 @@ class CallManager: ObservableObject {
     }
         
     func setupVapi() {
+        guard let vapi = self.vapi else {
+            print("Vapi is not initialized - setupVapi")
+            DispatchQueue.main.async {
+                self.callState = .ended
+            }
+            return
+        }
+        
         vapi.eventPublisher
             .sink { [weak self] event in
                 self?.vapiEvents.append(event)
@@ -124,15 +126,32 @@ class CallManager: ObservableObject {
     @MainActor
     func handleCallAction() async {
         if callState == .ended {
-            await startCall()
+            await initializeVapiAndStartCall()
         } else {
             await endCall()
         }
     }
     
     @MainActor
-    func startCall() async {
+    private func initializeVapiAndStartCall() async {
         callState = .loading
+        do {
+            let jwt = try await NetworkManager.shared.fetchJWTToken()
+            vapi = Vapi(publicKey: jwt)
+            await startCall()
+        } catch {
+            print("Failed to initialize Vapi or start call with error: \(error)")
+            callState = .ended
+        }
+    }
+
+    @MainActor
+    private func startCall() async {
+        guard let vapi = vapi else {
+            callState = .ended
+            return
+        }
+
         let assistant = [
             "model": [
                 "provider": "openai",
@@ -164,8 +183,10 @@ class CallManager: ObservableObject {
                 "provider": "deepgram"
             ]
         ] as [String : Any]
+
         do {
             try await vapi.start(assistant: assistant)
+            setupVapi()
             // Start the live activity
             let activityAttributes = Her_ExtensionAttributes(name: "Conversation")
             let initialContentState = Her_ExtensionAttributes.ContentState(sfSymbolName: "ellipsis")
@@ -200,8 +221,14 @@ class CallManager: ObservableObject {
             }
         }
     }
+
     
-    func endCall()  {
+    private func endCall() async {
+        guard let vapi = vapi else {
+            callState = .ended
+            return
+        }
+        
         vapi.stop()
         Task {
             await activity?.end(dismissalPolicy: .immediate)

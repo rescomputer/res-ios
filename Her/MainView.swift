@@ -54,7 +54,7 @@ struct MainView: View {
 
             // Start Button
             Button {
-                Task {  await callManager.handleCallAction() }
+                Task { await callManager.handleCallAction() }
             } label: {
                 Text(callManager.buttonText)
                     .font(.system(.title2, design: .rounded))
@@ -71,8 +71,6 @@ struct MainView: View {
             }
             .pressAnimation()
             .buttonStyle(PlainButtonStyle())
-
-            
             .disabled(callManager.callState == .loading)
             
             HStack {
@@ -98,7 +96,6 @@ struct MainView: View {
         }
         .padding()
         .padding(.horizontal, 10)
-        .onAppear { callManager.setupVapi() }
         .background {
             ZStack {
                 LinearGradient(

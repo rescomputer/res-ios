@@ -44,6 +44,7 @@
 		F3B5AB1E2BAD062D009CDBB5 /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */; };
 		F3B5AB212BAD08F1009CDBB5 /* AnimationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB202BAD08F1009CDBB5 /* AnimationUtility.swift */; };
 		F3B5AB252BAE91E3009CDBB5 /* CustomLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB242BAE91E3009CDBB5 /* CustomLinkView.swift */; };
+		FA5DB0392BC8B57400EB8BBB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5DB0382BC8B57400EB8BBB /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,7 @@
 		F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsView.swift; sourceTree = "<group>"; };
 		F3B5AB202BAD08F1009CDBB5 /* AnimationUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationUtility.swift; sourceTree = "<group>"; };
 		F3B5AB242BAE91E3009CDBB5 /* CustomLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLinkView.swift; sourceTree = "<group>"; };
+		FA5DB0382BC8B57400EB8BBB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				B95D2F322BA4EAF5003C7C17 /* CallManager.swift */,
+				FA5DB0382BC8B57400EB8BBB /* NetworkManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				F31C49472BC0DDC60075477D /* AudioVisualizerView.swift in Sources */,
 				1849A5472BBDD68A00A4BCF1 /* UIScreen+Extensions.swift in Sources */,
 				187277062B9B85A20079C460 /* VAPIExampleView.swift in Sources */,
+				FA5DB0392BC8B57400EB8BBB /* NetworkManager.swift in Sources */,
 				18D289E52B9713FE008742FB /* MainView.swift in Sources */,
 				F31C49412BBE75C70075477D /* VoiceSettingsView.swift in Sources */,
 				18D289E32B9713FE008742FB /* HerApp.swift in Sources */,
