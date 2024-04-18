@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "18D289DE2B9713FE008742FB"
-               BuildableName = "Her.app"
-               BlueprintName = "Her"
+               BuildableName = "Res.app"
+               BlueprintName = "Res"
                ReferencedContainer = "container:Her.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -69,8 +69,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18D289DE2B9713FE008742FB"
-            BuildableName = "Her.app"
-            BlueprintName = "Her"
+            BuildableName = "Res.app"
+            BlueprintName = "Res"
             ReferencedContainer = "container:Her.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -86,8 +86,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18D289DE2B9713FE008742FB"
-            BuildableName = "Her.app"
-            BlueprintName = "Her"
+            BuildableName = "Res.app"
+            BlueprintName = "Res"
             ReferencedContainer = "container:Her.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

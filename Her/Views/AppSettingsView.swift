@@ -338,7 +338,7 @@ extension AppSettingsView {
                     ScrollView {
                            VStack(alignment:.leading, spacing: 10) {   
                              Text("""
-                                Her uses AI to help make conversations more engaging and meaningful.
+                                Res uses AI to help make conversations more engaging and meaningful.
                                 """)
                             .bold()
                             .font(.footnote)
@@ -349,7 +349,7 @@ extension AppSettingsView {
                                 .foregroundColor(.black.opacity(0.6))
 
                             VStack(alignment: .leading){
-                                Text("Her is powered by:")
+                                Text("Res is powered by:")
                                     .font(.footnote)
                                     .bold()
                                     .foregroundColor(.black.opacity(0.6))
@@ -526,12 +526,12 @@ extension AppSettingsView {
 
                         
                             VStack(alignment: .leading) {
-                                Text("We’re building Her for fun")
+                                Text("We’re building Res for fun")
                                     .font(.system(size: 20, design: .rounded))
                                     .bold()
                                     .foregroundColor(Color.black.opacity(1))
                                     .padding(.bottom, 2)
-                                Text("Learn more about “Her” and what it's all about.")
+                                Text("Learn more about Res and what it's all about.")
                                     .font(.system(size: 14))
                                     .foregroundColor(Color.black.opacity(0.5))
 
@@ -567,7 +567,7 @@ extension AppSettingsView {
                 
                         VStack(alignment:.leading, spacing: 10) {   
                              Text("""
-                                "Her" is an open-source project aimed at exploring the intricacies of AI and human interaction.
+                                "Res" is an open-source project aimed at exploring the intricacies of AI and human interaction.
                                 """)
                             .font(.footnote)
                             .bold()

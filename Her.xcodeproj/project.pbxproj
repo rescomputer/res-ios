@@ -810,7 +810,7 @@
 				DEVELOPMENT_TEAM = Y2V76WXBUQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Her Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Her AI";
+				INFOPLIST_KEY_CFBundleDisplayName = "Res AI";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -842,7 +842,7 @@
 				DEVELOPMENT_TEAM = Y2V76WXBUQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Her Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Her AI";
+				INFOPLIST_KEY_CFBundleDisplayName = "Res AI";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
