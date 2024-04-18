@@ -7,3 +7,4 @@ The current product does a few things well by leveraging [Vapi.ai](https://vapi.
 You can join the TestFlight here: [testflight.apple.com/join/vYkfwoti](https://testflight.apple.com/join/vYkfwoti)
 
 Check out the demo here: [twitter.com/ricburton/status/1771113631653961785](https://twitter.com/ricburton/status/1771113631653961785)
+![Photo on 18-04-2024 at 08 25](https://github.com/ricburton/her/assets/438160/98e7b06a-df36-48e8-929f-d28c9f8f2bbb)
