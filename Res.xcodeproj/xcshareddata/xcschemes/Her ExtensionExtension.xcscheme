@@ -17,9 +17,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "18F7232A2BA95060003F44FA"
-               BuildableName = "Her ExtensionExtension.appex"
-               BlueprintName = "Her ExtensionExtension"
-               ReferencedContainer = "container:Her.xcodeproj">
+               BuildableName = "Res ExtensionExtension.appex"
+               BlueprintName = "Res ExtensionExtension"
+               ReferencedContainer = "container:Res.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,9 +31,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "18D289DE2B9713FE008742FB"
-               BuildableName = "Her.app"
-               BlueprintName = "Her"
-               ReferencedContainer = "container:Her.xcodeproj">
+               BuildableName = "Res.app"
+               BlueprintName = "Res"
+               ReferencedContainer = "container:Res.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -63,18 +63,18 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18F7232A2BA95060003F44FA"
-            BuildableName = "Her ExtensionExtension.appex"
-            BlueprintName = "Her ExtensionExtension"
-            ReferencedContainer = "container:Her.xcodeproj">
+            BuildableName = "Res ExtensionExtension.appex"
+            BlueprintName = "Res ExtensionExtension"
+            ReferencedContainer = "container:Res.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18D289DE2B9713FE008742FB"
-            BuildableName = "Her.app"
-            BlueprintName = "Her"
-            ReferencedContainer = "container:Her.xcodeproj">
+            BuildableName = "Res.app"
+            BlueprintName = "Res"
+            ReferencedContainer = "container:Res.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <EnvironmentVariables>
@@ -108,9 +108,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18D289DE2B9713FE008742FB"
-            BuildableName = "Her.app"
-            BlueprintName = "Her"
-            ReferencedContainer = "container:Her.xcodeproj">
+            BuildableName = "Res.app"
+            BlueprintName = "Res"
+            ReferencedContainer = "container:Res.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

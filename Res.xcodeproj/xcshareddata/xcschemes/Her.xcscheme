@@ -18,7 +18,7 @@
                BlueprintIdentifier = "18D289DE2B9713FE008742FB"
                BuildableName = "Res.app"
                BlueprintName = "Res"
-               ReferencedContainer = "container:Her.xcodeproj">
+               ReferencedContainer = "container:Res.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -36,9 +36,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "18D289EE2B9713FF008742FB"
-               BuildableName = "HerTests.xctest"
-               BlueprintName = "HerTests"
-               ReferencedContainer = "container:Her.xcodeproj">
+               BuildableName = "ResTests.xctest"
+               BlueprintName = "ResTests"
+               ReferencedContainer = "container:Res.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "18D289F82B9713FF008742FB"
-               BuildableName = "HerUITests.xctest"
-               BlueprintName = "HerUITests"
-               ReferencedContainer = "container:Her.xcodeproj">
+               BuildableName = "ResUITests.xctest"
+               BlueprintName = "ResUITests"
+               ReferencedContainer = "container:Res.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,7 +71,7 @@
             BlueprintIdentifier = "18D289DE2B9713FE008742FB"
             BuildableName = "Res.app"
             BlueprintName = "Res"
-            ReferencedContainer = "container:Her.xcodeproj">
+            ReferencedContainer = "container:Res.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -88,7 +88,7 @@
             BlueprintIdentifier = "18D289DE2B9713FE008742FB"
             BuildableName = "Res.app"
             BlueprintName = "Res"
-            ReferencedContainer = "container:Her.xcodeproj">
+            ReferencedContainer = "container:Res.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

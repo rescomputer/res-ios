@@ -25,7 +25,7 @@
 		18F723372BA95060003F44FA /* Her_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F723362BA95060003F44FA /* Her_Extension.swift */; };
 		18F723392BA95060003F44FA /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F723382BA95060003F44FA /* AppIntent.swift */; };
 		18F7233B2BA95062003F44FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18F7233A2BA95062003F44FA /* Assets.xcassets */; };
-		18F7233F2BA95062003F44FA /* Her ExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 18F7232B2BA95060003F44FA /* Her ExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		18F7233F2BA95062003F44FA /* Res ExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 18F7232B2BA95060003F44FA /* Res ExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		18F723492BA9ED0D003F44FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18F723482BA9ED0D003F44FA /* LaunchScreen.storyboard */; };
 		18F7234D2BA9F3D3003F44FA /* whisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 18F7234C2BA9F3D3003F44FA /* whisp.png */; };
 		18F723892BAC2695003F44FA /* ActivityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F723882BAC2694003F44FA /* ActivityKit.framework */; };
@@ -77,7 +77,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				18F7233F2BA95062003F44FA /* Her ExtensionExtension.appex in Embed Foundation Extensions */,
+				18F7233F2BA95062003F44FA /* Res ExtensionExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,16 +90,16 @@
 		1849A5492BBDD6FF00A4BCF1 /* HomeScreenWidgetGuideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenWidgetGuideView.swift; sourceTree = "<group>"; };
 		1849A54C2BBDDF7100A4BCF1 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		187277052B9B85A20079C460 /* VAPIExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAPIExampleView.swift; sourceTree = "<group>"; };
-		18D289DF2B9713FE008742FB /* Her.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Her.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18D289DF2B9713FE008742FB /* Res.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Res.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D289E22B9713FE008742FB /* HerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HerApp.swift; sourceTree = "<group>"; };
 		18D289E42B9713FE008742FB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		18D289E62B9713FF008742FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		18D289EF2B9713FF008742FB /* HerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		18D289F92B9713FF008742FB /* HerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		18D289EF2B9713FF008742FB /* ResTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ResTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		18D289F92B9713FF008742FB /* ResUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ResUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D28A0F2B97178E008742FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		18D28A102B971B0A008742FB /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		18D28A112B98E67D008742FB /* HerAnimation.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = HerAnimation.mp4; sourceTree = "<group>"; };
-		18F7232B2BA95060003F44FA /* Her ExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Her ExtensionExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18F7232B2BA95060003F44FA /* Res ExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Res ExtensionExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18F7232D2BA95060003F44FA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		18F7232F2BA95060003F44FA /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		18F723322BA95060003F44FA /* Her_ExtensionBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Her_ExtensionBundle.swift; sourceTree = "<group>"; };
@@ -177,10 +177,10 @@
 		18D289E02B9713FE008742FB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				18D289DF2B9713FE008742FB /* Her.app */,
-				18D289EF2B9713FF008742FB /* HerTests.xctest */,
-				18D289F92B9713FF008742FB /* HerUITests.xctest */,
-				18F7232B2BA95060003F44FA /* Her ExtensionExtension.appex */,
+				18D289DF2B9713FE008742FB /* Res.app */,
+				18D289EF2B9713FF008742FB /* ResTests.xctest */,
+				18D289F92B9713FF008742FB /* ResUITests.xctest */,
+				18F7232B2BA95060003F44FA /* Res ExtensionExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -275,9 +275,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		18D289DE2B9713FE008742FB /* Her */ = {
+		18D289DE2B9713FE008742FB /* Res */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18D28A032B9713FF008742FB /* Build configuration list for PBXNativeTarget "Her" */;
+			buildConfigurationList = 18D28A032B9713FF008742FB /* Build configuration list for PBXNativeTarget "Res" */;
 			buildPhases = (
 				18D289DB2B9713FE008742FB /* Sources */,
 				18D289DC2B9713FE008742FB /* Frameworks */,
@@ -289,17 +289,17 @@
 			dependencies = (
 				18F7233E2BA95062003F44FA /* PBXTargetDependency */,
 			);
-			name = Her;
+			name = Res;
 			packageProductDependencies = (
 				18F7238C2BAC2C3C003F44FA /* Vapi */,
 			);
 			productName = Her;
-			productReference = 18D289DF2B9713FE008742FB /* Her.app */;
+			productReference = 18D289DF2B9713FE008742FB /* Res.app */;
 			productType = "com.apple.product-type.application";
 		};
-		18D289EE2B9713FF008742FB /* HerTests */ = {
+		18D289EE2B9713FF008742FB /* ResTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18D28A062B9713FF008742FB /* Build configuration list for PBXNativeTarget "HerTests" */;
+			buildConfigurationList = 18D28A062B9713FF008742FB /* Build configuration list for PBXNativeTarget "ResTests" */;
 			buildPhases = (
 				18D289EB2B9713FF008742FB /* Sources */,
 				18D289EC2B9713FF008742FB /* Frameworks */,
@@ -310,14 +310,14 @@
 			dependencies = (
 				18D289F12B9713FF008742FB /* PBXTargetDependency */,
 			);
-			name = HerTests;
+			name = ResTests;
 			productName = HerTests;
-			productReference = 18D289EF2B9713FF008742FB /* HerTests.xctest */;
+			productReference = 18D289EF2B9713FF008742FB /* ResTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		18D289F82B9713FF008742FB /* HerUITests */ = {
+		18D289F82B9713FF008742FB /* ResUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18D28A092B9713FF008742FB /* Build configuration list for PBXNativeTarget "HerUITests" */;
+			buildConfigurationList = 18D28A092B9713FF008742FB /* Build configuration list for PBXNativeTarget "ResUITests" */;
 			buildPhases = (
 				18D289F52B9713FF008742FB /* Sources */,
 				18D289F62B9713FF008742FB /* Frameworks */,
@@ -328,14 +328,14 @@
 			dependencies = (
 				18D289FB2B9713FF008742FB /* PBXTargetDependency */,
 			);
-			name = HerUITests;
+			name = ResUITests;
 			productName = HerUITests;
-			productReference = 18D289F92B9713FF008742FB /* HerUITests.xctest */;
+			productReference = 18D289F92B9713FF008742FB /* ResUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		18F7232A2BA95060003F44FA /* Her ExtensionExtension */ = {
+		18F7232A2BA95060003F44FA /* Res ExtensionExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18F723402BA95062003F44FA /* Build configuration list for PBXNativeTarget "Her ExtensionExtension" */;
+			buildConfigurationList = 18F723402BA95062003F44FA /* Build configuration list for PBXNativeTarget "Res ExtensionExtension" */;
 			buildPhases = (
 				18F723272BA95060003F44FA /* Sources */,
 				18F723282BA95060003F44FA /* Frameworks */,
@@ -345,12 +345,12 @@
 			);
 			dependencies = (
 			);
-			name = "Her ExtensionExtension";
+			name = "Res ExtensionExtension";
 			packageProductDependencies = (
 				18F7238A2BAC2C17003F44FA /* Vapi */,
 			);
 			productName = "Her ExtensionExtension";
-			productReference = 18F7232B2BA95060003F44FA /* Her ExtensionExtension.appex */;
+			productReference = 18F7232B2BA95060003F44FA /* Res ExtensionExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -379,7 +379,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 18D289DA2B9713FE008742FB /* Build configuration list for PBXProject "Her" */;
+			buildConfigurationList = 18D289DA2B9713FE008742FB /* Build configuration list for PBXProject "Res" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -390,15 +390,16 @@
 			mainGroup = 18D289D62B9713FE008742FB;
 			packageReferences = (
 				18D28A0C2B971574008742FB /* XCRemoteSwiftPackageReference "ios" */,
+				18F07E032BD1C1A300E5B28D /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 18D289E02B9713FE008742FB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				18D289DE2B9713FE008742FB /* Her */,
-				18D289EE2B9713FF008742FB /* HerTests */,
-				18D289F82B9713FF008742FB /* HerUITests */,
-				18F7232A2BA95060003F44FA /* Her ExtensionExtension */,
+				18D289DE2B9713FE008742FB /* Res */,
+				18D289EE2B9713FF008742FB /* ResTests */,
+				18D289F82B9713FF008742FB /* ResUITests */,
+				18F7232A2BA95060003F44FA /* Res ExtensionExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -499,17 +500,17 @@
 /* Begin PBXTargetDependency section */
 		18D289F12B9713FF008742FB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 18D289DE2B9713FE008742FB /* Her */;
+			target = 18D289DE2B9713FE008742FB /* Res */;
 			targetProxy = 18D289F02B9713FF008742FB /* PBXContainerItemProxy */;
 		};
 		18D289FB2B9713FF008742FB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 18D289DE2B9713FE008742FB /* Her */;
+			target = 18D289DE2B9713FE008742FB /* Res */;
 			targetProxy = 18D289FA2B9713FF008742FB /* PBXContainerItemProxy */;
 		};
 		18F7233E2BA95062003F44FA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 18F7232A2BA95060003F44FA /* Her ExtensionExtension */;
+			target = 18F7232A2BA95060003F44FA /* Res ExtensionExtension */;
 			targetProxy = 18F7233D2BA95062003F44FA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -649,7 +650,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Her/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Her;
+				INFOPLIST_KEY_CFBundleDisplayName = Res;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCameraUsageDescription = "The camera is needed for some of the audio libraries.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "The app needs to access your microphone to chat.";
@@ -692,7 +693,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Her/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Her;
+				INFOPLIST_KEY_CFBundleDisplayName = Res;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCameraUsageDescription = "The camera is needed for some of the audio libraries.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "The app needs to access your microphone to chat.";
@@ -738,7 +739,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Her.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Her";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Res.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Res";
 			};
 			name = Debug;
 		};
@@ -758,7 +759,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Her.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Her";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Res.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Res";
 			};
 			name = Release;
 		};
@@ -867,7 +868,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		18D289DA2B9713FE008742FB /* Build configuration list for PBXProject "Her" */ = {
+		18D289DA2B9713FE008742FB /* Build configuration list for PBXProject "Res" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18D28A012B9713FF008742FB /* Debug */,
@@ -876,7 +877,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18D28A032B9713FF008742FB /* Build configuration list for PBXNativeTarget "Her" */ = {
+		18D28A032B9713FF008742FB /* Build configuration list for PBXNativeTarget "Res" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18D28A042B9713FF008742FB /* Debug */,
@@ -885,7 +886,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18D28A062B9713FF008742FB /* Build configuration list for PBXNativeTarget "HerTests" */ = {
+		18D28A062B9713FF008742FB /* Build configuration list for PBXNativeTarget "ResTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18D28A072B9713FF008742FB /* Debug */,
@@ -894,7 +895,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18D28A092B9713FF008742FB /* Build configuration list for PBXNativeTarget "HerUITests" */ = {
+		18D28A092B9713FF008742FB /* Build configuration list for PBXNativeTarget "ResUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18D28A0A2B9713FF008742FB /* Debug */,
@@ -903,7 +904,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18F723402BA95062003F44FA /* Build configuration list for PBXNativeTarget "Her ExtensionExtension" */ = {
+		18F723402BA95062003F44FA /* Build configuration list for PBXNativeTarget "Res ExtensionExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18F723412BA95062003F44FA /* Debug */,
@@ -921,6 +922,14 @@
 			requirement = {
 				branch = main;
 				kind = branch;
+			};
+		};
+		18F07E032BD1C1A300E5B28D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
