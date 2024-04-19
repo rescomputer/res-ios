@@ -35,6 +35,9 @@ extension View {
     func applyScrollViewEdgeFadeLight() -> some View {
         self.modifier(ScrollViewEdgeFadeLight())
     }
+    func scaleUpAnimation() -> some View {
+        self.modifier(ScaleUpAnimation())
+    }
 }
 
 struct FadeInEffect: ViewModifier {
@@ -44,8 +47,22 @@ struct FadeInEffect: ViewModifier {
         content
             .opacity(isShowing ? 1 : 0)
             .onAppear {
-                withAnimation(.easeInOut(duration: 0.1)) {
+                withAnimation(.easeIn(duration: 0.1)) {
                     isShowing = true
+                }
+            }
+    }
+}
+
+struct ScaleUpAnimation: ViewModifier {
+    @State private var isAnimating = false
+
+    func body(content: Content) -> some View {
+        content
+            .scaleEffect(isAnimating ? 1.0 : 0)
+            .onAppear {
+                withAnimation(Animation.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0)) {
+                    isAnimating = true
                 }
             }
     }

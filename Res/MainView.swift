@@ -52,26 +52,61 @@ struct MainView: View {
             }
             Spacer()
 
-            // Start Button
-            Button {
-                Task {  await callManager.handleCallAction() }
-            } label: {
-                Text(callManager.buttonText)
+                // Start Button
+                ZStack {
+                            if callManager.callState == .loading {
+                                HStack(spacing: 10) {
+                                    Loader()
+                                        .frame(width: 17, height: 17)
+                                        .scaleUpAnimation()
+                                    Text(callManager.buttonText)
+                                        .fadeInEffect()
+
+                                }
+                            } else {
+                                    Text(callManager.buttonText)
+                                        .fadeInEffect()
+                            }
+                    }
                     .font(.system(.title2, design: .rounded))
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding()
+                    .frame(height: 60)
                     .frame(maxWidth: .infinity)
                     .background(callManager.buttonColor)
                     .cornerRadius(50)
                     .overlay(
+                    // Inner dark stroke
                         RoundedRectangle(cornerRadius: 50)
                             .stroke(Color.black.opacity(1), lineWidth: 1)
                     )
-            }
-            .pressAnimation()
-            .buttonStyle(PlainButtonStyle())
-
+                    .overlay(
+                    // Inner light stroke
+                        RoundedRectangle(cornerRadius: 50, style: .continuous)
+                            .strokeBorder(
+                                LinearGradient(
+                                colors: [
+                                    Color.white.opacity(0.5),
+                                    Color.white.opacity(0),
+                                    Color.black.opacity(0.5)
+                                ],
+                                startPoint: .top,
+                                endPoint: .bottom
+                                ),
+                                lineWidth: 2
+                            )
+                            .blendMode(.overlay)
+                            //.opacity(0.3)
+                    )
+                    .onTapGesture {
+                        Task {  await callManager.handleCallAction() }
+                        let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                        impactMed.impactOccurred()
+                    }
+                    .padding(.top, 5)
+                    .pressAnimation()
+                    .opacity(1)                
             
             .disabled(callManager.callState == .loading)
             
@@ -81,15 +116,19 @@ struct MainView: View {
                         let impactMed = UIImpactFeedbackGenerator(style: .soft)
                         impactMed.impactOccurred()
                     }) {
-                        HStack {
+                        HStack(spacing: 10) {
                             Image(systemName: "waveform")
-                                .resizable()
-                                .frame(width: 24, height: 24)
+                                .font(.system(size: 22))
                                 .foregroundColor(Color.white.opacity(0.5))
-                                // .padding()
+                        if isModalStepTwoEnabled {
+                            Text("Personality")
+                                .font(.system(size: 18))
+                                .foregroundColor(Color.white.opacity(0.6))
+                        } else {
                             Text("Personality & Voice")
                                 .font(.system(size: 18))
                                 .foregroundColor(Color.white.opacity(0.6))
+                        }
                     }
                 }
             }
