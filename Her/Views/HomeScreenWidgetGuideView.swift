@@ -96,13 +96,13 @@ extension HomeScreenWidgetGuideView {
             timelineStep(iconName: "hand.tap.fill", description: "Long-press on an empty space on your home screen and look for the '+' icon at the top-left corner of the screen.", imageName: "homescreen-step-one")
             
             // Step 2
-            timelineStep(iconName: "sparkle.magnifyingglass", description: "Search for Her in the widget gallery and tap on it to see the widget options.", imageName: "homescreen-step-two")
+            timelineStep(iconName: "sparkle.magnifyingglass", description: "Search for Res in the widget gallery and tap on it to see the widget options.", imageName: "homescreen-step-two")
             
             // Step 3
             timelineStep(iconName: "rectangle.stack.fill", description: "Choose the size that suits your preference – small, medium, or large – by tapping on it.", imageName: "homescreen-step-three")
             
             // Step 4
-            timelineStep(iconName: "hand.draw.fill", description: "Drag it to your desired location and exit jiggle mode to enjoy instant access to her whenever you want to talk.", imageName: "homescreen-step-four", isLastStep: true)
+            timelineStep(iconName: "hand.draw.fill", description: "Drag it to your desired location and exit jiggle mode to enjoy instant access to Res whenever you want to talk.", imageName: "homescreen-step-four", isLastStep: true)
         }
         .padding(.top, 10)
     }

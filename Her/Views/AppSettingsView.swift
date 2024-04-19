@@ -302,7 +302,7 @@ extension AppSettingsView {
                                     .bold()
                                     .foregroundColor(Color.black.opacity(1))
                                     .padding(.bottom, 2)
-                                Text("How we handle conversation audio within “Her”.")
+                                Text("How we handle conversation audio within “Res”.")
                                     .font(.system(size: 14))
                                     .foregroundColor(Color.black.opacity(0.5))
 

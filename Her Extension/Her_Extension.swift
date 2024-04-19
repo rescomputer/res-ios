@@ -191,43 +191,6 @@ struct HerAccessoryCircularEntryView: View {
     }
 }
 
-//struct HerAccessorySquareEntryView: View {
-//    var entry: Provider.Entry
-//
-//    var body: some View {
-//        ZStack {
-//            Image("flow")
-//                .resizable()
-//                .aspectRatio(contentMode: .fill)
-//                .opacity(0.3)
-//                .scaleEffect(1.3)
-//            
-//            Text("Chat")
-//        }
-//        .containerBackground(for: .widget) {
-//            // Customize the background view for the accessory rectangular widget
-//            Color.white
-//        }
-//    }
-//}
-
-//struct Her_ExtensionEntryView : View {
-//    var entry: Provider.Entry
-//
-//    var body: some View {
-//        ZStack {
-//            Image("flow")
-//                .resizable()
-//                .aspectRatio(contentMode: .fill)
-//                .opacity(0.3)
-//                .offset(y: -20)
-//                .scaleEffect(1.3)
-//            
-//            Text("Start Conversation")
-//        }
-//    }
-//}
-
 struct Her_Extension: Widget {
     let kind: String = "Her_Extension"
 
