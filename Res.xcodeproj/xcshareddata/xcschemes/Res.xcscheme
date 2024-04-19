@@ -21,6 +21,20 @@
                ReferencedContainer = "container:Res.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "18F7232A2BA95060003F44FA"
+               BuildableName = "Res ExtensionExtension.appex"
+               BlueprintName = "Res ExtensionExtension"
+               ReferencedContainer = "container:Res.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
