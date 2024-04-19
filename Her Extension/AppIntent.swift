@@ -1,6 +1,6 @@
 //
 //  AppIntent.swift
-//  Her Extension
+//  Res Extension
 //
 //  Created by Richard Burton on 19/03/2024.
 //

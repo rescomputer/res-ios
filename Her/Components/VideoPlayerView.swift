@@ -1,6 +1,6 @@
 //
 //  VideoPlayerView.swift
-//  Her
+//  Res
 //
 //  Created by Daniel Berezhnoy on 3/15/24.
 //

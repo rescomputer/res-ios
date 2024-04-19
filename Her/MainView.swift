@@ -1,6 +1,6 @@
 //
 //  HerApp.swift
-//  Her
+//  Res
 //
 //  Created by Richard Burton on 03/05/2024.
 //

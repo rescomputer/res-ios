@@ -1,6 +1,6 @@
 //
 //  HomeScreenWidgetGuideView.swift
-//  Her
+//  Res
 //
 //  Created by Steven Sarmiento on 4/2/24.
 //
@@ -72,14 +72,6 @@ struct HomeScreenWidgetGuideView: View {
                             .cornerRadius(15)
                             .padding(.bottom, 5)
                         
-                        // VStack {
-                        //     Text("Add a widget to your home screen to open Her quickly.")
-                        //         .bold()
-                        //         .font(.system(size: 18, design: .rounded))
-                        //         .foregroundColor(Color.white.opacity(0.7))
-                        //         .multilineTextAlignment(.center)
-                        //         .frame(maxWidth: .infinity)
-                        // }
                     }
                     .frame(maxWidth: .infinity, maxHeight: 120, alignment: .center)
 

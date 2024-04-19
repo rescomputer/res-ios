@@ -1,6 +1,6 @@
 //
 //  Her_Extension.swift
-//  Her Extension
+//  Res Extension
 //
 //  Created by Richard Burton on 19/03/2024.
 //
@@ -235,8 +235,8 @@ struct Her_Extension: Widget {
         AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
             HerEntryView(entry: entry)
         }
-        .configurationDisplayName("Her Widget")
-        .description("Start a conversation with Her")
+        .configurationDisplayName("Res Widget")
+        .description("Start a conversation with Res")
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .accessoryRectangular, .accessoryCircular])
     }
 }

@@ -1,6 +1,6 @@
 //
 //  LockScreenWidgetGuideView.swift
-//  Her
+//  Res
 //
 //  Created by Steven Sarmiento on 4/2/24.
 //
@@ -72,14 +72,6 @@ struct LockScreenWidgetGuideView: View {
                             .cornerRadius(15)
                             .padding(.bottom, 5)
                         
-                        // VStack {
-                        //     Text("Add a widget to your lock screen to access Her quickly on the go.")
-                        //         .bold()
-                        //         .font(.system(size: 18, design: .rounded))
-                        //         .foregroundColor(Color.white.opacity(0.7))
-                        //         .multilineTextAlignment(.center)
-                        //         .frame(maxWidth: .infinity)
-                        // }
                     }
                     .frame(maxWidth: .infinity, maxHeight: 120, alignment: .center)
 
@@ -112,7 +104,7 @@ extension LockScreenWidgetGuideView {
             timelineStep(iconName: "plus.circle.fill", description: "Add a widget to your lock screen, by selecting the Add Widget option.", imageName: "lockscreen-step-two")
             
             // Step 3
-            timelineStep(iconName: "sparkle.magnifyingglass", description: "Search for Her in the widget gallery and tap on it to see the widget options.", imageName: "lockscreen-step-three")
+            timelineStep(iconName: "sparkle.magnifyingglass", description: "Search for Res in the widget gallery and tap on it to see the widget options.", imageName: "lockscreen-step-three")
             
             // Step 4
             timelineStep(iconName: "hand.draw.fill", description: "Drag it to your desired location and exit the lockscreen customization mode.", imageName: "lockscreen-step-four", isLastStep: true)

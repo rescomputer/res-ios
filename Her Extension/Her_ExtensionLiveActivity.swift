@@ -20,7 +20,7 @@ struct Her_ExtensionLiveActivity: Widget {
                         .font(.system(size: 30))
                         .foregroundColor(context.state.sfSymbolName == "ellipsis" ? .gray : .green)
                     
-                    Text("Conversation with Her")
+                    Text("Conversation with Res")
                         .font(.headline)
                         .padding(.leading, 8)
                 }
@@ -37,14 +37,14 @@ struct Her_ExtensionLiveActivity: Widget {
                             .font(.system(size: 30))
                             .foregroundColor(context.state.sfSymbolName == "ellipsis" ? .gray : .green)
                         
-                        Text("Conversation with Her")
+                        Text("Conversation with Res")
                             .font(.headline)
                             .padding(.leading, 8)
                     }
                 }
                 
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text("Her")
+                    Text("Res")
                         .font(.subheadline)
                 }
                 
@@ -58,7 +58,7 @@ struct Her_ExtensionLiveActivity: Widget {
                     .imageScale(.small)
                     .foregroundColor(context.state.sfSymbolName == "ellipsis" ? .gray : .green)
             } compactTrailing: {
-                Text("Her")
+                Text("Res")
                     .font(.caption)
             } minimal: {
                 Image(systemName: context.state.sfSymbolName)

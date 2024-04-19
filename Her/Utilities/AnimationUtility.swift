@@ -1,6 +1,6 @@
 //
 //  AnimationUtility.swift
-//  Her
+//  Res
 //
 //  Created by Steven Sarmiento on 3/21/24.
 //

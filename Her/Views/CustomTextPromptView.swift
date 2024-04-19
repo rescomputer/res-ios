@@ -1,6 +1,6 @@
 //
 //  CustomTextPromptView.swift
-//  Her
+//  Res
 //
 //  Created by Steven Sarmiento on 4/4/24.
 //

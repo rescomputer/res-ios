@@ -1,6 +1,6 @@
 //
 //  UIScreen+Extensions.swift
-//  Her
+//  Res
 //
 //  Created by Steven Sarmiento on 4/2/24.
 //
