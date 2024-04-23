@@ -21,7 +21,7 @@ struct VAPIExampleView: View {
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
                     .padding()
-                    .background(callManager.callStateColor)
+//                    .background(callManager.callStateColor)
                     .cornerRadius(10)
                 
                 Spacer()
@@ -37,7 +37,7 @@ struct VAPIExampleView: View {
                         .foregroundColor(.white)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(callManager.buttonColor)
+//                        .background(callManager.buttonColor)
                         .cornerRadius(10)
                 }
                 .disabled(callManager.callState == .loading)

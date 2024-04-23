@@ -221,19 +221,29 @@ extension CallManager {
         }
     }
     
-    var callStateColor: Color {
-        switch callState {
-            case .started: return .green.opacity(0.8)
-            case .loading: return .orange.opacity(0.8)
-            case .ended: return .gray.opacity(0.8)
-        }
+    // var callStateColor: Color {
+    //     switch callState {
+    //         case .started: return .green.opacity(0.8)
+    //         case .loading: return .orange.opacity(0.8)
+    //         case .ended: return .gray.opacity(0.8)
+    //     }
+    // }
+    var buttonGradient: LinearGradient {
+    switch callState {
+    case .loading:
+        return LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
+    case .ended:
+        return LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
+    case .started:
+        return LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
     }
+}
     
     var buttonText: String {
         callState == .loading ? "Connecting" : (callState == .ended ? "Start Conversation" : "End Conversation")
     }
     
-    var buttonColor: Color {
-        callState == .loading ? Color(red: 1, green: 0.8, blue: 0.49) : (callState == .ended ? Color(red: 0.106, green: 0.149, blue: 0.149) : Color(red: 0.957, green: 0.298, blue: 0.424))
-    }
+    // var buttonColor: Color {
+    //     callState == .loading ? Color(red: 1, green: 0.42, blue: 0) : (callState == .ended ? Color(red: 1, green: 0.42, blue: 0) : Color(red: 1, green: 0.42, blue: 0))
+    // }
 }

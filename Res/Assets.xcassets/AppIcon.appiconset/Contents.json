@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Icon-App-iTunes.png",
+      "filename" : "res-icon.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"

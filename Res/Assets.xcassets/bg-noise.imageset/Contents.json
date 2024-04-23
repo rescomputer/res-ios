@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "spiral.png",
+      "filename" : "bg-noise.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "spiral@2x.png",
+      "filename" : "bg-noise@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "spiral@3x.png",
+      "filename" : "bg-noise@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
