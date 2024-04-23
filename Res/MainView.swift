@@ -28,86 +28,31 @@ struct MainView: View {
             VStack {
                 greenScreen
                 mainButton
-                sheetButtons
+                setupButtons
                 Spacer()
             }
             .padding()
             .padding(.top, 50)
             .padding(.horizontal, 10)
             
-            .overlay(
-                Image("corner-tick")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 100) // Adjust the size as needed
-                    .alignmentGuide(HorizontalAlignment.leading) { d in d[.leading] }
-                    .alignmentGuide(VerticalAlignment.bottom) { d in d[.bottom] },
-                alignment: .bottomLeading
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 55)
-                    .stroke(Color(red: 0.655, green: 0.627, blue: 0.569),
-                            lineWidth: 2)
-                    .shadow(color: Color(red: 0.655, green: 0.627, blue: 0.569),
-                            radius: 4, x: 0, y: 0)
-                    .clipShape(
-                        RoundedRectangle(cornerRadius: 55)
-                    )
-                    .shadow(color: Color.black, radius: 3, x: 0, y: 0)
-                    .clipShape(
-                        RoundedRectangle(cornerRadius: 55)
-                    )
-            )
+            .overlay(cornerTick, alignment: .bottomLeading)
+            .overlay(borderShadow)
             
-            .background(Color(red: 1, green: 0.98, blue: 0.933))
+            .background(backgroundColor)
             
-            .overlay(
-                Image("bg-noise")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .opacity(0.5)
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 55)
-                    .strokeBorder(LinearGradient(gradient: Gradient(colors: [.white.opacity(1), .white.opacity(1)]), startPoint: .leading, endPoint: .trailing), lineWidth: 1)
-            )
+            .overlay(backgroundNoise)
+            .overlay(whiteBorder)
             
             .clipShape(RoundedRectangle(cornerRadius: 55))
         }
-        .onAppear { callManager.setupVapi() }
         .edgesIgnoringSafeArea(.all)
+        .onAppear { callManager.setupVapi() }
         
-        .background(
-            LinearGradient(
-                gradient: Gradient(colors: [Color.black, Color.black]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-        )
-        
-        .overlay {
-            if let activeModal = activeModal {
-                switch activeModal {
-                    case .voiceSettingsModal:
-                        showVoiceSettingsModal(keyboardResponder: keyboardResponder)
-                }
-            }
-            if isAppSettingsViewShowing {
-                AppSettingsView(
-                    isPresented: $isAppSettingsViewShowing,
-                    activeModal: $activeModal,
-                    selectedOption: $selectedOption,
-                    isModalStepTwoEnabled: $isModalStepTwoEnabled,
-                    callManager: callManager,
-                    keyboardResponder: keyboardResponder
-                )
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .edgesIgnoringSafeArea(.all)
-                .fadeInEffect()
-            }
-        }
+        .overlay { voiceSetupSheet }
+        .overlay { if isAppSettingsViewShowing { appSettingsSheet } }
     }
     
+    // Components
     private var greenScreen: some View {
         ZStack {
             VStack {
@@ -220,7 +165,7 @@ struct MainView: View {
         .padding(.top, 20)
     }
     
-    private var sheetButtons: some View {
+    private var setupButtons: some View {
         HStack(spacing: 20) {
             Spacer()
             
@@ -325,8 +270,65 @@ struct MainView: View {
         .padding(.top, 20)
     }
     
-    private var animation: Animation {
-        .linear(duration: 0.5).repeatForever()
+    private var voiceSetupSheet: some View {
+        ZStack {
+            if let activeModal {
+                switch activeModal {
+                    case .voiceSettingsModal:
+                        showVoiceSettingsModal(keyboardResponder: keyboardResponder)
+                }
+            }
+        }
+    }
+    
+    private var appSettingsSheet: some View {
+        AppSettingsView(
+            isPresented: $isAppSettingsViewShowing,
+            activeModal: $activeModal,
+            selectedOption: $selectedOption,
+            isModalStepTwoEnabled: $isModalStepTwoEnabled,
+            callManager: callManager,
+            keyboardResponder: keyboardResponder
+        )
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .edgesIgnoringSafeArea(.all)
+        .fadeInEffect()
+    }
+    
+    private var cornerTick: some View {
+        Image(.cornerTick)
+            .resizable()
+            .scaledToFit()
+            .frame(width: 100, height: 100)
+            .alignmentGuide(HorizontalAlignment.leading) { d in d[.leading] }
+            .alignmentGuide(VerticalAlignment.bottom) { d in d[.bottom] }
+    }
+    
+    // Shadows, borders, etc
+    private var borderShadow: some View {
+        RoundedRectangle(cornerRadius: 55)
+            .stroke(Color(red: 0.655, green: 0.627, blue: 0.569),lineWidth: 2)
+            .shadow(color: Color(red: 0.655, green: 0.627, blue: 0.569),radius: 4, x: 0, y: 0)
+            .clipShape(RoundedRectangle(cornerRadius: 55))
+        
+            .shadow(color: Color.black, radius: 3, x: 0, y: 0)
+            .clipShape(RoundedRectangle(cornerRadius: 55))
+    }
+    
+    private var backgroundColor: some View {
+        Color(red: 1, green: 0.98, blue: 0.933)
+    }
+    
+    private var backgroundNoise: some View {
+        Image(.bgNoise)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .opacity(0.5)
+    }
+    
+    private var whiteBorder: some View {
+        RoundedRectangle(cornerRadius: 55)
+            .strokeBorder(LinearGradient(gradient: Gradient(colors: [.white.opacity(1), .white.opacity(1)]), startPoint: .leading, endPoint: .trailing), lineWidth: 1)
     }
 }
 
