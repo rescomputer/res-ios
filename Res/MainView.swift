@@ -25,23 +25,8 @@ struct MainView: View {
                         .frame(height: 43) 
                         
                         VStack {
-
-                            // Top Nav
-                            HStack {
-                                Spacer()
-                                Button(action: {
-                                    withAnimation(.easeInOut(duration: 0.15)) {
-                                        isAppSettingsViewShowing = true
-                                    }
-                                    let impactMed = UIImpactFeedbackGenerator(style: .soft)
-                                    impactMed.impactOccurred()
-                                }) {
-                                    Image(systemName: "gearshape.fill")
-                                        .font(.system(size: 20))
-                                        .bold()
-                                        .foregroundColor(.white.opacity(0.3))
-                                }
-                            }
+                            Spacer()
+                             .frame(height: 10)
                             ZStack {
                                 VStack {
                                     Image("roboto")
@@ -149,8 +134,12 @@ struct MainView: View {
                                 .shadow(color: Color.black.opacity(0.5), radius: 3, x: 0, y: 0)   
                             
                             .disabled(callManager.callState == .loading)
-                            
-                            HStack {
+
+                        HStack(spacing: 20) {
+                            Spacer()
+
+                            //personality & voice
+                            ZStack {
                                 Button(action: {
                                         self.activeModal = .voiceSettingsModal
                                         let impactMed = UIImpactFeedbackGenerator(style: .soft)
@@ -159,21 +148,97 @@ struct MainView: View {
                                         HStack(spacing: 10) {
                                             Image(systemName: "waveform")
                                                 .font(.system(size: 22))
-                                                .foregroundColor(Color.white.opacity(0.5))
-                                        if isModalStepTwoEnabled {
-                                            Text("Personality")
-                                                .font(.system(size: 18))
-                                                .foregroundColor(Color.white.opacity(0.6))
-                                        } else {
-                                            Text("Personality & Voice")
-                                                .font(.system(size: 18))
-                                                .foregroundColor(Color.white.opacity(0.6))
-                                        }
+                                                .foregroundColor(Color.black.opacity(0.5))
+                                        // if isModalStepTwoEnabled {
+                                        //     Text("Personality")
+                                        //         .font(.system(size: 18))
+                                        //         .foregroundColor(Color.black.opacity(0.6))
+                                        // } else {
+                                        //     Text("Personality & Voice")
+                                        //         .font(.system(size: 18))
+                                        //         .foregroundColor(Color.black.opacity(0.6))
+                                        // }
                                     }
                                 }
+                                .padding()
+                                .frame(width: 60, height: 60)
+                                .background(
+                                    LinearGradient(gradient: Gradient(colors: [Color(red: 0.729, green: 0.725, blue: 0.71), Color(red: 1, green: 0.98, blue: 0.933)]), startPoint: .top, endPoint: .bottom)
+                                )
+                                .cornerRadius(50)
+                                .overlay(
+                                    // Inner light stroke
+                                    RoundedRectangle(cornerRadius: 50, style: .continuous)
+                                        .strokeBorder(
+                                            LinearGradient(
+                                            colors: [
+                                                Color.white.opacity(0.5),
+                                                Color.white.opacity(0),
+                                                Color.black.opacity(0.5)
+                                            ],
+                                            startPoint: .top,
+                                            endPoint: .bottom
+                                        ),
+                                        lineWidth: 3
+                                        )
+                                        .blendMode(.overlay)
+                                        //.opacity(0.3)
+                                        )
+                                .pressAnimation()
+                                .padding(2)
                             }
-                            .padding(.bottom, 10)    
-                            Spacer()
+                            .background(RoundedRectangle(cornerRadius: 50)
+                            .fill(Color.black))
+                            .shadow(color: Color.black.opacity(0.5), radius: 3, x: 0, y: 0) 
+
+                            // settings    
+                            ZStack {
+                                Button(action: {
+                                    withAnimation(.easeInOut(duration: 0.15)) {
+                                        isAppSettingsViewShowing = true
+                                    }
+                                    let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                                    impactMed.impactOccurred()
+                                }) {
+                                    Image(systemName: "gearshape.fill")
+                                        .font(.system(size: 20))
+                                        .bold()
+                                        .foregroundColor(.black.opacity(0.3))
+                                }
+                                .padding()
+                                .frame(width: 60, height: 60)
+                                .background(
+                                    LinearGradient(gradient: Gradient(colors: [Color(red: 0.729, green: 0.725, blue: 0.71), Color(red: 1, green: 0.98, blue: 0.933)]), startPoint: .top, endPoint: .bottom)
+                                )
+                                .cornerRadius(50)
+                                .overlay(
+                                    // Inner light stroke
+                                    RoundedRectangle(cornerRadius: 50, style: .continuous)
+                                        .strokeBorder(
+                                            LinearGradient(
+                                            colors: [
+                                                Color.white.opacity(0.5),
+                                                Color.white.opacity(0),
+                                                Color.black.opacity(0.5)
+                                            ],
+                                            startPoint: .top,
+                                            endPoint: .bottom
+                                        ),
+                                        lineWidth: 3
+                                        )
+                                        .blendMode(.overlay)
+                                        //.opacity(0.3)
+                                        )
+                                .pressAnimation()
+                                .padding(2)
+                            }  
+                            .background(RoundedRectangle(cornerRadius: 50)
+                            .fill(Color.black))
+                            .shadow(color: Color.black.opacity(0.5), radius: 3, x: 0, y: 0)                          
+                        }
+                        .padding(.top, 10)
+                        
+                        Spacer()
                         }
                         .padding()
                         .padding(.horizontal, 10)
