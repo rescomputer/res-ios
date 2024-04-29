@@ -53,10 +53,10 @@ struct VoiceSettingsView: View {
                 )
             }
             .overlay(
-                RoundedRectangle(cornerRadius: 0)
+                RoundedRectangle(cornerRadius: 5)
                     .fill(Color.black.opacity(0.05))
                     .frame(maxWidth: .infinity)
-                    .frame(height: 140),
+                    .frame(height: 120),
                      alignment: .bottom
                 )
             .overlay(
@@ -106,6 +106,13 @@ struct VoiceSettingsView: View {
                 )
             }
         }
-        .padding(.vertical)  
-        }
+        .padding(.vertical)
+        .background(
+                RoundedRectangle(cornerRadius: 40)
+                    .fill(Color.white)
+        ) 
+        .clipShape(
+             RoundedRectangle(cornerRadius: 40)
+        )
+    }
 }
