@@ -19,6 +19,8 @@ struct Res_ExtensionAttributes: ActivityAttributes {
 }
 
 class CallManager: ObservableObject {
+    @Published var currentTranscript: String = ""
+
     enum CallState {
         case started, loading, ended
     }
@@ -91,8 +93,10 @@ class CallManager: ObservableObject {
                         print(event)
                     case .metadata:
                         print(event)
-                    case .transcript:
-                        print(event)
+                    case .transcript(let transcriptEvent):
+                        DispatchQueue.main.async {
+                            self?.currentTranscript = transcriptEvent.transcript
+                        }
                     case .error(let error):
                         print("Error: \(error)")
                 }
