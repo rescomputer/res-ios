@@ -102,7 +102,7 @@ struct MainView: View {
             RoundedRectangle(cornerRadius: 34)
                 .strokeBorder(LinearGradient(gradient: Gradient(colors: [Color(red: 0.878, green: 0.863, blue: 0.824), Color(red: 0.878, green: 0.863, blue: 0.824)]), startPoint: .bottom, endPoint: .leading), lineWidth: 12)
         )
-        .shadow(color: Color.black.opacity(0.2), radius: 3, x: 0, y: 0)
+        .shadow(color: Color.black.opacity(0.15), radius: 3, x: 0, y: 0)
     }
     
     private var mainButton: some View {
