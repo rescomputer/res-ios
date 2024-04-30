@@ -18,6 +18,9 @@ struct MainView: View {
     @State private var activeModal: ActiveModal?
     @Binding var isAppSettingsViewShowing: Bool
     @Binding var isModalStepTwoEnabled: Bool
+    
+    @ObservedObject var audioRecorder =  AudioRecorder()
+
 
     var body: some View {
         VStack(spacing: 25) {
@@ -54,7 +57,21 @@ struct MainView: View {
 
             // Start Button
             Button {
-                Task {  await callManager.handleCallAction() }
+                
+                
+                DispatchQueue.global().async {
+                    
+                    if (self.audioRecorder.isRecording) {
+                        self.audioRecorder.stopRecording()
+                    }
+                    else {
+                        self.audioRecorder.startRecording()
+                    }
+                }
+                Task {
+                    await callManager.handleCallAction()
+                }
+            
             } label: {
                 Text(callManager.buttonText)
                     .font(.system(.title2, design: .rounded))
@@ -98,7 +115,9 @@ struct MainView: View {
         }
         .padding()
         .padding(.horizontal, 10)
-        .onAppear { callManager.setupVapi() }
+        .onAppear {
+            callManager.setupVapi()
+        }
         .background {
             ZStack {
                 LinearGradient(
@@ -197,3 +216,8 @@ extension MainView {
         }
     }
 }
+
+
+
+
+

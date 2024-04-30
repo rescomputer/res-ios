@@ -9,6 +9,7 @@ import Combine
 import SwiftUI
 import Vapi
 import ActivityKit
+import os.log
 
 struct Her_ExtensionAttributes: ActivityAttributes {
     struct ContentState: Codable, Hashable {
@@ -19,6 +20,7 @@ struct Her_ExtensionAttributes: ActivityAttributes {
 }
 
 class CallManager: ObservableObject {
+
     enum CallState {
         case started, loading, ended
     }
@@ -121,7 +123,7 @@ class CallManager: ObservableObject {
     // This method should generate and play a short audio clip using the selected voice and speed settings.
     }
     
-    @MainActor
+//    @MainActor
     func handleCallAction() async {
         if callState == .ended {
             await startCall()
@@ -130,9 +132,13 @@ class CallManager: ObservableObject {
         }
     }
     
-    @MainActor
+//    @MainActor
     func startCall() async {
         callState = .loading
+
+
+
+
         let assistant = [
             "model": [
                 "provider": "openai",
@@ -203,6 +209,8 @@ class CallManager: ObservableObject {
     
     func endCall()  {
         vapi.stop()
+
+        
         Task {
             await activity?.end(dismissalPolicy: .immediate)
             DispatchQueue.main.async {
@@ -230,10 +238,25 @@ extension CallManager {
     }
     
     var buttonText: String {
-        callState == .loading ? "Loading..." : (callState == .ended ? "Start Conversation" : "End Conversation")
+        if callState == .loading {
+            return "Loading..."
+        }
+        if (callState == .ended) {
+            return "Start Conversation"
+        }
+        return "End Conversation"
     }
     
     var buttonColor: Color {
-        callState == .loading ? Color(red: 1, green: 0.8, blue: 0.49) : (callState == .ended ? Color(red: 0.106, green: 0.149, blue: 0.149) : Color(red: 0.957, green: 0.298, blue: 0.424))
+        if callState == .loading {
+            return Color(red: 1, green: 0.8, blue: 0.49)
+        }
+        if callState == .ended {
+            return Color(red: 0.106, green: 0.149, blue: 0.149)
+        } 
+        
+        // default
+        return Color(red: 0.957, green: 0.298, blue: 0.424)
+        
     }
 }
