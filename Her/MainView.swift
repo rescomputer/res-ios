@@ -54,6 +54,10 @@ struct MainView: View {
                     .foregroundColor(Color.white.opacity(0.5))
             }
             Spacer()
+            
+            AudioVisualizerView(audioRecorder: audioRecorder)
+                          .frame(height: 100)
+                          .padding()
 
             // Start Button
             Button {

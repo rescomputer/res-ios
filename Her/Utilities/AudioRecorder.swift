@@ -9,6 +9,8 @@ import Foundation
 import Combine
 import AVFoundation
 
+
+
 class AudioRecorder: ObservableObject {
     @Published var isRecording: Bool = false
     @Published var amplitude: Float = 1.0
@@ -45,7 +47,6 @@ class AudioRecorder: ObservableObject {
         minAmplitude = min(minAmplitude, rmsValue)
         maxAmplitude = max(maxAmplitude, rmsValue)
         let normalizedAmplitude = (rmsValue - minAmplitude) / (maxAmplitude - minAmplitude)
-//        print(normalizedAmplitude)
         DispatchQueue.main.async { [weak self] in
             self?.amplitude = normalizedAmplitude
         }
@@ -110,3 +111,4 @@ class AudioRecorder: ObservableObject {
      
     }
 }
+
