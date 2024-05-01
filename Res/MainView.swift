@@ -10,7 +10,6 @@ import UIKit
 import ActivityKit
 
 struct MainView: View {
-    
     @FocusState private var isTextFieldFocused: Bool
     
     @StateObject private var callManager = CallManager()
@@ -24,15 +23,28 @@ struct MainView: View {
     @State private var activeModal: ActiveModal?
     
     var body: some View {
-        VStack {
+        
+        ZStack {
+            LinearGradient(
+                gradient: Gradient(colors: [Color(red: 0.047, green: 0.071, blue: 0.071), Color(red: 0.047, green: 0.071, blue: 0.071)]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .edgesIgnoringSafeArea(.all)
+
             VStack {
                 greenScreen
+                Image("res-marker")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: .infinity, maxHeight: 5)
+                    .padding(.top, 10)
                 mainButton
                 setupButtons
                 Spacer()
             }
             .padding()
-            .padding(.top, 50)
+            .padding(.top, 10)
             .padding(.horizontal, 10)
             
             .overlay(cornerTick, alignment: .bottomLeading)
@@ -45,7 +57,6 @@ struct MainView: View {
             
             .clipShape(RoundedRectangle(cornerRadius: 55))
         }
-        .edgesIgnoringSafeArea(.all)
         .onAppear { callManager.setupVapi() }
         
         .overlay { voiceSetupSheet }
@@ -61,6 +72,11 @@ struct MainView: View {
                     .scaledToFit()
                     .frame(width: 150, height: 150)
                     .padding(.bottom, 100)
+                // Text(callManager.currentTranscript)
+                //     .frame(maxWidth: .infinity, alignment: .center)
+                //     .padding()
+                //     .background(Color.white.opacity(0.5))
+                //     .cornerRadius(10)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: 500)
@@ -71,6 +87,7 @@ struct MainView: View {
                 endPoint: .bottom
             )
         )
+        .clipShape(RoundedRectangle(cornerRadius: 34))
         .overlay(
             Image("bg-noise")
                 .resizable()
@@ -78,15 +95,14 @@ struct MainView: View {
                 .opacity(0.5)
         )
         .overlay(
-            RoundedRectangle(cornerRadius: 30)
-                .strokeBorder(LinearGradient(gradient: Gradient(colors: [.black, .black]), startPoint: .top, endPoint: .trailing), lineWidth: 12)
+            RoundedRectangle(cornerRadius: 34)
+                .strokeBorder(LinearGradient(gradient: Gradient(colors: [.black, .black]), startPoint: .top, endPoint: .trailing), lineWidth: 14)
         )
         .overlay(
-            RoundedRectangle(cornerRadius: 30)
-                .strokeBorder(LinearGradient(gradient: Gradient(colors: [Color(red: 0.878, green: 0.863, blue: 0.824), Color(red: 1, green: 0.98, blue: 0.933)]), startPoint: .top, endPoint: .trailing), lineWidth: 10)
+            RoundedRectangle(cornerRadius: 34)
+                .strokeBorder(LinearGradient(gradient: Gradient(colors: [Color(red: 0.878, green: 0.863, blue: 0.824), Color(red: 0.878, green: 0.863, blue: 0.824)]), startPoint: .bottom, endPoint: .leading), lineWidth: 12)
         )
-        .clipShape(RoundedRectangle(cornerRadius: 30))
-        .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 0)
+        .shadow(color: Color.black.opacity(0.15), radius: 3, x: 0, y: 0)
     }
     
     private var mainButton: some View {
@@ -176,19 +192,10 @@ struct MainView: View {
                     let impactMed = UIImpactFeedbackGenerator(style: .soft)
                     impactMed.impactOccurred()
                 }) {
-                    HStack(spacing: 10) {
-                        Image(systemName: "waveform")
-                            .font(.system(size: 22))
-                            .foregroundColor(Color.black.opacity(0.5))
-                        // if isModalStepTwoEnabled {
-                        //     Text("Personality")
-                        //         .font(.system(size: 18))
-                        //         .foregroundColor(Color.black.opacity(0.6))
-                        // } else {
-                        //     Text("Personality & Voice")
-                        //         .font(.system(size: 18))
-                        //         .foregroundColor(Color.black.opacity(0.6))
-                        // }
+                    ZStack {
+                        Image(systemName: "brain.fill")
+                            .font(.system(size: 16))
+                            .foregroundColor(.black.opacity(0.5))
                     }
                 }
                 .padding()
@@ -231,10 +238,12 @@ struct MainView: View {
                     let impactMed = UIImpactFeedbackGenerator(style: .soft)
                     impactMed.impactOccurred()
                 }) {
-                    Image(systemName: "gearshape.fill")
-                        .font(.system(size: 20))
-                        .bold()
-                        .foregroundColor(.black.opacity(0.3))
+                    ZStack {
+                        Image(systemName: "gearshape.fill")
+                            .font(.system(size: 18))
+                            .foregroundColor(.black.opacity(0.5))
+                    }
+
                 }
                 .padding()
                 .frame(width: 60, height: 60)
@@ -299,7 +308,7 @@ struct MainView: View {
         Image(.cornerTick)
             .resizable()
             .scaledToFit()
-            .frame(width: 100, height: 100)
+            .frame(width: 125, height: 125)
             .alignmentGuide(HorizontalAlignment.leading) { d in d[.leading] }
             .alignmentGuide(VerticalAlignment.bottom) { d in d[.bottom] }
     }
@@ -369,10 +378,6 @@ extension MainView {
                 isModalStepTwoEnabled: $isModalStepTwoEnabled,
                 callManager: callManager,
                 keyboardResponder: keyboardResponder)
-            .background(
-                RoundedRectangle(cornerRadius: 40)
-                    .fill(Color.white)
-            )
         }
     }
 }

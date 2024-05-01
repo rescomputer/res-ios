@@ -19,6 +19,8 @@ struct Res_ExtensionAttributes: ActivityAttributes {
 }
 
 class CallManager: ObservableObject {
+    @Published var currentTranscript: String = ""
+
     enum CallState {
         case started, loading, ended
     }
@@ -91,8 +93,10 @@ class CallManager: ObservableObject {
                         print(event)
                     case .metadata:
                         print(event)
-                    case .transcript:
-                        print(event)
+                    case .transcript(let transcriptEvent):
+                        DispatchQueue.main.async {
+                            self?.currentTranscript = transcriptEvent.transcript
+                        }
                     case .error(let error):
                         print("Error: \(error)")
                 }
@@ -221,13 +225,6 @@ extension CallManager {
         }
     }
     
-    // var callStateColor: Color {
-    //     switch callState {
-    //         case .started: return .green.opacity(0.8)
-    //         case .loading: return .orange.opacity(0.8)
-    //         case .ended: return .gray.opacity(0.8)
-    //     }
-    // }
     var buttonGradient: LinearGradient {
     switch callState {
     case .loading:
@@ -242,8 +239,4 @@ extension CallManager {
     var buttonText: String {
         callState == .loading ? "Connecting" : (callState == .ended ? "Start Conversation" : "End Conversation")
     }
-    
-    // var buttonColor: Color {
-    //     callState == .loading ? Color(red: 1, green: 0.42, blue: 0) : (callState == .ended ? Color(red: 1, green: 0.42, blue: 0) : Color(red: 1, green: 0.42, blue: 0))
-    // }
 }
