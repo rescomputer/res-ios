@@ -1,3 +1,4 @@
-Config.xcconfig
+Release.xcconfig
+Debug.xcconfig
 .DS_Store
 xcuserdata/
