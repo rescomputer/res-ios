@@ -19,6 +19,9 @@ struct Config {
         guard let value = Bundle.main.object(forInfoDictionaryKey: key) as? String else {
             fatalError("Missing key \(key) in Info.plist")
         }
+        print(value)
+        print(value)
+        
 
         precondition(
             !value.isEmpty,

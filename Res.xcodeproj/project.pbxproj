@@ -40,9 +40,10 @@
 		F3B5AB1E2BAD062D009CDBB5 /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */; };
 		F3B5AB212BAD08F1009CDBB5 /* AnimationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB202BAD08F1009CDBB5 /* AnimationUtility.swift */; };
 		F3B5AB252BAE91E3009CDBB5 /* CustomLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB242BAE91E3009CDBB5 /* CustomLinkView.swift */; };
-		FA7944DA2BE637390035EC8B /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = FA7944D92BE637390035EC8B /* Debug.xcconfig */; };
 		FA7944DC2BE6D08C0035EC8B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7944DB2BE6D08C0035EC8B /* Config.swift */; };
-		FA7944DF2BE6DA2A0035EC8B /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = FA7944DE2BE6DA2A0035EC8B /* Release.xcconfig */; };
+		FA7944E42BE7168D0035EC8B /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7944E32BE7168D0035EC8B /* AuthView.swift */; };
+		FA7944E72BE7172C0035EC8B /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = FA7944E62BE7172C0035EC8B /* Supabase */; };
+		FA7944E92BE717980035EC8B /* Supabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7944E82BE717980035EC8B /* Supabase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,9 +122,12 @@
 		F3B5AB202BAD08F1009CDBB5 /* AnimationUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationUtility.swift; sourceTree = "<group>"; };
 		F3B5AB242BAE91E3009CDBB5 /* CustomLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLinkView.swift; sourceTree = "<group>"; };
 		FA7944D82BE636360035EC8B /* Config.template.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.template.xcconfig; sourceTree = "<group>"; };
-		FA7944D92BE637390035EC8B /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		FA7944DB2BE6D08C0035EC8B /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		FA7944DE2BE6DA2A0035EC8B /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		FA7944E12BE7135F0035EC8B /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		FA7944E22BE7136D0035EC8B /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		FA7944E32BE7168D0035EC8B /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		FA7944E82BE717980035EC8B /* Supabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Supabase.swift; sourceTree = "<group>"; };
+		FA7944EA2BE733C90035EC8B /* ResDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ResDebug.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,7 @@
 			files = (
 				18F7238D2BAC2C3C003F44FA /* Vapi in Frameworks */,
 				18F723892BAC2695003F44FA /* ActivityKit.framework in Frameworks */,
+				FA7944E72BE7172C0035EC8B /* Supabase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,7 +192,9 @@
 		18D289E12B9713FE008742FB /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				FA7944EA2BE733C90035EC8B /* ResDebug.entitlements */,
 				18D289E22B9713FE008742FB /* ResApp.swift */,
+				FA7944E32BE7168D0035EC8B /* AuthView.swift */,
 				18D289E42B9713FE008742FB /* MainView.swift */,
 				F3B5AB232BAD35BD009CDBB5 /* Views */,
 				F3B5AB222BAD358D009CDBB5 /* Managers */,
@@ -196,9 +203,10 @@
 				18D28A0F2B97178E008742FB /* Info.plist */,
 				18D289E62B9713FF008742FB /* Assets.xcassets */,
 				FA7944D82BE636360035EC8B /* Config.template.xcconfig */,
-				FA7944DE2BE6DA2A0035EC8B /* Release.xcconfig */,
-				FA7944D92BE637390035EC8B /* Debug.xcconfig */,
+				FA7944E22BE7136D0035EC8B /* Release.xcconfig */,
+				FA7944E12BE7135F0035EC8B /* Debug.xcconfig */,
 				FA7944DB2BE6D08C0035EC8B /* Config.swift */,
+				FA7944E82BE717980035EC8B /* Supabase.swift */,
 			);
 			path = Res;
 			sourceTree = "<group>";
@@ -293,6 +301,7 @@
 			name = Res;
 			packageProductDependencies = (
 				18F7238C2BAC2C3C003F44FA /* Vapi */,
+				FA7944E62BE7172C0035EC8B /* Supabase */,
 			);
 			productName = Her;
 			productReference = 18D289DF2B9713FE008742FB /* Res.app */;
@@ -392,6 +401,7 @@
 			packageReferences = (
 				18D28A0C2B971574008742FB /* XCRemoteSwiftPackageReference "ios" */,
 				18F07E032BD1C1A300E5B28D /* XCRemoteSwiftPackageReference "SnapKit" */,
+				FA7944E52BE717110035EC8B /* XCRemoteSwiftPackageReference "supabase-swift" */,
 			);
 			productRefGroup = 18D289E02B9713FE008742FB /* Products */;
 			projectDirPath = "";
@@ -410,9 +420,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA7944DA2BE637390035EC8B /* Debug.xcconfig in Resources */,
 				18D289E72B9713FF008742FB /* Assets.xcassets in Resources */,
-				FA7944DF2BE6DA2A0035EC8B /* Release.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,12 +459,14 @@
 				187277062B9B85A20079C460 /* VAPIExampleView.swift in Sources */,
 				18D289E52B9713FE008742FB /* MainView.swift in Sources */,
 				F31C494B2BC37C080075477D /* Loader.swift in Sources */,
+				FA7944E42BE7168D0035EC8B /* AuthView.swift in Sources */,
 				F31C49412BBE75C70075477D /* VoiceSettingsView.swift in Sources */,
 				18D289E32B9713FE008742FB /* ResApp.swift in Sources */,
 				F3B5AB1E2BAD062D009CDBB5 /* AppSettingsView.swift in Sources */,
 				1849A54A2BBDD6FF00A4BCF1 /* LockScreenWidgetGuideView.swift in Sources */,
 				F3B5AB1A2BACE488009CDBB5 /* XMarkButton.swift in Sources */,
 				1849A54B2BBDD6FF00A4BCF1 /* HomeScreenWidgetGuideView.swift in Sources */,
+				FA7944E92BE717980035EC8B /* Supabase.swift in Sources */,
 				B95D2F332BA4EAF5003C7C17 /* CallManager.swift in Sources */,
 				B95D2F352BA4EB32003C7C17 /* CustomTextEditor.swift in Sources */,
 				F3B5AB252BAE91E3009CDBB5 /* CustomLinkView.swift in Sources */,
@@ -518,7 +528,6 @@
 /* Begin XCBuildConfiguration section */
 		18D28A012B9713FF008742FB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA7944D92BE637390035EC8B /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -582,7 +591,6 @@
 		};
 		18D28A022B9713FF008742FB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA7944DE2BE6DA2A0035EC8B /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -639,14 +647,16 @@
 		};
 		18D28A042B9713FF008742FB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA7944E12BE7135F0035EC8B /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = Res/ResDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20;
-				DEVELOPMENT_TEAM = 6ADU7T5Q7V;
+				DEVELOPMENT_TEAM = Q5W3Y6NXEB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Res/Info.plist;
@@ -668,7 +678,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.balance.Her;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test100.res;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -682,6 +692,7 @@
 		};
 		18D28A052B9713FF008742FB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA7944E22BE7136D0035EC8B /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -711,7 +722,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.balance.Her;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test100.res;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -734,7 +745,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.balance.HerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test100.resTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -754,7 +765,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.balance.HerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test100.resTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -773,7 +784,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.balance.HerUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test100.resUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -792,7 +803,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.balance.HerUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test100.resUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -808,7 +819,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y2V76WXBUQ;
+				DEVELOPMENT_TEAM = Q5W3Y6NXEB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Res Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Res AI";
@@ -820,7 +831,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "io.balance.Her.Res-Extension";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.test100.res.Res-Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -852,7 +863,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "io.balance.Her.Res-Extension";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.test100.res.Res-Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -932,6 +943,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		FA7944E52BE717110035EC8B /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -944,6 +963,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 18D28A0C2B971574008742FB /* XCRemoteSwiftPackageReference "ios" */;
 			productName = Vapi;
+		};
+		FA7944E62BE7172C0035EC8B /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA7944E52BE717110035EC8B /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
