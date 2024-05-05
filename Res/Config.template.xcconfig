@@ -1,7 +1,7 @@
-// Ignore this till the next PR
-// Duplicate this file to Debug.xcconfig and Release.xcconfig
-// Fill in appropriate values (check with team, if you're uncertain)
+// In the base directory, run ./scripts/generate-configs.sh in the terminal
+// Fill in appropriate values in the generated config file
+// (check with team, if you're uncertain)
 
 // "/$()/" is needed in urls to prevent "//" from being interpreted as a comment
-SUPABASE_URL=https:/$()/your-project-name.supabase.co
-SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_URL = https:/$()/project-identifier.supabase.co
+SUPABASE_ANON_KEY = supabase-anon-key

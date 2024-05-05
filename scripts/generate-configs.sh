@@ -1,6 +1,9 @@
 #!/bin/bash
 
-# Paths to the template and the new config files
+# Run this to generate config files (one for now)
+# The config files are gitignored and meant to hold
+# variables for data we don't want checked into the repo
+
 TEMPLATE_FILE="./Res/Config.template.xcconfig"
 CONFIG_FILE="./Res/Config.xcconfig"
 

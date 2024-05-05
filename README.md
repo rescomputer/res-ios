@@ -15,3 +15,9 @@ Check out the demo here: [twitter.com/ricburton/status/1771113631653961785](http
 
 - [xcode](https://developer.apple.com/xcode/) for the majority of the app development
 - IDE (ike [vscode](https://vscode.dev/) or [cursor](https://cursor.sh/)) to configure other files
+
+## Setup
+
+### Config's
+
+In the base directory, run `./scripts/generate-config.sh` to generate a config file, that's local to your environment. Modify the generated config to use the approriate values.
