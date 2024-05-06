@@ -17,10 +17,17 @@ struct ResApp: App {
             options.debug = true // Enabled debug when first installing is always helpful
             options.enableTracing = true 
 
-            // Uncomment the following lines to add more data to your events
+            // Uncomment the following lines to add more data to the events
             // options.attachScreenshot = true // This adds a screenshot to the error events
             // options.attachViewHierarchy = true // This adds the view hierarchy to the error events
         }
+
+        // Distinguish between build types (debug and release for now)
+        SentrySDK.configureScope { scope in
+            scope.setTag(value: Config.buildConfiguration, key: "build-configuration")
+            scope.setEnvironment(Config.buildConfiguration)
+        }
+
         // example usage:
         // SentrySDK.capture(message: "This app uses Sentry!")
     }
