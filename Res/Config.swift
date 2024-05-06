@@ -1,10 +1,6 @@
 import Foundation
 
 struct Config {
-    // Constants for Info.plist keys
-    private static let supabaseUrlKey = "SUPABASE_URL"
-    private static let supabaseAnonKey = "SUPABASE_ANON_KEY"
-
     static var buildConfiguration: String {
         #if DEBUG
         return "Debug"
@@ -31,10 +27,14 @@ struct Config {
     }
 
     static var SUPABASE_URL: String {
-        return getString(forKey: supabaseUrlKey)
+        return getString(forKey: "SUPABASE_URL")
     }
 
     static var SUPABASE_ANON_KEY: String {
-        return getString(forKey: supabaseAnonKey)
+        return getString(forKey: "SUPABASE_ANON_KEY")
+    }
+
+    static var SENTRY_DSN: String {
+        return getString(forKey: "SENTRY_DSN")
     }
 }
