@@ -137,7 +137,6 @@ class CallManager: ObservableObject {
     
     @MainActor
     func startCall() async {
-        audioManager.setupAudioMonitoring()
         callState = .loading
         let assistant = [
             "model": [
@@ -183,6 +182,7 @@ class CallManager: ObservableObject {
             print("Error starting call or requesting activity: \(error)")
             callState = .ended
         }
+        audioManager.setupAudioMonitoring()
     }
     
     func updateLiveActivity() {
@@ -213,7 +213,7 @@ class CallManager: ObservableObject {
             await activity?.end(dismissalPolicy: .immediate)
             DispatchQueue.main.async {
                 self.activity = nil
-                self.audioManager.resetAudioLevels()
+                self.audioManager.stopAudioMonitoring()
             }
         }
     }

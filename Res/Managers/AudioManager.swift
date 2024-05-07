@@ -23,9 +23,11 @@ class AudioManager: ObservableObject {
             guard let self = self else { return }
             let level = self.calculateAudioLevel(buffer: buffer)
             DispatchQueue.main.async {
-                self.audioLevels.append(CGFloat(level))
-                if self.audioLevels.count > 40 {
-                    self.audioLevels.removeFirst()
+                if self.audioLevels.last != CGFloat(level) {
+                   self.audioLevels.append(CGFloat(level))
+                   if self.audioLevels.count > 40 {
+                       self.audioLevels.removeFirst()
+                   }
                 }
             }
         }
@@ -57,9 +59,16 @@ class AudioManager: ObservableObject {
         return meterLevel
     }
 
+    func stopAudioMonitoring() {
+        audioEngine.stop()
+        audioEngine.inputNode.removeTap(onBus: 0)
+        resetAudioLevels()
+    }
+
     func resetAudioLevels() {
-    DispatchQueue.main.async {
-        self.audioLevels = Array(repeating: 0, count: 40)  
+        DispatchQueue.main.async {
+            self.audioLevels = Array(repeating: 0, count: 40)  
+        }
     }
 }
-}
+

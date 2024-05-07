@@ -35,7 +35,7 @@ struct CentralWaveformView: View {
         }
         }
     }
-    
+
     func waveformPath(audioLevels: [CGFloat], centerY: CGFloat, tapeGap: CGFloat, lineWidth: CGFloat, opacity: Double) -> some View {
         GeometryReader { geometry in
             Path { path in
