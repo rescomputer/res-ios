@@ -67,11 +67,15 @@ struct MainView: View {
     private var greenScreen: some View {
         ZStack {
             VStack {
-                Image(.roboto)
+                if callManager.callState == .started {
+                    WaveformView(audioLevels: $callManager.audioManager.audioLevels, isRecording: .constant(true))   
+                    } else {
+                    Image(.roboto)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 150, height: 150)
                     .padding(.bottom, 100)
+                }
                 // Text(callManager.currentTranscript)
                 //     .frame(maxWidth: .infinity, alignment: .center)
                 //     .padding()

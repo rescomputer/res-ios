@@ -20,6 +20,7 @@ struct Res_ExtensionAttributes: ActivityAttributes {
 
 class CallManager: ObservableObject {
     @Published var currentTranscript: String = ""
+    var audioManager = AudioManager()
 
     enum CallState {
         case started, loading, ended
@@ -31,9 +32,8 @@ class CallManager: ObservableObject {
     let vapi: Vapi
     
     init() {
-        vapi = Vapi(
-            publicKey: "a9a1bf8c-c389-490b-a82b-29fe9ba081d8"
-        )
+        vapi = Vapi(publicKey: "a9a1bf8c-c389-490b-a82b-29fe9ba081d8")
+        audioManager.setupAudioMonitoring()
     }
     
     @Published var enteredText = ""
@@ -73,7 +73,7 @@ class CallManager: ObservableObject {
         default: return "Voice Speed"
         }
     }
-        
+
     func setupVapi() {
         vapi.eventPublisher
             .sink { [weak self] event in
@@ -120,6 +120,7 @@ class CallManager: ObservableObject {
         UserDefaults.standard.set(enteredText, forKey: "enteredText")
     }
 
+    //TODO: ADD voice previews
     func playVoicePreview() {
     // Implementation depends on the capabilities of Vapi or another audio library.
     // This method should generate and play a short audio clip using the selected voice and speed settings.
@@ -136,6 +137,7 @@ class CallManager: ObservableObject {
     
     @MainActor
     func startCall() async {
+        audioManager.setupAudioMonitoring()
         callState = .loading
         let assistant = [
             "model": [
@@ -211,6 +213,7 @@ class CallManager: ObservableObject {
             await activity?.end(dismissalPolicy: .immediate)
             DispatchQueue.main.async {
                 self.activity = nil
+                self.audioManager.resetAudioLevels()
             }
         }
     }
@@ -226,15 +229,15 @@ extension CallManager {
     }
     
     var buttonGradient: LinearGradient {
-    switch callState {
-    case .loading:
-        return LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
-    case .ended:
-        return LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
-    case .started:
-        return LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
+        switch callState {
+        case .loading:
+            return LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
+        case .ended:
+            return LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
+        case .started:
+            return LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
+        }
     }
-}
     
     var buttonText: String {
         callState == .loading ? "Connecting" : (callState == .ended ? "Start Conversation" : "End Conversation")

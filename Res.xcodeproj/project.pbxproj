@@ -11,7 +11,6 @@
 		1849A54A2BBDD6FF00A4BCF1 /* LockScreenWidgetGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849A5482BBDD6FF00A4BCF1 /* LockScreenWidgetGuideView.swift */; };
 		1849A54B2BBDD6FF00A4BCF1 /* HomeScreenWidgetGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849A5492BBDD6FF00A4BCF1 /* HomeScreenWidgetGuideView.swift */; };
 		1849A54D2BBDDF7100A4BCF1 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849A54C2BBDDF7100A4BCF1 /* LaunchScreenViewController.swift */; };
-		187277062B9B85A20079C460 /* VAPIExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187277052B9B85A20079C460 /* VAPIExampleView.swift */; };
 		18D289E32B9713FE008742FB /* ResApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D289E22B9713FE008742FB /* ResApp.swift */; };
 		18D289E52B9713FE008742FB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D289E42B9713FE008742FB /* MainView.swift */; };
 		18D289E72B9713FF008742FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D289E62B9713FF008742FB /* Assets.xcassets */; };
@@ -28,13 +27,14 @@
 		18F7238D2BAC2C3C003F44FA /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = 18F7238C2BAC2C3C003F44FA /* Vapi */; };
 		B95D2F332BA4EAF5003C7C17 /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F322BA4EAF5003C7C17 /* CallManager.swift */; };
 		B95D2F352BA4EB32003C7C17 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */; };
-		B95D2F392BA4EB58003C7C17 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F382BA4EB58003C7C17 /* VideoPlayerView.swift */; };
 		F31C49412BBE75C70075477D /* VoiceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C49402BBE75C70075477D /* VoiceSettingsView.swift */; };
 		F31C49432BBF85890075477D /* CustomTextPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C49422BBF85890075477D /* CustomTextPromptView.swift */; };
 		F31C49452BBF86950075477D /* VoiceTypeAndToneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C49442BBF86950075477D /* VoiceTypeAndToneView.swift */; };
 		F31C49472BC0DDC60075477D /* AudioVisualizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C49462BC0DDC60075477D /* AudioVisualizerView.swift */; };
 		F31C49492BC111180075477D /* VoiceTypeAndToneSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C49482BC111180075477D /* VoiceTypeAndToneSettingsView.swift */; };
 		F31C494B2BC37C080075477D /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C494A2BC37C080075477D /* Loader.swift */; };
+		F370C6662BE9A4C700BCF1A8 /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F370C6652BE9A4C700BCF1A8 /* WaveformView.swift */; };
+		F370C6682BE9C0CE00BCF1A8 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F370C6672BE9C0CE00BCF1A8 /* AudioManager.swift */; };
 		F3B5AB182BACDB8A009CDBB5 /* HalfModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */; };
 		F3B5AB1A2BACE488009CDBB5 /* XMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */; };
 		F3B5AB1E2BAD062D009CDBB5 /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */; };
@@ -85,7 +85,6 @@
 		1849A5482BBDD6FF00A4BCF1 /* LockScreenWidgetGuideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenWidgetGuideView.swift; sourceTree = "<group>"; };
 		1849A5492BBDD6FF00A4BCF1 /* HomeScreenWidgetGuideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenWidgetGuideView.swift; sourceTree = "<group>"; };
 		1849A54C2BBDDF7100A4BCF1 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
-		187277052B9B85A20079C460 /* VAPIExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAPIExampleView.swift; sourceTree = "<group>"; };
 		18D289DF2B9713FE008742FB /* Res.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Res.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D289E22B9713FE008742FB /* ResApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResApp.swift; sourceTree = "<group>"; };
 		18D289E42B9713FE008742FB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -106,13 +105,14 @@
 		18F723882BAC2694003F44FA /* ActivityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActivityKit.framework; path = System/Library/Frameworks/ActivityKit.framework; sourceTree = SDKROOT; };
 		B95D2F322BA4EAF5003C7C17 /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
-		B95D2F382BA4EB58003C7C17 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		F31C49402BBE75C70075477D /* VoiceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceSettingsView.swift; sourceTree = "<group>"; };
 		F31C49422BBF85890075477D /* CustomTextPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextPromptView.swift; sourceTree = "<group>"; };
 		F31C49442BBF86950075477D /* VoiceTypeAndToneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceTypeAndToneView.swift; sourceTree = "<group>"; };
 		F31C49462BC0DDC60075477D /* AudioVisualizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioVisualizerView.swift; sourceTree = "<group>"; };
 		F31C49482BC111180075477D /* VoiceTypeAndToneSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceTypeAndToneSettingsView.swift; sourceTree = "<group>"; };
 		F31C494A2BC37C080075477D /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
+		F370C6652BE9A4C700BCF1A8 /* WaveformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformView.swift; sourceTree = "<group>"; };
+		F370C6672BE9C0CE00BCF1A8 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalView.swift; sourceTree = "<group>"; };
 		F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMarkButton.swift; sourceTree = "<group>"; };
 		F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsView.swift; sourceTree = "<group>"; };
@@ -220,13 +220,12 @@
 		B95D2F3A2BA4F35F003C7C17 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				187277052B9B85A20079C460 /* VAPIExampleView.swift */,
 				B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */,
-				B95D2F382BA4EB58003C7C17 /* VideoPlayerView.swift */,
 				F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */,
 				F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */,
 				F3B5AB242BAE91E3009CDBB5 /* CustomLinkView.swift */,
 				F31C494A2BC37C080075477D /* Loader.swift */,
+				F370C6652BE9A4C700BCF1A8 /* WaveformView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -244,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				B95D2F322BA4EAF5003C7C17 /* CallManager.swift */,
+				F370C6672BE9C0CE00BCF1A8 /* AudioManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -435,9 +435,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3B5AB212BAD08F1009CDBB5 /* AnimationUtility.swift in Sources */,
+				F370C6662BE9A4C700BCF1A8 /* WaveformView.swift in Sources */,
 				F31C49472BC0DDC60075477D /* AudioVisualizerView.swift in Sources */,
+				F370C6682BE9C0CE00BCF1A8 /* AudioManager.swift in Sources */,
 				1849A5472BBDD68A00A4BCF1 /* UIScreen+Extensions.swift in Sources */,
-				187277062B9B85A20079C460 /* VAPIExampleView.swift in Sources */,
 				18D289E52B9713FE008742FB /* MainView.swift in Sources */,
 				F31C494B2BC37C080075477D /* Loader.swift in Sources */,
 				F31C49412BBE75C70075477D /* VoiceSettingsView.swift in Sources */,
@@ -451,7 +452,6 @@
 				F3B5AB252BAE91E3009CDBB5 /* CustomLinkView.swift in Sources */,
 				F31C49492BC111180075477D /* VoiceTypeAndToneSettingsView.swift in Sources */,
 				F31C49452BBF86950075477D /* VoiceTypeAndToneView.swift in Sources */,
-				B95D2F392BA4EB58003C7C17 /* VideoPlayerView.swift in Sources */,
 				1849A54D2BBDDF7100A4BCF1 /* LaunchScreenViewController.swift in Sources */,
 				F3B5AB182BACDB8A009CDBB5 /* HalfModalView.swift in Sources */,
 				F31C49432BBF85890075477D /* CustomTextPromptView.swift in Sources */,
@@ -632,7 +632,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20;
-				DEVELOPMENT_TEAM = 6ADU7T5Q7V;
+				DEVELOPMENT_TEAM = GZ2BM4VMQU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Res/Info.plist;
@@ -675,7 +675,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20;
-				DEVELOPMENT_TEAM = 6ADU7T5Q7V;
+				DEVELOPMENT_TEAM = GZ2BM4VMQU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Res/Info.plist;
@@ -794,7 +794,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y2V76WXBUQ;
+				DEVELOPMENT_TEAM = GZ2BM4VMQU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Res Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Res AI";
@@ -826,7 +826,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y2V76WXBUQ;
+				DEVELOPMENT_TEAM = GZ2BM4VMQU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Res Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Res AI";
