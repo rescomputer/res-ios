@@ -52,7 +52,6 @@
 		FA95764F2BEA4C3100EC2FA4 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		FA9576502BEA4C3100EC2FA4 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		FA9576522BEA4CDD00EC2FA4 /* SentryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9576512BEA4CDD00EC2FA4 /* SentryManager.swift */; };
-		FA9576572BEB4C3700EC2FA4 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		FA9576582BEB4C3700EC2FA4 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 00571768FCC847B5B370CACD /* Sentry */; };
 		FA9576972BEC099700EC2FA4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9576962BEC099700EC2FA4 /* XCTest.framework */; platformFilter = ios; };
 /* End PBXBuildFile section */
@@ -154,7 +153,6 @@
 				18F723892BAC2695003F44FA /* ActivityKit.framework in Frameworks */,
 				FA14AAD22BE850A0001C7486 /* Functions in Frameworks */,
 				FA14AAD02BE850A0001C7486 /* Auth in Frameworks */,
-				FA9576572BEB4C3700EC2FA4 /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
