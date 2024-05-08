@@ -5,3 +5,4 @@
 // "/$()/" is needed in urls to prevent "//" from being interpreted as a comment
 SUPABASE_URL = https:/$()/project-identifier.supabase.co
 SUPABASE_ANON_KEY = supabase-anon-key
+SENTRY_DSN = https:/$()/----.ingest.us.sentry.io/---

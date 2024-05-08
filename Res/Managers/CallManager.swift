@@ -99,7 +99,7 @@ class CallManager: ObservableObject {
                             self?.currentTranscript = transcriptEvent.transcript
                         }
                     case .error(let error):
-                        print("Error: \(error)")
+                        SentryManager.shared.captureError(error, description: "VAPI reported an error")
                 }
                 self?.updateLiveActivity()
             }
@@ -198,7 +198,7 @@ class CallManager: ObservableObject {
                 contentState: initialContentState
             )
         } catch {
-            print("Error starting call or requesting activity: \(error)")
+            SentryManager.shared.captureError(error, description: "Error starting call or requesting activity")
             callState = .ended
         }
     }
