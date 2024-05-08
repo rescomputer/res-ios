@@ -68,3 +68,8 @@ struct CustomTextEditor: UIViewRepresentable {
         }
     }
 }
+
+
+#Preview("Custom Text Editor") {
+    CustomTextEditor(text: .constant("Type here..."), isDisabled: false)
+}

@@ -62,3 +62,7 @@ class LaunchScreenViewController: UIViewController {
         }
     }
 }
+
+#Preview {
+    LaunchScreenViewController()
+}

@@ -20,7 +20,7 @@ struct AppSettingsView: View {
     @Binding var selectedOption: Option?
     @Binding var isModalStepTwoEnabled: Bool
     @ObservedObject var callManager: CallManager
-    @ObservedObject var keyboardResponder: KeyboardResponder  
+    @ObservedObject var keyboardResponder: KeyboardResponder
     
     var body: some View {
         ZStack {
@@ -658,3 +658,14 @@ extension AppSettingsView {
 
 }
 
+
+#Preview("App Settings View") {
+    AppSettingsView(
+        isPresented: .constant(true),
+        activeModal: .constant(nil), // Set to nil if there's no appropriate case
+        selectedOption: .constant(nil),
+        isModalStepTwoEnabled: .constant(false),
+        callManager: CallManager(),
+        keyboardResponder: KeyboardResponder()
+    )
+}

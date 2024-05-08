@@ -116,3 +116,13 @@ struct VoiceSettingsView: View {
         )
     }
 }
+
+#Preview("Voice Settings View") {
+    VoiceSettingsView(
+        activeModal: .constant(nil),
+        selectedOption: .constant(nil),
+        isModalStepTwoEnabled: .constant(false),
+        callManager: CallManager(), // Make sure CallManager can be instantiated
+        keyboardResponder: KeyboardResponder()
+    )
+}

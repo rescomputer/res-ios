@@ -113,3 +113,15 @@ struct HalfModalView<Content: View>: View {
         }
     }
 }
+
+
+#Preview("Half Modal View") {
+    HalfModalView(isShown: .constant(true), onDismiss: {}, modalHeightMultiplier: -0.02) {
+        VStack {
+            Text("Modal Content Here")
+                .padding()
+                .background(Color.white)
+                .cornerRadius(10)
+        }
+    }
+}

@@ -86,3 +86,15 @@ struct CustomLinkView: View {
         .pressAnimation()
     }
 }
+
+#Preview("Custom Link View") {
+    CustomLinkView(
+        iconName: "link.circle",
+        title: "Navigate to Example",
+        action: {},
+        navigateTo: {},
+        screenSize: UIScreen.main.bounds.size,
+        offset: 0,
+        minHeight: 100
+    )
+}

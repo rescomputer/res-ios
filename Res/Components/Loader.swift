@@ -28,3 +28,8 @@ struct Loader : View {
     }
 }
     
+#Preview("Loader View") {
+    Loader()
+        .frame(width: 50, height: 50)
+        .padding()
+}
