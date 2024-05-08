@@ -1,10 +1,3 @@
-//
-//  ResUITestsLaunchTests.swift
-//  ResUITests
-//
-//  Created by Mike Jonas on 5/8/24.
-//
-
 import XCTest
 
 final class ResUITestsLaunchTests: XCTestCase {
