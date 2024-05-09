@@ -385,3 +385,10 @@ extension MainView {
 #Preview {
     MainView(isAppSettingsViewShowing: .constant(false), isModalStepTwoEnabled: .constant(false))
 }
+
+#Preview("Main View - App Settings Showing") {
+    MainView(
+        isAppSettingsViewShowing: .constant(true),
+        isModalStepTwoEnabled: .constant(false)
+    )
+}

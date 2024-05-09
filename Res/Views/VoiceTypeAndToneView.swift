@@ -139,3 +139,16 @@ struct VoiceTypeAndToneView: View {
         .padding(.horizontal, backgroundContext == .white ? 20 : 0)
     }
 }
+
+
+#Preview("Voice Type and Tone View") {
+    VoiceTypeAndToneView(
+        activeModal: .constant(nil),
+        selectedOption: .constant(nil),
+        callManager: CallManager(),
+        keyboardResponder: KeyboardResponder(),
+        showSaveButton: true,
+        saveSettingsAction: {},
+        backgroundContext: .white
+    )
+}

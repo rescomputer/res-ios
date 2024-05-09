@@ -41,17 +41,19 @@
 		F3B5AB1E2BAD062D009CDBB5 /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */; };
 		F3B5AB212BAD08F1009CDBB5 /* AnimationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB202BAD08F1009CDBB5 /* AnimationUtility.swift */; };
 		F3B5AB252BAE91E3009CDBB5 /* CustomLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB242BAE91E3009CDBB5 /* CustomLinkView.swift */; };
-		FA14AACB2BE80E0B001C7486 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = FA14AACA2BE80E0B001C7486 /* Config.xcconfig */; };
 		FA14AACD2BE84F43001C7486 /* SupabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA14AACC2BE84F43001C7486 /* SupabaseManager.swift */; };
 		FA14AAD02BE850A0001C7486 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = FA14AACF2BE850A0001C7486 /* Auth */; };
 		FA14AAD22BE850A0001C7486 /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = FA14AAD12BE850A0001C7486 /* Functions */; };
 		FA14AAD42BE850A0001C7486 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = FA14AAD32BE850A0001C7486 /* Supabase */; };
 		FA7944DC2BE6D08C0035EC8B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7944DB2BE6D08C0035EC8B /* Config.swift */; };
-		FA95764D2BEA4C3100EC2FA4 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
-		FA95764E2BEA4C3100EC2FA4 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 00571768FCC847B5B370CACD /* Sentry */; };
+		FA8DCFA12BEC19B800F54DCA /* ResUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8DCF9E2BEC195B00F54DCA /* ResUITests.swift */; };
+		FA8DCFA22BEC19B800F54DCA /* ResUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8DCF9F2BEC195B00F54DCA /* ResUITestsLaunchTests.swift */; };
+		FA8DCFA32BEC19C700F54DCA /* ResTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8DCF9C2BEC194900F54DCA /* ResTests.swift */; };
 		FA95764F2BEA4C3100EC2FA4 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		FA9576502BEA4C3100EC2FA4 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		FA9576522BEA4CDD00EC2FA4 /* SentryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9576512BEA4CDD00EC2FA4 /* SentryManager.swift */; };
+		FA9576582BEB4C3700EC2FA4 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 00571768FCC847B5B370CACD /* Sentry */; };
+		FA9576972BEC099700EC2FA4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9576962BEC099700EC2FA4 /* XCTest.framework */; platformFilter = ios; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,7 +135,11 @@
 		FA14AACC2BE84F43001C7486 /* SupabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseManager.swift; sourceTree = "<group>"; };
 		FA7944D82BE636360035EC8B /* Config.template.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.template.xcconfig; sourceTree = "<group>"; };
 		FA7944DB2BE6D08C0035EC8B /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		FA8DCF9C2BEC194900F54DCA /* ResTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResTests.swift; sourceTree = "<group>"; };
+		FA8DCF9E2BEC195B00F54DCA /* ResUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResUITests.swift; sourceTree = "<group>"; };
+		FA8DCF9F2BEC195B00F54DCA /* ResUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		FA9576512BEA4CDD00EC2FA4 /* SentryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentryManager.swift; sourceTree = "<group>"; };
+		FA9576962BEC099700EC2FA4 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,12 +147,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA9576582BEB4C3700EC2FA4 /* Sentry in Frameworks */,
 				FA14AAD42BE850A0001C7486 /* Supabase in Frameworks */,
 				18F7238D2BAC2C3C003F44FA /* Vapi in Frameworks */,
 				18F723892BAC2695003F44FA /* ActivityKit.framework in Frameworks */,
 				FA14AAD22BE850A0001C7486 /* Functions in Frameworks */,
 				FA14AAD02BE850A0001C7486 /* Auth in Frameworks */,
-				2DE1830E58A749F8A3633BED /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA95764F2BEA4C3100EC2FA4 /* (null) in Frameworks */,
+				FA9576972BEC099700EC2FA4 /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +191,8 @@
 			isa = PBXGroup;
 			children = (
 				18D289E12B9713FE008742FB /* Res */,
+				FA8DCF9D2BEC194900F54DCA /* ResTests */,
+				FA8DCFA02BEC195B00F54DCA /* ResUITests */,
 				18F723312BA95060003F44FA /* Res Extension */,
 				18F7232C2BA95060003F44FA /* Frameworks */,
 				18D289E02B9713FE008742FB /* Products */,
@@ -222,6 +231,7 @@
 		18F7232C2BA95060003F44FA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA9576962BEC099700EC2FA4 /* XCTest.framework */,
 				18F723882BAC2694003F44FA /* ActivityKit.framework */,
 				18F7232D2BA95060003F44FA /* WidgetKit.framework */,
 				18F7232F2BA95060003F44FA /* SwiftUI.framework */,
@@ -291,6 +301,23 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		FA8DCF9D2BEC194900F54DCA /* ResTests */ = {
+			isa = PBXGroup;
+			children = (
+				FA8DCF9C2BEC194900F54DCA /* ResTests.swift */,
+			);
+			path = ResTests;
+			sourceTree = "<group>";
+		};
+		FA8DCFA02BEC195B00F54DCA /* ResUITests */ = {
+			isa = PBXGroup;
+			children = (
+				FA8DCF9E2BEC195B00F54DCA /* ResUITests.swift */,
+				FA8DCF9F2BEC195B00F54DCA /* ResUITestsLaunchTests.swift */,
+			);
+			path = ResUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -353,6 +380,8 @@
 				18D289FB2B9713FF008742FB /* PBXTargetDependency */,
 			);
 			name = ResUITests;
+			packageProductDependencies = (
+			);
 			productName = HerUITests;
 			productReference = 18D289F92B9713FF008742FB /* ResUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -385,7 +414,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					18D289DE2B9713FE008742FB = {
 						CreatedOnToolsVersion = 15.2;
@@ -435,7 +464,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA14AACB2BE80E0B001C7486 /* Config.xcconfig in Resources */,
 				18D289E72B9713FF008742FB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -518,6 +546,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA8DCFA32BEC19C700F54DCA /* ResTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,6 +554,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA8DCFA12BEC19B800F54DCA /* ResUITests.swift in Sources */,
+				FA8DCFA22BEC19B800F54DCA /* ResUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -772,7 +803,6 @@
 		18D28A072B9713FF008742FB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -792,7 +822,6 @@
 		18D28A082B9713FF008742FB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -978,20 +1007,20 @@
 				minimumVersion = 5.7.1;
 			};
 		};
-		FA14AACE2BE850A0001C7486 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/supabase/supabase-swift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.5.1;
-			};
-		};
 		BD1914C8DBDC4BCDB400579F /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/getsentry/sentry-cocoa/";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 8.0.0;
+			};
+		};
+		FA14AACE2BE850A0001C7486 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1026,11 +1055,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA14AACE2BE850A0001C7486 /* XCRemoteSwiftPackageReference "supabase-swift" */;
 			productName = Supabase;
-		};
-		00571768FCC847B5B370CACD /* Sentry */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BD1914C8DBDC4BCDB400579F /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
-			productName = Sentry;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

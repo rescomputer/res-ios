@@ -167,3 +167,14 @@ struct OptionsMenu: View {
         .padding(.horizontal, 10)
     }
 }
+
+#Preview("Custom Text Prompt View") {
+    CustomTextPromptView(
+        activeModal: .constant(nil),
+        selectedOption: .constant(nil),
+        isModalStepTwoEnabled: .constant(false),
+        callManager: CallManager(),
+        keyboardResponder: KeyboardResponder(),
+        continueAction: {}
+    )
+}

@@ -39,3 +39,8 @@ struct AudioVisualizerView: View {
         }
     }
 }
+
+#Preview("Audio Visualizer View") {
+    AudioVisualizerView()
+}
+

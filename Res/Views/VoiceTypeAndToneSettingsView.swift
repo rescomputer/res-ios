@@ -148,3 +148,14 @@ extension VoiceTypeAndToneSettingsView {
                     .padding(.bottom, 20)
     }
 }
+
+#Preview("Voice Type and Tone Settings View") {
+    VoiceTypeAndToneSettingsView(
+        dismissAction: {},
+        activeModal: .constant(nil),
+        selectedOption: .constant(nil),
+        isModalStepTwoEnabled: .constant(false),
+        callManager: CallManager(),
+        keyboardResponder: KeyboardResponder()
+    )
+}

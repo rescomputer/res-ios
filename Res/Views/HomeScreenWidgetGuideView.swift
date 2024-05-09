@@ -138,3 +138,7 @@ extension HomeScreenWidgetGuideView {
         }
     }
 }
+
+#Preview {
+    HomeScreenWidgetGuideView(dismissAction: {})
+}

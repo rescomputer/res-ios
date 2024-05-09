@@ -22,3 +22,7 @@ struct XMarkButton: View {
         .pressAnimation()
     }
 }
+
+#Preview("XMark Button") {
+    XMarkButton(action: {})
+}

@@ -143,3 +143,6 @@ extension LockScreenWidgetGuideView {
     }
 }
 
+#Preview {
+    LockScreenWidgetGuideView(dismissAction: {})
+}
