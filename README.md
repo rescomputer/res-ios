@@ -20,4 +20,4 @@ Check out the demo here: [twitter.com/ricburton/status/1771113631653961785](http
 
 ### Config's
 
-In the base directory, run `./scripts/generate-config.sh` to generate a config file, that's local to your environment. Modify the generated config to use the approriate values.
+In the base directory, run `./scripts/generate-configs.sh` to generate a config file, that's local to your environment. Modify the generated config to use the approriate values.
