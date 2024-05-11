@@ -21,7 +21,6 @@ struct AppSettingsView: View {
     @Binding var isModalStepTwoEnabled: Bool
     @ObservedObject var callManager: CallManager
     @ObservedObject var keyboardResponder: KeyboardResponder  
-    @StateObject private var authViewModel = AuthViewModel()
 
     var body: some View {
         ZStack {
@@ -165,8 +164,15 @@ struct AppSettingsView: View {
 extension AppSettingsView {
     private func logoutButton() -> some View {
         Button("Logout") {
-            authViewModel.signOut()
-            print("User logged out successfully")
+            Task {
+                do {
+                    try await SupabaseManager.shared.signOut()
+                    isPresented = false
+                    print("Signed out")
+                } catch {
+                    print("Signout failed: \(error.localizedDescription)")
+                }
+            }
         }
         .frame(maxWidth: .infinity)
         .frame(height: 44)
