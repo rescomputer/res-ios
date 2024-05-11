@@ -21,7 +21,8 @@ struct AppSettingsView: View {
     @Binding var isModalStepTwoEnabled: Bool
     @ObservedObject var callManager: CallManager
     @ObservedObject var keyboardResponder: KeyboardResponder
-
+    let isDebugMode = Config.buildConfiguration == .debug
+    
     var body: some View {
         ZStack {
             LinearGradient(
@@ -89,7 +90,9 @@ struct AppSettingsView: View {
                     }
                     Spacer()
                     Spacer()
-                    logoutButton()
+                if isDebugMode {
+                    signOutButton()
+                }
 
             }
             .padding()
@@ -162,7 +165,7 @@ struct AppSettingsView: View {
 }
 
 extension AppSettingsView {
-    private func logoutButton() -> some View {
+    private func signOutButton() -> some View {
         Button("sign out") {
             Task {
                 do {

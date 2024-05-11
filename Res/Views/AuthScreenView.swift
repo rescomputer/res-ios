@@ -2,7 +2,7 @@ import SwiftUI
 import AuthenticationServices
 
 struct AuthView: View {
-    let isDebugMode = Config.buildConfiguration == .debug
+    var isDebugMode: Bool
 
     var body: some View {
         VStack {
@@ -69,10 +69,10 @@ struct AuthView: View {
 struct AuthView_Previews: PreviewProvider {
     static var previews: some View {
         return Group {
-            AuthView()
+            AuthView(isDebugMode: true)
                 .previewDisplayName("Debug Version")
 
-            AuthView()
+            AuthView(isDebugMode: false)
                 .previewDisplayName("Release Version")
         }
     }

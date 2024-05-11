@@ -46,7 +46,7 @@ struct ResApp: App {
             if resAppModel.isAuthenticated || !isDebugMode {
                 MainView(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled)
             } else {
-                AuthView()
+                AuthView(isDebugMode: isDebugMode)
             }
         }
     }
