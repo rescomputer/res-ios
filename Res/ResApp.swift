@@ -32,10 +32,10 @@ class ResAppModel: ObservableObject {
 @main
 struct ResApp: App {
     @StateObject private var resAppModel = ResAppModel()
-    @State private var currentSessionUID: String?
     @State private var isAppSettingsViewShowing = false
     @State private var isModalStepTwoEnabled = false
-    
+    let isDebugMode = Config.buildConfiguration == .debug
+
     init() {
         // if enableDebugLogging is true, log to sentry during local development
         SentryManager.shared.start(enableDebugLogging: false)
@@ -43,10 +43,10 @@ struct ResApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if resAppModel.isAuthenticated {
+            if resAppModel.isAuthenticated || !isDebugMode {
                 MainView(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled)
             } else {
-                AuthView(isDebugMode: true)
+                AuthView()
             }
         }
     }

@@ -2,7 +2,8 @@ import SwiftUI
 import AuthenticationServices
 
 struct AuthView: View {
-    var isDebugMode: Bool
+    let isDebugMode = Config.buildConfiguration == .debug
+
     var body: some View {
         VStack {
             if isDebugMode {
@@ -10,8 +11,12 @@ struct AuthView: View {
             } else {
                 appleSignInButton
             }
+        }.onAppear {
+            print("isDebugMode:", isDebugMode)
+            print("Build Configuration:", Config.buildConfiguration)
         }
     }
+    
 
     private var SignInWithDevEmail: some View {
         Button("Sign In with dev email") {
@@ -64,10 +69,10 @@ struct AuthView: View {
 struct AuthView_Previews: PreviewProvider {
     static var previews: some View {
         return Group {
-            AuthView(isDebugMode: true)
+            AuthView()
                 .previewDisplayName("Debug Version")
 
-            AuthView(isDebugMode: false)
+            AuthView()
                 .previewDisplayName("Release Version")
         }
     }

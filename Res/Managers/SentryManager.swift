@@ -11,7 +11,7 @@ class SentryManager {
         self.enableDebugLogging = enableDebugLogging
 
         // Check if Sentry should be active considering the debug flag
-        if Config.buildConfiguration == "Release" || enableDebugLogging {
+        if Config.buildConfiguration == .release || enableDebugLogging {
             SentrySDK.start { options in
                 options.dsn = Config.SENTRY_DSN
                 options.debug = enableDebugLogging  // Control SDK debugging with the parameter
@@ -22,7 +22,7 @@ class SentryManager {
 
     
     var isSentryActive: Bool {
-        return Config.buildConfiguration == "Release" || enableDebugLogging
+        return Config.buildConfiguration == .release || enableDebugLogging
     }
 
     func captureError(_ error: Error, description: String? = nil) {

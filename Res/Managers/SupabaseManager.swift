@@ -5,7 +5,7 @@ import AuthenticationServices
 
 class SupabaseManager {
     static let shared = SupabaseManager()
-    
+
     private(set) var client: SupabaseClient
     private init() {
         self.client = SupabaseClient(

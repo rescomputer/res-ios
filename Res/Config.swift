@@ -1,11 +1,16 @@
 import Foundation
 
 struct Config {
-    static var buildConfiguration: String {
+    enum BuildConfiguration {
+        case debug
+        case release
+    }
+
+    static var buildConfiguration: BuildConfiguration {
         #if DEBUG
-        return "Debug"
+            return .debug
         #else
-        return "Release"
+            return .release
         #endif
     }
 

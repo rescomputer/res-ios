@@ -20,7 +20,7 @@ struct AppSettingsView: View {
     @Binding var selectedOption: Option?
     @Binding var isModalStepTwoEnabled: Bool
     @ObservedObject var callManager: CallManager
-    @ObservedObject var keyboardResponder: KeyboardResponder  
+    @ObservedObject var keyboardResponder: KeyboardResponder
 
     var body: some View {
         ZStack {
@@ -163,7 +163,7 @@ struct AppSettingsView: View {
 
 extension AppSettingsView {
     private func logoutButton() -> some View {
-        Button("Logout") {
+        Button("sign out") {
             Task {
                 do {
                     try await SupabaseManager.shared.signOut()
@@ -176,14 +176,13 @@ extension AppSettingsView {
         }
         .frame(maxWidth: .infinity)
         .frame(height: 44)
-        .background(Color.red)
+        .background(Color.gray.opacity(0.3))
         .foregroundColor(.white)
         .cornerRadius(10)
         .font(.system(size: 17, weight: .semibold))
         .padding()
     }
-    
-    
+
      enum SettingType: Identifiable {
          case homeScreen, lockScreen, voiceTypeAndTone
 
