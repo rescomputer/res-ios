@@ -20,8 +20,9 @@ struct AppSettingsView: View {
     @Binding var selectedOption: Option?
     @Binding var isModalStepTwoEnabled: Bool
     @ObservedObject var callManager: CallManager
-    @ObservedObject var keyboardResponder: KeyboardResponder
-    
+    @ObservedObject var keyboardResponder: KeyboardResponder  
+    @StateObject private var authViewModel = AuthViewModel()
+
     var body: some View {
         ZStack {
             LinearGradient(
@@ -89,6 +90,7 @@ struct AppSettingsView: View {
                     }
                     Spacer()
                     Spacer()
+                    logoutButton()
 
             }
             .padding()
@@ -161,7 +163,21 @@ struct AppSettingsView: View {
 }
 
 extension AppSettingsView {
-
+    private func logoutButton() -> some View {
+        Button("Logout") {
+            authViewModel.signOut()
+            print("User logged out successfully")
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: 44)
+        .background(Color.red)
+        .foregroundColor(.white)
+        .cornerRadius(10)
+        .font(.system(size: 17, weight: .semibold))
+        .padding()
+    }
+    
+    
      enum SettingType: Identifiable {
          case homeScreen, lockScreen, voiceTypeAndTone
 

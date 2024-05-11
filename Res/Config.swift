@@ -37,4 +37,12 @@ struct Config {
     static var SENTRY_DSN: String {
         return getString(forKey: "SENTRY_DSN")
     }
+    
+    static var DEBUG_USER_EMAIL: String {
+        return getString(forKey: "DEBUG_USER_EMAIL")
+    }
+    
+    static var DEBUG_USER_PASSWORD: String {
+        return getString(forKey: "DEBUG_USER_PASSWORD")
+    }
 }
