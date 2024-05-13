@@ -45,6 +45,9 @@
 		FA14AAD02BE850A0001C7486 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = FA14AACF2BE850A0001C7486 /* Auth */; };
 		FA14AAD22BE850A0001C7486 /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = FA14AAD12BE850A0001C7486 /* Functions */; };
 		FA14AAD42BE850A0001C7486 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = FA14AAD32BE850A0001C7486 /* Supabase */; };
+		FA5550A22BEDD4AF00C7648B /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		FA5550A32BEDD4AF00C7648B /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 00571768FCC847B5B370CACD /* Sentry */; };
+		FA5550A52BEDD4CF00C7648B /* AuthScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5550A42BEDD4CF00C7648B /* AuthScreenView.swift */; };
 		FA7944DC2BE6D08C0035EC8B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7944DB2BE6D08C0035EC8B /* Config.swift */; };
 		FA8DCFA12BEC19B800F54DCA /* ResUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8DCF9E2BEC195B00F54DCA /* ResUITests.swift */; };
 		FA8DCFA22BEC19B800F54DCA /* ResUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8DCF9F2BEC195B00F54DCA /* ResUITestsLaunchTests.swift */; };
@@ -52,7 +55,6 @@
 		FA95764F2BEA4C3100EC2FA4 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		FA9576502BEA4C3100EC2FA4 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		FA9576522BEA4CDD00EC2FA4 /* SentryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9576512BEA4CDD00EC2FA4 /* SentryManager.swift */; };
-		FA9576582BEB4C3700EC2FA4 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 00571768FCC847B5B370CACD /* Sentry */; };
 		FA9576972BEC099700EC2FA4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9576962BEC099700EC2FA4 /* XCTest.framework */; platformFilter = ios; };
 /* End PBXBuildFile section */
 
@@ -133,6 +135,7 @@
 		F3B5AB242BAE91E3009CDBB5 /* CustomLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLinkView.swift; sourceTree = "<group>"; };
 		FA14AACA2BE80E0B001C7486 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		FA14AACC2BE84F43001C7486 /* SupabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseManager.swift; sourceTree = "<group>"; };
+		FA5550A42BEDD4CF00C7648B /* AuthScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthScreenView.swift; sourceTree = "<group>"; };
 		FA7944D82BE636360035EC8B /* Config.template.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.template.xcconfig; sourceTree = "<group>"; };
 		FA7944DB2BE6D08C0035EC8B /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		FA8DCF9C2BEC194900F54DCA /* ResTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResTests.swift; sourceTree = "<group>"; };
@@ -147,12 +150,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA9576582BEB4C3700EC2FA4 /* Sentry in Frameworks */,
+				FA5550A32BEDD4AF00C7648B /* Sentry in Frameworks */,
 				FA14AAD42BE850A0001C7486 /* Supabase in Frameworks */,
 				18F7238D2BAC2C3C003F44FA /* Vapi in Frameworks */,
 				18F723892BAC2695003F44FA /* ActivityKit.framework in Frameworks */,
 				FA14AAD22BE850A0001C7486 /* Functions in Frameworks */,
 				FA14AAD02BE850A0001C7486 /* Auth in Frameworks */,
+				FA5550A22BEDD4AF00C7648B /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +292,7 @@
 		F3B5AB232BAD35BD009CDBB5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FA5550A42BEDD4CF00C7648B /* AuthScreenView.swift */,
 				1849A54C2BBDDF7100A4BCF1 /* LaunchScreenViewController.swift */,
 				1849A5492BBDD6FF00A4BCF1 /* HomeScreenWidgetGuideView.swift */,
 				1849A5482BBDD6FF00A4BCF1 /* LockScreenWidgetGuideView.swift */,
@@ -524,6 +529,7 @@
 				F31C49412BBE75C70075477D /* VoiceSettingsView.swift in Sources */,
 				18D289E32B9713FE008742FB /* ResApp.swift in Sources */,
 				F3B5AB1E2BAD062D009CDBB5 /* AppSettingsView.swift in Sources */,
+				FA5550A52BEDD4CF00C7648B /* AuthScreenView.swift in Sources */,
 				FA14AACD2BE84F43001C7486 /* SupabaseManager.swift in Sources */,
 				1849A54A2BBDD6FF00A4BCF1 /* LockScreenWidgetGuideView.swift in Sources */,
 				F3B5AB1A2BACE488009CDBB5 /* XMarkButton.swift in Sources */,

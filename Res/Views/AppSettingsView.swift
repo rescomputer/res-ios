@@ -21,6 +21,7 @@ struct AppSettingsView: View {
     @Binding var isModalStepTwoEnabled: Bool
     @ObservedObject var callManager: CallManager
     @ObservedObject var keyboardResponder: KeyboardResponder
+    let isDebugMode = Config.buildConfiguration == .debug
     
     var body: some View {
         ZStack {
@@ -89,6 +90,9 @@ struct AppSettingsView: View {
                     }
                     Spacer()
                     Spacer()
+                if isDebugMode {
+                    signOutButton()
+                }
 
             }
             .padding()
@@ -161,6 +165,26 @@ struct AppSettingsView: View {
 }
 
 extension AppSettingsView {
+    private func signOutButton() -> some View {
+        Button("sign out") {
+            Task {
+                do {
+                    try await SupabaseManager.shared.signOut()
+                    isPresented = false
+                    print("Signed out")
+                } catch {
+                    print("Signout failed: \(error.localizedDescription)")
+                }
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: 44)
+        .background(Color.gray.opacity(0.3))
+        .foregroundColor(.white)
+        .cornerRadius(10)
+        .font(.system(size: 17, weight: .semibold))
+        .padding()
+    }
 
      enum SettingType: Identifiable {
          case homeScreen, lockScreen, voiceTypeAndTone
