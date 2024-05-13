@@ -1,11 +1,16 @@
 import Foundation
 
 struct Config {
-    static var buildConfiguration: String {
+    enum BuildConfiguration {
+        case debug
+        case release
+    }
+
+    static var buildConfiguration: BuildConfiguration {
         #if DEBUG
-        return "Debug"
+            return .debug
         #else
-        return "Release"
+            return .release
         #endif
     }
 
@@ -36,5 +41,13 @@ struct Config {
 
     static var SENTRY_DSN: String {
         return getString(forKey: "SENTRY_DSN")
+    }
+    
+    static var DEBUG_USER_EMAIL: String {
+        return getString(forKey: "DEBUG_USER_EMAIL")
+    }
+    
+    static var DEBUG_USER_PASSWORD: String {
+        return getString(forKey: "DEBUG_USER_PASSWORD")
     }
 }

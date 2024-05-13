@@ -3,6 +3,8 @@
 // (check with team, if you're uncertain)
 
 // "/$()/" is needed in urls to prevent "//" from being interpreted as a comment
-SUPABASE_URL = https:/$()/project-identifier.supabase.co
-SUPABASE_ANON_KEY = supabase-anon-key
-SENTRY_DSN = https:/$()/----.ingest.us.sentry.io/---
+SUPABASE_URL = https:/$()/xsltilxucvfhkssumglu.supabase.co
+SUPABASE_ANON_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhzbHRpbHh1Y3ZmaGtzc3VtZ2x1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI3ODUxODYsImV4cCI6MjAyODM2MTE4Nn0.p6xUoNo3_kjbiS-QNfnjwn9-KNVWgPdkFZPucs1WeG4
+SENTRY_DSN = https:/$()/214bd4f20b96d11e589c28ee309006bb@o38917.ingest.us.sentry.io/4507206726647808
+DEBUG_USER_EMAIL = user@email.com
+DEBUG_USER_PASSWORD = password
