@@ -20,7 +20,7 @@ struct Res_ExtensionAttributes: ActivityAttributes {
 
 class CallManager: ObservableObject {
     @Published var currentTranscript: String = ""
-
+    
     enum CallState {
         case started, loading, ended
     }
@@ -45,29 +45,29 @@ class CallManager: ObservableObject {
             UserDefaults.standard.set(voice, forKey: "voice")
         }
     }
-
+    
     var voiceDisplayName: String {
         switch voice {
-        case "alloy": return "🇺🇸 Alloy"
-        case "echo": return "🇺🇸 Echo"
-        case "fable": return "🇬🇧 Fable"
-        case "onyx": return "🇺🇸 Onyx"
-        case "nova": return "🇺🇸 Nova"
-        case "shimmer": return "🇺🇸 Shimmer"
-        default: return "Voice Type"
+            case "alloy": return "🇺🇸 Alloy"
+            case "echo": return "🇺🇸 Echo"
+            case "fable": return "🇬🇧 Fable"
+            case "onyx": return "🇺🇸 Onyx"
+            case "nova": return "🇺🇸 Nova"
+            case "shimmer": return "🇺🇸 Shimmer"
+            default: return "Voice Type"
         }
     }
-
+    
     var speedDisplayName: String {
         switch speed {
-        case 0.3: return "🐢 Slow"
-        case 1.0: return "💬 Normal"
-        case 1.3: return "🐇 Fast"
-        case 1.5: return "⚡️ Superfast"
-        default: return "Voice Speed"
+            case 0.3: return "🐢 Slow"
+            case 1.0: return "💬 Normal"
+            case 1.3: return "🐇 Fast"
+            case 1.5: return "⚡️ Superfast"
+            default: return "Voice Speed"
         }
     }
-        
+    
     func setupVapi() {
         guard let vapi = self.vapi else {
             print("Vapi is not initialized - setupVapi")
@@ -120,14 +120,13 @@ class CallManager: ObservableObject {
     func saveEnteredText() {
         UserDefaults.standard.set(enteredText, forKey: "enteredText")
     }
-
+    
     func playVoicePreview() {
-    // Implementation depends on the capabilities of Vapi or another audio library.
-    // This method should generate and play a short audio clip using the selected voice and speed settings.
+        // Implementation depends on the capabilities of Vapi or another audio library.
+        // This method should generate and play a short audio clip using the selected voice and speed settings.
     }
     
-    @MainActor
-    func handleCallAction() async {
+    @MainActor func handleCallAction() async {
         if callState == .ended {
             await initializeVapiAndStartCall()
         } else {
@@ -135,10 +134,9 @@ class CallManager: ObservableObject {
         }
     }
     
-    @MainActor
-    private func initializeVapiAndStartCall() async {
+    @MainActor private func initializeVapiAndStartCall() async {
         callState = .loading
-
+        
         do {
             let jwt = try await SupabaseManager.shared.issueVapiToken()
             vapi = Vapi(publicKey: jwt)
@@ -148,21 +146,21 @@ class CallManager: ObservableObject {
             callState = .ended
         }
     }
-
-    @MainActor
-    private func startCall() async {
+    
+    @MainActor private func startCall() async {
+        
         guard let vapi = vapi else {
             callState = .ended
             return
         }
-
+        
         let assistant = [
             "model": [
                 "provider": "openai",
                 "model": "gpt-4-0613",
                 "fallbackModels" : [
-                  "gpt-4-0125-preview",
-                  "gpt-4-1106-preview"
+                    "gpt-4-0125-preview",
+                    "gpt-4-1106-preview"
                 ],
                 "messages": [
                     ["role":"system",
@@ -205,23 +203,23 @@ class CallManager: ObservableObject {
     
     func updateLiveActivity() {
         switch callState {
-        case .started:
-            let sfSymbolName = "waveform.and.person.filled"
-            let updatedContentState = Res_ExtensionAttributes.ContentState(sfSymbolName: sfSymbolName)
-            Task {
-                await activity?.update(using: updatedContentState)
-            }
-        case .loading:
-            let sfSymbolName = "ellipsis"
-            let updatedContentState = Res_ExtensionAttributes.ContentState(sfSymbolName: sfSymbolName)
-            Task {
-                await activity?.update(using: updatedContentState)
-            }
-        case .ended:
-            Task {
-                await activity?.end(dismissalPolicy: .immediate)
-                activity = nil
-            }
+            case .started:
+                let sfSymbolName = "waveform.and.person.filled"
+                let updatedContentState = Res_ExtensionAttributes.ContentState(sfSymbolName: sfSymbolName)
+                Task {
+                    await activity?.update(using: updatedContentState)
+                }
+            case .loading:
+                let sfSymbolName = "ellipsis"
+                let updatedContentState = Res_ExtensionAttributes.ContentState(sfSymbolName: sfSymbolName)
+                Task {
+                    await activity?.update(using: updatedContentState)
+                }
+            case .ended:
+                Task {
+                    await activity?.end(dismissalPolicy: .immediate)
+                    activity = nil
+                }
         }
     }
     
@@ -230,7 +228,7 @@ class CallManager: ObservableObject {
             callState = .ended
             return
         }
-
+        
         vapi.stop()
         Task {
             await activity?.end(dismissalPolicy: .immediate)
@@ -251,15 +249,15 @@ extension CallManager {
     }
     
     var buttonGradient: LinearGradient {
-    switch callState {
-    case .loading:
-        return LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
-    case .ended:
-        return LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
-    case .started:
-        return LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
+        switch callState {
+            case .loading:
+                return LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
+            case .ended:
+                return LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
+            case .started:
+                return LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
+        }
     }
-}
     
     var buttonText: String {
         callState == .loading ? "Connecting" : (callState == .ended ? "Start Conversation" : "End Conversation")

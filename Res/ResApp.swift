@@ -9,26 +9,6 @@ import SwiftUI
 import Sentry
 import Supabase
 
-class ResAppModel: ObservableObject {
-    @Published var isAuthenticated = false
-    private var authStateChangesTask: Task<Void, Never>? = nil
-
-    init() {
-        handleAuthStateChanges()
-    }
-
-    func handleAuthStateChanges() {
-        authStateChangesTask = Task {
-            for await (_, session) in SupabaseManager.shared.client.auth.authStateChanges {
-                DispatchQueue.main.async {
-                    self.isAuthenticated = (session != nil)
-                }
-            }
-        }
-    }
-}
-
-
 @main
 struct ResApp: App {
     @StateObject private var resAppModel = ResAppModel()
@@ -47,6 +27,25 @@ struct ResApp: App {
                 MainView(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled)
             } else {
                 AuthView(isDebugMode: isDebugMode)
+            }
+        }
+    }
+}
+
+class ResAppModel: ObservableObject {
+    @Published var isAuthenticated = false
+    private var authStateChangesTask: Task<Void, Never>? = nil
+
+    init() {
+        handleAuthStateChanges()
+    }
+
+    func handleAuthStateChanges() {
+        authStateChangesTask = Task {
+            for await (_, session) in SupabaseManager.shared.client.auth.authStateChanges {
+                DispatchQueue.main.async {
+                    self.isAuthenticated = (session != nil)
+                }
             }
         }
     }
