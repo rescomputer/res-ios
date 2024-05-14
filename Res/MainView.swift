@@ -30,12 +30,11 @@ struct MainView: View {
             VStack {
                 greenScreen
                 resMarker
+                Spacer()
                 mainButton
                 setupButtons
-                Spacer()
             }
             .padding()
-            .padding(.top, 10)
             .padding(.horizontal, 10)
             
             .overlay(cornerTick, alignment: .bottomLeading)
@@ -47,8 +46,10 @@ struct MainView: View {
             .overlay(whiteBorder)
             
             .clipShape(RoundedRectangle(cornerRadius: 55))
-            .overlay(topTick, alignment: .top)  
+            .overlay(topTick, alignment: .top)
         }
+        .ignoresSafeArea(edges: .bottom)
+        
         .onAppear { callManager.setupVapi() }
         .overlay { voiceSetupSheet }
         .overlay { if isAppSettingsViewShowing { appSettingsSheet } }
