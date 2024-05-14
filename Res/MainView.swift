@@ -402,11 +402,14 @@ extension MainView {
     }
 }
 
-#Preview {
-    MainView(isAppSettingsViewShowing: .constant(false), isModalStepTwoEnabled: .constant(false))
+#Preview("Main View") {
+    MainView(
+        isAppSettingsViewShowing: .constant(false),
+        isModalStepTwoEnabled: .constant(false)
+    )
 }
 
-#Preview("Main View - App Settings Showing") {
+#Preview("App Settings") {
     MainView(
         isAppSettingsViewShowing: .constant(true),
         isModalStepTwoEnabled: .constant(false)
