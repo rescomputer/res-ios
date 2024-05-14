@@ -56,9 +56,9 @@ struct MainView: View {
             .overlay(whiteBorder)
             
             .clipShape(RoundedRectangle(cornerRadius: 55))
+            .overlay(topTick, alignment: .top)  
         }
         .onAppear { callManager.setupVapi() }
-        
         .overlay { voiceSetupSheet }
         .overlay { if isAppSettingsViewShowing { appSettingsSheet } }
     }
@@ -312,6 +312,19 @@ struct MainView: View {
             .alignmentGuide(HorizontalAlignment.leading) { d in d[.leading] }
             .alignmentGuide(VerticalAlignment.bottom) { d in d[.bottom] }
     }
+    
+    private var topTick: some View {
+        Image(.topTick)
+        .resizable()
+        .scaledToFit()
+        .frame(width: 125, height: 125)
+        .alignmentGuide(HorizontalAlignment.center) { d in d[.leading] + d.width / 2 }
+        .alignmentGuide(VerticalAlignment.top) { d in
+            let dynamicIslandHeight: CGFloat = 67 
+            return d[.top] + dynamicIslandHeight
+        }
+    }
+    
     
     // Shadows, borders, etc
     private var borderShadow: some View {
