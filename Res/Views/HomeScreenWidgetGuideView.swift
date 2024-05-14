@@ -66,7 +66,7 @@ struct HomeScreenWidgetGuideView: View {
 
                     //TODO add images or video of what the final widgets look like
                     ZStack {
-                        Image("homescreen-widget-topper")
+                        Image(.homescreenWidgetTopper)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .cornerRadius(15)

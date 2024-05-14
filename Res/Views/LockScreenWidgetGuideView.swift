@@ -66,7 +66,7 @@ struct LockScreenWidgetGuideView: View {
 
                     //TODO add images or video of what the final widgets look like
                     ZStack {
-                        Image("lockscreen-widget-topper")
+                        Image(.lockscreenWidgetTopper)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .cornerRadius(15)

@@ -25,20 +25,11 @@ struct MainView: View {
     var body: some View {
         
         ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: [Color(red: 0.047, green: 0.071, blue: 0.071), Color(red: 0.047, green: 0.071, blue: 0.071)]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .edgesIgnoringSafeArea(.all)
+            backgroundGradient
 
             VStack {
                 greenScreen
-                Image("res-marker")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(maxWidth: .infinity, maxHeight: 5)
-                    .padding(.top, 10)
+                resMarker
                 mainButton
                 setupButtons
                 Spacer()
@@ -64,6 +55,15 @@ struct MainView: View {
     }
     
     // Components
+    private var backgroundGradient: some View {
+        LinearGradient(
+            gradient: Gradient(colors: [Color(red: 0.047, green: 0.071, blue: 0.071), Color(red: 0.047, green: 0.071, blue: 0.071)]),
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .edgesIgnoringSafeArea(.all)
+    }
+    
     private var greenScreen: some View {
         ZStack {
             VStack {
@@ -89,7 +89,7 @@ struct MainView: View {
         )
         .clipShape(RoundedRectangle(cornerRadius: 34))
         .overlay(
-            Image("bg-noise")
+            Image(.bgNoise)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .opacity(0.5)
@@ -103,6 +103,14 @@ struct MainView: View {
                 .strokeBorder(LinearGradient(gradient: Gradient(colors: [Color(red: 0.878, green: 0.863, blue: 0.824), Color(red: 0.878, green: 0.863, blue: 0.824)]), startPoint: .bottom, endPoint: .leading), lineWidth: 12)
         )
         .shadow(color: Color.black.opacity(0.15), radius: 3, x: 0, y: 0)
+    }
+    
+    private var resMarker: some View {
+        Image(.resMarker)
+            .resizable()
+            .scaledToFill()
+            .frame(height: 5)
+            .padding(.top, 10)
     }
     
     private var mainButton: some View {
