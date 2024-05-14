@@ -19,12 +19,11 @@ class SentryManager {
             }
         }
     }
-
     
     var isSentryActive: Bool {
         return Config.buildConfiguration == .release || enableDebugLogging
     }
-
+    
     func captureError(_ error: Error, description: String? = nil) {
         if isSentryActive {
             SentrySDK.capture(error: error) { scope in
@@ -40,7 +39,7 @@ class SentryManager {
             }
         }
     }
-
+    
     func captureMessage(_ message: String) {
         if isSentryActive {
             SentrySDK.capture(message: message)
