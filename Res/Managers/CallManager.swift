@@ -192,15 +192,15 @@ class CallManager: ObservableObject {
             ]
         ] as [String : Any]
         do {
-            try await vapi.start(assistant: assistant)
+            _ = try await vapi.start(assistant: assistant)
             setupVapi()
+            
             // Start the live activity
             let activityAttributes = Res_ExtensionAttributes(name: "Conversation")
             let initialContentState = Res_ExtensionAttributes.ContentState(sfSymbolName: "ellipsis")
-            activity = try Activity<Res_ExtensionAttributes>.request(
-                attributes: activityAttributes,
-                contentState: initialContentState
-            )
+            
+            activity = try Activity<Res_ExtensionAttributes>.request(attributes: activityAttributes, contentState: initialContentState)
+            
         } catch {
             SentryManager.shared.captureError(error, description: "Error starting call or requesting activity")
             callState = .ended
@@ -247,21 +247,25 @@ class CallManager: ObservableObject {
 
 extension CallManager {
     var callStateText: String {
+        
         switch callState {
-            case .started: return "Connected"
-            case .loading: return "Connecting..."
-            case .ended: return "Chat with an AI back-and-forth"
+            case .started:
+                "Connected"
+            case .loading:
+                "Connecting..."
+            case .ended:
+                "Chat with an AI back-and-forth"
         }
     }
     
     var buttonGradient: LinearGradient {
         switch callState {
             case .loading:
-                return LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
             case .ended:
-                return LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
             case .started:
-                return LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
         }
     }
     
