@@ -10,14 +10,6 @@ import SwiftUI
 import Vapi
 import ActivityKit
 
-struct Res_ExtensionAttributes: ActivityAttributes {
-    struct ContentState: Codable, Hashable {
-        var sfSymbolName: String
-    }
-    
-    var name: String
-}
-
 class CallManager: ObservableObject {
     @Published var currentTranscript: String = ""
     
@@ -48,34 +40,47 @@ class CallManager: ObservableObject {
     
     var voiceDisplayName: String {
         switch voice {
-            case "alloy": return "🇺🇸 Alloy"
-            case "echo": return "🇺🇸 Echo"
-            case "fable": return "🇬🇧 Fable"
-            case "onyx": return "🇺🇸 Onyx"
-            case "nova": return "🇺🇸 Nova"
-            case "shimmer": return "🇺🇸 Shimmer"
-            default: return "Voice Type"
+            case "alloy":
+                return "🇺🇸 Alloy"
+            case "echo":
+                return "🇺🇸 Echo"
+            case "fable":
+                return "🇬🇧 Fable"
+            case "onyx":
+                return "🇺🇸 Onyx"
+            case "nova":
+                return "🇺🇸 Nova"
+            case "shimmer":
+                return "🇺🇸 Shimmer"
+            default:
+                return "Voice Type"
         }
     }
     
     var speedDisplayName: String {
         switch speed {
-            case 0.3: return "🐢 Slow"
-            case 1.0: return "💬 Normal"
-            case 1.3: return "🐇 Fast"
-            case 1.5: return "⚡️ Superfast"
-            default: return "Voice Speed"
+            case 0.3:
+                return "🐢 Slow"
+            case 1.0:
+                return "💬 Normal"
+            case 1.3:
+                return "🐇 Fast"
+            case 1.5:
+                return "⚡️ Superfast"
+            default:
+                return "Voice Speed"
         }
     }
     
     func setupVapi() {
-        guard let vapi = self.vapi else {
+        guard let vapi else {
             print("Vapi is not initialized - setupVapi")
             DispatchQueue.main.async {
                 self.callState = .ended
             }
             return
         }
+        
         vapi.eventPublisher
             .sink { [weak self] event in
                 self?.vapiEvents.append(event)
@@ -104,6 +109,7 @@ class CallManager: ObservableObject {
                 self?.updateLiveActivity()
             }
             .store(in: &cancellables)
+        
         if let savedText = UserDefaults.standard.string(forKey: "enteredText"), !savedText.isEmpty {
             enteredText = savedText
         } else {
@@ -262,4 +268,12 @@ extension CallManager {
     var buttonText: String {
         callState == .loading ? "Connecting" : (callState == .ended ? "Start Conversation" : "End Conversation")
     }
+}
+
+struct Res_ExtensionAttributes: ActivityAttributes {
+    struct ContentState: Codable, Hashable {
+        var sfSymbolName: String
+    }
+    
+    var name: String
 }
