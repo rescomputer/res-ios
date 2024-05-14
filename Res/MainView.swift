@@ -325,7 +325,6 @@ struct MainView: View {
         }
     }
     
-    
     // Shadows, borders, etc
     private var borderShadow: some View {
         RoundedRectangle(cornerRadius: 55)
