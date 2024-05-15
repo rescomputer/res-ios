@@ -13,7 +13,7 @@ import ActivityKit
 class CallManager: ObservableObject {
     @Published var currentTranscript: String = ""
     
-    enum CallState {
+    enum CallState: String {
         case started, loading, ended
     }
     

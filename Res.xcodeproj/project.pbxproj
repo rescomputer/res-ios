@@ -28,7 +28,6 @@
 		2DE1830E58A749F8A3633BED /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 00571768FCC847B5B370CACD /* Sentry */; };
 		B95D2F332BA4EAF5003C7C17 /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F322BA4EAF5003C7C17 /* CallManager.swift */; };
 		B95D2F352BA4EB32003C7C17 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */; };
-		B976AF652BF437730014196F /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B976AF642BF437730014196F /* PlayerView.swift */; };
 		B976AF672BF438CE0014196F /* dial.up.sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B976AF662BF438CE0014196F /* dial.up.sound.mp3 */; };
 		B976AF692BF43F780014196F /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B976AF682BF43F780014196F /* AudioManager.swift */; };
 		F31C49412BBE75C70075477D /* VoiceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C49402BBE75C70075477D /* VoiceSettingsView.swift */; };
@@ -121,7 +120,6 @@
 		18F723882BAC2694003F44FA /* ActivityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActivityKit.framework; path = System/Library/Frameworks/ActivityKit.framework; sourceTree = SDKROOT; };
 		B95D2F322BA4EAF5003C7C17 /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
-		B976AF642BF437730014196F /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		B976AF662BF438CE0014196F /* dial.up.sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = dial.up.sound.mp3; sourceTree = "<group>"; };
 		B976AF682BF43F780014196F /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		F31C49402BBE75C70075477D /* VoiceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceSettingsView.swift; sourceTree = "<group>"; };
@@ -221,7 +219,6 @@
 			children = (
 				18D289E22B9713FE008742FB /* ResApp.swift */,
 				18D289E42B9713FE008742FB /* MainView.swift */,
-				B976AF642BF437730014196F /* PlayerView.swift */,
 				F3B5AB232BAD35BD009CDBB5 /* Views */,
 				F3B5AB222BAD358D009CDBB5 /* Managers */,
 				F3B5AB1F2BAD08CA009CDBB5 /* Utilities */,
@@ -526,7 +523,6 @@
 			files = (
 				F3B5AB212BAD08F1009CDBB5 /* AnimationUtility.swift in Sources */,
 				F31C49472BC0DDC60075477D /* AudioVisualizerView.swift in Sources */,
-				B976AF652BF437730014196F /* PlayerView.swift in Sources */,
 				1849A5472BBDD68A00A4BCF1 /* UIScreen+Extensions.swift in Sources */,
 				18D289E52B9713FE008742FB /* MainView.swift in Sources */,
 				F31C494B2BC37C080075477D /* Loader.swift in Sources */,
