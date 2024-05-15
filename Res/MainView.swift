@@ -138,10 +138,11 @@ struct MainView: View {
             .font(.system(.title2, design: .rounded))
             .fontWeight(.bold)
             .foregroundColor(.white)
-            .padding()
+            
             .frame(height: 60)
             .frame(maxWidth: .infinity)
             .background(callManager.buttonGradient)
+            
             .overlay(
                 Image(.bgNoise)
                     .resizable()
@@ -149,11 +150,13 @@ struct MainView: View {
                     .opacity(1)
             )
             .cornerRadius(50)
-            // .overlay(
-            // // Inner dark stroke
-            //     RoundedRectangle(cornerRadius: 50)
-            //         .stroke(Color(red: 0.275, green: 0.122, blue: 0.063), lineWidth: 1)
-            // )
+            
+//             .overlay(
+//             // Inner dark stroke
+//                 RoundedRectangle(cornerRadius: 50)
+//                     .stroke(Color(red: 0.275, green: 0.122, blue: 0.063), lineWidth: 1)
+//             )
+            
             .overlay(
                 // Inner light stroke
                 RoundedRectangle(cornerRadius: 50, style: .continuous)
@@ -170,27 +173,20 @@ struct MainView: View {
                         lineWidth: 3
                     )
                     .blendMode(.overlay)
-                //.opacity(0.3)
             )
+            
             .onTapGesture {
                 Task {  await callManager.handleCallAction() }
                 let impactMed = UIImpactFeedbackGenerator(style: .soft)
                 impactMed.impactOccurred()
             }
             .pressAnimation()
-            .opacity(1)
             .padding(2)
-            .padding(.vertical, 0)
-            
         }
-        
-        .background(RoundedRectangle(cornerRadius: 50)
-            .fill(Color.black))
+        .background(RoundedRectangle(cornerRadius: 50).fill(Color.black))
         .shadow(color: Color.black.opacity(0.5), radius: 3, x: 0, y: 0)
         
         .disabled(callManager.callState == .loading)
-        
-        .padding(.top, 20)
     }
     
     private var setupButtons: some View {

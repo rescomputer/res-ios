@@ -156,9 +156,7 @@ struct PressAnimation: ViewModifier {
             .scaleEffect(isPressed ? 0.98 : 1)
             .animation(.easeInOut(duration: 0.1), value: isPressed)
             .onLongPressGesture(minimumDuration: .infinity, pressing: { pressing in
-                withAnimation {
-                    isPressed = pressing
-                }
+                withAnimation { isPressed = pressing }
             }, perform: {})
     }
 }
