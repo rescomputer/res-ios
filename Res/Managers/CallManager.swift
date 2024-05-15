@@ -196,9 +196,6 @@ class CallManager: ObservableObject {
             ]
         ] as [String : Any]
         do {
-            
-            #warning("This delay will decrease the usability but will increase the fun")
-            try await Task.sleep(nanoseconds: 5_000_000_000)
             _ = try await vapi.start(assistant: assistant)
             
             setupVapi()
@@ -263,6 +260,11 @@ class CallManager: ObservableObject {
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
             audioPlayer?.play()
+            
+//            audioPlayer = try AVAudioPlayer(contentsOf: url)
+//            audioPlayer?.delegate = self
+//            audioPlayer?.play()
+//            self.completionHandler = completion
 
         } catch let error {
             print(error.localizedDescription)
@@ -272,6 +274,14 @@ class CallManager: ObservableObject {
     func stopPlayingSounds() {
         audioPlayer?.stop()
     }
+    
+//    TODO: Enable the full length playback
+//    // AVAudioPlayerDelegate method
+//    private var completionHandler: (() -> Void)?
+//    
+//    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+//        completionHandler?()
+//    }
 }
 
 extension CallManager {
