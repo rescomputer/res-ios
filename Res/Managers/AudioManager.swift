@@ -10,7 +10,7 @@ import AVFoundation
 @MainActor class AudioManager: ObservableObject {
     var audioPlayer: AVAudioPlayer?
     
-    func playSound() {
+    func playDialUpSound() {
         guard let path = Bundle.main.path(forResource: "dial.up.sound", ofType: "mp3") else {
             return
         }
@@ -24,5 +24,9 @@ import AVFoundation
         } catch let error {
             print(error.localizedDescription)
         }
+    }
+    
+    func stopPlaying() {
+        audioPlayer?.stop()
     }
 }

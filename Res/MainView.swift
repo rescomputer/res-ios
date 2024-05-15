@@ -13,6 +13,7 @@ struct MainView: View {
     @FocusState private var isTextFieldFocused: Bool
     
     @StateObject private var callManager = CallManager()
+    @StateObject private var audioManager = AudioManager()
     @StateObject private var keyboardResponder = KeyboardResponder()
     
     @Binding var isAppSettingsViewShowing: Bool
@@ -23,7 +24,6 @@ struct MainView: View {
     @State private var activeModal: ActiveModal?
     
     var body: some View {
-        
         ZStack {
             backgroundGradient
 
@@ -35,6 +35,7 @@ struct MainView: View {
                 setupButtons
             }
             .padding()
+            .padding(.bottom)
             .padding(.horizontal, 10)
             
             .overlay(cornerTick, alignment: .bottomLeading)
