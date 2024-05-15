@@ -9,8 +9,11 @@ import Combine
 import SwiftUI
 import Vapi
 import ActivityKit
+import AVFoundation
 
 class CallManager: ObservableObject {
+    var audioPlayer: AVAudioPlayer?
+    
     @Published var currentTranscript: String = ""
     
     enum CallState: String {
@@ -142,6 +145,7 @@ class CallManager: ObservableObject {
     
     @MainActor private func initializeVapiAndStartCall() async {
         callState = .loading
+        playDialUpSound()
         
         do {
             let jwt = try await SupabaseManager.shared.issueVapiToken()
@@ -192,8 +196,13 @@ class CallManager: ObservableObject {
             ]
         ] as [String : Any]
         do {
+            
+            #warning("This delay will decrease the usability but will increase the fun")
+            try await Task.sleep(nanoseconds: 5_000_000_000)
             _ = try await vapi.start(assistant: assistant)
+            
             setupVapi()
+            stopPlayingSounds()
             
             // Start the live activity
             let activityAttributes = Res_ExtensionAttributes(name: "Conversation")
@@ -242,6 +251,26 @@ class CallManager: ObservableObject {
                 self.activity = nil
             }
         }
+    }
+    
+    private func playDialUpSound() {
+        guard let path = Bundle.main.path(forResource: "dial.up.sound", ofType: "mp3") else {
+            return
+        }
+        
+        let url = URL(fileURLWithPath: path)
+
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.play()
+
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func stopPlayingSounds() {
+        audioPlayer?.stop()
     }
 }
 
