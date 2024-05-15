@@ -59,7 +59,8 @@ struct MainView: View {
     // Components
     private var backgroundGradient: some View {
         LinearGradient(
-            gradient: Gradient(colors: [Color(red: 0.047, green: 0.071, blue: 0.071), Color(red: 0.047, green: 0.071, blue: 0.071)]),
+            gradient: greenGradient,
+//            Gradient(colors: [Color(red: 0.047, green: 0.071, blue: 0.071), Color(red: 0.047, green: 0.071, blue: 0.071)]
             startPoint: .top,
             endPoint: .bottom
         )
@@ -74,22 +75,18 @@ struct MainView: View {
                     .scaledToFit()
                     .frame(width: 150, height: 150)
                     .padding(.bottom, 100)
-                // Text(callManager.currentTranscript)
-                //     .frame(maxWidth: .infinity, alignment: .center)
-                //     .padding()
-                //     .background(Color.white.opacity(0.5))
-                //     .cornerRadius(10)
+                
+//                Text(callManager.currentTranscript)
+//                    .frame(maxWidth: .infinity, alignment: .center)
+//                    .padding()
+//                    .background(Color.white.opacity(0.5))
+//                    .cornerRadius(10)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: 500)
-        .background(
-            LinearGradient(
-                gradient: Gradient(colors: [Color(red: 0.067, green: 0.094, blue: 0.063), Color(red: 0.071, green: 0.192, blue: 0.078)]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-        )
+        .background(LinearGradient( gradient: greenGradient, startPoint: .top, endPoint: .bottom))
         .clipShape(RoundedRectangle(cornerRadius: 34))
+        
         .overlay(
             Image(.bgNoise)
                 .resizable()
@@ -105,6 +102,11 @@ struct MainView: View {
                 .strokeBorder(LinearGradient(gradient: Gradient(colors: [Color(red: 0.878, green: 0.863, blue: 0.824), Color(red: 0.878, green: 0.863, blue: 0.824)]), startPoint: .bottom, endPoint: .leading), lineWidth: 12)
         )
         .shadow(color: Color.black.opacity(0.15), radius: 3, x: 0, y: 0)
+    }
+    
+    private var greenGradient: Gradient {
+        Gradient(colors: [Color(red: 0.067, green: 0.094, blue: 0.063),
+                          Color(red: 0.071, green: 0.192, blue: 0.078)])
     }
     
     private var resMarker: some View {
