@@ -13,7 +13,6 @@ struct MainView: View {
     @FocusState private var isTextFieldFocused: Bool
     
     @StateObject private var callManager = CallManager()
-    @StateObject private var audioManager = AudioManager()
     @StateObject private var keyboardResponder = KeyboardResponder()
     
     @Binding var isAppSettingsViewShowing: Bool
@@ -176,7 +175,7 @@ struct MainView: View {
             )
             
             .onTapGesture {
-                Task {  await callManager.handleCallAction() }
+                Task { await callManager.handleCallAction() }
                 let impactMed = UIImpactFeedbackGenerator(style: .soft)
                 impactMed.impactOccurred()
             }
