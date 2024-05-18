@@ -40,6 +40,12 @@
 		F3B5AB1E2BAD062D009CDBB5 /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */; };
 		F3B5AB212BAD08F1009CDBB5 /* AnimationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB202BAD08F1009CDBB5 /* AnimationUtility.swift */; };
 		F3B5AB252BAE91E3009CDBB5 /* CustomLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB242BAE91E3009CDBB5 /* CustomLinkView.swift */; };
+		F3E72E462BF95FA6001FB6E4 /* MainViewTeenageEng.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E72E452BF95FA6001FB6E4 /* MainViewTeenageEng.swift */; };
+		F3E72E4A2BF961B6001FB6E4 /* VoiceTypeAndToneSettingsTeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E72E492BF961B6001FB6E4 /* VoiceTypeAndToneSettingsTeView.swift */; };
+		F3E72E4C2BF9620B001FB6E4 /* VoiceTypeAndToneTeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E72E4B2BF9620B001FB6E4 /* VoiceTypeAndToneTeView.swift */; };
+		F3E72E4E2BF96240001FB6E4 /* CustomTextPromptTeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E72E4D2BF96240001FB6E4 /* CustomTextPromptTeView.swift */; };
+		F3E72E502BF962F7001FB6E4 /* VoiceSettingsTeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E72E4F2BF962F7001FB6E4 /* VoiceSettingsTeView.swift */; };
+		F3E72E522BF9632A001FB6E4 /* AppSettingsTeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E72E512BF9632A001FB6E4 /* AppSettingsTeView.swift */; };
 		FA14AACD2BE84F43001C7486 /* SupabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA14AACC2BE84F43001C7486 /* SupabaseManager.swift */; };
 		FA14AAD02BE850A0001C7486 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = FA14AACF2BE850A0001C7486 /* Auth */; };
 		FA14AAD22BE850A0001C7486 /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = FA14AAD12BE850A0001C7486 /* Functions */; };
@@ -131,6 +137,12 @@
 		F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsView.swift; sourceTree = "<group>"; };
 		F3B5AB202BAD08F1009CDBB5 /* AnimationUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationUtility.swift; sourceTree = "<group>"; };
 		F3B5AB242BAE91E3009CDBB5 /* CustomLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLinkView.swift; sourceTree = "<group>"; };
+		F3E72E452BF95FA6001FB6E4 /* MainViewTeenageEng.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewTeenageEng.swift; sourceTree = "<group>"; };
+		F3E72E492BF961B6001FB6E4 /* VoiceTypeAndToneSettingsTeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceTypeAndToneSettingsTeView.swift; sourceTree = "<group>"; };
+		F3E72E4B2BF9620B001FB6E4 /* VoiceTypeAndToneTeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceTypeAndToneTeView.swift; sourceTree = "<group>"; };
+		F3E72E4D2BF96240001FB6E4 /* CustomTextPromptTeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextPromptTeView.swift; sourceTree = "<group>"; };
+		F3E72E4F2BF962F7001FB6E4 /* VoiceSettingsTeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceSettingsTeView.swift; sourceTree = "<group>"; };
+		F3E72E512BF9632A001FB6E4 /* AppSettingsTeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsTeView.swift; sourceTree = "<group>"; };
 		FA14AACA2BE80E0B001C7486 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		FA14AACC2BE84F43001C7486 /* SupabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseManager.swift; sourceTree = "<group>"; };
 		FA5550A42BEDD4CF00C7648B /* AuthScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthScreenView.swift; sourceTree = "<group>"; };
@@ -217,6 +229,7 @@
 			children = (
 				18D289E22B9713FE008742FB /* ResApp.swift */,
 				18D289E42B9713FE008742FB /* MainView.swift */,
+				F3E72E452BF95FA6001FB6E4 /* MainViewTeenageEng.swift */,
 				F3B5AB232BAD35BD009CDBB5 /* Views */,
 				F3B5AB222BAD358D009CDBB5 /* Managers */,
 				F3B5AB1F2BAD08CA009CDBB5 /* Utilities */,
@@ -289,18 +302,39 @@
 		F3B5AB232BAD35BD009CDBB5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F3E72E482BF960D5001FB6E4 /* ClassicRes */,
+				F3E72E472BF960CB001FB6E4 /* TeenageEng */,
 				FA5550A42BEDD4CF00C7648B /* AuthScreenView.swift */,
-				1849A54C2BBDDF7100A4BCF1 /* LaunchScreenViewController.swift */,
 				1849A5492BBDD6FF00A4BCF1 /* HomeScreenWidgetGuideView.swift */,
+				F31C49462BC0DDC60075477D /* AudioVisualizerView.swift */,
 				1849A5482BBDD6FF00A4BCF1 /* LockScreenWidgetGuideView.swift */,
+				1849A54C2BBDDF7100A4BCF1 /* LaunchScreenViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F3E72E472BF960CB001FB6E4 /* TeenageEng */ = {
+			isa = PBXGroup;
+			children = (
+				F3E72E512BF9632A001FB6E4 /* AppSettingsTeView.swift */,
+				F3E72E4F2BF962F7001FB6E4 /* VoiceSettingsTeView.swift */,
+				F3E72E4D2BF96240001FB6E4 /* CustomTextPromptTeView.swift */,
+				F3E72E4B2BF9620B001FB6E4 /* VoiceTypeAndToneTeView.swift */,
+				F3E72E492BF961B6001FB6E4 /* VoiceTypeAndToneSettingsTeView.swift */,
+			);
+			path = TeenageEng;
+			sourceTree = "<group>";
+		};
+		F3E72E482BF960D5001FB6E4 /* ClassicRes */ = {
+			isa = PBXGroup;
+			children = (
 				F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */,
 				F31C49402BBE75C70075477D /* VoiceSettingsView.swift */,
 				F31C49422BBF85890075477D /* CustomTextPromptView.swift */,
 				F31C49442BBF86950075477D /* VoiceTypeAndToneView.swift */,
-				F31C49462BC0DDC60075477D /* AudioVisualizerView.swift */,
 				F31C49482BC111180075477D /* VoiceTypeAndToneSettingsView.swift */,
 			);
-			path = Views;
+			path = ClassicRes;
 			sourceTree = "<group>";
 		};
 		FA8DCF9D2BEC194900F54DCA /* ResTests */ = {
@@ -522,16 +556,22 @@
 				F31C49472BC0DDC60075477D /* AudioVisualizerView.swift in Sources */,
 				1849A5472BBDD68A00A4BCF1 /* UIScreen+Extensions.swift in Sources */,
 				18D289E52B9713FE008742FB /* MainView.swift in Sources */,
+				F3E72E522BF9632A001FB6E4 /* AppSettingsTeView.swift in Sources */,
+				F3E72E4C2BF9620B001FB6E4 /* VoiceTypeAndToneTeView.swift in Sources */,
+				F3E72E4A2BF961B6001FB6E4 /* VoiceTypeAndToneSettingsTeView.swift in Sources */,
 				F31C494B2BC37C080075477D /* Loader.swift in Sources */,
+				F3E72E502BF962F7001FB6E4 /* VoiceSettingsTeView.swift in Sources */,
 				F31C49412BBE75C70075477D /* VoiceSettingsView.swift in Sources */,
 				18D289E32B9713FE008742FB /* ResApp.swift in Sources */,
 				F3B5AB1E2BAD062D009CDBB5 /* AppSettingsView.swift in Sources */,
 				FA5550A52BEDD4CF00C7648B /* AuthScreenView.swift in Sources */,
 				FA14AACD2BE84F43001C7486 /* SupabaseManager.swift in Sources */,
 				1849A54A2BBDD6FF00A4BCF1 /* LockScreenWidgetGuideView.swift in Sources */,
+				F3E72E4E2BF96240001FB6E4 /* CustomTextPromptTeView.swift in Sources */,
 				F3B5AB1A2BACE488009CDBB5 /* XMarkButton.swift in Sources */,
 				1849A54B2BBDD6FF00A4BCF1 /* HomeScreenWidgetGuideView.swift in Sources */,
 				B95D2F332BA4EAF5003C7C17 /* CallManager.swift in Sources */,
+				F3E72E462BF95FA6001FB6E4 /* MainViewTeenageEng.swift in Sources */,
 				B95D2F352BA4EB32003C7C17 /* CustomTextEditor.swift in Sources */,
 				F3B5AB252BAE91E3009CDBB5 /* CustomLinkView.swift in Sources */,
 				FA7944DC2BE6D08C0035EC8B /* Config.swift in Sources */,
