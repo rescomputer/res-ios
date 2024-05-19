@@ -118,7 +118,7 @@ struct MainViewTeenageEng: View {
                      .blendMode(.plusLighter)
                      .opacity(0.3)
         )
-        .shadow(color: Color.black.opacity(0.5), radius: 8, x: 0, y: 4)
+        .shadow(color: Color.black.opacity(0.5), radius: 5, x: 0, y: 3)
     }
     
     private var screenGradient: Gradient {
