@@ -191,7 +191,8 @@ struct MainViewTeenageEng: View {
                 .padding(2)
             }
             .background(RoundedRectangle(cornerRadius: 100).fill(Color.black))
-            .shadow(color: Color.black.opacity(0.5), radius: 3, x: 0, y: 0)
+            .shadow(color: Color(red: 0.957, green: 0.812, blue: 0.714).opacity(0.4), radius: 3, x: 0, y: -4)
+            .shadow(color: Color(red: 0.506, green: 0.173, blue: 0.02).opacity(0.4), radius: 5, x: 0, y: 4)
             
             .disabled(callManager.callState == .loading) 
     }
