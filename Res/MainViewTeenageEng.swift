@@ -211,7 +211,7 @@ struct MainViewTeenageEng: View {
                     ZStack {
                         Image(systemName: "gear")
                             .font(.system(size: 20))
-                            .foregroundColor(.black.opacity(0.3))
+                            .foregroundColor(.black.opacity(0.7))
                     }
 
                 }
@@ -239,11 +239,11 @@ struct MainViewTeenageEng: View {
                         .blendMode(.overlay)
                 )
                 .pressAnimation()
-                .padding(2)
+                .padding(1)
             }
             .background(RoundedRectangle(cornerRadius: 50)
                 .fill(Color.black))
-            .shadow(color: Color.black.opacity(0.5), radius: 3, x: 0, y: 0)
+            .shadow(color: Color.black.opacity(0.4), radius: 4, x: 0, y: 0)
     }
 
      private var brainButton: some View {
@@ -257,7 +257,7 @@ struct MainViewTeenageEng: View {
                     ZStack {
                         Image(systemName: "waveform")
                             .font(.system(size: 20))
-                            .foregroundColor(.black.opacity(0.3))
+                            .foregroundColor(.black.opacity(0.7))
                     }
                 }
                 .padding()
@@ -285,11 +285,11 @@ struct MainViewTeenageEng: View {
                     //.opacity(0.3)
                 )
                 .pressAnimation()
-                .padding(2)
+                .padding(1)
             }
             .background(RoundedRectangle(cornerRadius: 50)
                 .fill(Color.black))
-            .shadow(color: Color.black.opacity(0.5), radius: 3, x: 0, y: 0)
+            .shadow(color: Color.black.opacity(0.4), radius: 4, x: 0, y: 0)
 
     }
     

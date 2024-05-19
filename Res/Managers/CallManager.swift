@@ -318,11 +318,11 @@ extension CallManager {
                     .scaleUpAnimation()
             case .ended:
                 Image(systemName: "phone.fill")
-                    .foregroundStyle(.white.opacity(0.4))
+                    .foregroundStyle(.white.opacity(0.8))
                     .scaleUpAnimation()
             case .started:
                 Image(systemName: "phone.down.fill")
-                    .foregroundStyle(.white.opacity(0.4))
+                    .foregroundStyle(.white.opacity(0.8))
                     .scaleUpAnimation()
         }
     }
