@@ -180,6 +180,7 @@ struct MainViewTeenageEng: View {
                             lineWidth: 2
                         )
                         .blendMode(.overlay)
+                        .blur(radius: 1.0)
                 )
                 
                 .onTapGesture {
@@ -192,7 +193,8 @@ struct MainViewTeenageEng: View {
             }
             .background(RoundedRectangle(cornerRadius: 100).fill(Color.black))
             .shadow(color: Color(red: 0.957, green: 0.812, blue: 0.714).opacity(0.4), radius: 3, x: 0, y: -4)
-            .shadow(color: Color(red: 0.506, green: 0.173, blue: 0.02).opacity(0.4), radius: 5, x: 0, y: 4)
+            .shadow(color: Color(red: 0.506, green: 0.173, blue: 0.02).opacity(0.4), radius: 7, x: 0, y: 7)
+            .shadow(color: Color(red: 0.506, green: 0.173, blue: 0.02).opacity(0.6), radius: 3, x: 0, y: 2)
             
             .disabled(callManager.callState == .loading) 
     }
@@ -237,13 +239,16 @@ struct MainViewTeenageEng: View {
                             lineWidth: 2
                         )
                         .blendMode(.overlay)
+                        .blur(radius: 1.0)
+
                 )
                 .pressAnimation()
                 .padding(1)
             }
             .background(RoundedRectangle(cornerRadius: 50)
                 .fill(Color.black))
-            .shadow(color: Color.black.opacity(0.4), radius: 4, x: 0, y: 0)
+            .shadow(color: Color.black.opacity(0.3), radius: 3, x: 0, y: 3)
+            .shadow(color: Color.white.opacity(0.9), radius: 3, x: 0, y: -3)
     }
 
      private var brainButton: some View {
@@ -282,14 +287,15 @@ struct MainViewTeenageEng: View {
                             lineWidth: 2
                         )
                         .blendMode(.overlay)
-                    //.opacity(0.3)
+                        .blur(radius: 1.0)
                 )
                 .pressAnimation()
                 .padding(1)
             }
             .background(RoundedRectangle(cornerRadius: 50)
                 .fill(Color.black))
-            .shadow(color: Color.black.opacity(0.4), radius: 4, x: 0, y: 0)
+            .shadow(color: Color.black.opacity(0.3), radius: 3, x: 0, y: 3)
+            .shadow(color: Color.white.opacity(0.9), radius: 3, x: 0, y: -3)
 
     }
     
