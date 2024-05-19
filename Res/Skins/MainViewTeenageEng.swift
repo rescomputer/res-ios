@@ -21,7 +21,8 @@ struct MainViewTeenageEng: View {
     @State private var drawingHeight = true
     @State private var selectedOption: Option?
     @State private var activeModal: ActiveModal?
-    
+    @State private var teScreenState: TeScreenState = .textFirstScreen
+
     var body: some View {
         ZStack {
             backgroundGradient
@@ -64,12 +65,21 @@ struct MainViewTeenageEng: View {
     
     private var teScreen: some View {
         ZStack {
-            VStack {
-//                Image(.roboto)
-//                    .resizable()
-//                    .scaledToFit()
-//                    .frame(width: 150, height: 150)
-                
+            switch teScreenState {
+            case .textFirstScreen:
+                VStack {
+                    Text("Text First Screen")
+                        .font(.largeTitle)
+                        .foregroundColor(.white)
+                }
+            case .voiceSettingsScreen:
+                VoiceSettingsTeView(
+                    activeModal: $activeModal,
+                    selectedOption: $selectedOption,
+                    isModalStepTwoEnabled: $isModalStepTwoEnabled,
+                    callManager: callManager,
+                    keyboardResponder: keyboardResponder
+                )
             }
         }
         .frame(maxWidth: .infinity, maxHeight: 300)
@@ -255,7 +265,8 @@ struct MainViewTeenageEng: View {
             //personality & voice
             ZStack {
                 Button(action: {
-                    self.activeModal = .voiceSettingsModal
+                    self.teScreenState = .voiceSettingsScreen
+                   // self.activeModal = .voiceSettingsModal
                     let impactMed = UIImpactFeedbackGenerator(style: .soft)
                     impactMed.impactOccurred()
                 }) {
@@ -370,7 +381,10 @@ struct MainViewTeenageEng: View {
 }
 
 extension MainViewTeenageEng {
-    
+    enum TeScreenState {
+        case textFirstScreen
+        case voiceSettingsScreen
+    }
     enum ActiveModal {
         case voiceSettingsModal
     }
