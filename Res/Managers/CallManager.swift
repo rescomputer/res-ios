@@ -300,17 +300,37 @@ extension CallManager {
     var buttonGradient: LinearGradient {
         switch callState {
             case .loading:
-                LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [Color(red: 0.957, green: 0.522, blue: 0), Color(red: 0.961, green: 0.282, blue: 0)]), startPoint: .top, endPoint: .bottom)
             case .ended:
-                LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [Color(red: 0.957, green: 0.522, blue: 0), Color(red: 0.961, green: 0.282, blue: 0)]), startPoint: .top, endPoint: .bottom)
             case .started:
-                LinearGradient(gradient: Gradient(colors: [Color(red: 1, green: 0.42, blue: 0), Color(red: 1, green: 0.514, blue: 0.161), Color(red: 0.878, green: 0.404, blue: 0.063)]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [Color(red: 0.957, green: 0.231, blue: 0), Color(red: 0.961, green: 0, blue: 0)]), startPoint: .top, endPoint: .bottom)
+
         }
     }
-    
-    var buttonText: String {
-        callState == .loading ? "Connecting" : (callState == .ended ? "Start Conversation" : "End Conversation")
+
+    @ViewBuilder
+    var buttonText: some View {
+        switch callState {
+            case .loading:
+                Loader()
+                    .frame(width: 42, height: 42)
+                    .scaleUpAnimation()
+            case .ended:
+                Image(systemName: "phone.fill")
+                    .foregroundStyle(.white.opacity(0.4))
+                    .scaleUpAnimation()
+            case .started:
+                Image(systemName: "phone.down.fill")
+                    .foregroundStyle(.white.opacity(0.4))
+                    .scaleUpAnimation()
+        }
     }
+
+    //Res Classic
+    // var buttonText: String {
+    //     callState == .loading ? "Connecting" : (callState == .ended ? "Start Conversation" : "End Conversation")
+    // }
 }
 
 struct Res_ExtensionAttributes: ActivityAttributes {

@@ -27,17 +27,15 @@ struct MainViewTeenageEng: View {
             backgroundGradient
 
             VStack {
-                greenScreen
-                resMarker
+                topTickTe
+                teScreen
+                teenageEngGrill
                 Spacer()
-                mainButton
-                setupButtons
+                mainButtons
             }
             .padding()
             .padding(.bottom)
-            .padding(.horizontal, 10)
             
-            .overlay(cornerTick, alignment: .bottomLeading)
             .overlay(borderShadow)
             
             .background(backgroundColor)
@@ -45,8 +43,7 @@ struct MainViewTeenageEng: View {
             .overlay(backgroundNoise)
             .overlay(whiteBorder)
             
-            .clipShape(RoundedRectangle(cornerRadius: 55))
-            .overlay(topTick, alignment: .top)
+            .clipShape(RoundedRectangle(cornerRadius: 25))
         }
         .ignoresSafeArea(edges: .bottom)
         
@@ -58,34 +55,26 @@ struct MainViewTeenageEng: View {
     // Components
     private var backgroundGradient: some View {
         LinearGradient(
-            gradient: greenGradient,
-//            Gradient(colors: [Color(red: 0.047, green: 0.071, blue: 0.071), Color(red: 0.047, green: 0.071, blue: 0.071)]
+            gradient: screenGradient,
             startPoint: .top,
             endPoint: .bottom
         )
         .edgesIgnoringSafeArea(.all)
     }
     
-    private var greenScreen: some View {
+    private var teScreen: some View {
         ZStack {
             VStack {
-                Image(.roboto)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 150, height: 150)
-                    .padding(.bottom, 100)
+//                Image(.roboto)
+//                    .resizable()
+//                    .scaledToFit()
+//                    .frame(width: 150, height: 150)
                 
-//                Text(callManager.currentTranscript)
-//                    .frame(maxWidth: .infinity, alignment: .center)
-//                    .padding()
-//                    .background(Color.white.opacity(0.5))
-//                    .cornerRadius(10)
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: 500)
-        .background(LinearGradient( gradient: greenGradient, startPoint: .top, endPoint: .bottom))
-        .clipShape(RoundedRectangle(cornerRadius: 34))
-        
+        .frame(maxWidth: .infinity, maxHeight: 300)
+        .background(LinearGradient( gradient: screenGradient, startPoint: .top, endPoint: .bottom))
+        .clipShape(RoundedRectangle(cornerRadius: 20))
         .overlay(
             Image(.bgNoise)
                 .resizable()
@@ -93,127 +82,91 @@ struct MainViewTeenageEng: View {
                 .opacity(0.5)
         )
         .overlay(
-            RoundedRectangle(cornerRadius: 34)
-                .strokeBorder(LinearGradient(gradient: Gradient(colors: [.black, .black]), startPoint: .top, endPoint: .trailing), lineWidth: 14)
+                  // Inner light stroke
+                  RoundedRectangle(cornerRadius: 20, style: .continuous)
+                     .strokeBorder(
+                        LinearGradient(
+                           colors: [
+                              Color.white,
+                              Color.white.opacity(0),
+                              Color.white.opacity(0),
+                              Color.white.opacity(0),
+                              Color.white.opacity(0.3)
+                           ],
+                           startPoint: .bottom,
+                           endPoint: .top
+                        ),
+                        lineWidth: 4
+                     )
+                     .blendMode(.plusLighter)
+                     .opacity(0.3)
         )
         .overlay(
-            RoundedRectangle(cornerRadius: 34)
-                .strokeBorder(LinearGradient(gradient: Gradient(colors: [Color(red: 0.878, green: 0.863, blue: 0.824), Color(red: 0.878, green: 0.863, blue: 0.824)]), startPoint: .bottom, endPoint: .leading), lineWidth: 12)
+                  // Inner light stroke
+                  RoundedRectangle(cornerRadius: 20, style: .continuous)
+                     .strokeBorder(
+                        LinearGradient(
+                           colors: [
+                              Color.black,
+                              Color.black,
+                           ],
+                           startPoint: .bottom,
+                           endPoint: .top
+                        ),
+                        lineWidth: 1
+                     )
+                     .blendMode(.plusLighter)
+                     .opacity(0.3)
         )
-        .shadow(color: Color.black.opacity(0.15), radius: 3, x: 0, y: 0)
+        .shadow(color: Color.black.opacity(0.5), radius: 8, x: 0, y: 4)
     }
     
-    private var greenGradient: Gradient {
-        Gradient(colors: [Color(red: 0.067, green: 0.094, blue: 0.063),
-                          Color(red: 0.071, green: 0.192, blue: 0.078)])
+    private var screenGradient: Gradient {
+        Gradient(colors: [
+            Color(red: 0.051, green: 0.043, blue: 0.047),
+            Color(red: 0.051, green: 0.043, blue: 0.047),  
+            Color(red: 0.051, green: 0.043, blue: 0.047), 
+            Color(red: 0.051, green: 0.043, blue: 0.047),
+            Color(red: 0.137, green: 0.137, blue: 0.137)
+            ])
     }
     
-    private var resMarker: some View {
-        Image(.resMarker)
+    private var teenageEngGrill: some View {
+        Image(.teenageEngGrill)
             .resizable()
             .scaledToFill()
-            .frame(height: 5)
-            .padding(.top, 10)
+            .frame(width: 260, height: 260)
+            .padding(.vertical, 10)
     }
     
-    private var mainButton: some View {
-        ZStack {
-            // Start Button
+    private var mainButtons: some View {
+        HStack { 
+            brainButton
+            Spacer()
+            callButton
+            Spacer()
+            appSettingsButton
+        }
+        .padding(.horizontal, 20)
+        .frame(maxWidth: .infinity)
+
+    }
+
+    private var callButton: some View {
+            
             ZStack {
-                if callManager.callState == .loading {
-                    HStack(spacing: 10) {
-                        Loader()
-                            .frame(width: 17, height: 17)
-                            .scaleUpAnimation()
-                        Text(callManager.buttonText)
-                            .fadeInEffect()
-                        
-                    }
-                } else {
-                    Text(callManager.buttonText)
+                // Start Button
+                ZStack {
+                    callManager.buttonText
                         .fadeInEffect()
                 }
-            }
-            .font(.system(.title2, design: .rounded))
-            .fontWeight(.bold)
-            .foregroundColor(.white)
-            
-            .frame(height: 60)
-            .frame(maxWidth: .infinity)
-            .background(callManager.buttonGradient)
-            
-            .overlay(
-                Image(.bgNoise)
-                    .resizable()
-                    .frame(height: 60)
-                    .opacity(1)
-            )
-            .cornerRadius(50)
-            
-//             .overlay(
-//             // Inner dark stroke
-//                 RoundedRectangle(cornerRadius: 50)
-//                     .stroke(Color(red: 0.275, green: 0.122, blue: 0.063), lineWidth: 1)
-//             )
-            
-            .overlay(
-                // Inner light stroke
-                RoundedRectangle(cornerRadius: 50, style: .continuous)
-                    .strokeBorder(
-                        LinearGradient(
-                            colors: [
-                                Color.white.opacity(0.5),
-                                Color.white.opacity(0),
-                                Color.black.opacity(0.5)
-                            ],
-                            startPoint: .top,
-                            endPoint: .bottom
-                        ),
-                        lineWidth: 3
-                    )
-                    .blendMode(.overlay)
-            )
-            
-            .onTapGesture {
-                Task { await callManager.handleCallAction() }
-                let impactMed = UIImpactFeedbackGenerator(style: .soft)
-                impactMed.impactOccurred()
-            }
-            .pressAnimation()
-            .padding(2)
-        }
-        .background(RoundedRectangle(cornerRadius: 50).fill(Color.black))
-        .shadow(color: Color.black.opacity(0.5), radius: 3, x: 0, y: 0)
-        
-        .disabled(callManager.callState == .loading)
-    }
-    
-    private var setupButtons: some View {
-        HStack(spacing: 20) {
-            Spacer()
-            
-            //personality & voice
-            ZStack {
-                Button(action: {
-                    self.activeModal = .voiceSettingsModal
-                    let impactMed = UIImpactFeedbackGenerator(style: .soft)
-                    impactMed.impactOccurred()
-                }) {
-                    ZStack {
-                        Image(systemName: "brain.fill")
-                            .font(.system(size: 16))
-                            .foregroundColor(.black.opacity(0.5))
-                    }
-                }
-                .padding()
-                .frame(width: 60, height: 60)
-                .background(
-                    LinearGradient(gradient: Gradient(colors: [Color(red: 0.729, green: 0.725, blue: 0.71), Color(red: 1, green: 0.98, blue: 0.933)]), startPoint: .top, endPoint: .bottom)
-                )
-                .cornerRadius(50)
+                .font(.system(size: 42))
+                .frame(width: 110, height: 110)
+                .background(callManager.buttonGradient)
+                .cornerRadius(100)
                 .overlay(
                     // Inner light stroke
-                    RoundedRectangle(cornerRadius: 50, style: .continuous)
+                    RoundedRectangle(cornerRadius: 100, style: .continuous)
                         .strokeBorder(
                             LinearGradient(
                                 colors: [
@@ -224,17 +177,26 @@ struct MainViewTeenageEng: View {
                                 startPoint: .top,
                                 endPoint: .bottom
                             ),
-                            lineWidth: 3
+                            lineWidth: 2
                         )
                         .blendMode(.overlay)
-                    //.opacity(0.3)
                 )
+                
+                .onTapGesture {
+                    Task { await callManager.handleCallAction() }
+                    let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                    impactMed.impactOccurred()
+                }
                 .pressAnimation()
                 .padding(2)
             }
-            .background(RoundedRectangle(cornerRadius: 50)
-                .fill(Color.black))
+            .background(RoundedRectangle(cornerRadius: 100).fill(Color.black))
             .shadow(color: Color.black.opacity(0.5), radius: 3, x: 0, y: 0)
+            
+            .disabled(callManager.callState == .loading) 
+    }
+    
+    private var appSettingsButton: some View {
             
             // settings
             ZStack {
@@ -246,18 +208,18 @@ struct MainViewTeenageEng: View {
                     impactMed.impactOccurred()
                 }) {
                     ZStack {
-                        Image(systemName: "gearshape.fill")
-                            .font(.system(size: 18))
-                            .foregroundColor(.black.opacity(0.5))
+                        Image(systemName: "gear")
+                            .font(.system(size: 20))
+                            .foregroundColor(.black.opacity(0.3))
                     }
 
                 }
                 .padding()
                 .frame(width: 60, height: 60)
                 .background(
-                    LinearGradient(gradient: Gradient(colors: [Color(red: 0.729, green: 0.725, blue: 0.71), Color(red: 1, green: 0.98, blue: 0.933)]), startPoint: .top, endPoint: .bottom)
+                    LinearGradient(gradient: Gradient(colors: [Color(red: 0.937, green: 0.933, blue: 0.914), Color(red: 0.867, green: 0.871, blue: 0.816)]), startPoint: .top, endPoint: .bottom)
                 )
-                .cornerRadius(50)
+                .cornerRadius(35)
                 .overlay(
                     // Inner light stroke
                     RoundedRectangle(cornerRadius: 50, style: .continuous)
@@ -271,7 +233,52 @@ struct MainViewTeenageEng: View {
                                 startPoint: .top,
                                 endPoint: .bottom
                             ),
-                            lineWidth: 3
+                            lineWidth: 2
+                        )
+                        .blendMode(.overlay)
+                )
+                .pressAnimation()
+                .padding(2)
+            }
+            .background(RoundedRectangle(cornerRadius: 50)
+                .fill(Color.black))
+            .shadow(color: Color.black.opacity(0.5), radius: 3, x: 0, y: 0)
+    }
+
+     private var brainButton: some View {
+            //personality & voice
+            ZStack {
+                Button(action: {
+                    self.activeModal = .voiceSettingsModal
+                    let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                    impactMed.impactOccurred()
+                }) {
+                    ZStack {
+                        Image(systemName: "waveform")
+                            .font(.system(size: 20))
+                            .foregroundColor(.black.opacity(0.3))
+                    }
+                }
+                .padding()
+                .frame(width: 60, height: 60)
+                .background(
+                    LinearGradient(gradient: Gradient(colors: [Color(red: 0.937, green: 0.933, blue: 0.914), Color(red: 0.867, green: 0.871, blue: 0.816)]), startPoint: .top, endPoint: .bottom)
+                )
+                .cornerRadius(35)
+                .overlay(
+                    // Inner light stroke
+                    RoundedRectangle(cornerRadius: 50, style: .continuous)
+                        .strokeBorder(
+                            LinearGradient(
+                                colors: [
+                                    Color.white.opacity(0.5),
+                                    Color.white.opacity(0),
+                                    Color.black.opacity(0.5)
+                                ],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            ),
+                            lineWidth: 2
                         )
                         .blendMode(.overlay)
                     //.opacity(0.3)
@@ -282,8 +289,7 @@ struct MainViewTeenageEng: View {
             .background(RoundedRectangle(cornerRadius: 50)
                 .fill(Color.black))
             .shadow(color: Color.black.opacity(0.5), radius: 3, x: 0, y: 0)
-        }
-        .padding(.top, 20)
+
     }
     
     private var voiceSetupSheet: some View {
@@ -310,41 +316,37 @@ struct MainViewTeenageEng: View {
         .edgesIgnoringSafeArea(.all)
         .fadeInEffect()
     }
-    
-    private var cornerTick: some View {
-        Image(.cornerTick)
-            .resizable()
-            .scaledToFit()
-            .frame(width: 125, height: 125)
-            .alignmentGuide(HorizontalAlignment.leading) { d in d[.leading] }
-            .alignmentGuide(VerticalAlignment.bottom) { d in d[.bottom] }
-    }
-    
-    private var topTick: some View {
-        Image(.topTick)
-        .resizable()
-        .scaledToFit()
-        .frame(width: 125, height: 125)
-        .alignmentGuide(HorizontalAlignment.center) { d in d[.leading] + d.width / 2 }
-        .alignmentGuide(VerticalAlignment.top) { d in
-            let dynamicIslandHeight: CGFloat = 67
-            return d[.top] + dynamicIslandHeight
+
+    private var topTickTe: some View {
+        HStack{
+            Image(.resMarkerTe)
+                .resizable()
+                .scaledToFit()
+                .frame( height:12)
+            Spacer()
+            Text("1.0.12")
+                .font(.system(size: 14, design: .monospaced))
+                .fontWeight(.bold)
+                .foregroundColor(.black.opacity(0.3))
         }
+        .padding(.horizontal, 20)
+
     }
     
-    // Shadows, borders, etc
+    //Shadows, borders, etc
     private var borderShadow: some View {
-        RoundedRectangle(cornerRadius: 55)
+        RoundedRectangle(cornerRadius: 25)
             .stroke(Color(red: 0.655, green: 0.627, blue: 0.569),lineWidth: 2)
             .shadow(color: Color(red: 0.655, green: 0.627, blue: 0.569),radius: 4, x: 0, y: 0)
-            .clipShape(RoundedRectangle(cornerRadius: 55))
+            .clipShape(RoundedRectangle(cornerRadius: 25))
         
             .shadow(color: Color.black, radius: 3, x: 0, y: 0)
-            .clipShape(RoundedRectangle(cornerRadius: 55))
+            .clipShape(RoundedRectangle(cornerRadius: 25))
+            .opacity(0.4)
     }
     
     private var backgroundColor: some View {
-        Color(red: 1, green: 0.98, blue: 0.933)
+        Color(red: 0.91, green: 0.914, blue: 0.89)
     }
     
     private var backgroundNoise: some View {
@@ -355,7 +357,7 @@ struct MainViewTeenageEng: View {
     }
     
     private var whiteBorder: some View {
-        RoundedRectangle(cornerRadius: 55)
+        RoundedRectangle(cornerRadius: 25)
             .strokeBorder(LinearGradient(gradient: Gradient(colors: [.white.opacity(1), .white.opacity(1)]), startPoint: .leading, endPoint: .trailing), lineWidth: 1)
     }
 }
