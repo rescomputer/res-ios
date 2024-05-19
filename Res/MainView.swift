@@ -125,12 +125,12 @@ struct MainView: View {
                         Loader()
                             .frame(width: 17, height: 17)
                             .scaleUpAnimation()
-                        Text(callManager.buttonText)
+                        callManager.buttonText
                             .fadeInEffect()
                         
                     }
                 } else {
-                    Text(callManager.buttonText)
+                    callManager.buttonText
                         .fadeInEffect()
                 }
             }
@@ -149,13 +149,6 @@ struct MainView: View {
                     .opacity(1)
             )
             .cornerRadius(50)
-            
-//             .overlay(
-//             // Inner dark stroke
-//                 RoundedRectangle(cornerRadius: 50)
-//                     .stroke(Color(red: 0.275, green: 0.122, blue: 0.063), lineWidth: 1)
-//             )
-            
             .overlay(
                 // Inner light stroke
                 RoundedRectangle(cornerRadius: 50, style: .continuous)
