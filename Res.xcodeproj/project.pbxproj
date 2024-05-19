@@ -12,7 +12,7 @@
 		1849A54B2BBDD6FF00A4BCF1 /* HomeScreenWidgetGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849A5492BBDD6FF00A4BCF1 /* HomeScreenWidgetGuideView.swift */; };
 		1849A54D2BBDDF7100A4BCF1 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1849A54C2BBDDF7100A4BCF1 /* LaunchScreenViewController.swift */; };
 		18D289E32B9713FE008742FB /* ResApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D289E22B9713FE008742FB /* ResApp.swift */; };
-		18D289E52B9713FE008742FB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D289E42B9713FE008742FB /* MainView.swift */; };
+		18D289E52B9713FE008742FB /* MainViewClassic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D289E42B9713FE008742FB /* MainViewClassic.swift */; };
 		18D289E72B9713FF008742FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D289E62B9713FF008742FB /* Assets.xcassets */; };
 		18F7232E2BA95060003F44FA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F7232D2BA95060003F44FA /* WidgetKit.framework */; };
 		18F723302BA95060003F44FA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F7232F2BA95060003F44FA /* SwiftUI.framework */; };
@@ -108,7 +108,7 @@
 		1849A54C2BBDDF7100A4BCF1 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		18D289DF2B9713FE008742FB /* Res.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Res.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D289E22B9713FE008742FB /* ResApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResApp.swift; sourceTree = "<group>"; };
-		18D289E42B9713FE008742FB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		18D289E42B9713FE008742FB /* MainViewClassic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewClassic.swift; sourceTree = "<group>"; };
 		18D289E62B9713FF008742FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18D289EF2B9713FF008742FB /* ResTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ResTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D289F92B9713FF008742FB /* ResUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ResUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -228,8 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				18D289E22B9713FE008742FB /* ResApp.swift */,
-				18D289E42B9713FE008742FB /* MainView.swift */,
-				F3E72E452BF95FA6001FB6E4 /* MainViewTeenageEng.swift */,
+				F3E72E532BF9ACC6001FB6E4 /* Skins */,
 				F3B5AB232BAD35BD009CDBB5 /* Views */,
 				F3B5AB222BAD358D009CDBB5 /* Managers */,
 				F3B5AB1F2BAD08CA009CDBB5 /* Utilities */,
@@ -335,6 +334,15 @@
 				F31C49482BC111180075477D /* VoiceTypeAndToneSettingsView.swift */,
 			);
 			path = ClassicRes;
+			sourceTree = "<group>";
+		};
+		F3E72E532BF9ACC6001FB6E4 /* Skins */ = {
+			isa = PBXGroup;
+			children = (
+				18D289E42B9713FE008742FB /* MainViewClassic.swift */,
+				F3E72E452BF95FA6001FB6E4 /* MainViewTeenageEng.swift */,
+			);
+			path = Skins;
 			sourceTree = "<group>";
 		};
 		FA8DCF9D2BEC194900F54DCA /* ResTests */ = {
@@ -555,7 +563,7 @@
 				F3B5AB212BAD08F1009CDBB5 /* AnimationUtility.swift in Sources */,
 				F31C49472BC0DDC60075477D /* AudioVisualizerView.swift in Sources */,
 				1849A5472BBDD68A00A4BCF1 /* UIScreen+Extensions.swift in Sources */,
-				18D289E52B9713FE008742FB /* MainView.swift in Sources */,
+				18D289E52B9713FE008742FB /* MainViewClassic.swift in Sources */,
 				F3E72E522BF9632A001FB6E4 /* AppSettingsTeView.swift in Sources */,
 				F3E72E4C2BF9620B001FB6E4 /* VoiceTypeAndToneTeView.swift in Sources */,
 				F3E72E4A2BF961B6001FB6E4 /* VoiceTypeAndToneSettingsTeView.swift in Sources */,
@@ -763,7 +771,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 6ADU7T5Q7V;
+				DEVELOPMENT_TEAM = GZ2BM4VMQU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Res/Info.plist;
@@ -808,7 +816,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 6ADU7T5Q7V;
+				DEVELOPMENT_TEAM = GZ2BM4VMQU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Res/Info.plist;
@@ -925,7 +933,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y2V76WXBUQ;
+				DEVELOPMENT_TEAM = GZ2BM4VMQU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Res Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Res AI";
@@ -957,7 +965,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y2V76WXBUQ;
+				DEVELOPMENT_TEAM = GZ2BM4VMQU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Res Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Res AI";
