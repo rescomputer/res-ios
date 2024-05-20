@@ -10,7 +10,6 @@ import UIKit
 import ActivityKit
 
 struct MainView: View {
-    
     @FocusState private var isTextFieldFocused: Bool
     
     @StateObject private var callManager = CallManager()
