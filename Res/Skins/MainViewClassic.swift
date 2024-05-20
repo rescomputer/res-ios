@@ -25,7 +25,7 @@ struct MainView: View {
     var body: some View {
         ZStack {
             backgroundGradient
-
+            
             VStack {
                 greenScreen
                 resMarker
@@ -49,8 +49,8 @@ struct MainView: View {
             .overlay(topTick, alignment: .top)
         }
         .ignoresSafeArea(edges: .bottom)
-        
         .onAppear { callManager.setupVapi() }
+        
         .overlay { voiceSetupSheet }
         .overlay { if isAppSettingsViewShowing { appSettingsSheet } }
     }
@@ -185,7 +185,7 @@ struct MainView: View {
         HStack(spacing: 20) {
             Spacer()
             
-            //personality & voice
+            // Personality & Voice
             ZStack {
                 Button(action: {
                     self.activeModal = .voiceSettingsModal
@@ -229,7 +229,7 @@ struct MainView: View {
                 .fill(Color.black))
             .shadow(color: Color.black.opacity(0.5), radius: 3, x: 0, y: 0)
             
-            // settings
+            // Settings
             ZStack {
                 Button(action: {
                     withAnimation(.easeInOut(duration: 0.15)) {
@@ -243,7 +243,7 @@ struct MainView: View {
                             .font(.system(size: 18))
                             .foregroundColor(.black.opacity(0.5))
                     }
-
+                    
                 }
                 .padding()
                 .frame(width: 60, height: 60)
@@ -315,14 +315,14 @@ struct MainView: View {
     
     private var topTick: some View {
         Image(.topTick)
-        .resizable()
-        .scaledToFit()
-        .frame(width: 125, height: 125)
-        .alignmentGuide(HorizontalAlignment.center) { d in d[.leading] + d.width / 2 }
-        .alignmentGuide(VerticalAlignment.top) { d in
-            let dynamicIslandHeight: CGFloat = 67 
-            return d[.top] + dynamicIslandHeight
-        }
+            .resizable()
+            .scaledToFit()
+            .frame(width: 125, height: 125)
+            .alignmentGuide(HorizontalAlignment.center) { d in d[.leading] + d.width / 2 }
+            .alignmentGuide(VerticalAlignment.top) { d in
+                let dynamicIslandHeight: CGFloat = 67
+                return d[.top] + dynamicIslandHeight
+            }
     }
     
     // Shadows, borders, etc
