@@ -23,26 +23,7 @@ import AVFoundation
     @Published var callState: CallState = .ended
     var vapiEvents = [Vapi.Event]()
     private var cancellables = Set<AnyCancellable>()
-    @Published var vapi: Vapi?
-    
-    
-    
-    
-    
-//    @MainActor var audioLevel: Float? {
-//        vapi?.localAudioLevel
-//    }
-    
-    func startObservingAudioLevel() async {
-        do {
-            try await vapi?.startLocalAudioLevelObserver()
-        } catch {
-            print(error)
-        }
-    }
-    
-    
-    
+    var vapi: Vapi?
     
     @Published var enteredText = ""
     
@@ -58,6 +39,10 @@ import AVFoundation
         didSet {
             UserDefaults.standard.set(voice, forKey: "voice")
         }
+    }
+    
+    var volumeLevel: Float {
+        vapi?.localAudioLevel ?? 0
     }
     
     var voiceDisplayName: String {
@@ -154,7 +139,7 @@ import AVFoundation
         // This method should generate and play a short audio clip using the selected voice and speed settings.
     }
     
-    @MainActor func handleCallAction() async {
+    func handleCallAction() async {
         if callState == .ended {
             await initializeVapiAndStartCall()
         } else {
@@ -162,7 +147,7 @@ import AVFoundation
         }
     }
     
-    @MainActor private func initializeVapiAndStartCall() async {
+    private func initializeVapiAndStartCall() async {
         callState = .loading
         playDialUpSound()
         
@@ -174,9 +159,21 @@ import AVFoundation
             print("Failed to initialize Vapi or start call with error: \(error)")
             callState = .ended
         }
+        
+        Task {
+            await startObservingAudioLevel()
+        }
     }
     
-    @MainActor private func startCall() async {
+    func startObservingAudioLevel() async {
+        do {
+            try await vapi?.startLocalAudioLevelObserver()
+        } catch {
+            print(error)
+        }
+    }
+    
+    private func startCall() async {
         
         guard let vapi = vapi else {
             callState = .ended

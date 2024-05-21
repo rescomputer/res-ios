@@ -50,13 +50,10 @@ struct MainViewClassic: View {
         }
         .ignoresSafeArea(edges: .bottom)
         .onAppear { callManager.setupVapi() }
+        .task { await callManager.startObservingAudioLevel() }
         
         .overlay { voiceSetupSheet }
         .overlay { if isAppSettingsViewShowing { appSettingsSheet } }
-        
-        .task {
-            await callManager.startObservingAudioLevel()
-        }
     }
     
     // Components
@@ -78,16 +75,6 @@ struct MainViewClassic: View {
                     .scaledToFit()
                     .frame(width: 150, height: 150)
                     .padding(.bottom, 100)
-                
-                
-                
-                Text(callManager.vapi?.localAudioLevel?.description ?? "No Description")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .fontDesign(.rounded)
-                    .foregroundStyle(.white)
-                
-                
                 
 //                Text(callManager.currentTranscript)
 //                    .frame(maxWidth: .infinity, alignment: .center)
