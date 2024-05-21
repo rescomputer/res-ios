@@ -16,7 +16,7 @@ struct AppSettingsView: View {
     @State private var showingSettingsAlert = false
     @State private var infoModal: InfoModal?
     @State private var selectedSetting: SettingType?
-    @Binding var activeModal: MainView.ActiveModal?
+    @Binding var activeModal: MainViewClassic.ActiveModal?
     @Binding var selectedOption: Option?
     @Binding var isModalStepTwoEnabled: Bool
     @ObservedObject var callManager: CallManager

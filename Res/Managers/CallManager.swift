@@ -11,7 +11,7 @@ import Vapi
 import ActivityKit
 import AVFoundation
 
-class CallManager: ObservableObject {
+@MainActor class CallManager: ObservableObject {
     var audioPlayer: AVAudioPlayer?
     
     @Published var currentTranscript: String = ""
@@ -23,7 +23,26 @@ class CallManager: ObservableObject {
     @Published var callState: CallState = .ended
     var vapiEvents = [Vapi.Event]()
     private var cancellables = Set<AnyCancellable>()
-    var vapi: Vapi?
+    @Published var vapi: Vapi?
+    
+    
+    
+    
+    
+//    @MainActor var audioLevel: Float? {
+//        vapi?.localAudioLevel
+//    }
+    
+    func startObservingAudioLevel() async {
+        do {
+            try await vapi?.startLocalAudioLevelObserver()
+        } catch {
+            print(error)
+        }
+    }
+    
+    
+    
     
     @Published var enteredText = ""
     
