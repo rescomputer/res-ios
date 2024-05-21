@@ -47,7 +47,6 @@ struct MainViewTeenageEng: View {
         }
         .ignoresSafeArea(edges: .bottom)
         .onAppear { callManager.setupVapi() }
-        .task { await callManager.startObservingAudioLevel() }
         
         .overlay { voiceSetupSheet }
         .overlay { if isAppSettingsViewShowing { appSettingsSheet } }

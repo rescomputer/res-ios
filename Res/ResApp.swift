@@ -28,6 +28,8 @@ struct ResApp: App {
             } else {
                 AuthView(isDebugMode: isDebugMode)
             }
+            
+//            MainViewClassic(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled)
         }
     }
 }
