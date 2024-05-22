@@ -18,9 +18,11 @@ struct MainViewTeenageEng: View {
     @Binding var isAppSettingsViewShowing: Bool
     @Binding var isModalStepTwoEnabled: Bool
     
-    @State private var drawingHeight = true
     @State private var selectedOption: Option?
     @State private var activeModal: ActiveModal?
+    
+    @State private var audioLevel: Float = 0
+//    @State private var drawingHeight = true
     
     var body: some View {
         ZStack {
@@ -50,6 +52,10 @@ struct MainViewTeenageEng: View {
         
         .overlay { voiceSetupSheet }
         .overlay { if isAppSettingsViewShowing { appSettingsSheet } }
+        
+        .onChange(of: callManager.vapi?.localAudioLevel) { oldValue, newValue in
+            audioLevel = (newValue ?? 0) * 100
+        }
     }
     
     // Components
@@ -70,8 +76,10 @@ struct MainViewTeenageEng: View {
 //                    .scaledToFit()
 //                    .frame(width: 150, height: 150)
                 
-                Text(callManager.volumeLevel.description)
-                    .foregroundStyle(.white)
+//                Text("\(audioLevel)")
+//                    .foregroundStyle(.white)
+                
+                WaveAnimation(height: $audioLevel)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: 300)
