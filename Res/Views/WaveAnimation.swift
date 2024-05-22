@@ -12,7 +12,8 @@ struct WaveAnimation: View {
     
     var body: some View {
         Wave(offset: waveOffset, percent: 50)
-            .fill(Color.blue)
+            .stroke(Color.blue, lineWidth: 3)
+            .frame(height: 200)
             .ignoresSafeArea(.all)
             .onAppear { startAnimation() }
     }
