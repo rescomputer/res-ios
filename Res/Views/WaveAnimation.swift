@@ -9,11 +9,11 @@ import SwiftUI
 
 struct WaveAnimation: View {
     
-    @Binding var height: Double
+    @Binding var height: Float
     @State private var waveOffset = Angle(degrees: 0)
     
     var body: some View {
-        Wave(offset: waveOffset, waveHeight: height / 100)
+        Wave(offset: waveOffset, waveHeight: Double(height) / 100)
             .stroke(Color.green, lineWidth: 3.5)
             .onAppear { startAnimation() }
     }
@@ -26,7 +26,7 @@ struct WaveAnimation: View {
     }
 }
 
-struct Wave: Shape {
+private struct Wave: Shape {
     
     var offset: Angle
     let waveHeight: Double
