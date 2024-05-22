@@ -11,8 +11,8 @@ struct WaveAnimation: View {
     @State private var waveOffset = Angle(degrees: 0)
     
     var body: some View {
-        Wave(offset: waveOffset, percent: 50)
-            .stroke(Color.green, lineWidth: 4)
+        Wave(offset: waveOffset)
+            .stroke(Color.green, lineWidth: 3.5)
             .onAppear { startAnimation() }
     }
     
@@ -24,9 +24,7 @@ struct WaveAnimation: View {
 }
 
 struct Wave: Shape {
-    
-    var offset: Angle // Offset for the wave
-    var percent: Double // Percentage of the wave height
+    var offset: Angle
     
     // Animatable data for the shape
     var animatableData: Double {
