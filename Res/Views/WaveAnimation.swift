@@ -12,9 +12,7 @@ struct WaveAnimation: View {
     
     var body: some View {
         Wave(offset: waveOffset, percent: 50)
-            .stroke(Color.blue, lineWidth: 3)
-            .frame(height: 200)
-            .ignoresSafeArea(.all)
+            .stroke(Color.green, lineWidth: 4)
             .onAppear { startAnimation() }
     }
     
@@ -37,37 +35,35 @@ struct Wave: Shape {
     }
     
     func path(in rect: CGRect) -> Path {
+        // Initialize a new Path object
         var p = Path()
         
-        // Define the range of the wave's height
-        let lowestWave = 0.02
-        let highestWave = 1.00
-        
-        // Calculate the new percentage height
-        let newPercent = lowestWave + (highestWave - lowestWave) * (percent / 100)
+        // Define the wave height as a small fraction of the view's height
         let waveHeight = 0.015 * rect.height
-        let yOffSet = CGFloat(1 - newPercent) * (rect.height - 4 * waveHeight) + 2 * waveHeight
+        
+        // Set a fixed vertical position for the thin wave line
+        let yOffSet = rect.height / 2
+        
+        // Define the start and end angles for the wave animation
         let startAngle = offset
         let endAngle = offset + Angle(degrees: 360 + 10)
         
-        // Move to the starting point of the wave
+        // Move to the initial point of the wave on the left side of the view
         p.move(to: CGPoint(x: 0, y: yOffSet + waveHeight * CGFloat(sin(offset.radians))))
         
-        // Draw the wave
+        // Iterate over the angles to draw the wave pattern
         for angle in stride(from: startAngle.degrees, through: endAngle.degrees, by: 5) {
+            // Calculate the x-coordinate based on the current angle
             let x = CGFloat((angle - startAngle.degrees) / 360) * rect.width
+            // Add a line to the current point of the wave, adjusting y-coordinate based on sine function
             p.addLine(to: CGPoint(x: x, y: yOffSet + waveHeight * CGFloat(sin(Angle(degrees: angle).radians))))
         }
         
-        // Complete the path
-        p.addLine(to: CGPoint(x: rect.width, y: rect.height))
-        p.addLine(to: CGPoint(x: 0, y: rect.height))
-        p.closeSubpath()
-        
-        return p
+        return p // Return the constructed path representing the wave shape
     }
 }
 
 #Preview {
     WaveAnimation()
 }
+
