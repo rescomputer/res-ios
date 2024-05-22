@@ -11,7 +11,7 @@ struct WaveAnimation: View {
     @State private var waveOffset = Angle(degrees: 0)
     
     var body: some View {
-        Wave(offset: Angle(degrees: waveOffset.degrees), percent: 50)
+        Wave(offset: waveOffset, percent: 50)
             .fill(Color.blue)
             .ignoresSafeArea(.all)
             .onAppear { startAnimation() }
