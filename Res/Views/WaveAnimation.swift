@@ -64,4 +64,3 @@ struct Wave: Shape {
 #Preview {
     WaveAnimation()
 }
-
