@@ -70,6 +70,8 @@ struct MainViewTeenageEng: View {
 //                    .scaledToFit()
 //                    .frame(width: 150, height: 150)
                 
+                Text(callManager.volumeLevel.description)
+                    .foregroundStyle(.white)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: 300)

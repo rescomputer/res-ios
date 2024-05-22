@@ -75,6 +75,9 @@ struct MainViewClassic: View {
                     .frame(width: 150, height: 150)
                     .padding(.bottom, 100)
                 
+//                Text(callManager.volumeLevel.description)
+//                    .foregroundStyle(.white)
+                
 //                Text(callManager.currentTranscript)
 //                    .frame(maxWidth: .infinity, alignment: .center)
 //                    .padding()

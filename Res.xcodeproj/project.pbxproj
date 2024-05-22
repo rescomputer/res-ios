@@ -26,6 +26,7 @@
 		18F7238B2BAC2C17003F44FA /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = 18F7238A2BAC2C17003F44FA /* Vapi */; };
 		18F7238D2BAC2C3C003F44FA /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = 18F7238C2BAC2C3C003F44FA /* Vapi */; };
 		2DE1830E58A749F8A3633BED /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 00571768FCC847B5B370CACD /* Sentry */; };
+		B953528C2BFE771600C1E32C /* WaveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B953528B2BFE771600C1E32C /* WaveAnimation.swift */; };
 		B95D2F332BA4EAF5003C7C17 /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F322BA4EAF5003C7C17 /* CallManager.swift */; };
 		B95D2F352BA4EB32003C7C17 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */; };
 		B976AF672BF438CE0014196F /* dial.up.sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B976AF662BF438CE0014196F /* dial.up.sound.mp3 */; };
@@ -123,6 +124,7 @@
 		18F7233A2BA95062003F44FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18F7233C2BA95062003F44FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18F723882BAC2694003F44FA /* ActivityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActivityKit.framework; path = System/Library/Frameworks/ActivityKit.framework; sourceTree = SDKROOT; };
+		B953528B2BFE771600C1E32C /* WaveAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimation.swift; sourceTree = "<group>"; };
 		B95D2F322BA4EAF5003C7C17 /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		B976AF662BF438CE0014196F /* dial.up.sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = dial.up.sound.mp3; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 				F31C49462BC0DDC60075477D /* AudioVisualizerView.swift */,
 				1849A5482BBDD6FF00A4BCF1 /* LockScreenWidgetGuideView.swift */,
 				1849A54C2BBDDF7100A4BCF1 /* LaunchScreenViewController.swift */,
+				B953528B2BFE771600C1E32C /* WaveAnimation.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -567,6 +570,7 @@
 				F3E72E522BF9632A001FB6E4 /* AppSettingsTeView.swift in Sources */,
 				F3E72E4C2BF9620B001FB6E4 /* VoiceTypeAndToneTeView.swift in Sources */,
 				F3E72E4A2BF961B6001FB6E4 /* VoiceTypeAndToneSettingsTeView.swift in Sources */,
+				B953528C2BFE771600C1E32C /* WaveAnimation.swift in Sources */,
 				F31C494B2BC37C080075477D /* Loader.swift in Sources */,
 				F3E72E502BF962F7001FB6E4 /* VoiceSettingsTeView.swift in Sources */,
 				F31C49412BBE75C70075477D /* VoiceSettingsView.swift in Sources */,

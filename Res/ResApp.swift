@@ -23,13 +23,13 @@ struct ResApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if resAppModel.isAuthenticated || !isDebugMode {
-                MainViewTeenageEng(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled)
-            } else {
-                AuthView(isDebugMode: isDebugMode)
-            }
+//            if resAppModel.isAuthenticated || !isDebugMode {
+//                MainViewTeenageEng(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled)
+//            } else {
+//                AuthView(isDebugMode: isDebugMode)
+//            }
             
-//            MainViewClassic(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled)
+            MainViewTeenageEng(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled)
         }
     }
 }
