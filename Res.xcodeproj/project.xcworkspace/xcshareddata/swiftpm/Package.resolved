@@ -1,4 +1,5 @@
 {
+  "originHash" : "db9d30212719c1fd654e323ba314ac74f7d7862124ee02e21a8a4e2e3868e173",
   "pins" : [
     {
       "identity" : "daily-client-ios",
@@ -15,7 +16,7 @@
       "location" : "https://github.com/VapiAI/ios",
       "state" : {
         "branch" : "main",
-        "revision" : "8a07d5f8a185d5799e79f29cfd67056ac55619d9"
+        "revision" : "2867e22c962e49e342a22a6912c957bd2a050839"
       }
     },
     {
@@ -50,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/supabase/supabase-swift.git",
       "state" : {
-        "revision" : "d61365ac8fd142e2992933ed4bc2c641faae6097",
-        "version" : "2.10.0"
+        "revision" : "7222c4bb5a1f447915b43501faad7eaf89e50115",
+        "version" : "2.11.0"
       }
     },
     {
@@ -73,5 +74,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

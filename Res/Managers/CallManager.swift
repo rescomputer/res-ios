@@ -196,7 +196,13 @@ class CallManager: ObservableObject {
             ]
         ] as [String : Any]
         do {
-            _ = try await vapi.start(assistant: assistant)
+            let call = try await vapi.start(assistant: assistant)
+
+            do {
+                try await SupabaseManager.shared.insertCallRecord(callUUID: call.id)
+            } catch {
+                SentryManager.shared.captureError(error, description: "Error inserting call record into db")
+            }
             
             setupVapi()
             stopPlayingSounds()
@@ -208,7 +214,7 @@ class CallManager: ObservableObject {
             activity = try Activity<Res_ExtensionAttributes>.request(attributes: activityAttributes, contentState: initialContentState)
             
         } catch {
-            SentryManager.shared.captureError(error, description: "Error starting call or requesting activity")
+            SentryManager.shared.captureError(error, description: "Error starting call")
             callState = .ended
         }
     }
