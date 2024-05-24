@@ -24,6 +24,8 @@ struct MainViewTeenageEng: View {
     @State private var audioLevel: Float = 0
 //    @State private var drawingHeight = true
     
+//    @StateObject private var volumeObserver = VolumeObserver()
+    
     var body: some View {
         ZStack {
             backgroundGradient
@@ -76,8 +78,11 @@ struct MainViewTeenageEng: View {
 //                    .scaledToFit()
 //                    .frame(width: 150, height: 150)
                 
-                Text("\(callManager.vapi?.localAudioLevel ?? 0)")
-                    .foregroundStyle(.white)
+//                Text("\(callManager.vapi?.localAudioLevel ?? 0)")
+//                    .foregroundStyle(.white)
+                
+//                Text("\(volumeObserver.volume)")
+//                    .foregroundStyle(.white)
                 
                 WaveAnimation(height: $audioLevel)
             }
