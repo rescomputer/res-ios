@@ -26,6 +26,7 @@
 		18F7238B2BAC2C17003F44FA /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = 18F7238A2BAC2C17003F44FA /* Vapi */; };
 		18F7238D2BAC2C3C003F44FA /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = 18F7238C2BAC2C3C003F44FA /* Vapi */; };
 		2DE1830E58A749F8A3633BED /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 00571768FCC847B5B370CACD /* Sentry */; };
+		B91C79312C011C3E00D45290 /* WaveTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91C79302C011C3E00D45290 /* WaveTest.swift */; };
 		B953528C2BFE771600C1E32C /* WaveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B953528B2BFE771600C1E32C /* WaveAnimation.swift */; };
 		B95D2F332BA4EAF5003C7C17 /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F322BA4EAF5003C7C17 /* CallManager.swift */; };
 		B95D2F352BA4EB32003C7C17 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */; };
@@ -124,6 +125,7 @@
 		18F7233A2BA95062003F44FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18F7233C2BA95062003F44FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18F723882BAC2694003F44FA /* ActivityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActivityKit.framework; path = System/Library/Frameworks/ActivityKit.framework; sourceTree = SDKROOT; };
+		B91C79302C011C3E00D45290 /* WaveTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveTest.swift; sourceTree = "<group>"; };
 		B953528B2BFE771600C1E32C /* WaveAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimation.swift; sourceTree = "<group>"; };
 		B95D2F322BA4EAF5003C7C17 /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				18D289E22B9713FE008742FB /* ResApp.swift */,
+				B91C79302C011C3E00D45290 /* WaveTest.swift */,
 				F3E72E532BF9ACC6001FB6E4 /* Skins */,
 				F3B5AB232BAD35BD009CDBB5 /* Views */,
 				F3B5AB222BAD358D009CDBB5 /* Managers */,
@@ -589,6 +592,7 @@
 				FA7944DC2BE6D08C0035EC8B /* Config.swift in Sources */,
 				F31C49492BC111180075477D /* VoiceTypeAndToneSettingsView.swift in Sources */,
 				F31C49452BBF86950075477D /* VoiceTypeAndToneView.swift in Sources */,
+				B91C79312C011C3E00D45290 /* WaveTest.swift in Sources */,
 				1849A54D2BBDDF7100A4BCF1 /* LaunchScreenViewController.swift in Sources */,
 				FA9576522BEA4CDD00EC2FA4 /* SentryManager.swift in Sources */,
 				F3B5AB182BACDB8A009CDBB5 /* HalfModalView.swift in Sources */,
