@@ -12,9 +12,11 @@ struct WaveTest: View {
     
     var body: some View {
         VStack {
+            Text("\(volume)")
+            
             WaveAnimation(height: $volume)
             
-            Slider(value: $volume, in: 0...10)
+            Slider(value: $volume, in: 0...00.1)
                 .tint(.green)
                 .padding()
         }

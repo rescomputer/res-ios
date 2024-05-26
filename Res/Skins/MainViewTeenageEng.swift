@@ -56,7 +56,7 @@ struct MainViewTeenageEng: View {
         .overlay { if isAppSettingsViewShowing { appSettingsSheet } }
         
         .onChange(of: callManager.vapi?.localAudioLevel) { oldValue, newValue in
-            audioLevel = (newValue ?? 0) * 100000
+            audioLevel = (newValue ?? 0) /** 100000*/
         }
     }
     
@@ -81,8 +81,8 @@ struct MainViewTeenageEng: View {
 //                Text("\(callManager.vapi?.localAudioLevel ?? 0)")
 //                    .foregroundStyle(.white)
                 
-//                Text("\(volumeObserver.volume)")
-//                    .foregroundStyle(.white)
+                Text("\(audioLevel)")
+                    .foregroundStyle(.white)
                 
                 WaveAnimation(height: $audioLevel)
             }
