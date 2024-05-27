@@ -23,30 +23,9 @@ struct MainViewTeenageEng: View {
     
     @State private var audioLevel: Float = 0 {
         didSet {
-            lastTimeAudioLevelChanged = .now
+            
         }
     }
-    
-    
-    @State private var lastTimeAudioLevelChanged = Date()
-    
-    private var audioLevelStable: Bool {
-        Date.now.timeIntervalSince(lastTimeAudioLevelChanged) > 1
-    }
-    
-    private var timeSinceChange: String {
-        Date.now.timeIntervalSince(lastTimeAudioLevelChanged).description
-    }
-    
-    
-    
-    func hasValueNotChanged() -> Bool {
-        let currentTime = Date()
-        let timeInterval = currentTime.timeIntervalSince(lastTimeAudioLevelChanged)
-        return timeInterval > 1
-    }
-    
-    
     
     var body: some View {
         ZStack {
@@ -95,14 +74,6 @@ struct MainViewTeenageEng: View {
         VStack {
             Text("\(audioLevel)")
                 .foregroundStyle(.white)
-            
-//            Text("Time since last change: " + timeSinceChange)
-//                .foregroundStyle(.white)
-            
-            if hasValueNotChanged() {
-                Text("Audio is stable")
-                    .foregroundStyle(.white)
-            }
             
             WaveAnimation(height: $audioLevel)
         }
