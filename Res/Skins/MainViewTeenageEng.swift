@@ -21,7 +21,20 @@ struct MainViewTeenageEng: View {
     @State private var selectedOption: Option?
     @State private var activeModal: ActiveModal?
     
-    @State private var audioLevel: Float = 0
+    @State private var audioLevel: Float = 0 {
+        didSet {
+            lastTimeAudioLevelChanged = .now
+        }
+    }
+    
+    
+    @State private var lastTimeAudioLevelChanged = Date()
+    
+    private var audioLevelStable: Bool {
+        Date.now.timeIntervalSince(lastTimeAudioLevelChanged) > 1
+    }
+    
+    
     
     var body: some View {
         ZStack {
@@ -68,8 +81,12 @@ struct MainViewTeenageEng: View {
     
     private var teScreen: some View {
         VStack {
-//            Text("\(audioLevel)")
-//                .foregroundStyle(.white)
+            Text("\(audioLevel)")
+                .foregroundStyle(.white)
+            
+            if audioLevelStable {
+                Text("STABLE")
+            }
             
             WaveAnimation(height: $audioLevel)
         }
