@@ -34,6 +34,18 @@ struct MainViewTeenageEng: View {
         Date.now.timeIntervalSince(lastTimeAudioLevelChanged) > 1
     }
     
+    private var timeSinceChange: String {
+        Date.now.timeIntervalSince(lastTimeAudioLevelChanged).description
+    }
+    
+    
+    
+    func hasValueNotChanged() -> Bool {
+        let currentTime = Date()
+        let timeInterval = currentTime.timeIntervalSince(lastTimeAudioLevelChanged)
+        return timeInterval > 1
+    }
+    
     
     
     var body: some View {
@@ -84,8 +96,12 @@ struct MainViewTeenageEng: View {
             Text("\(audioLevel)")
                 .foregroundStyle(.white)
             
-            if audioLevelStable {
-                Text("STABLE")
+//            Text("Time since last change: " + timeSinceChange)
+//                .foregroundStyle(.white)
+            
+            if hasValueNotChanged() {
+                Text("Audio is stable")
+                    .foregroundStyle(.white)
             }
             
             WaveAnimation(height: $audioLevel)
