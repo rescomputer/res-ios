@@ -16,7 +16,7 @@ struct WaveTest: View {
             
             WaveAnimation(height: $volume)
             
-            Slider(value: $volume, in: 0...00.1)
+            Slider(value: $volume, in: 0...0.1)
                 .tint(.green)
                 .padding()
         }

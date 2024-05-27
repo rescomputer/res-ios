@@ -22,9 +22,6 @@ struct MainViewTeenageEng: View {
     @State private var activeModal: ActiveModal?
     
     @State private var audioLevel: Float = 0
-//    @State private var drawingHeight = true
-    
-//    @StateObject private var volumeObserver = VolumeObserver()
     
     var body: some View {
         ZStack {
@@ -41,7 +38,6 @@ struct MainViewTeenageEng: View {
             .padding(.bottom)
             
             .overlay(borderShadow)
-            
             .background(backgroundColor)
             
             .overlay(backgroundNoise)
@@ -56,7 +52,7 @@ struct MainViewTeenageEng: View {
         .overlay { if isAppSettingsViewShowing { appSettingsSheet } }
         
         .onChange(of: callManager.vapi?.localAudioLevel) { oldValue, newValue in
-            audioLevel = (newValue ?? 0) /** 100000*/
+            audioLevel = (newValue ?? 0)
         }
     }
     
@@ -71,13 +67,11 @@ struct MainViewTeenageEng: View {
     }
     
     private var teScreen: some View {
-        ZStack {
-            VStack {
-                Text("\(audioLevel)")
-                    .foregroundStyle(.white)
-                
-                WaveAnimation(height: $audioLevel)
-            }
+        VStack {
+//            Text("\(audioLevel)")
+//                .foregroundStyle(.white)
+            
+            WaveAnimation(height: $audioLevel)
         }
         .frame(maxWidth: .infinity, maxHeight: 300)
         .background(LinearGradient( gradient: screenGradient, startPoint: .top, endPoint: .bottom))

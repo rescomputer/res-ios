@@ -14,7 +14,7 @@ struct WaveAnimation: View {
     
     var body: some View {
         Wave(offset: waveOffset, waveHeight: waveHeight)
-            .stroke(height > 0.01 ? Color.orange : Color.green, lineWidth: 3.5)
+            .stroke(height > 0.01 ? Color.orange : Color.green, lineWidth: 3)
             .onAppear { startAnimation() }
     }
     
