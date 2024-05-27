@@ -73,14 +73,6 @@ struct MainViewTeenageEng: View {
     private var teScreen: some View {
         ZStack {
             VStack {
-//                Image(.roboto)
-//                    .resizable()
-//                    .scaledToFit()
-//                    .frame(width: 150, height: 150)
-                
-//                Text("\(callManager.vapi?.localAudioLevel ?? 0)")
-//                    .foregroundStyle(.white)
-                
                 Text("\(audioLevel)")
                     .foregroundStyle(.white)
                 

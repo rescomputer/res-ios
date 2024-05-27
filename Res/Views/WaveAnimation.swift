@@ -13,9 +13,8 @@ struct WaveAnimation: View {
     @State private var waveOffset = Angle(degrees: 0)
     
     var body: some View {
-//        Wave(offset: waveOffset, waveHeight: Double(height) / 100)
         Wave(offset: waveOffset, waveHeight: waveHeight)
-            .stroke(Color.green, lineWidth: 3.5)
+            .stroke(height > 0.01 ? Color.orange : Color.green, lineWidth: 3.5)
             .onAppear { startAnimation() }
     }
     
@@ -27,15 +26,13 @@ struct WaveAnimation: View {
     }
     
     private var waveHeight: Double {
-//        height > 0.00005 ? 0.1 : 0
-        
-        if height > 0.000001 && height < 0.00003 {
+        if height > 0.000001 && height < 0.0001 {
             return 0.01
             
-        } else if height > 0.00003 && height < 0.9 {
+        } else if height > 0.0001 && height < 0.9 {
             return 0.1
             
-        } else if height > 0.9 && height < 0 {
+        } else if height > 0.9 && height < 10 {
             return 0.2
             
         } else {
@@ -95,5 +92,5 @@ private struct Wave: Shape {
 }
 
 #Preview {
-    WaveAnimation(height: .constant(2))
+    WaveAnimation(height: .constant(0.1))
 }
