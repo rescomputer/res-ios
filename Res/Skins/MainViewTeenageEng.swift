@@ -23,6 +23,17 @@ struct MainViewTeenageEng: View {
     
     @State private var audioLevel: Float = 0
     
+    
+    
+    @State private var previousAudioLevel: Float = 0
+    @State private var isAudioLevelUnchanged: Bool = false
+    
+    var audioCheckInterval: TimeInterval = 1.0
+    @State private var audioCheckTimer: Timer?
+    
+    
+    
+    
     var body: some View {
         ZStack {
             backgroundGradient
@@ -54,7 +65,45 @@ struct MainViewTeenageEng: View {
         .onChange(of: callManager.vapi?.localAudioLevel) { oldValue, newValue in
             audioLevel = (newValue ?? 0)
         }
+        
+        
+        .onAppear {
+            callManager.setupVapi()
+            startAudioCheckTimer()
+        }
+        .onDisappear {
+            stopAudioCheckTimer()
+        }
     }
+    
+    
+    
+    
+    private func startAudioCheckTimer() {
+        audioCheckTimer = Timer.scheduledTimer(withTimeInterval: audioCheckInterval,
+                                               repeats: true) { _ in
+            checkAudioLevel()
+        }
+    }
+    
+    private func stopAudioCheckTimer() {
+        audioCheckTimer?.invalidate()
+        audioCheckTimer = nil
+    }
+    
+    private func checkAudioLevel() {
+        if audioLevel == previousAudioLevel {
+            isAudioLevelUnchanged = true
+        } else {
+            isAudioLevelUnchanged = false
+        }
+        previousAudioLevel = audioLevel
+    }
+
+    
+    
+    
+    
     
     // Components
     private var backgroundGradient: some View {
@@ -68,8 +117,12 @@ struct MainViewTeenageEng: View {
     
     private var teScreen: some View {
         VStack {
-            Text("\(audioLevel)")
-                .foregroundStyle(.white)
+            if isAudioLevelUnchanged {
+                Text("Audio level unchanged for more than 1 second")
+                    .foregroundColor(.red)
+                    .fontWeight(.bold)
+                    .padding()
+            }
             
             WaveAnimation(height: $audioLevel)
         }
@@ -421,4 +474,3 @@ extension MainViewTeenageEng {
         isModalStepTwoEnabled: .constant(false)
     )
 }
-
