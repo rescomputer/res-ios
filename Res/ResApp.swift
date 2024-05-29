@@ -24,12 +24,12 @@ struct ResApp: App {
     var body: some Scene {
         WindowGroup {
 //            if resAppModel.isAuthenticated || !isDebugMode {
-//                MainViewTeenageEng(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled)
+//                MainViewTeenageEng(appSettingsViewShowing: $appSettingsViewShowing, modalStepTwoEnabled: $modalStepTwoEnabled)
 //            } else {
 //                AuthView(isDebugMode: isDebugMode)
 //            }
             
-            MainViewTeenageEng(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled)
+            MainViewTeenageEng(appSettingsViewShowing: $isAppSettingsViewShowing, modalStepTwoEnabled: $isModalStepTwoEnabled)
         }
     }
 }

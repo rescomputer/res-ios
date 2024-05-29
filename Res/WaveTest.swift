@@ -14,7 +14,7 @@ struct WaveTest: View {
         VStack {
             Text("\(volume)")
             
-            WaveAnimation(height: $volume)
+            WaveAnimation(height: $volume, levelStable: .constant(false))
             
             Slider(value: $volume, in: 0...0.1)
                 .tint(.green)

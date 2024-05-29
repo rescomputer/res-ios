@@ -15,8 +15,8 @@ struct MainViewClassic: View {
     @StateObject private var callManager = CallManager()
     @StateObject private var keyboardResponder = KeyboardResponder()
     
-    @Binding var isAppSettingsViewShowing: Bool
-    @Binding var isModalStepTwoEnabled: Bool
+    @Binding var appSettingsViewShowing: Bool
+    @Binding var modalStepTwoEnabled: Bool
     
     @State private var drawingHeight = true
     @State private var selectedOption: Option?
@@ -52,7 +52,7 @@ struct MainViewClassic: View {
         .onAppear { callManager.setupVapi() }
         
         .overlay { voiceSetupSheet }
-        .overlay { if isAppSettingsViewShowing { appSettingsSheet } }
+        .overlay { if appSettingsViewShowing { appSettingsSheet } }
     }
     
     // Components
@@ -236,7 +236,7 @@ struct MainViewClassic: View {
             ZStack {
                 Button(action: {
                     withAnimation(.easeInOut(duration: 0.15)) {
-                        isAppSettingsViewShowing = true
+                        appSettingsViewShowing = true
                     }
                     let impactMed = UIImpactFeedbackGenerator(style: .soft)
                     impactMed.impactOccurred()
@@ -295,10 +295,10 @@ struct MainViewClassic: View {
     
     private var appSettingsSheet: some View {
         AppSettingsView(
-            isPresented: $isAppSettingsViewShowing,
+            isPresented: $appSettingsViewShowing,
             activeModal: $activeModal,
             selectedOption: $selectedOption,
-            isModalStepTwoEnabled: $isModalStepTwoEnabled,
+            isModalStepTwoEnabled: $modalStepTwoEnabled,
             callManager: callManager,
             keyboardResponder: keyboardResponder
         )
@@ -390,7 +390,7 @@ extension MainViewClassic {
             VoiceSettingsView(
                 activeModal: $activeModal,
                 selectedOption: $selectedOption,
-                isModalStepTwoEnabled: $isModalStepTwoEnabled,
+                isModalStepTwoEnabled: $modalStepTwoEnabled,
                 callManager: callManager,
                 keyboardResponder: keyboardResponder)
         }
@@ -399,14 +399,14 @@ extension MainViewClassic {
 
 #Preview("Main View") {
     MainViewClassic(
-        isAppSettingsViewShowing: .constant(false),
-        isModalStepTwoEnabled: .constant(false)
+        appSettingsViewShowing: .constant(false),
+        modalStepTwoEnabled: .constant(false)
     )
 }
 
 #Preview("App Settings") {
     MainViewClassic(
-        isAppSettingsViewShowing: .constant(true),
-        isModalStepTwoEnabled: .constant(false)
+        appSettingsViewShowing: .constant(true),
+        modalStepTwoEnabled: .constant(false)
     )
 }

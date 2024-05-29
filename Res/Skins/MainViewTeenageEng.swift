@@ -10,29 +10,26 @@ import UIKit
 import ActivityKit
 
 struct MainViewTeenageEng: View {
+    
+    // TextField
     @FocusState private var isTextFieldFocused: Bool
     
+    // Managers
     @StateObject private var callManager = CallManager()
     @StateObject private var keyboardResponder = KeyboardResponder()
     
-    @Binding var isAppSettingsViewShowing: Bool
-    @Binding var isModalStepTwoEnabled: Bool
-    
+    // Modals
     @State private var selectedOption: Option?
     @State private var activeModal: ActiveModal?
     
+    @Binding var appSettingsViewShowing: Bool
+    @Binding var modalStepTwoEnabled: Bool
+    
+    // Audio Level
     @State private var audioLevel: Float = 0
-    
-    
-    
-    @State private var previousAudioLevel: Float = 0
-    @State private var isAudioLevelUnchanged: Bool = false
-    
-    var audioCheckInterval: TimeInterval = 1.0
     @State private var audioCheckTimer: Timer?
-    
-    
-    
+    @State private var previousAudioLevel: Float = 0
+    @State private var audioLevelUnchanged = false
     
     var body: some View {
         ZStack {
@@ -59,51 +56,16 @@ struct MainViewTeenageEng: View {
         .ignoresSafeArea(edges: .bottom)
         .onAppear { callManager.setupVapi() }
         
+        .onAppear { startAudioCheckTimer() }
+        .onDisappear { stopAudioCheckTimer() }
+        
         .overlay { voiceSetupSheet }
-        .overlay { if isAppSettingsViewShowing { appSettingsSheet } }
+        .overlay { if appSettingsViewShowing { appSettingsSheet } }
         
         .onChange(of: callManager.vapi?.localAudioLevel) { oldValue, newValue in
             audioLevel = (newValue ?? 0)
         }
-        
-        
-        .onAppear {
-            callManager.setupVapi()
-            startAudioCheckTimer()
-        }
-        .onDisappear {
-            stopAudioCheckTimer()
-        }
     }
-    
-    
-    
-    
-    private func startAudioCheckTimer() {
-        audioCheckTimer = Timer.scheduledTimer(withTimeInterval: audioCheckInterval,
-                                               repeats: true) { _ in
-            checkAudioLevel()
-        }
-    }
-    
-    private func stopAudioCheckTimer() {
-        audioCheckTimer?.invalidate()
-        audioCheckTimer = nil
-    }
-    
-    private func checkAudioLevel() {
-        if audioLevel == previousAudioLevel {
-            isAudioLevelUnchanged = true
-        } else {
-            isAudioLevelUnchanged = false
-        }
-        previousAudioLevel = audioLevel
-    }
-
-    
-    
-    
-    
     
     // Components
     private var backgroundGradient: some View {
@@ -117,14 +79,12 @@ struct MainViewTeenageEng: View {
     
     private var teScreen: some View {
         VStack {
-            if isAudioLevelUnchanged {
-                Text("Audio level unchanged for more than 1 second")
-                    .foregroundColor(.red)
-                    .fontWeight(.bold)
-                    .padding()
-            }
+//            Text(audioLevelUnchanged.description)
+//                .foregroundColor(.red)
+//                .fontWeight(.bold)
+//                .padding()
             
-            WaveAnimation(height: $audioLevel)
+            WaveAnimation(height: $audioLevel, levelStable: $audioLevelUnchanged)
         }
         .frame(maxWidth: .infinity, maxHeight: 300)
         .background(LinearGradient( gradient: screenGradient, startPoint: .top, endPoint: .bottom))
@@ -257,7 +217,7 @@ struct MainViewTeenageEng: View {
         ZStack {
             Button(action: {
                 withAnimation(.easeInOut(duration: 0.15)) {
-                    isAppSettingsViewShowing = true
+                    appSettingsViewShowing = true
                 }
                 let impactMed = UIImpactFeedbackGenerator(style: .soft)
                 impactMed.impactOccurred()
@@ -364,10 +324,10 @@ struct MainViewTeenageEng: View {
     
     private var appSettingsSheet: some View {
         AppSettingsTeView(
-            isPresented: $isAppSettingsViewShowing,
+            isPresented: $appSettingsViewShowing,
             activeModal: $activeModal,
             selectedOption: $selectedOption,
-            isModalStepTwoEnabled: $isModalStepTwoEnabled,
+            isModalStepTwoEnabled: $modalStepTwoEnabled,
             callManager: callManager,
             keyboardResponder: keyboardResponder
         )
@@ -419,6 +379,23 @@ struct MainViewTeenageEng: View {
         RoundedRectangle(cornerRadius: 25)
             .strokeBorder(LinearGradient(gradient: Gradient(colors: [.white.opacity(1), .white.opacity(1)]), startPoint: .leading, endPoint: .trailing), lineWidth: 1)
     }
+    
+    // Timer Functions
+    private func startAudioCheckTimer() {
+        audioCheckTimer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { _ in
+            checkAudioLevel()
+        }
+    }
+    
+    private func stopAudioCheckTimer() {
+        audioCheckTimer?.invalidate()
+        audioCheckTimer = nil
+    }
+    
+    private func checkAudioLevel() {
+        audioLevelUnchanged = audioLevel == previousAudioLevel
+        previousAudioLevel = audioLevel
+    }
 }
 
 extension MainViewTeenageEng {
@@ -454,7 +431,7 @@ extension MainViewTeenageEng {
             VoiceSettingsTeView(
                 activeModal: $activeModal,
                 selectedOption: $selectedOption,
-                isModalStepTwoEnabled: $isModalStepTwoEnabled,
+                isModalStepTwoEnabled: $modalStepTwoEnabled,
                 callManager: callManager,
                 keyboardResponder: keyboardResponder)
         }
@@ -463,14 +440,14 @@ extension MainViewTeenageEng {
 
 #Preview("Main View") {
     MainViewTeenageEng(
-        isAppSettingsViewShowing: .constant(false),
-        isModalStepTwoEnabled: .constant(false)
+        appSettingsViewShowing: .constant(false),
+        modalStepTwoEnabled: .constant(false)
     )
 }
 
 #Preview("App Settings") {
     MainViewTeenageEng(
-        isAppSettingsViewShowing: .constant(true),
-        isModalStepTwoEnabled: .constant(false)
+        appSettingsViewShowing: .constant(true),
+        modalStepTwoEnabled: .constant(false)
     )
 }
