@@ -26,7 +26,7 @@ struct WaveAnimation: View {
     }
     
     private var waveHeight: Double {
-        if height > 0.000001 && height < 0.00001 {
+        if height > 0000001 && height < 0.00001 {
             return 0.01
             
         } else if height > 0.00001 && height < 0.9 {

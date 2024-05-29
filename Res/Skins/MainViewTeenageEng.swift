@@ -21,25 +21,7 @@ struct MainViewTeenageEng: View {
     @State private var selectedOption: Option?
     @State private var activeModal: ActiveModal?
     
-    @State private var audioLevel: Float = 0 {
-        didSet {
-//            timer.invalidate()
-//            timer.fire()
-        }
-    }
-    
-    
-    
-//    let timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { timer in
-//        
-//    }
-    
-    
-//    func startTimer() {
-//        timer.fire()
-//    }
-    
-    
+    @State private var audioLevel: Float = 0
     
     var body: some View {
         ZStack {
@@ -72,10 +54,6 @@ struct MainViewTeenageEng: View {
         .onChange(of: callManager.vapi?.localAudioLevel) { oldValue, newValue in
             audioLevel = (newValue ?? 0)
         }
-        
-//        .onAppear {
-//            timer.fire()
-//        }
     }
     
     // Components
@@ -92,9 +70,6 @@ struct MainViewTeenageEng: View {
         VStack {
             Text("\(audioLevel)")
                 .foregroundStyle(.white)
-            
-//            Text(timer.fireDate.description)
-//                .foregroundStyle(.white)
             
             WaveAnimation(height: $audioLevel)
         }
