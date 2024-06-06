@@ -14,9 +14,15 @@ struct WaveAnimation: View {
     @State private var waveOffset = Angle(degrees: 0)
     
     var body: some View {
-        Wave(offset: waveOffset, waveHeight: levelStable ? 0 : waveHeight)
-            .stroke(height > 0.01 ? Color.orange : Color.green, lineWidth: 3)
-            .onAppear { startAnimation() }
+        ZStack {
+            Wave(offset: waveOffset, waveHeight: levelStable ? 0 : waveHeight)
+                .stroke(height > 0.01 ? Color.orange : Color.green, lineWidth: 5)
+                .onAppear { startAnimation() }
+                .blur(radius: 4)
+            Wave(offset: waveOffset, waveHeight: levelStable ? 0 : waveHeight)
+                .stroke(height > 0.01 ? Color.orange : Color.green, lineWidth: 3)
+                .onAppear { startAnimation() }
+        }
     }
     
     private func startAnimation() {

@@ -85,16 +85,27 @@ struct MainViewTeenageEng: View {
 //                .padding()
             
             WaveAnimation(height: $audioLevel, levelStable: $audioLevelUnchanged)
+                .mask(
+                    LinearGradient(
+                        gradient: Gradient(stops: [
+                            .init(color: .clear, location: 0.0),
+                            .init(color: .black, location: 0.2),
+                            .init(color: .black, location: 0.8),
+                            .init(color: .clear, location: 1.0)
+                        ]),
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                )
         }
         .frame(maxWidth: .infinity, maxHeight: 300)
-        .background(LinearGradient( gradient: screenGradient, startPoint: .top, endPoint: .bottom))
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .overlay(
-            Image(.bgNoise)
+        .background(
+            Image(.resScreen)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .opacity(0.5)
+                .opacity(0.7)
         )
+        .background(LinearGradient( gradient: screenGradient, startPoint: .top, endPoint: .bottom))
         .overlay(
             // Inner light stroke
             RoundedRectangle(cornerRadius: 20, style: .continuous)
@@ -133,6 +144,7 @@ struct MainViewTeenageEng: View {
                 .opacity(0.3)
         )
         .shadow(color: Color.black.opacity(0.5), radius: 5, x: 0, y: 3)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
     }
     
     private var screenGradient: Gradient {
@@ -373,6 +385,13 @@ struct MainViewTeenageEng: View {
             .resizable()
             .aspectRatio(contentMode: .fill)
             .opacity(0.5)
+    }
+
+    private var resScreen: some View {
+        Image(.resScreen)
+            .resizable()
+            .scaledToFill()
+            .aspectRatio(contentMode: .fill)
     }
     
     private var whiteBorder: some View {
