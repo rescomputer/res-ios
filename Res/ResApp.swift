@@ -14,6 +14,9 @@ struct ResApp: App {
     @StateObject private var resAppModel = ResAppModel()
     @State private var isAppSettingsViewShowing = false
     @State private var isModalStepTwoEnabled = false
+    @State private var hasCompletedOnboarding = false 
+    @State private var isLaunchScreenPresented = true
+    //@State private var hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
     let isDebugMode = Config.buildConfiguration == .debug
 
     init() {
@@ -23,8 +26,16 @@ struct ResApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if resAppModel.isAuthenticated || !isDebugMode {
-//                MainView(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled)
+            if isLaunchScreenPresented {
+                LaunchScreenView(isAppSettingsViewShowing: .constant(false), isModalStepTwoEnabled: .constant(false))
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                            withAnimation {
+                                isLaunchScreenPresented = false
+                            }
+                        }
+                    }
+            } else if resAppModel.isAuthenticated || !isDebugMode {
                 MainViewTeenageEng(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled)
             } else {
                 AuthView(isDebugMode: isDebugMode)

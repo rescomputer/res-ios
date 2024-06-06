@@ -35,6 +35,9 @@
 		F31C49472BC0DDC60075477D /* AudioVisualizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C49462BC0DDC60075477D /* AudioVisualizerView.swift */; };
 		F31C49492BC111180075477D /* VoiceTypeAndToneSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C49482BC111180075477D /* VoiceTypeAndToneSettingsView.swift */; };
 		F31C494B2BC37C080075477D /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C494A2BC37C080075477D /* Loader.swift */; };
+		F3B27D662C12399E00AFCDAD /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = F3B27D652C12399E00AFCDAD /* RiveRuntime */; };
+		F3B27D692C1240F400AFCDAD /* res_unboxing.riv in Resources */ = {isa = PBXBuildFile; fileRef = F3B27D682C1240F400AFCDAD /* res_unboxing.riv */; };
+		F3B4EC5E2C1238F0000B80EF /* OnboardingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4EC5D2C1238F0000B80EF /* OnboardingAnimation.swift */; };
 		F3B5AB182BACDB8A009CDBB5 /* HalfModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */; };
 		F3B5AB1A2BACE488009CDBB5 /* XMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */; };
 		F3B5AB1E2BAD062D009CDBB5 /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */; };
@@ -132,6 +135,8 @@
 		F31C49462BC0DDC60075477D /* AudioVisualizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioVisualizerView.swift; sourceTree = "<group>"; };
 		F31C49482BC111180075477D /* VoiceTypeAndToneSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceTypeAndToneSettingsView.swift; sourceTree = "<group>"; };
 		F31C494A2BC37C080075477D /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
+		F3B27D682C1240F400AFCDAD /* res_unboxing.riv */ = {isa = PBXFileReference; lastKnownFileType = file; name = res_unboxing.riv; path = ../../../Documents/res_unboxing.riv; sourceTree = "<group>"; };
+		F3B4EC5D2C1238F0000B80EF /* OnboardingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAnimation.swift; sourceTree = "<group>"; };
 		F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalView.swift; sourceTree = "<group>"; };
 		F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMarkButton.swift; sourceTree = "<group>"; };
 		F3B5AB1D2BAD062D009CDBB5 /* AppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsView.swift; sourceTree = "<group>"; };
@@ -165,6 +170,7 @@
 				18F7238D2BAC2C3C003F44FA /* Vapi in Frameworks */,
 				18F723892BAC2695003F44FA /* ActivityKit.framework in Frameworks */,
 				FA14AAD22BE850A0001C7486 /* Functions in Frameworks */,
+				F3B27D662C12399E00AFCDAD /* RiveRuntime in Frameworks */,
 				FA14AAD02BE850A0001C7486 /* Auth in Frameworks */,
 				FA5550A22BEDD4AF00C7648B /* (null) in Frameworks */,
 			);
@@ -235,6 +241,7 @@
 				B95D2F3A2BA4F35F003C7C17 /* Components */,
 				18D28A0F2B97178E008742FB /* Info.plist */,
 				18D289E62B9713FF008742FB /* Assets.xcassets */,
+				F3B27D672C1240E000AFCDAD /* Rive Files */,
 				B976AF662BF438CE0014196F /* dial.up.sound.mp3 */,
 				FA7944D82BE636360035EC8B /* Config.template.xcconfig */,
 				FA14AACA2BE80E0B001C7486 /* Config.xcconfig */,
@@ -279,6 +286,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		F3B27D672C1240E000AFCDAD /* Rive Files */ = {
+			isa = PBXGroup;
+			children = (
+				F3B27D682C1240F400AFCDAD /* res_unboxing.riv */,
+			);
+			path = "Rive Files";
+			sourceTree = "<group>";
+		};
 		F3B5AB1F2BAD08CA009CDBB5 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -304,6 +319,7 @@
 				F3E72E482BF960D5001FB6E4 /* ClassicRes */,
 				F3E72E472BF960CB001FB6E4 /* TeenageEng */,
 				FA5550A42BEDD4CF00C7648B /* AuthScreenView.swift */,
+				F3B4EC5D2C1238F0000B80EF /* OnboardingAnimation.swift */,
 				1849A5492BBDD6FF00A4BCF1 /* HomeScreenWidgetGuideView.swift */,
 				F31C49462BC0DDC60075477D /* AudioVisualizerView.swift */,
 				1849A5482BBDD6FF00A4BCF1 /* LockScreenWidgetGuideView.swift */,
@@ -387,6 +403,7 @@
 				FA14AAD12BE850A0001C7486 /* Functions */,
 				FA14AAD32BE850A0001C7486 /* Supabase */,
 				00571768FCC847B5B370CACD /* Sentry */,
+				F3B27D652C12399E00AFCDAD /* RiveRuntime */,
 			);
 			productName = Her;
 			productReference = 18D289DF2B9713FE008742FB /* Res.app */;
@@ -490,6 +507,7 @@
 				18F07E032BD1C1A300E5B28D /* XCRemoteSwiftPackageReference "SnapKit" */,
 				FA14AACE2BE850A0001C7486 /* XCRemoteSwiftPackageReference "supabase-swift" */,
 				BD1914C8DBDC4BCDB400579F /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
+				F3B4EC5C2C1238C4000B80EF /* XCRemoteSwiftPackageReference "rive-ios" */,
 			);
 			productRefGroup = 18D289E02B9713FE008742FB /* Products */;
 			projectDirPath = "";
@@ -510,6 +528,7 @@
 			files = (
 				B976AF672BF438CE0014196F /* dial.up.sound.mp3 in Resources */,
 				18D289E72B9713FF008742FB /* Assets.xcassets in Resources */,
+				F3B27D692C1240F400AFCDAD /* res_unboxing.riv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,6 +602,7 @@
 				B95D2F352BA4EB32003C7C17 /* CustomTextEditor.swift in Sources */,
 				F3B5AB252BAE91E3009CDBB5 /* CustomLinkView.swift in Sources */,
 				FA7944DC2BE6D08C0035EC8B /* Config.swift in Sources */,
+				F3B4EC5E2C1238F0000B80EF /* OnboardingAnimation.swift in Sources */,
 				F31C49492BC111180075477D /* VoiceTypeAndToneSettingsView.swift in Sources */,
 				F31C49452BBF86950075477D /* VoiceTypeAndToneView.swift in Sources */,
 				1849A54D2BBDDF7100A4BCF1 /* LaunchScreenViewController.swift in Sources */,
@@ -1065,6 +1085,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		F3B4EC5C2C1238C4000B80EF /* XCRemoteSwiftPackageReference "rive-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rive-app/rive-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.13.0;
+			};
+		};
 		FA14AACE2BE850A0001C7486 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/supabase/supabase-swift.git";
@@ -1090,6 +1118,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 18D28A0C2B971574008742FB /* XCRemoteSwiftPackageReference "ios" */;
 			productName = Vapi;
+		};
+		F3B27D652C12399E00AFCDAD /* RiveRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F3B4EC5C2C1238C4000B80EF /* XCRemoteSwiftPackageReference "rive-ios" */;
+			productName = RiveRuntime;
 		};
 		FA14AACF2BE850A0001C7486 /* Auth */ = {
 			isa = XCSwiftPackageProductDependency;
