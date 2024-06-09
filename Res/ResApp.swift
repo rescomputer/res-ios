@@ -37,6 +37,8 @@ struct ResApp: App {
                     }
             } else if resAppModel.isAuthenticated || !isDebugMode {
                 MainViewTeenageEng(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled)
+                    //.statusBarHidden(true)
+                    .persistentSystemOverlays(.hidden)
             } else {
                 AuthView(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled, isDebugMode: isDebugMode)
             }
