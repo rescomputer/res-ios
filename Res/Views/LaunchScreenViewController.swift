@@ -14,11 +14,7 @@ struct LaunchScreenView: View {
             Color.black.edgesIgnoringSafeArea(.all)
 
 
-            if showNextView {
-                // Replace with the next view you want to show
-                Text("Next View")
-                    .zIndex(2)
-            } else if showRiveAnimation {
+            if showRiveAnimation {
                 MainViewTeenageEng(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled)
                     .zIndex(0)
                 RiveViewModel(fileName: "res_unboxing").view()
@@ -39,7 +35,7 @@ struct LaunchScreenView: View {
                     .opacity(logoOpacity)
                     .zIndex(1)
                     .onAppear {
-                        withAnimation(.easeIn(duration: 0.7)) {
+                        withAnimation(.easeIn(duration: 0.3)) {
                             logoOpacity = 1.0
                         }
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {

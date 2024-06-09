@@ -36,7 +36,7 @@
 		F31C49492BC111180075477D /* VoiceTypeAndToneSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C49482BC111180075477D /* VoiceTypeAndToneSettingsView.swift */; };
 		F31C494B2BC37C080075477D /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C494A2BC37C080075477D /* Loader.swift */; };
 		F3B27D662C12399E00AFCDAD /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = F3B27D652C12399E00AFCDAD /* RiveRuntime */; };
-		F3B27D692C1240F400AFCDAD /* res_unboxing.riv in Resources */ = {isa = PBXBuildFile; fileRef = F3B27D682C1240F400AFCDAD /* res_unboxing.riv */; };
+		F3B27D6F2C15755200AFCDAD /* res_unboxing.riv in Resources */ = {isa = PBXBuildFile; fileRef = F3B27D6E2C15755200AFCDAD /* res_unboxing.riv */; };
 		F3B4EC5E2C1238F0000B80EF /* OnboardingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4EC5D2C1238F0000B80EF /* OnboardingAnimation.swift */; };
 		F3B5AB182BACDB8A009CDBB5 /* HalfModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */; };
 		F3B5AB1A2BACE488009CDBB5 /* XMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */; };
@@ -135,7 +135,7 @@
 		F31C49462BC0DDC60075477D /* AudioVisualizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioVisualizerView.swift; sourceTree = "<group>"; };
 		F31C49482BC111180075477D /* VoiceTypeAndToneSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceTypeAndToneSettingsView.swift; sourceTree = "<group>"; };
 		F31C494A2BC37C080075477D /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
-		F3B27D682C1240F400AFCDAD /* res_unboxing.riv */ = {isa = PBXFileReference; lastKnownFileType = file; name = res_unboxing.riv; path = ../../../Documents/res_unboxing.riv; sourceTree = "<group>"; };
+		F3B27D6E2C15755200AFCDAD /* res_unboxing.riv */ = {isa = PBXFileReference; lastKnownFileType = file; name = res_unboxing.riv; path = ../../../Desktop/res_unboxing.riv; sourceTree = "<group>"; };
 		F3B4EC5D2C1238F0000B80EF /* OnboardingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAnimation.swift; sourceTree = "<group>"; };
 		F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalView.swift; sourceTree = "<group>"; };
 		F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMarkButton.swift; sourceTree = "<group>"; };
@@ -289,7 +289,7 @@
 		F3B27D672C1240E000AFCDAD /* Rive Files */ = {
 			isa = PBXGroup;
 			children = (
-				F3B27D682C1240F400AFCDAD /* res_unboxing.riv */,
+				F3B27D6E2C15755200AFCDAD /* res_unboxing.riv */,
 			);
 			path = "Rive Files";
 			sourceTree = "<group>";
@@ -528,7 +528,7 @@
 			files = (
 				B976AF672BF438CE0014196F /* dial.up.sound.mp3 in Resources */,
 				18D289E72B9713FF008742FB /* Assets.xcassets in Resources */,
-				F3B27D692C1240F400AFCDAD /* res_unboxing.riv in Resources */,
+				F3B27D6F2C15755200AFCDAD /* res_unboxing.riv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
