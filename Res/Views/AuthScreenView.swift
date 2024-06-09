@@ -50,7 +50,7 @@ struct AuthView: View {
     private var FeaturesText: some View {
          VStack(alignment: .leading, spacing: 10) {
             listItem(icon: "dial.high.fill", title: "Total Control", text: "Control the speed, accent, and gender of your AI. You control who you are talking to.")
-            listItem(icon: "face.smiling.inverse", title: "Real Conversation", text: "Choose between presets or set custom prompting for your every conversation.")
+            listItem(icon: "face.smiling.inverse", title: "Real Conversation", text: "Choose between presets or set custom prompting for every conversation.")
             listItem(icon: "eye.slash.fill", title: "Privacy first", text: "HIPPA enabled privacy when you want it, your conversations are special, keep them private if you need.")
         }
         .padding(.top, 50)
