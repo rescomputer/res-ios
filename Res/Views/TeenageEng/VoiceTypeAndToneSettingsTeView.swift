@@ -46,7 +46,7 @@ struct VoiceTypeAndToneSettingsTeView: View {
                     }
                     Spacer()
                     
-                    Text("Voice Type & Tone")
+                    Text("Accents, Gender, Speed")
                         .bold()
                         .font(.system(size: 20, design: .rounded))
                         .foregroundColor(Color.white.opacity(0.8))

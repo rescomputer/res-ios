@@ -12,8 +12,9 @@ import SwiftUI
 struct CustomToggle: View {
     let title: String
     let systemImageName: String
-
     @Binding var isOn: Bool
+    var infoAction: (() -> Void)? = nil
+
 
     var body: some View {
         HStack {
@@ -27,6 +28,19 @@ struct CustomToggle: View {
                     .font(.system(size: 16))
                     .foregroundColor(.white)
                     .bold()
+            if let infoAction: () -> Void = infoAction {
+                Button(action: {
+                    infoAction()
+                    let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                    impactMed.impactOccurred()
+                }) {
+                    Image(systemName: "questionmark.circle")
+                        .font(.system(size: 16))
+                        .bold()
+                        .foregroundColor(.yellow.opacity(0.6))
+                        .frame(width: 30, height: 30)
+                    }
+                } 
             Spacer()
             Toggle("", isOn: $isOn)
                 .toggleStyle(SwitchToggleStyle(tint: .green.opacity(1)))
@@ -69,7 +83,7 @@ struct CustomLinkView: View {
                 Text(title)
                     .font(.system(size: 16))
                     .foregroundColor(.white)
-                    .bold()
+                    .bold()   
                 Spacer()
                 Image(systemName: "chevron.right")
                     .font(.system(size: 16))

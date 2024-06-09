@@ -12,6 +12,7 @@ import AVFoundation
 
 struct AppSettingsTeView: View {
     @Binding var isPresented: Bool
+    @State private var isPrivacyModeEnabled = false
     @State private var isMicrophoneEnabled = false
     @State private var showingSettingsAlert = false
     @State private var infoModal: InfoModal?
@@ -81,6 +82,8 @@ struct AppSettingsTeView: View {
                 VStack {
 
                     micPermissions()
+
+                    privacySettings()
 
                     voiceTypeAndToneSettings()
 
@@ -171,19 +174,18 @@ extension AppSettingsTeView {
                 do {
                     try await SupabaseManager.shared.signOut()
                     isPresented = false
-                    print("Signed out")
+                    print("Signed Out")
                 } catch {
                     print("Signout failed: \(error.localizedDescription)")
                 }
             }
         }
         .frame(maxWidth: .infinity)
-        .frame(height: 44)
-        .background(Color.gray.opacity(0.3))
+        .frame(height: 54)
+        .background(Color.red.opacity(0.3))
         .foregroundColor(.white)
-        .cornerRadius(10)
+        .cornerRadius(15)
         .font(.system(size: 17, weight: .semibold))
-        .padding()
     }
 
      enum SettingType: Identifiable {
@@ -215,7 +217,7 @@ extension AppSettingsTeView {
         }
     }
 
-     private func voiceTypeAndToneSettings() -> some View {
+    private func voiceTypeAndToneSettings() -> some View {
         VStack {
                 HStack {
                     Text("Voice")
@@ -224,7 +226,7 @@ extension AppSettingsTeView {
                         .foregroundColor(Color.white.opacity(0.7))
                     Spacer()
                 }
-                CustomLinkView(iconName: "face.dashed.fill", title: "Type & Speed", action: {}, navigateTo: {
+                CustomLinkView(iconName: "person.wave.2.fill", title: "Accents, Gender, Speed.", action: {}, navigateTo: {
                     self.selectedSetting = .voiceTypeAndTone
                 }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
         }
@@ -232,10 +234,27 @@ extension AppSettingsTeView {
 
     }
 
+    private func privacySettings() -> some View {
+                    VStack{
+                        CustomToggle(
+                            title: "Privacy Mode",
+                            systemImageName: isPrivacyModeEnabled ? "eye.slash.fill" : "eye.fill",
+                            isOn: $isPrivacyModeEnabled
+                            )
+                            .contentTransition(.symbolEffect(.replace.offUp.byLayer))
+                            // .onChange(of: isMicrophoneEnabled) { oldValue ,newValue in
+                            //     handleMicrophonePermission(isEnabled: newValue)
+                            // }
+
+                    }
+                    .padding(.bottom, 20)
+
+    }
+
     private func widgetSettings() -> some View {
         VStack {
                 HStack {
-                    Text("Widgets")
+                    Text("Tutorials")
                         .bold()
                         .font(.system(size: 16))
                         .foregroundColor(Color.white.opacity(0.7))
@@ -264,31 +283,16 @@ extension AppSettingsTeView {
                         CustomToggle(
                             title: "Microphone",
                             systemImageName: isMicrophoneEnabled ? "mic.fill" : "mic.slash.fill",
-                            isOn: $isMicrophoneEnabled
+                            isOn: $isMicrophoneEnabled,
+                            infoAction: {
+                                self.infoModal = .recordingResModal
+                            }
                             )
                             .contentTransition(.symbolEffect(.replace.offUp.byLayer))
                             .onChange(of: isMicrophoneEnabled) { oldValue ,newValue in
                                 handleMicrophonePermission(isEnabled: newValue)
                             }
-                        Button(action: {
-                            self.infoModal = .recordingResModal
-                            let impactMed = UIImpactFeedbackGenerator(style: .soft)
-                            impactMed.impactOccurred()
-                        }) {
-                            HStack {
-                                Text("How does audio recording work?")
-                                    .font(.system(size: 14))
-                                    .foregroundColor(Color.white.opacity(0.3))
-                                Image(systemName: "info.circle")
-                                    .font(.system(size: 14))
-                                    .foregroundColor(.white.opacity(0.3))
-                            }
-                            .padding(.vertical, 10)
-
-                        }
-                        .pressAnimation()
                     }
-                    .padding(.bottom, 20)
     }
 
     private func showRecordingResModal() -> some View {
@@ -540,7 +544,7 @@ extension AppSettingsTeView {
                     HStack {
                         ZStack {
                             HStack {
-                                Image(systemName: "info.circle.fill")
+                                Image(systemName: "party.popper.fill")
                                     .resizable()
                                     .foregroundColor(.black.opacity(0.05))
                                     .frame(width: 85, height: 85)
