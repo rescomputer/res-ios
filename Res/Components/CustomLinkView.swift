@@ -19,13 +19,13 @@ struct CustomToggle: View {
     var body: some View {
         HStack {
             Image(systemName: systemImageName)
-                .font(.system(size: 16))
+                .font(.system(size: 14))
                 .bold()
                 .foregroundColor(.white.opacity(0.3))
                 .frame(width: 30, height: 30)
         
              Text(title)
-                    .font(.system(size: 16))
+                    .font(.system(size: 14))
                     .foregroundColor(.white)
                     .bold()
             if let infoAction: () -> Void = infoAction {
@@ -38,7 +38,7 @@ struct CustomToggle: View {
                         .font(.system(size: 16))
                         .bold()
                         .foregroundColor(.yellow.opacity(0.6))
-                        .frame(width: 30, height: 30)
+                        .frame(width: 16, height: 16)
                     }
                 } 
             Spacer()
@@ -75,13 +75,13 @@ struct CustomLinkView: View {
         }) {
             HStack {
                 Image(systemName: iconName)
-                    .font(.system(size: 16))
+                    .font(.system(size: 14))
                     .bold()
                     .foregroundColor(.white.opacity(0.3))
                     .frame(width: 30, height: 30)
                  
                 Text(title)
-                    .font(.system(size: 16))
+                    .font(.system(size: 14))
                     .foregroundColor(.white)
                     .bold()   
                 Spacer()
