@@ -26,7 +26,7 @@ struct ResApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if isLaunchScreenPresented {
+            if isLaunchScreenPresented && !resAppModel.isAuthenticated {
                 LaunchScreenView(isAppSettingsViewShowing: .constant(false), isModalStepTwoEnabled: .constant(false))
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {

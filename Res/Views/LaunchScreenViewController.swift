@@ -12,9 +12,8 @@ struct LaunchScreenView: View {
     var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
-
-
-            if showRiveAnimation {
+        
+     if showRiveAnimation {
                 MainViewTeenageEng(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled)
                     .zIndex(0)
                 RiveViewModel(fileName: "res_unboxing").view()
@@ -27,7 +26,7 @@ struct LaunchScreenView: View {
                             }
                         }
                     }
-            } else {
+            }  else {
                 Image("logo-res")
                     .resizable()
                     .scaledToFit()
@@ -50,5 +49,7 @@ struct LaunchScreenView: View {
 }
 
 #Preview {
-    LaunchScreenView(isAppSettingsViewShowing: .constant(false), isModalStepTwoEnabled: .constant(false))
-}
+    LaunchScreenView(
+        isAppSettingsViewShowing: .constant(false),
+        isModalStepTwoEnabled: .constant(false)
+    )}
