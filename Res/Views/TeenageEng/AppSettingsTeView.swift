@@ -176,25 +176,6 @@ struct AppSettingsTeView: View {
 }
 
 extension AppSettingsTeView {
-    private func signOutButton() -> some View {
-        Button("sign out") {
-            Task {
-                do {
-                    try await SupabaseManager.shared.signOut()
-                    isPresented = false
-                    print("Signed Out")
-                } catch {
-                    print("Signout failed: \(error.localizedDescription)")
-                }
-            }
-        }
-        .frame(maxWidth: .infinity)
-        .frame(height: 54)
-        .background(Color.red.opacity(0.3))
-        .foregroundColor(.white)
-        .cornerRadius(15)
-        .font(.system(size: 17, weight: .semibold))
-    }
 
      enum SettingType: Identifiable {
          case homeScreen, lockScreen, voiceTypeAndTone
@@ -228,6 +209,28 @@ extension AppSettingsTeView {
         }
     }
 
+    private func signOutButton() -> some View {
+        Button("Sign Out") {
+            Task {
+                do {
+                    try await SupabaseManager.shared.signOut()
+                    isPresented = false
+                    print("Signed Out")
+                } catch {
+                    print("Signout failed: \(error.localizedDescription)")
+                }
+            }
+        }
+        .pressAnimation()
+        .frame(maxWidth: .infinity)
+        .frame(height: 54)
+        .background(Color.red.opacity(0.4))
+        .foregroundColor(.white)
+        .cornerRadius(15)
+        .font(.system(size: 17, weight: .semibold))
+        .padding(.bottom, 20)
+    }
+
     private func voiceTypeAndToneSettings() -> some View {
         VStack {
                 HStack {
@@ -254,7 +257,7 @@ extension AppSettingsTeView {
                         .foregroundColor(Color.white.opacity(0.7))
                     Spacer()
                 }
-                CustomLinkView(iconName: "theatermask.and.paintbrush.fill", title: "Skins, Icons, and Profiles", action: {}, navigateTo: {
+                CustomLinkView(iconName: "theatermask.and.paintbrush.fill", title: "Skins, Icons, and More", action: {}, navigateTo: {
                     //self.selectedSetting = .voiceTypeAndTone
                 }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
         }
@@ -531,7 +534,6 @@ extension AppSettingsTeView {
                                 RoundedRectangle(cornerRadius: 50)
                                     .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
                                     .frame(height: 60)
-                                    .animation(nil)
                                 Text("Got it!")
                                     .font(.system(.title2, design: .rounded))
                                     .fontWeight(.bold)
@@ -663,7 +665,6 @@ extension AppSettingsTeView {
                                 RoundedRectangle(cornerRadius: 50)
                                     .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
                                     .frame(height: 60)
-                                    .animation(nil)
                                 Text("Got it!")
                                     .font(.system(.title2, design: .rounded))
                                     .fontWeight(.bold)
@@ -796,7 +797,6 @@ extension AppSettingsTeView {
                                 RoundedRectangle(cornerRadius: 50)
                                     .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
                                     .frame(height: 60)
-                                    .animation(nil)
                                 Text("Got it!")
                                     .font(.system(.title2, design: .rounded))
                                     .fontWeight(.bold)

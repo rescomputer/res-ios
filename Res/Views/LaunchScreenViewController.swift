@@ -6,6 +6,7 @@ struct LaunchScreenView: View {
     @State private var showRiveAnimation = false
     @State private var showNextView = false
 
+    @Binding var isChangelogViewShowing: Bool
     @Binding var isAppSettingsViewShowing: Bool
     @Binding var isModalStepTwoEnabled: Bool
 
@@ -14,8 +15,12 @@ struct LaunchScreenView: View {
             Color.black.edgesIgnoringSafeArea(.all)
         
      if showRiveAnimation {
-                MainViewTeenageEng(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled)
-                    .zIndex(0)
+             MainViewTeenageEng(
+                 isChangelogViewShowing: $isChangelogViewShowing, 
+                 isAppSettingsViewShowing: $isAppSettingsViewShowing,
+                 isModalStepTwoEnabled: $isModalStepTwoEnabled
+             )
+             .zIndex(0)
                 RiveViewModel(fileName: "res_unboxing").view()
                     .edgesIgnoringSafeArea(.all)
                     .zIndex(1)
@@ -50,6 +55,7 @@ struct LaunchScreenView: View {
 
 #Preview {
     LaunchScreenView(
+        isChangelogViewShowing: .constant(false),
         isAppSettingsViewShowing: .constant(false),
         isModalStepTwoEnabled: .constant(false)
     )}

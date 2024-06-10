@@ -15,6 +15,7 @@ struct MainViewTeenageEng: View {
     @StateObject private var callManager = CallManager()
     @StateObject private var keyboardResponder = KeyboardResponder()
     
+    @Binding var isChangelogViewShowing: Bool
     @Binding var isAppSettingsViewShowing: Bool
     @Binding var isModalStepTwoEnabled: Bool
     
@@ -50,6 +51,7 @@ struct MainViewTeenageEng: View {
         
         .overlay { voiceSetupSheet }
         .overlay { if isAppSettingsViewShowing { appSettingsSheet } }
+        .overlay { if isChangelogViewShowing { changelogSheet } }
     }
     
     // Components
@@ -321,6 +323,17 @@ struct MainViewTeenageEng: View {
         .edgesIgnoringSafeArea(.all)
         .fadeInEffect()
     }
+
+    private var changelogSheet: some View {
+        ChangelogView(dismissAction: {
+            withAnimation(.easeInOut(duration: 0.15)) {
+                isChangelogViewShowing = false
+            }
+        })
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .edgesIgnoringSafeArea(.all)
+        .fadeInEffect()
+    }
     
     private var topTickTe: some View {
         HStack{
@@ -329,10 +342,19 @@ struct MainViewTeenageEng: View {
                 .scaledToFit()
                 .frame( height:12)
             Spacer()
-            Text("1.0.12")
-                .font(.system(size: 14, design: .monospaced))
-                .fontWeight(.bold)
-                .foregroundColor(.black.opacity(0.3))
+            Button(action: {
+                withAnimation(.easeInOut(duration: 0.15)) {
+                    isChangelogViewShowing = true
+                    print("isChangelogViewShowing set to true")
+                }
+                let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                impactMed.impactOccurred()
+            }) {
+                Text("1.0.12")
+                    .font(.system(size: 14, design: .monospaced))
+                    .fontWeight(.bold)
+                    .foregroundColor(.black.opacity(0.3))    
+            }
         }
         .padding(.horizontal, 20)
         
@@ -409,6 +431,7 @@ extension MainViewTeenageEng {
 
 #Preview("Main View") {
     MainViewTeenageEng(
+        isChangelogViewShowing: .constant(false),
         isAppSettingsViewShowing: .constant(false),
         isModalStepTwoEnabled: .constant(false)
     )
@@ -416,8 +439,8 @@ extension MainViewTeenageEng {
 
 #Preview("App Settings") {
     MainViewTeenageEng(
+        isChangelogViewShowing: .constant(false),
         isAppSettingsViewShowing: .constant(true),
         isModalStepTwoEnabled: .constant(false)
     )
 }
-

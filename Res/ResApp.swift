@@ -12,6 +12,7 @@ import Supabase
 @main
 struct ResApp: App {
     @StateObject private var resAppModel = ResAppModel()
+    @State private var isChangelogViewShowing = false
     @State private var isAppSettingsViewShowing = false
     @State private var isModalStepTwoEnabled = false
     @State private var hasCompletedOnboarding = false 
@@ -27,7 +28,7 @@ struct ResApp: App {
     var body: some Scene {
         WindowGroup {
             if isLaunchScreenPresented && !resAppModel.isAuthenticated {
-                LaunchScreenView(isAppSettingsViewShowing: .constant(false), isModalStepTwoEnabled: .constant(false))
+                LaunchScreenView(isChangelogViewShowing: .constant(false), isAppSettingsViewShowing: .constant(false), isModalStepTwoEnabled: .constant(false))
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                             withAnimation {
@@ -36,11 +37,15 @@ struct ResApp: App {
                         }
                     }
             } else if resAppModel.isAuthenticated || !isDebugMode {
-                MainViewTeenageEng(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled)
-                    //.statusBarHidden(true)
-                    .persistentSystemOverlays(.hidden)
+                MainViewTeenageEng(
+                    isChangelogViewShowing: $isChangelogViewShowing,
+                    isAppSettingsViewShowing: $isAppSettingsViewShowing,
+                    isModalStepTwoEnabled: $isModalStepTwoEnabled
+                )
+                //.statusBarHidden(true)
+                .persistentSystemOverlays(.hidden)
             } else {
-                AuthView(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled, isDebugMode: isDebugMode)
+                AuthView(isChangelogViewShowing: $isChangelogViewShowing, isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled, isDebugMode: isDebugMode)
             }
         }
     }

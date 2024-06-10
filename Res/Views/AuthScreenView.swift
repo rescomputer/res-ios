@@ -2,6 +2,7 @@ import SwiftUI
 import AuthenticationServices
 
 struct AuthView: View {
+    @Binding var isChangelogViewShowing: Bool
     @Binding var isAppSettingsViewShowing: Bool
     @Binding var isModalStepTwoEnabled: Bool
     
@@ -11,8 +12,12 @@ struct AuthView: View {
 
     var body: some View {
         ZStack {
-            MainViewTeenageEng(isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled)
-                    .zIndex(0)
+            MainViewTeenageEng(
+                isChangelogViewShowing: $isChangelogViewShowing,
+                isAppSettingsViewShowing: $isAppSettingsViewShowing,
+                isModalStepTwoEnabled: $isModalStepTwoEnabled
+            )
+            .zIndex(0)
 
             Color.black.opacity(0.5)
                 .edgesIgnoringSafeArea(.all)
@@ -156,11 +161,21 @@ private func listItem(icon: String, title: String, text: String) -> some View {
 struct AuthView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            AuthView(isAppSettingsViewShowing: .constant(false), isModalStepTwoEnabled: .constant(false), isDebugMode: true)
-                .previewDisplayName("Debug Version")
+            AuthView(
+                isChangelogViewShowing: .constant(false),
+                isAppSettingsViewShowing: .constant(false),
+                isModalStepTwoEnabled: .constant(false),
+                isDebugMode: true
+            )
+            .previewDisplayName("Debug Version")
 
-            AuthView(isAppSettingsViewShowing: .constant(false), isModalStepTwoEnabled: .constant(false), isDebugMode: false)
-                .previewDisplayName("Release Version")
+            AuthView(
+                isChangelogViewShowing: .constant(false),
+                isAppSettingsViewShowing: .constant(false),
+                isModalStepTwoEnabled: .constant(false),
+                isDebugMode: false
+            )
+            .previewDisplayName("Release Version")
         }
     }
 }
