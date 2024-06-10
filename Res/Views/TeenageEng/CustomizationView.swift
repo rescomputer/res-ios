@@ -151,7 +151,7 @@ extension CustomizationView {
                     HStack {
                         ZStack {
                             HStack {
-                                Image(systemName: "eye.slash.fill")
+                                Image(systemName: "theatermask.and.paintbrush.fill")
                                     .resizable()
                                     .foregroundColor(.black.opacity(0.05))
                                     .frame(width: 85, height: 85)
@@ -161,35 +161,22 @@ extension CustomizationView {
 
                         
                             VStack(alignment: .leading) {
-                                Text("Your Privacy is Paramount")
+                                Text("Skins, skins, skins!")
                                     .font(.system(size: 20, design: .rounded))
                                     .bold()
                                     .foregroundColor(Color.black.opacity(1))
                                     .padding(.bottom, 2)
-                                Text("Learn more about how Res handles privacy with HIPPA")
+                                Text("Custom RES with custom skins, choose any skin and give RES a facelift.")
                                     .font(.system(size: 14))
                                     .foregroundColor(Color.black.opacity(0.5))
 
                             }
-                            .padding(.horizontal, 20)
                             .offset(x: UIScreen.isLargeDevice ? -20 : 0)
+                            .padding(.horizontal, 20)
 
                         }
                     }
-                    .overlay(
-                        Rectangle()
-                            .frame(height: 1)
-                            .foregroundColor(Color.black.opacity(0.1)),
-                        alignment: .bottom
-                    )
                 }
-                .overlay(
-                    RoundedRectangle(cornerRadius: 0)
-                        .fill(Color.black.opacity(0.05))
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 130),
-                        alignment: .bottom
-                    )
                 .overlay(
                     XMarkButton {
                         withAnimation(.easeOut(duration: 0.15)) {
@@ -202,38 +189,14 @@ extension CustomizationView {
                 
                         VStack(alignment:.leading, spacing: 10) {
                              Text("""
-                                Res is HIPPA enabled out of the box. Meaning that all conversations are able to be protected with HIPPA compliance. No recordings, no data is stored, and no data is shared.
+                                Skins is coming soon!
                                 """)
                             .font(.footnote)
                             .bold()
                             .foregroundColor(.black.opacity(0.6))
-
-                            Text("The goal is to create a application where users can engage in meaningful conversations with the latest AI models with out the need to worry about whether their data or conversations are being stored or how they would be used. ")
-                            .font(.footnote)
-                            .foregroundColor(.black.opacity(0.6))
                          }
                          .frame(height: 150)
                          .padding(.horizontal, 20)
-
-                    VStack{
-                        ZStack {
-                                RoundedRectangle(cornerRadius: 50)
-                                    .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
-                                    .frame(height: 60)
-                                Text("Got it!")
-                                    .font(.system(.title2, design: .rounded))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-                            }
-                            .onTapGesture {
-                                self.customizationModal = nil
-                            }
-                            .padding(.top, 5)
-                            .pressAnimation()
-                            .opacity(1)
-                    }
-                    .padding(.horizontal, 20)
-
                     
             }
             .padding(.vertical)
