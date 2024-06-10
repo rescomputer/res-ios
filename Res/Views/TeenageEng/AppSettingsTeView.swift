@@ -518,23 +518,6 @@ extension AppSettingsTeView {
                     .frame(maxHeight: 300)
                     .padding(.horizontal, 20)
                     // .applyScrollViewEdgeFadeLight()
-
-                // Got it Button
-                    // Button {
-                    //     self.infoModal = nil
-                    // } label: {
-                    //     Text("Got it!")
-                    //         .font(.system(.title2, design: .rounded))
-                    //         .fontWeight(.bold)
-                    //         .foregroundColor(.white)
-                    //         .padding()
-                    //         .frame(maxWidth: .infinity)
-                    //         .background(Color(red: 0.106, green: 0.149, blue: 0.149))
-                    //         .cornerRadius(50)
-                    // }
-                    // .padding(.horizontal)
-                    // .pressAnimation()
-                    // .buttonStyle(PlainButtonStyle())
                     
                     // Got it Button
                     VStack{
@@ -648,24 +631,6 @@ extension AppSettingsTeView {
                          }
                          .frame(height: 150)
                          .padding(.horizontal, 20)
-
-                    
-                    // Got it Button
-                    // Button {
-                    //     self.infoModal = nil
-                    // } label: {
-                    //     Text("Got it!")
-                    //         .font(.system(.title2, design: .rounded))
-                    //         .fontWeight(.bold)
-                    //         .foregroundColor(.white)
-                    //         .padding()
-                    //         .frame(maxWidth: .infinity)
-                    //         .background(Color(red: 0.106, green: 0.149, blue: 0.149))
-                    //         .cornerRadius(50)
-                    // }
-                    // .padding(.horizontal)
-                    // .pressAnimation()
-                    // .buttonStyle(PlainButtonStyle())
                     
                     // Got it Button
                     VStack{
@@ -781,23 +746,6 @@ extension AppSettingsTeView {
                          .frame(height: 150)
                          .padding(.horizontal, 20)
 
-                    
-                    // Got it Button
-                    // Button {
-                    //     self.infoModal = nil
-                    // } label: {
-                    //     Text("Got it!")
-                    //         .font(.system(.title2, design: .rounded))
-                    //         .fontWeight(.bold)
-                    //         .foregroundColor(.white)
-                    //         .padding()
-                    //         .frame(maxWidth: .infinity)
-                    //         .background(Color(red: 0.106, green: 0.149, blue: 0.149))
-                    //         .cornerRadius(50)
-                    // }
-                    // .padding(.horizontal)
-                    // .pressAnimation()
-                    // .buttonStyle(PlainButtonStyle())
                     
                     // Got it Button
                     VStack{

@@ -121,7 +121,7 @@ extension CustomizationView {
                 }, navigateTo: {
                     self.customizationModal = .skinModal
                 }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
-                CustomLinkView(iconName: "app.gift.fill", title: "Choose an Icon", action: {
+                CustomLinkView(iconName: "app.gift.fill", title: "Pick your App Icon", action: {
                     self.customizationModal = .iconModal
                 }, navigateTo: {
                     self.customizationModal = .iconModal
@@ -264,7 +264,7 @@ extension CustomizationView {
                     HStack {
                         ZStack {
                             HStack {
-                                Image(systemName: "eye.slash.fill")
+                                Image(systemName: "app.gift.fill")
                                     .resizable()
                                     .foregroundColor(.black.opacity(0.05))
                                     .frame(width: 85, height: 85)
@@ -274,35 +274,22 @@ extension CustomizationView {
 
                         
                             VStack(alignment: .leading) {
-                                Text("Your Privacy is Paramount")
+                                Text("Choose an App Icon!")
                                     .font(.system(size: 20, design: .rounded))
                                     .bold()
                                     .foregroundColor(Color.black.opacity(1))
                                     .padding(.bottom, 2)
-                                Text("Learn more about how Res handles privacy with HIPPA")
+                                Text("Custom RES on your homescreen, choose any icon and set it as your app icon")
                                     .font(.system(size: 14))
                                     .foregroundColor(Color.black.opacity(0.5))
 
                             }
-                            .padding(.horizontal, 20)
                             .offset(x: UIScreen.isLargeDevice ? -20 : 0)
+                            .padding(.horizontal, 20)
 
                         }
                     }
-                    .overlay(
-                        Rectangle()
-                            .frame(height: 1)
-                            .foregroundColor(Color.black.opacity(0.1)),
-                        alignment: .bottom
-                    )
                 }
-                .overlay(
-                    RoundedRectangle(cornerRadius: 0)
-                        .fill(Color.black.opacity(0.05))
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 130),
-                        alignment: .bottom
-                    )
                 .overlay(
                     XMarkButton {
                         withAnimation(.easeOut(duration: 0.15)) {
@@ -312,48 +299,63 @@ extension CustomizationView {
                     .offset(x: -20, y: 0),
                     alignment: .topTrailing
                     )
-                
-                        VStack(alignment:.leading, spacing: 10) {
-                            NavigationStack {
-                                Picker("Choose an Icon", selection: $resAppModel.activeAppIcon) {
-                                    let customIcons: [String] = ["AppIcon", "retro", "simple", "vaporwave", "testflight", "classic", "futurism"]
-                                    ForEach(customIcons, id: \.self) { icon in
-                                        Text(icon).tag(icon)
+
+                            VStack {
+                                let columns = [
+                                    GridItem(.adaptive(minimum: 80))
+                                ]
+
+                                LazyVGrid(columns: columns, spacing: 10) {
+                                    ForEach(["AppIcon", "retro", "simple", "vaporwave", "testflight", "classic", "futurism", "8-bit"], id: \.self) { icon in
+                                        VStack {
+                                            Image(uiImage: UIImage(named: icon) ?? UIImage())
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 70, height: 70)
+                                                .clipShape(RoundedRectangle(cornerRadius: 17))
+                                                .shadow(color: Color.black.opacity(0.2), radius: 3)
+                                                .background(
+                                                    RoundedRectangle(cornerRadius: 17)
+                                                        .stroke(resAppModel.activeAppIcon == icon ? Color.blue : Color.clear, lineWidth: 4)
+                                                )
+                                                .onTapGesture {
+                                                    if icon == "AppIcon" {
+                                                        UIApplication.shared.setAlternateIconName(nil)
+                                                    } else {
+                                                        UIApplication.shared.setAlternateIconName(icon)
+                                                    }
+                                                    resAppModel.activeAppIcon = icon
+                                                }
+                                            Text(icon)
+                                                .font(.caption)
+                                        }
                                     }
                                 }
-                                .navigationTitle("Choose an Icon")
-                                .onChange(of: resAppModel.activeAppIcon) { newValue in
-                                    if newValue == "AppIcon" {
-                                        UIApplication.shared.setAlternateIconName(nil)
-                                    } else {
-                                        UIApplication.shared.setAlternateIconName(newValue)
-                                    }
-                                }
+                                .padding()
                             }
+                            .frame(height: 290)
+                
+                        // VStack(alignment:.leading, spacing: 10) {
+                        //     NavigationStack {
+                        //         Picker("Choose an Icon", selection: $resAppModel.activeAppIcon) {
+                        //             let customIcons: [String] = ["AppIcon", "retro", "simple", "vaporwave", "testflight", "classic", "futurism"]
+                        //             ForEach(customIcons, id: \.self) { icon in
+                        //                 Text(icon).tag(icon)
+                        //             }
+                        //         }
+                        //         .navigationTitle("Choose an Icon")
+                        //         .onChange(of: resAppModel.activeAppIcon) { newValue in
+                        //             if newValue == "AppIcon" {
+                        //                 UIApplication.shared.setAlternateIconName(nil)
+                        //             } else {
+                        //                 UIApplication.shared.setAlternateIconName(newValue)
+                        //             }
+                        //         }
+                        //     }
 
-                         } 
-                         .frame(height: 150)
-                         .padding(.horizontal, 20)
-
-                    // VStack{
-                    //     ZStack {
-                    //             RoundedRectangle(cornerRadius: 50)
-                    //                 .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
-                    //                 .frame(height: 60)
-                    //             Text("Got it!")
-                    //                 .font(.system(.title2, design: .rounded))
-                    //                 .fontWeight(.bold)
-                    //                 .foregroundColor(.white)
-                    //         }
-                    //         .onTapGesture {
-                    //             self.customizationModal = nil
-                    //         }
-                    //         .padding(.top, 5)
-                    //         .pressAnimation()
-                    //         .opacity(1)
-                    // }
-                    // .padding(.horizontal, 20)
-
+                        //  } 
+                        //  .frame(height: 150)
+                        //  .padding(.horizontal, 20)
                     
             }
             .padding(.vertical)
@@ -361,6 +363,7 @@ extension CustomizationView {
                     RoundedRectangle(cornerRadius: 40)
                         .fill(Color.white)
             )
+            .clipped()
         }
     }
     
