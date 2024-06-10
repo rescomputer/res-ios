@@ -323,31 +323,36 @@ extension CustomizationView {
                                 }
                                 .navigationTitle("Choose an Icon")
                                 .onChange(of: resAppModel.activeAppIcon) { newValue in
-                                    UIApplication.shared.setAlternateIconName(newValue)
+                                    if newValue == "AppIcon" {
+                                        UIApplication.shared.setAlternateIconName(nil)
+                                    } else {
+                                        UIApplication.shared.setAlternateIconName(newValue)
+                                    }
                                 }
                             }
+
                          } 
                          .frame(height: 150)
                          .padding(.horizontal, 20)
 
-                    VStack{
-                        ZStack {
-                                RoundedRectangle(cornerRadius: 50)
-                                    .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
-                                    .frame(height: 60)
-                                Text("Got it!")
-                                    .font(.system(.title2, design: .rounded))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-                            }
-                            .onTapGesture {
-                                self.customizationModal = nil
-                            }
-                            .padding(.top, 5)
-                            .pressAnimation()
-                            .opacity(1)
-                    }
-                    .padding(.horizontal, 20)
+                    // VStack{
+                    //     ZStack {
+                    //             RoundedRectangle(cornerRadius: 50)
+                    //                 .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
+                    //                 .frame(height: 60)
+                    //             Text("Got it!")
+                    //                 .font(.system(.title2, design: .rounded))
+                    //                 .fontWeight(.bold)
+                    //                 .foregroundColor(.white)
+                    //         }
+                    //         .onTapGesture {
+                    //             self.customizationModal = nil
+                    //         }
+                    //         .padding(.top, 5)
+                    //         .pressAnimation()
+                    //         .opacity(1)
+                    // }
+                    // .padding(.horizontal, 20)
 
                     
             }
