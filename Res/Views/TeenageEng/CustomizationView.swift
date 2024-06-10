@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct CustomizationView: View {
+    @EnvironmentObject var resAppModel: ResAppModel
     var dismissAction: () -> Void
     @State private var customizationModal: CustomizationModal?
-
+    
     var body: some View {
 
             ZStack {
@@ -313,17 +314,19 @@ extension CustomizationView {
                     )
                 
                         VStack(alignment:.leading, spacing: 10) {
-                             Text("""
-                                Res is HIPPA enabled out of the box. Meaning that all conversations are able to be protected with HIPPA compliance. No recordings, no data is stored, and no data is shared.
-                                """)
-                            .font(.footnote)
-                            .bold()
-                            .foregroundColor(.black.opacity(0.6))
-
-                            Text("The goal is to create a application where users can engage in meaningful conversations with the latest AI models with out the need to worry about whether their data or conversations are being stored or how they would be used. ")
-                            .font(.footnote)
-                            .foregroundColor(.black.opacity(0.6))
-                         }
+                            NavigationStack {
+                                Picker("Choose an Icon", selection: $resAppModel.activeAppIcon) {
+                                    let customIcons: [String] = ["AppIcon", "retro", "simple", "vaporwave", "testflight", "classic", "futurism"]
+                                    ForEach(customIcons, id: \.self) { icon in
+                                        Text(icon).tag(icon)
+                                    }
+                                }
+                                .navigationTitle("Choose an Icon")
+                                .onChange(of: resAppModel.activeAppIcon) { newValue in
+                                    UIApplication.shared.setAlternateIconName(newValue)
+                                }
+                            }
+                         } 
                          .frame(height: 150)
                          .padding(.horizontal, 20)
 

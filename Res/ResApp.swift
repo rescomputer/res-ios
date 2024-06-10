@@ -48,10 +48,12 @@ struct ResApp: App {
                 AuthView(isChangelogViewShowing: $isChangelogViewShowing, isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled, isDebugMode: isDebugMode)
             }
         }
+        .environmentObject(resAppModel)
     }
 }
 
 class ResAppModel: ObservableObject {
+    @AppStorage("active_icon") var activeAppIcon: String = "AppIcon"
     @Published var isAuthenticated = false
     private var authStateChangesTask: Task<Void, Never>? = nil
 
