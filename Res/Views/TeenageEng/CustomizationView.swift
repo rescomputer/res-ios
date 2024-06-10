@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CustomizationView: View {
     var dismissAction: () -> Void
+    @State private var customizationModal: CustomizationModal?
 
     var body: some View {
 
@@ -73,29 +74,289 @@ struct CustomizationView: View {
             .padding(.horizontal, 10)
         }
         .slideLeft()
+        .overlay {
+            if let customizationModal = customizationModal {
+                switch customizationModal {
+                case .skinModal:
+                    showSkinModal()
+                case .iconModal:
+                    showIconModal()
+                }
+            }
+        }
     }
 }
 
 extension CustomizationView {
-        private func customizationLinks() -> some View {
-            VStack {
-                    HStack {
-                        Text("Tutorials")
-                            .bold()
-                            .font(.system(size: 12))
-                            .foregroundColor(Color.white.opacity(0.7))
-                        Spacer()
-                    }
-                    CustomLinkView(iconName: "paintbrush.fill", title: "Choose a Skin", action: {}, navigateTo: {
-                        //self.selectedSetting = .homeScreen
-                    }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
-                    CustomLinkView(iconName: "app.gift.fill", title: "Choose an Icon", action: {}, navigateTo: {
-                        //self.selectedSetting = .lockScreen
-                    }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
-            }
-            .padding(.bottom, 20)
 
-        } 
+    enum CustomizationModal {
+        case skinModal
+        case iconModal
+    }
+
+    enum ModalHeightMultiplier {
+        case skinModal
+        case iconModal
+
+        var value: CGFloat {
+            switch self {
+            case .skinModal: return -0.02
+            case .iconModal: return -0.02
+            }
+        }
+    }
+
+    private func customizationLinks() -> some View {
+        VStack {
+                HStack {
+                    Text("Tutorials")
+                        .bold()
+                        .font(.system(size: 12))
+                        .foregroundColor(Color.white.opacity(0.7))
+                    Spacer()
+                }
+                CustomLinkView(iconName: "paintbrush.fill", title: "Choose a Skin", action: {
+                    self.customizationModal = .skinModal
+                }, navigateTo: {
+                    self.customizationModal = .skinModal
+                }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
+                CustomLinkView(iconName: "app.gift.fill", title: "Choose an Icon", action: {
+                    self.customizationModal = .iconModal
+                }, navigateTo: {
+                    self.customizationModal = .iconModal
+                }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
+        }
+        .padding(.bottom, 20)
+
+    } 
+
+    private func showSkinModal() -> some View {
+
+        HalfModalView(isShown: Binding<Bool>(
+            get: { self.customizationModal == .skinModal },
+            set: { newValue in
+                if !newValue {
+                    self.customizationModal = nil
+                }
+            }
+        ), onDismiss: {
+            withAnimation(.easeInOut(duration: 0.15)) {
+                self.customizationModal = nil
+            }
+        }, modalHeightMultiplier: CustomizationView.ModalHeightMultiplier.skinModal.value
+        ) {
+            VStack{
+                ZStack {
+                    HStack {
+                        ZStack {
+                            HStack {
+                                Image(systemName: "eye.slash.fill")
+                                    .resizable()
+                                    .foregroundColor(.black.opacity(0.05))
+                                    .frame(width: 85, height: 85)
+                                Spacer()
+                            }
+                            .offset(x: 10, y: -15)
+
+                        
+                            VStack(alignment: .leading) {
+                                Text("Your Privacy is Paramount")
+                                    .font(.system(size: 20, design: .rounded))
+                                    .bold()
+                                    .foregroundColor(Color.black.opacity(1))
+                                    .padding(.bottom, 2)
+                                Text("Learn more about how Res handles privacy with HIPPA")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(Color.black.opacity(0.5))
+
+                            }
+                            .padding(.horizontal, 20)
+                            .offset(x: UIScreen.isLargeDevice ? -20 : 0)
+
+                        }
+                    }
+                    .overlay(
+                        Rectangle()
+                            .frame(height: 1)
+                            .foregroundColor(Color.black.opacity(0.1)),
+                        alignment: .bottom
+                    )
+                }
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .fill(Color.black.opacity(0.05))
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 130),
+                        alignment: .bottom
+                    )
+                .overlay(
+                    XMarkButton {
+                        withAnimation(.easeOut(duration: 0.15)) {
+                            self.customizationModal = nil
+                        }
+                    }
+                    .offset(x: -20, y: 0),
+                    alignment: .topTrailing
+                    )
+                
+                        VStack(alignment:.leading, spacing: 10) {
+                             Text("""
+                                Res is HIPPA enabled out of the box. Meaning that all conversations are able to be protected with HIPPA compliance. No recordings, no data is stored, and no data is shared.
+                                """)
+                            .font(.footnote)
+                            .bold()
+                            .foregroundColor(.black.opacity(0.6))
+
+                            Text("The goal is to create a application where users can engage in meaningful conversations with the latest AI models with out the need to worry about whether their data or conversations are being stored or how they would be used. ")
+                            .font(.footnote)
+                            .foregroundColor(.black.opacity(0.6))
+                         }
+                         .frame(height: 150)
+                         .padding(.horizontal, 20)
+
+                    VStack{
+                        ZStack {
+                                RoundedRectangle(cornerRadius: 50)
+                                    .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
+                                    .frame(height: 60)
+                                Text("Got it!")
+                                    .font(.system(.title2, design: .rounded))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            }
+                            .onTapGesture {
+                                self.customizationModal = nil
+                            }
+                            .padding(.top, 5)
+                            .pressAnimation()
+                            .opacity(1)
+                    }
+                    .padding(.horizontal, 20)
+
+                    
+            }
+            .padding(.vertical)
+            .background(
+                    RoundedRectangle(cornerRadius: 40)
+                        .fill(Color.white)
+            )
+        }
+    }
+
+    private func showIconModal() -> some View {
+
+        HalfModalView(isShown: Binding<Bool>(
+            get: { self.customizationModal == .iconModal },
+            set: { newValue in
+                if !newValue {
+                    self.customizationModal = nil
+                }
+            }
+        ), onDismiss: {
+            withAnimation(.easeInOut(duration: 0.15)) {
+                self.customizationModal = nil
+            }
+        }, modalHeightMultiplier: CustomizationView.ModalHeightMultiplier.iconModal.value
+        ) {
+            VStack{
+                ZStack {
+                    HStack {
+                        ZStack {
+                            HStack {
+                                Image(systemName: "eye.slash.fill")
+                                    .resizable()
+                                    .foregroundColor(.black.opacity(0.05))
+                                    .frame(width: 85, height: 85)
+                                Spacer()
+                            }
+                            .offset(x: 10, y: -15)
+
+                        
+                            VStack(alignment: .leading) {
+                                Text("Your Privacy is Paramount")
+                                    .font(.system(size: 20, design: .rounded))
+                                    .bold()
+                                    .foregroundColor(Color.black.opacity(1))
+                                    .padding(.bottom, 2)
+                                Text("Learn more about how Res handles privacy with HIPPA")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(Color.black.opacity(0.5))
+
+                            }
+                            .padding(.horizontal, 20)
+                            .offset(x: UIScreen.isLargeDevice ? -20 : 0)
+
+                        }
+                    }
+                    .overlay(
+                        Rectangle()
+                            .frame(height: 1)
+                            .foregroundColor(Color.black.opacity(0.1)),
+                        alignment: .bottom
+                    )
+                }
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .fill(Color.black.opacity(0.05))
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 130),
+                        alignment: .bottom
+                    )
+                .overlay(
+                    XMarkButton {
+                        withAnimation(.easeOut(duration: 0.15)) {
+                            self.customizationModal = nil
+                        }
+                    }
+                    .offset(x: -20, y: 0),
+                    alignment: .topTrailing
+                    )
+                
+                        VStack(alignment:.leading, spacing: 10) {
+                             Text("""
+                                Res is HIPPA enabled out of the box. Meaning that all conversations are able to be protected with HIPPA compliance. No recordings, no data is stored, and no data is shared.
+                                """)
+                            .font(.footnote)
+                            .bold()
+                            .foregroundColor(.black.opacity(0.6))
+
+                            Text("The goal is to create a application where users can engage in meaningful conversations with the latest AI models with out the need to worry about whether their data or conversations are being stored or how they would be used. ")
+                            .font(.footnote)
+                            .foregroundColor(.black.opacity(0.6))
+                         }
+                         .frame(height: 150)
+                         .padding(.horizontal, 20)
+
+                    VStack{
+                        ZStack {
+                                RoundedRectangle(cornerRadius: 50)
+                                    .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
+                                    .frame(height: 60)
+                                Text("Got it!")
+                                    .font(.system(.title2, design: .rounded))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            }
+                            .onTapGesture {
+                                self.customizationModal = nil
+                            }
+                            .padding(.top, 5)
+                            .pressAnimation()
+                            .opacity(1)
+                    }
+                    .padding(.horizontal, 20)
+
+                    
+            }
+            .padding(.vertical)
+            .background(
+                    RoundedRectangle(cornerRadius: 40)
+                        .fill(Color.white)
+            )
+        }
+    }
+    
+
 }
 
 
