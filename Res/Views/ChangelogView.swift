@@ -77,20 +77,37 @@ struct ChangelogView: View {
                 }
                 .padding(.bottom, 20)
 
-                    //TODO add images or video of what the final widgets look like
                     ZStack {
-                        if let appIcon = UIImage(named: "AppIcon") {
-                            Image(uiImage: appIcon)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .cornerRadius(25)
-                                .padding(.bottom, 5)
-                        } else {
-                            Text("App Icon not found")
-                                .foregroundColor(.white)
+                        HStack(alignment: .top) {
+                            if let appIcon = UIImage(named: "AppIcon") {
+                                Image(uiImage: appIcon)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .cornerRadius(18)
+                                    .padding(.bottom, 5)
+                                    .shadow(color: Color.black.opacity(0.5), radius: 5)
+                            } else {
+                                Text("App Icon not found")
+                                    .foregroundColor(.white)
+                            }
+
+                            VStack(alignment: .leading, spacing: 5) {
+                                Text("Explore the latest AI models and have real conversations.")
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .foregroundColor(Color.white.opacity(0.5))
+                                 Button(action: {
+                                    // link to github repo
+                                    let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                                    impactMed.impactOccurred()
+                                }) {
+                                    Text("RES is open-source")
+                                        .font(.system(size: 16, design: .monospaced))
+                                        .foregroundColor(.orange.opacity(0.8))    
+                                }
+                            }.padding(.horizontal)
                         }
                     }
-                    .frame(maxWidth: .infinity, maxHeight: 120, alignment: .center)
+                    .frame(maxWidth: .infinity, maxHeight: 90, alignment: .center)
 
                     ScrollView {
                         changelogContent()
