@@ -36,6 +36,7 @@
 		F31C49492BC111180075477D /* VoiceTypeAndToneSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C49482BC111180075477D /* VoiceTypeAndToneSettingsView.swift */; };
 		F31C494B2BC37C080075477D /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C494A2BC37C080075477D /* Loader.swift */; };
 		F31C74A92C16B2FA009023D6 /* ChangelogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C74A82C16B2FA009023D6 /* ChangelogView.swift */; };
+		F31C74ED2C17483D009023D6 /* CustomizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C74EC2C17483D009023D6 /* CustomizationView.swift */; };
 		F3B27D662C12399E00AFCDAD /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = F3B27D652C12399E00AFCDAD /* RiveRuntime */; };
 		F3B27D6F2C15755200AFCDAD /* res_unboxing.riv in Resources */ = {isa = PBXBuildFile; fileRef = F3B27D6E2C15755200AFCDAD /* res_unboxing.riv */; };
 		F3B4EC5E2C1238F0000B80EF /* OnboardingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4EC5D2C1238F0000B80EF /* OnboardingAnimation.swift */; };
@@ -137,6 +138,7 @@
 		F31C49482BC111180075477D /* VoiceTypeAndToneSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceTypeAndToneSettingsView.swift; sourceTree = "<group>"; };
 		F31C494A2BC37C080075477D /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		F31C74A82C16B2FA009023D6 /* ChangelogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangelogView.swift; sourceTree = "<group>"; };
+		F31C74EC2C17483D009023D6 /* CustomizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizationView.swift; sourceTree = "<group>"; };
 		F3B27D6E2C15755200AFCDAD /* res_unboxing.riv */ = {isa = PBXFileReference; lastKnownFileType = file; name = res_unboxing.riv; path = ../../../Desktop/res_unboxing.riv; sourceTree = "<group>"; };
 		F3B4EC5D2C1238F0000B80EF /* OnboardingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAnimation.swift; sourceTree = "<group>"; };
 		F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalView.swift; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				F3E72E512BF9632A001FB6E4 /* AppSettingsTeView.swift */,
+				F31C74EC2C17483D009023D6 /* CustomizationView.swift */,
 				F3E72E4F2BF962F7001FB6E4 /* VoiceSettingsTeView.swift */,
 				F3E72E4D2BF96240001FB6E4 /* CustomTextPromptTeView.swift */,
 				F3E72E4B2BF9620B001FB6E4 /* VoiceTypeAndToneTeView.swift */,
@@ -588,6 +591,7 @@
 				18D289E52B9713FE008742FB /* MainViewClassic.swift in Sources */,
 				F3E72E522BF9632A001FB6E4 /* AppSettingsTeView.swift in Sources */,
 				F3E72E4C2BF9620B001FB6E4 /* VoiceTypeAndToneTeView.swift in Sources */,
+				F31C74ED2C17483D009023D6 /* CustomizationView.swift in Sources */,
 				F3E72E4A2BF961B6001FB6E4 /* VoiceTypeAndToneSettingsTeView.swift in Sources */,
 				F31C494B2BC37C080075477D /* Loader.swift in Sources */,
 				F3E72E502BF962F7001FB6E4 /* VoiceSettingsTeView.swift in Sources */,

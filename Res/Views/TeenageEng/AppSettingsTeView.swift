@@ -169,7 +169,14 @@ struct AppSettingsTeView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .edgesIgnoringSafeArea(.all)
                     .transition(.opacity)
-                }
+                case .appCustomization:
+                    CustomizationView(dismissAction: {
+                        self.selectedSetting = nil
+                    })
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .edgesIgnoringSafeArea(.all)
+                    .transition(.opacity)
+                }   
             }
         }
     }
@@ -178,13 +185,14 @@ struct AppSettingsTeView: View {
 extension AppSettingsTeView {
 
      enum SettingType: Identifiable {
-         case homeScreen, lockScreen, voiceTypeAndTone
+         case homeScreen, lockScreen, voiceTypeAndTone, appCustomization
 
          var id: Int {
              switch self {
              case .homeScreen: return 0
              case .lockScreen: return 1
              case .voiceTypeAndTone: return 2
+             case .appCustomization: return 3
              }
          }
      }
@@ -258,7 +266,7 @@ extension AppSettingsTeView {
                     Spacer()
                 }
                 CustomLinkView(iconName: "theatermask.and.paintbrush.fill", title: "Skins, Icons, and More", action: {}, navigateTo: {
-                    //self.selectedSetting = .voiceTypeAndTone
+                    self.selectedSetting = .appCustomization
                 }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
         }
         .padding(.bottom, 20)

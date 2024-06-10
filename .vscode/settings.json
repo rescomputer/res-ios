@@ -5,5 +5,7 @@
         "other": "off"
     },
     "lldb.library": "/Library/Developer/CommandLineTools/Library/PrivateFrameworks/LLDB.framework/Versions/A/LLDB",
-    "lldb.launch.expressions": "native"
+    "lldb.launch.expressions": "native",
+    "workbench.iconTheme": "icons",
+    "workbench.panel.defaultLocation": "bottom"
 }
