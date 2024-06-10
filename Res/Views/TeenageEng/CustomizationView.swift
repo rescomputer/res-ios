@@ -306,7 +306,7 @@ extension CustomizationView {
                                 ]
 
                                 LazyVGrid(columns: columns, spacing: 10) {
-                                    ForEach(["AppIcon", "retro", "simple", "vaporwave", "testflight", "classic", "futurism", "8-bit"], id: \.self) { icon in
+                                    ForEach(["AppIcon", "retro", "simple", "vaporwave", "testflight", "classic", "futurism", "8-bit", "apple-retro"], id: \.self) { icon in
                                         VStack {
                                             Image(uiImage: UIImage(named: icon) ?? UIImage())
                                                 .resizable()

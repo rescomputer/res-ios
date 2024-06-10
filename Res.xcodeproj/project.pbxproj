@@ -793,7 +793,7 @@
 			baseConfigurationReference = FA14AACA2BE80E0B001C7486 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "retro futurism classic testflight simple vaporwave 8-bit";
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "retro futurism classic testflight simple vaporwave 8-bit apple-retro";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
@@ -839,7 +839,7 @@
 			baseConfigurationReference = FA14AACA2BE80E0B001C7486 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "retro futurism classic testflight simple vaporwave 8-bit";
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "retro futurism classic testflight simple vaporwave 8-bit apple-retro";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
