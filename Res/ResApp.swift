@@ -24,7 +24,7 @@ struct ResApp: App {
     var body: some Scene {
         WindowGroup {
             if resAppModel.isAuthenticated || !isDebugMode {
-                MainViewTeenageEng(appSettingsViewShowing: $isAppSettingsViewShowing, modalStepTwoEnabled: $isModalStepTwoEnabled)
+                MainViewTeenageEng(isAppSettingsViewShowing: $isAppSettingsViewShowing, modalStepTwoEnabled: $isModalStepTwoEnabled)
             } else {
                 AuthView(isDebugMode: isDebugMode)
             }

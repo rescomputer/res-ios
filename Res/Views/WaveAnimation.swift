@@ -14,52 +14,33 @@ struct WaveAnimation: View {
     @Binding var isAssistantSpeaking: Bool
     @State private var waveOffset = Angle(degrees: 0)
         
+    private let minFrequencyLevel = 0.033
+    private let frequencyMultiplier = 60.0
+
     var frequency: Double {
-        audioLevel < 0.05 ? 2 : Double(audioLevel * 60)
+        max(Double(audioLevel), minFrequencyLevel) * frequencyMultiplier
     }
     
     var waveHeight: Double {
         isAssistantSpeaking ? Double(height) : 0
     }
-    
 
     var body: some View {
         ZStack {
-            Wave(offset: waveOffset, waveHeight: waveHeight, frequency: frequency) // Adjust frequency here
-                .stroke(.green, lineWidth: 5)
-//                .onAppear { startAnimation() }
+            Wave(offset: waveOffset, waveHeight: waveHeight, frequency: frequency)
+                .stroke(Color.green, lineWidth: 5)
                 .blur(radius: 4)
             
-            Wave(offset: waveOffset, waveHeight: waveHeight, frequency: frequency) // Adjust frequency here
-                .stroke(.green, lineWidth: 3)
-//                .onAppear { startAnimation() }
+            Wave(offset: waveOffset, waveHeight: waveHeight, frequency: frequency)
+                .stroke(Color.green, lineWidth: 3)
         }
     }
-    
-    private func startAnimation() {
-        withAnimation(.linear(duration: 1).repeatForever(autoreverses: false)) {
-            waveOffset = Angle(degrees: -360)
-        }
-    }
-    
-//    private var waveHeight: Double {
-//        if height > 0.0000001 && height < 0.00001 {
-//            return 0.01
-//        } else if height > 0.00001 && height < 0.9 {
-//            return 0.1
-//        } else if height > 0.9 && height < 10 {
-//            return 0.2
-//        } else {
-//            return 0
-//        }
-//    }
 }
- 
+
 private struct Wave: Shape {
-    
     var offset: Angle
-    let waveHeight: Double
-    let frequency: Double // New frequency property
+    var waveHeight: Double
+    var frequency: Double
     
     var animatableData: Double {
         get { offset.degrees }
@@ -67,27 +48,19 @@ private struct Wave: Shape {
     }
     
     func path(in rect: CGRect) -> Path {
-        var p = Path()
+        var path = Path()
         let actualWaveHeight = waveHeight * rect.height
-        let yOffSet = rect.height / 2
+        let yOffset = rect.height / 2
         let startAngle = offset
-        let endAngle = offset + Angle(degrees: 360 + 10)
-        
-        p.move(to: CGPoint(x: 0, y: yOffSet + actualWaveHeight * CGFloat(sin(offset.radians * frequency)))) // Apply frequency
-        
-        for angle in stride(from: startAngle.degrees, through: endAngle.degrees, by: 5) {
+        let endAngle = startAngle + Angle(degrees: 360)
+
+        path.move(to: CGPoint(x: 0, y: yOffset + actualWaveHeight * CGFloat(sin(offset.radians * frequency))))
+        for angle in stride(from: startAngle.degrees, through: endAngle.degrees, by: 1) {
             let x = CGFloat((angle - startAngle.degrees) / 360) * rect.width
-            p.addLine(to: CGPoint(x: x, y: yOffSet + actualWaveHeight * CGFloat(sin(Angle(degrees: angle).radians * frequency)))) // Apply frequency
+            path.addLine(to: CGPoint(x: x, y: yOffset + actualWaveHeight * CGFloat(sin(Angle(degrees: angle).radians * frequency))))
         }
-        
-        return p
+        return path
     }
-    
-//    init(offset: Angle, waveHeight: Double, frequency: Double) {
-//        self.offset = offset
-//        self.waveHeight = waveHeight
-//        self.frequency = frequency
-//    }
 }
 
 #Preview {

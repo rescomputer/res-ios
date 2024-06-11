@@ -22,7 +22,7 @@ struct MainViewTeenageEng: View {
     @State private var selectedOption: Option?
     @State private var activeModal: ActiveModal?
     
-    @Binding var appSettingsViewShowing: Bool
+    @Binding var isAppSettingsViewShowing: Bool
     @Binding var modalStepTwoEnabled: Bool
     
     // Audio Level
@@ -55,7 +55,7 @@ struct MainViewTeenageEng: View {
         .onAppear { callManager.setupVapi() }
         
         .overlay { voiceSetupSheet }
-        .overlay { if appSettingsViewShowing { appSettingsSheet } }
+        .overlay { if isAppSettingsViewShowing { appSettingsSheet } }
         
         .onChange(of: callManager.vapi?.localAudioLevel) { oldValue, newValue in
             localAudioLevel = (newValue ?? 0)
@@ -215,7 +215,7 @@ struct MainViewTeenageEng: View {
         ZStack {
             Button(action: {
                 withAnimation(.easeInOut(duration: 0.15)) {
-                    appSettingsViewShowing = true
+                    isAppSettingsViewShowing = true
                 }
                 let impactMed = UIImpactFeedbackGenerator(style: .soft)
                 impactMed.impactOccurred()
@@ -322,7 +322,7 @@ struct MainViewTeenageEng: View {
     
     private var appSettingsSheet: some View {
         AppSettingsTeView(
-            isPresented: $appSettingsViewShowing,
+            isPresented: $isAppSettingsViewShowing,
             activeModal: $activeModal,
             selectedOption: $selectedOption,
             isModalStepTwoEnabled: $modalStepTwoEnabled,
@@ -428,14 +428,14 @@ extension MainViewTeenageEng {
 
 #Preview("Main View") {
     MainViewTeenageEng(
-        appSettingsViewShowing: .constant(false),
+        isAppSettingsViewShowing: .constant(false),
         modalStepTwoEnabled: .constant(false)
     )
 }
 
 #Preview("App Settings") {
     MainViewTeenageEng(
-        appSettingsViewShowing: .constant(true),
+        isAppSettingsViewShowing: .constant(true),
         modalStepTwoEnabled: .constant(false)
     )
 }
