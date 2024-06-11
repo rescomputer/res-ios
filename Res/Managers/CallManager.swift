@@ -25,6 +25,18 @@ import AVFoundation
     private var cancellables = Set<AnyCancellable>()
     var vapi: Vapi?
     
+    
+    var isAssistantSpeaking = false
+    
+    
+    func test() {
+        //        vapiEvents.conve
+        //        Vapi.Event.conversationUpdate(<#ConversationUpdate#>)
+    }
+    
+    //    let role: Message.Role = .user
+    
+    
     @Published var enteredText = ""
     
     @Published var activity: Activity<Res_ExtensionAttributes>?
@@ -45,37 +57,41 @@ import AVFoundation
         vapi?.localAudioLevel ?? 0
     }
     
+    var remoteVolumeLevel: Float {
+        vapi?.remoteAudioLevel ?? 0
+    }
+    
     var voiceDisplayName: String {
         switch voice {
-            case "alloy":
-                return "🇺🇸 Alloy"
-            case "echo":
-                return "🇺🇸 Echo"
-            case "fable":
-                return "🇬🇧 Fable"
-            case "onyx":
-                return "🇺🇸 Onyx"
-            case "nova":
-                return "🇺🇸 Nova"
-            case "shimmer":
-                return "🇺🇸 Shimmer"
-            default:
-                return "Voice Type"
+        case "alloy":
+            return "🇺🇸 Alloy"
+        case "echo":
+            return "🇺🇸 Echo"
+        case "fable":
+            return "🇬🇧 Fable"
+        case "onyx":
+            return "🇺🇸 Onyx"
+        case "nova":
+            return "🇺🇸 Nova"
+        case "shimmer":
+            return "🇺🇸 Shimmer"
+        default:
+            return "Voice Type"
         }
     }
     
     var speedDisplayName: String {
         switch speed {
-            case 0.3:
-                return "🐢 Slow"
-            case 1.0:
-                return "💬 Normal"
-            case 1.3:
-                return "🐇 Fast"
-            case 1.5:
-                return "⚡️ Superfast"
-            default:
-                return "Voice Speed"
+        case 0.3:
+            return "🐢 Slow"
+        case 1.0:
+            return "💬 Normal"
+        case 1.3:
+            return "🐇 Fa st"
+        case 1.5:
+            return "⚡️ Superfast"
+        default:
+            return "Voice Speed"
         }
     }
     
@@ -92,26 +108,34 @@ import AVFoundation
             .sink { [weak self] event in
                 self?.vapiEvents.append(event)
                 switch event {
-                    case .callDidStart:
-                        self?.callState = .started
-                    case .callDidEnd:
-                        self?.callState = .ended
-                    case .speechUpdate:
-                        print(event)
-                    case .conversationUpdate:
-                        print(event)
-                    case .functionCall:
-                        print(event)
-                    case .hang:
-                        print(event)
-                    case .metadata:
-                        print(event)
-                    case .transcript(let transcriptEvent):
-                        DispatchQueue.main.async {
-                            self?.currentTranscript = transcriptEvent.transcript
-                        }
-                    case .error(let error):
-                        SentryManager.shared.captureError(error, description: "VAPI reported an error")
+                case .callDidStart:
+                    //
+                    self?.callState = .started
+                case .callDidEnd:
+                    self?.callState = .ended
+                case .speechUpdate(let speechUpdate):
+                    print(event)
+                    if speechUpdate.status == .stopped && speechUpdate.role == .assistant {
+                        self?.isAssistantSpeaking = false
+                    } else if speechUpdate.role == .user {
+                        self?.isAssistantSpeaking = false
+                    } else {
+                        self?.isAssistantSpeaking = true
+                    }
+                case .conversationUpdate:
+                    print(event)
+                case .functionCall:
+                    print(event)
+                case .hang:
+                    print(event)
+                case .metadata:
+                    print(event)
+                case .transcript(let transcriptEvent):
+                    DispatchQueue.main.async {
+                        self?.currentTranscript = transcriptEvent.transcript
+                    }
+                case .error(let error):
+                    SentryManager.shared.captureError(error, description: "VAPI reported an error")
                 }
                 self?.updateLiveActivity()
             }
@@ -162,6 +186,7 @@ import AVFoundation
         
         Task {
             await startObservingAudioLevel()
+            await startObservingRemoteAudioLevel()
         }
     }
     
@@ -172,6 +197,15 @@ import AVFoundation
             print(error)
         }
     }
+    
+    func startObservingRemoteAudioLevel() async {
+        do {
+            try await vapi?.startRemoteParticipantsAudioLevelObserver()
+        } catch {
+            print(error)
+        }
+    }
+    
     
     private func startCall() async {
         
@@ -199,7 +233,7 @@ import AVFoundation
             "numWordsToInterruptAssistant": 1,
             "responseDelaySeconds": 0,
             "llmRequestDelaySeconds": 0,
-            "firstMessage": "Hey",
+            "firstMessage": "What's up? ",
             "voice": [
                 "voiceId": voice,
                 "provider":"openai",
@@ -231,23 +265,23 @@ import AVFoundation
     
     func updateLiveActivity() {
         switch callState {
-            case .started:
-                let sfSymbolName = "waveform.and.person.filled"
-                let updatedContentState = Res_ExtensionAttributes.ContentState(sfSymbolName: sfSymbolName)
-                Task {
-                    await activity?.update(using: updatedContentState)
-                }
-            case .loading:
-                let sfSymbolName = "ellipsis"
-                let updatedContentState = Res_ExtensionAttributes.ContentState(sfSymbolName: sfSymbolName)
-                Task {
-                    await activity?.update(using: updatedContentState)
-                }
-            case .ended:
-                Task {
-                    await activity?.end(dismissalPolicy: .immediate)
-                    activity = nil
-                }
+        case .started:
+            let sfSymbolName = "waveform.and.person.filled"
+            let updatedContentState = Res_ExtensionAttributes.ContentState(sfSymbolName: sfSymbolName)
+            Task {
+                await activity?.update(using: updatedContentState)
+            }
+        case .loading:
+            let sfSymbolName = "ellipsis"
+            let updatedContentState = Res_ExtensionAttributes.ContentState(sfSymbolName: sfSymbolName)
+            Task {
+                await activity?.update(using: updatedContentState)
+            }
+        case .ended:
+            Task {
+                await activity?.end(dismissalPolicy: .immediate)
+                activity = nil
+            }
         }
     }
     
@@ -272,16 +306,16 @@ import AVFoundation
         }
         
         let url = URL(fileURLWithPath: path)
-
+        
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
             audioPlayer?.play()
             
-//            audioPlayer = try AVAudioPlayer(contentsOf: url)
-//            audioPlayer?.delegate = self
-//            audioPlayer?.play()
-//            self.completionHandler = completion
-
+            //            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            //            audioPlayer?.delegate = self
+            //            audioPlayer?.play()
+            //            self.completionHandler = completion
+            
         } catch let error {
             print(error.localizedDescription)
         }
@@ -291,58 +325,58 @@ import AVFoundation
         audioPlayer?.stop()
     }
     
-//    TODO: Enable the full length playback
-//    // AVAudioPlayerDelegate method
-//    private var completionHandler: (() -> Void)?
-//    
-//    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-//        completionHandler?()
-//    }
+    //    TODO: Enable the full length playback
+    //    // AVAudioPlayerDelegate method
+    //    private var completionHandler: (() -> Void)?
+    //
+    //    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+    //        completionHandler?()
+    //    }
 }
 
 extension CallManager {
     var callStateText: String {
         
         switch callState {
-            case .started:
-                "Connected"
-            case .loading:
-                "Connecting..."
-            case .ended:
-                "Chat with an AI back-and-forth"
+        case .started:
+            "Connected"
+        case .loading:
+            "Connecting..."
+        case .ended:
+            "Chat with an AI back-and-forth"
         }
     }
     
     var buttonGradient: LinearGradient {
         switch callState {
-            case .loading:
-                LinearGradient(gradient: Gradient(colors: [Color(red: 0.957, green: 0.522, blue: 0), Color(red: 0.961, green: 0.282, blue: 0)]), startPoint: .top, endPoint: .bottom)
-            case .ended:
-                LinearGradient(gradient: Gradient(colors: [Color(red: 0.957, green: 0.522, blue: 0), Color(red: 0.961, green: 0.282, blue: 0)]), startPoint: .top, endPoint: .bottom)
-            case .started:
-                LinearGradient(gradient: Gradient(colors: [Color(red: 0.957, green: 0.231, blue: 0), Color(red: 0.961, green: 0, blue: 0)]), startPoint: .top, endPoint: .bottom)
-
+        case .loading:
+            LinearGradient(gradient: Gradient(colors: [Color(red: 0.957, green: 0.522, blue: 0), Color(red: 0.961, green: 0.282, blue: 0)]), startPoint: .top, endPoint: .bottom)
+        case .ended:
+            LinearGradient(gradient: Gradient(colors: [Color(red: 0.957, green: 0.522, blue: 0), Color(red: 0.961, green: 0.282, blue: 0)]), startPoint: .top, endPoint: .bottom)
+        case .started:
+            LinearGradient(gradient: Gradient(colors: [Color(red: 0.957, green: 0.231, blue: 0), Color(red: 0.961, green: 0, blue: 0)]), startPoint: .top, endPoint: .bottom)
+            
         }
     }
-
+    
     @ViewBuilder
     var buttonText: some View {
         switch callState {
-            case .loading:
-                Loader()
-                    .frame(width: 42, height: 42)
-                    .scaleUpAnimation()
-            case .ended:
-                Image(systemName: "phone.fill")
-                    .foregroundStyle(.white.opacity(0.8))
-                    .scaleUpAnimation()
-            case .started:
-                Image(systemName: "phone.down.fill")
-                    .foregroundStyle(.white.opacity(0.8))
-                    .scaleUpAnimation()
+        case .loading:
+            Loader()
+                .frame(width: 42, height: 42)
+                .scaleUpAnimation()
+        case .ended:
+            Image(systemName: "phone.fill")
+                .foregroundStyle(.white.opacity(0.8))
+                .scaleUpAnimation()
+        case .started:
+            Image(systemName: "phone.down.fill")
+                .foregroundStyle(.white.opacity(0.8))
+                .scaleUpAnimation()
         }
     }
-
+    
     //Res Classic
     // var buttonText: String {
     //     callState == .loading ? "Connecting" : (callState == .ended ? "Start Conversation" : "End Conversation")

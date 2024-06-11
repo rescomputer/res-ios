@@ -26,10 +26,12 @@ struct MainViewTeenageEng: View {
     @Binding var modalStepTwoEnabled: Bool
     
     // Audio Level
-    @State private var audioLevel: Float = 0
+    @State private var localAudioLevel: Float = 0
     @State private var audioCheckTimer: Timer?
     @State private var previousAudioLevel: Float = 0
     @State private var audioLevelUnchanged = false
+    
+    @State private var remoteAudioLevel: Float = 0
     
     var body: some View {
         ZStack {
@@ -56,14 +58,18 @@ struct MainViewTeenageEng: View {
         .ignoresSafeArea(edges: .bottom)
         .onAppear { callManager.setupVapi() }
         
-        .onAppear { startAudioCheckTimer() }
+        .onAppear { startAudioCheckTimer () }
         .onDisappear { stopAudioCheckTimer() }
         
         .overlay { voiceSetupSheet }
         .overlay { if appSettingsViewShowing { appSettingsSheet } }
         
         .onChange(of: callManager.vapi?.localAudioLevel) { oldValue, newValue in
-            audioLevel = (newValue ?? 0)
+            localAudioLevel = (newValue ?? 0)
+        }
+        
+        .onChange(of: callManager.remoteVolumeLevel) { oldValue, newValue in
+            remoteAudioLevel = newValue
         }
     }
     
@@ -84,19 +90,26 @@ struct MainViewTeenageEng: View {
 //                .fontWeight(.bold)
 //                .padding()
             
-            WaveAnimation(height: $audioLevel, levelStable: $audioLevelUnchanged)
-                .mask(
-                    LinearGradient(
-                        gradient: Gradient(stops: [
-                            .init(color: .clear, location: 0.0),
-                            .init(color: .black, location: 0.2),
-                            .init(color: .black, location: 0.8),
-                            .init(color: .clear, location: 1.0)
-                        ]),
-                        startPoint: .leading,
-                        endPoint: .trailing
-                    )
-                )
+//            Text("assistant speaking: \(callManager.isAssistantSpeaking)")
+            
+            WaveAnimation(
+                height: .constant(0.25),
+                audioLevel: $remoteAudioLevel,
+                levelStable: $audioLevelUnchanged,
+                isAssistantSpeaking: $callManager.isAssistantSpeaking
+            )
+//                .mask(
+//                    LinearGradient(
+//                        gradient: Gradient(stops: [
+//                            .init(color: .clear, location: 0.0),
+//                            .init(color: .black, location: 0.2),
+//                            .init(color: .black, location: 0.8),
+//                            .init(color: .clear, location: 1.0)
+//                        ]),
+//                        startPoint: .leading,
+//                        endPoint: .trailing
+//                    )
+//                )
         }
         .frame(maxWidth: .infinity, maxHeight: 300)
         .background(
@@ -412,8 +425,8 @@ struct MainViewTeenageEng: View {
     }
     
     private func checkAudioLevel() {
-        audioLevelUnchanged = audioLevel == previousAudioLevel
-        previousAudioLevel = audioLevel
+        audioLevelUnchanged = localAudioLevel == previousAudioLevel
+        previousAudioLevel = localAudioLevel
     }
 }
 

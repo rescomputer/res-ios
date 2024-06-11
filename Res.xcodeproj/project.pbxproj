@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,8 +23,6 @@
 		18F7233B2BA95062003F44FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18F7233A2BA95062003F44FA /* Assets.xcassets */; };
 		18F7233F2BA95062003F44FA /* Res ExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 18F7232B2BA95060003F44FA /* Res ExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		18F723892BAC2695003F44FA /* ActivityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F723882BAC2694003F44FA /* ActivityKit.framework */; };
-		18F7238B2BAC2C17003F44FA /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = 18F7238A2BAC2C17003F44FA /* Vapi */; };
-		18F7238D2BAC2C3C003F44FA /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = 18F7238C2BAC2C3C003F44FA /* Vapi */; };
 		2DE1830E58A749F8A3633BED /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 00571768FCC847B5B370CACD /* Sentry */; };
 		B91C79312C011C3E00D45290 /* WaveTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91C79302C011C3E00D45290 /* WaveTest.swift */; };
 		B91C79332C011EB700D45290 /* VolumeObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91C79322C011EB700D45290 /* VolumeObserver.swift */; };
@@ -64,6 +62,7 @@
 		FA9576502BEA4C3100EC2FA4 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		FA9576522BEA4CDD00EC2FA4 /* SentryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9576512BEA4CDD00EC2FA4 /* SentryManager.swift */; };
 		FA9576972BEC099700EC2FA4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9576962BEC099700EC2FA4 /* XCTest.framework */; platformFilter = ios; };
+		FACDDA392C17C3CE006395BE /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = FACDDA382C17C3CE006395BE /* Vapi */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,9 +165,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FACDDA392C17C3CE006395BE /* Vapi in Frameworks */,
 				FA5550A32BEDD4AF00C7648B /* Sentry in Frameworks */,
 				FA14AAD42BE850A0001C7486 /* Supabase in Frameworks */,
-				18F7238D2BAC2C3C003F44FA /* Vapi in Frameworks */,
 				18F723892BAC2695003F44FA /* ActivityKit.framework in Frameworks */,
 				FA14AAD22BE850A0001C7486 /* Functions in Frameworks */,
 				FA14AAD02BE850A0001C7486 /* Auth in Frameworks */,
@@ -199,7 +198,6 @@
 			files = (
 				18F723302BA95060003F44FA /* SwiftUI.framework in Frameworks */,
 				18F7232E2BA95060003F44FA /* WidgetKit.framework in Frameworks */,
-				18F7238B2BAC2C17003F44FA /* Vapi in Frameworks */,
 				2DE1830E58A749F8A3633BED /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -391,11 +389,11 @@
 			);
 			name = Res;
 			packageProductDependencies = (
-				18F7238C2BAC2C3C003F44FA /* Vapi */,
 				FA14AACF2BE850A0001C7486 /* Auth */,
 				FA14AAD12BE850A0001C7486 /* Functions */,
 				FA14AAD32BE850A0001C7486 /* Supabase */,
 				00571768FCC847B5B370CACD /* Sentry */,
+				FACDDA382C17C3CE006395BE /* Vapi */,
 			);
 			productName = Her;
 			productReference = 18D289DF2B9713FE008742FB /* Res.app */;
@@ -453,7 +451,6 @@
 			);
 			name = "Res ExtensionExtension";
 			packageProductDependencies = (
-				18F7238A2BAC2C17003F44FA /* Vapi */,
 			);
 			productName = "Her ExtensionExtension";
 			productReference = 18F7232B2BA95060003F44FA /* Res ExtensionExtension.appex */;
@@ -495,10 +492,10 @@
 			);
 			mainGroup = 18D289D62B9713FE008742FB;
 			packageReferences = (
-				18D28A0C2B971574008742FB /* XCRemoteSwiftPackageReference "ios" */,
 				18F07E032BD1C1A300E5B28D /* XCRemoteSwiftPackageReference "SnapKit" */,
 				FA14AACE2BE850A0001C7486 /* XCRemoteSwiftPackageReference "supabase-swift" */,
 				BD1914C8DBDC4BCDB400579F /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
+				FACDDA372C17C3CE006395BE /* XCLocalSwiftPackageReference "../res/vapi-ios" */,
 			);
 			productRefGroup = 18D289E02B9713FE008742FB /* Products */;
 			projectDirPath = "";
@@ -783,7 +780,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = GZ2BM4VMQU;
+				DEVELOPMENT_TEAM = Q5W3Y6NXEB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Res/Info.plist;
@@ -828,7 +825,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = GZ2BM4VMQU;
+				DEVELOPMENT_TEAM = Q5W3Y6NXEB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Res/Info.plist;
@@ -868,7 +865,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6ADU7T5Q7V;
+				DEVELOPMENT_TEAM = Q5W3Y6NXEB;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
@@ -887,7 +884,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6ADU7T5Q7V;
+				DEVELOPMENT_TEAM = Q5W3Y6NXEB;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
@@ -945,7 +942,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GZ2BM4VMQU;
+				DEVELOPMENT_TEAM = Q5W3Y6NXEB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Res Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Res AI";
@@ -977,7 +974,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GZ2BM4VMQU;
+				DEVELOPMENT_TEAM = Q5W3Y6NXEB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Res Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Res AI";
@@ -1052,15 +1049,14 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		18D28A0C2B971574008742FB /* XCRemoteSwiftPackageReference "ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/VapiAI/ios";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
+/* Begin XCLocalSwiftPackageReference section */
+		FACDDA372C17C3CE006395BE /* XCLocalSwiftPackageReference "../res/vapi-ios" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../res/vapi-ios";
 		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
 		18F07E032BD1C1A300E5B28D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -1093,16 +1089,6 @@
 			package = BD1914C8DBDC4BCDB400579F /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
 			productName = Sentry;
 		};
-		18F7238A2BAC2C17003F44FA /* Vapi */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 18D28A0C2B971574008742FB /* XCRemoteSwiftPackageReference "ios" */;
-			productName = Vapi;
-		};
-		18F7238C2BAC2C3C003F44FA /* Vapi */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 18D28A0C2B971574008742FB /* XCRemoteSwiftPackageReference "ios" */;
-			productName = Vapi;
-		};
 		FA14AACF2BE850A0001C7486 /* Auth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FA14AACE2BE850A0001C7486 /* XCRemoteSwiftPackageReference "supabase-swift" */;
@@ -1117,6 +1103,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA14AACE2BE850A0001C7486 /* XCRemoteSwiftPackageReference "supabase-swift" */;
 			productName = Supabase;
+		};
+		FACDDA382C17C3CE006395BE /* Vapi */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Vapi;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
