@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -63,6 +63,7 @@
 		FA9576522BEA4CDD00EC2FA4 /* SentryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9576512BEA4CDD00EC2FA4 /* SentryManager.swift */; };
 		FA9576972BEC099700EC2FA4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9576962BEC099700EC2FA4 /* XCTest.framework */; platformFilter = ios; };
 		FACDDA392C17C3CE006395BE /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = FACDDA382C17C3CE006395BE /* Vapi */; };
+		FACDDA3C2C18BFAF006395BE /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = FACDDA3B2C18BFAF006395BE /* Vapi */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +170,7 @@
 				FA5550A32BEDD4AF00C7648B /* Sentry in Frameworks */,
 				FA14AAD42BE850A0001C7486 /* Supabase in Frameworks */,
 				18F723892BAC2695003F44FA /* ActivityKit.framework in Frameworks */,
+				FACDDA3C2C18BFAF006395BE /* Vapi in Frameworks */,
 				FA14AAD22BE850A0001C7486 /* Functions in Frameworks */,
 				FA14AAD02BE850A0001C7486 /* Auth in Frameworks */,
 				FA5550A22BEDD4AF00C7648B /* (null) in Frameworks */,
@@ -394,6 +396,7 @@
 				FA14AAD32BE850A0001C7486 /* Supabase */,
 				00571768FCC847B5B370CACD /* Sentry */,
 				FACDDA382C17C3CE006395BE /* Vapi */,
+				FACDDA3B2C18BFAF006395BE /* Vapi */,
 			);
 			productName = Her;
 			productReference = 18D289DF2B9713FE008742FB /* Res.app */;
@@ -495,7 +498,7 @@
 				18F07E032BD1C1A300E5B28D /* XCRemoteSwiftPackageReference "SnapKit" */,
 				FA14AACE2BE850A0001C7486 /* XCRemoteSwiftPackageReference "supabase-swift" */,
 				BD1914C8DBDC4BCDB400579F /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
-				FACDDA372C17C3CE006395BE /* XCLocalSwiftPackageReference "../res/vapi-ios" */,
+				FACDDA3A2C18BFAF006395BE /* XCRemoteSwiftPackageReference "ios" */,
 			);
 			productRefGroup = 18D289E02B9713FE008742FB /* Products */;
 			projectDirPath = "";
@@ -1049,13 +1052,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		FACDDA372C17C3CE006395BE /* XCLocalSwiftPackageReference "../res/vapi-ios" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../res/vapi-ios";
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		18F07E032BD1C1A300E5B28D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1079,6 +1075,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.5.1;
+			};
+		};
+		FACDDA3A2C18BFAF006395BE /* XCRemoteSwiftPackageReference "ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/VapiAI/ios";
+			requirement = {
+				kind = revision;
+				revision = 1d07d49e48627c08b3592f4e839832c97a3cf9f8;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1106,6 +1110,11 @@
 		};
 		FACDDA382C17C3CE006395BE /* Vapi */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = Vapi;
+		};
+		FACDDA3B2C18BFAF006395BE /* Vapi */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FACDDA3A2C18BFAF006395BE /* XCRemoteSwiftPackageReference "ios" */;
 			productName = Vapi;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -1,5 +1,5 @@
 {
-  "originHash" : "dd64a7f129577c384e589b4cb33398736cf39bf65abe5599392e403d7b54030b",
+  "originHash" : "db9d30212719c1fd654e323ba314ac74f7d7862124ee02e21a8a4e2e3868e173",
   "pins" : [
     {
       "identity" : "daily-client-ios",
@@ -8,6 +8,14 @@
       "state" : {
         "revision" : "62fee5a117795439a22c568dd8271fc5e3a5b8d0",
         "version" : "0.20.0"
+      }
+    },
+    {
+      "identity" : "ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/VapiAI/ios",
+      "state" : {
+        "revision" : "1d07d49e48627c08b3592f4e839832c97a3cf9f8"
       }
     },
     {
