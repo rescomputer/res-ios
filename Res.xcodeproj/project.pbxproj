@@ -25,7 +25,6 @@
 		18F723892BAC2695003F44FA /* ActivityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F723882BAC2694003F44FA /* ActivityKit.framework */; };
 		2DE1830E58A749F8A3633BED /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 00571768FCC847B5B370CACD /* Sentry */; };
 		B91C79312C011C3E00D45290 /* WaveTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91C79302C011C3E00D45290 /* WaveTest.swift */; };
-		B91C79332C011EB700D45290 /* VolumeObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91C79322C011EB700D45290 /* VolumeObserver.swift */; };
 		B953528C2BFE771600C1E32C /* WaveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B953528B2BFE771600C1E32C /* WaveAnimation.swift */; };
 		B95D2F332BA4EAF5003C7C17 /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F322BA4EAF5003C7C17 /* CallManager.swift */; };
 		B95D2F352BA4EB32003C7C17 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */; };
@@ -127,7 +126,6 @@
 		18F7233C2BA95062003F44FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18F723882BAC2694003F44FA /* ActivityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActivityKit.framework; path = System/Library/Frameworks/ActivityKit.framework; sourceTree = SDKROOT; };
 		B91C79302C011C3E00D45290 /* WaveTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveTest.swift; sourceTree = "<group>"; };
-		B91C79322C011EB700D45290 /* VolumeObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeObserver.swift; sourceTree = "<group>"; };
 		B953528B2BFE771600C1E32C /* WaveAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimation.swift; sourceTree = "<group>"; };
 		B95D2F322BA4EAF5003C7C17 /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
@@ -234,7 +232,6 @@
 			isa = PBXGroup;
 			children = (
 				18D289E22B9713FE008742FB /* ResApp.swift */,
-				B91C79322C011EB700D45290 /* VolumeObserver.swift */,
 				B91C79302C011C3E00D45290 /* WaveTest.swift */,
 				F3E72E532BF9ACC6001FB6E4 /* Skins */,
 				F3B5AB232BAD35BD009CDBB5 /* Views */,
@@ -574,7 +571,6 @@
 				1849A5472BBDD68A00A4BCF1 /* UIScreen+Extensions.swift in Sources */,
 				18D289E52B9713FE008742FB /* MainViewClassic.swift in Sources */,
 				F3E72E522BF9632A001FB6E4 /* AppSettingsTeView.swift in Sources */,
-				B91C79332C011EB700D45290 /* VolumeObserver.swift in Sources */,
 				F3E72E4C2BF9620B001FB6E4 /* VoiceTypeAndToneTeView.swift in Sources */,
 				F3E72E4A2BF961B6001FB6E4 /* VoiceTypeAndToneSettingsTeView.swift in Sources */,
 				B953528C2BFE771600C1E32C /* WaveAnimation.swift in Sources */,

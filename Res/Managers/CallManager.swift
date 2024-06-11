@@ -28,15 +28,6 @@ import AVFoundation
     
     var isAssistantSpeaking = false
     
-    
-    func test() {
-        //        vapiEvents.conve
-        //        Vapi.Event.conversationUpdate(<#ConversationUpdate#>)
-    }
-    
-    //    let role: Message.Role = .user
-    
-    
     @Published var enteredText = ""
     
     @Published var activity: Activity<Res_ExtensionAttributes>?
@@ -52,11 +43,7 @@ import AVFoundation
             UserDefaults.standard.set(voice, forKey: "voice")
         }
     }
-    
-    var volumeLevel: Float {
-        vapi?.localAudioLevel ?? 0
-    }
-    
+
     var remoteVolumeLevel: Float {
         vapi?.remoteAudioLevel ?? 0
     }
@@ -115,9 +102,8 @@ import AVFoundation
                     self?.callState = .ended
                 case .speechUpdate(let speechUpdate):
                     print(event)
-                    if speechUpdate.status == .stopped && speechUpdate.role == .assistant {
-                        self?.isAssistantSpeaking = false
-                    } else if speechUpdate.role == .user {
+                    if (speechUpdate.status == .stopped && speechUpdate.role == .assistant)
+                        || speechUpdate.role == .user {
                         self?.isAssistantSpeaking = false
                     } else {
                         self?.isAssistantSpeaking = true
@@ -183,20 +169,12 @@ import AVFoundation
             print("Failed to initialize Vapi or start call with error: \(error)")
             callState = .ended
         }
-        
+
         Task {
-            await startObservingAudioLevel()
             await startObservingRemoteAudioLevel()
         }
     }
     
-    func startObservingAudioLevel() async {
-        do {
-            try await vapi?.startLocalAudioLevelObserver()
-        } catch {
-            print(error)
-        }
-    }
     
     func startObservingRemoteAudioLevel() async {
         do {
@@ -208,7 +186,6 @@ import AVFoundation
     
     
     private func startCall() async {
-        
         guard let vapi = vapi else {
             callState = .ended
             return

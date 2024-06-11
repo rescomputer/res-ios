@@ -17,7 +17,6 @@ struct WaveTest: View {
             WaveAnimation(
                 height: .constant(0.1),
                 audioLevel: $volume,
-                levelStable: .constant(false),
                 isAssistantSpeaking: .constant(true)
             )
             

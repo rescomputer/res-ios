@@ -27,10 +27,6 @@ struct MainViewTeenageEng: View {
     
     // Audio Level
     @State private var localAudioLevel: Float = 0
-    @State private var audioCheckTimer: Timer?
-    @State private var previousAudioLevel: Float = 0
-    @State private var audioLevelUnchanged = false
-    
     @State private var remoteAudioLevel: Float = 0
     
     var body: some View {
@@ -58,9 +54,6 @@ struct MainViewTeenageEng: View {
         .ignoresSafeArea(edges: .bottom)
         .onAppear { callManager.setupVapi() }
         
-        .onAppear { startAudioCheckTimer () }
-        .onDisappear { stopAudioCheckTimer() }
-        
         .overlay { voiceSetupSheet }
         .overlay { if appSettingsViewShowing { appSettingsSheet } }
         
@@ -85,31 +78,11 @@ struct MainViewTeenageEng: View {
     
     private var teScreen: some View {
         VStack {
-//            Text(audioLevelUnchanged.description)
-//                .foregroundColor(.red)
-//                .fontWeight(.bold)
-//                .padding()
-            
-//            Text("assistant speaking: \(callManager.isAssistantSpeaking)")
-            
             WaveAnimation(
                 height: .constant(0.25),
                 audioLevel: $remoteAudioLevel,
-                levelStable: $audioLevelUnchanged,
                 isAssistantSpeaking: $callManager.isAssistantSpeaking
             )
-//                .mask(
-//                    LinearGradient(
-//                        gradient: Gradient(stops: [
-//                            .init(color: .clear, location: 0.0),
-//                            .init(color: .black, location: 0.2),
-//                            .init(color: .black, location: 0.8),
-//                            .init(color: .clear, location: 1.0)
-//                        ]),
-//                        startPoint: .leading,
-//                        endPoint: .trailing
-//                    )
-//                )
         }
         .frame(maxWidth: .infinity, maxHeight: 300)
         .background(
@@ -410,23 +383,6 @@ struct MainViewTeenageEng: View {
     private var whiteBorder: some View {
         RoundedRectangle(cornerRadius: 25)
             .strokeBorder(LinearGradient(gradient: Gradient(colors: [.white.opacity(1), .white.opacity(1)]), startPoint: .leading, endPoint: .trailing), lineWidth: 1)
-    }
-    
-    // Timer Functions
-    private func startAudioCheckTimer() {
-        audioCheckTimer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { _ in
-            checkAudioLevel()
-        }
-    }
-    
-    private func stopAudioCheckTimer() {
-        audioCheckTimer?.invalidate()
-        audioCheckTimer = nil
-    }
-    
-    private func checkAudioLevel() {
-        audioLevelUnchanged = localAudioLevel == previousAudioLevel
-        previousAudioLevel = localAudioLevel
     }
 }
 

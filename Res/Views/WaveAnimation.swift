@@ -11,7 +11,6 @@ struct WaveAnimation: View {
     
     @Binding var height: Float
     @Binding var audioLevel: Float
-    @Binding var levelStable: Bool
     @Binding var isAssistantSpeaking: Bool
     @State private var waveOffset = Angle(degrees: 0)
         
@@ -95,7 +94,6 @@ private struct Wave: Shape {
     WaveAnimation(
         height: .constant(0.15),
         audioLevel: .constant(0.1),
-        levelStable: .constant(false),
         isAssistantSpeaking: .constant(true)
     )
 }
