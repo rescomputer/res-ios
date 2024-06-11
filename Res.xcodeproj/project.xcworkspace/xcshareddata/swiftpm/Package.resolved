@@ -15,6 +15,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/VapiAI/ios",
       "state" : {
+        "branch" : "main",
         "revision" : "1d07d49e48627c08b3592f4e839832c97a3cf9f8"
       }
     },
