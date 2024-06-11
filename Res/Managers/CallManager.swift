@@ -100,6 +100,7 @@ import AVFoundation
                     self?.callState = .started
                 case .callDidEnd:
                     self?.callState = .ended
+                    self?.isAssistantSpeaking = false
                 case .speechUpdate(let speechUpdate):
                     print(event)
                     if (speechUpdate.status == .stopped && speechUpdate.role == .assistant)
