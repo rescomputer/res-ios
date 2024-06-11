@@ -80,4 +80,26 @@ class SupabaseManager {
             throw error
         }
     }
+
+    // *****************
+    // ****** API ******
+    // *****************
+    struct CallData: Codable {
+        let id: String
+        let createdBy: String
+
+        enum CodingKeys: String, CodingKey {
+            case id
+            case createdBy = "created_by"
+        }
+    }
+
+    func insertCallRecord(callUUID: String) async throws {
+        let authedUser = try await getCurrentSession()
+        let callData = CallData(id: callUUID, createdBy: authedUser.uid)
+        try await client
+            .from("calls")
+            .insert(callData)
+            .execute()
+    }
 }

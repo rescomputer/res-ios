@@ -1,9 +1,5 @@
-//
-//  WaveTest.swift
-//  Res
-//
-//  Created by Daniel Berezhnoy on 5/24/24.
-//
+// This file is just for testing the waveAnimation component
+// in the preview. It can be safely deleted
 
 import SwiftUI
 
