@@ -40,7 +40,8 @@ struct ResApp: App {
                 MainViewTeenageEng(
                     isChangelogViewShowing: $isChangelogViewShowing,
                     isAppSettingsViewShowing: $isAppSettingsViewShowing,
-                    isModalStepTwoEnabled: $isModalStepTwoEnabled
+                    isModalStepTwoEnabled: $isModalStepTwoEnabled, 
+                    modalStepTwoEnabled: $isModalStepTwoEnabled
                 )
                 //.statusBarHidden(true)
                 .persistentSystemOverlays(.hidden)

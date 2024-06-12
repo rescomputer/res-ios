@@ -26,7 +26,6 @@ struct MainViewTeenageEng: View {
     @State private var selectedOption: Option?
     @State private var activeModal: ActiveModal?
     
-    @Binding var isAppSettingsViewShowing: Bool
     @Binding var modalStepTwoEnabled: Bool
     
     // Audio Level
@@ -454,7 +453,8 @@ extension MainViewTeenageEng {
 #Preview("Main View") {
     MainViewTeenageEng(
         isChangelogViewShowing: .constant(false),
-        isAppSettingsViewShowing: .constant(false),
+        isAppSettingsViewShowing: .constant(false), 
+        isModalStepTwoEnabled: .constant(false),
         modalStepTwoEnabled: .constant(false)
     )
 }
@@ -462,7 +462,8 @@ extension MainViewTeenageEng {
 #Preview("App Settings") {
     MainViewTeenageEng(
         isChangelogViewShowing: .constant(false),
-        isAppSettingsViewShowing: .constant(true),
+        isAppSettingsViewShowing: .constant(true), 
+        isModalStepTwoEnabled: .constant(false),
         modalStepTwoEnabled: .constant(false)
     )
 }

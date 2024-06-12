@@ -517,6 +517,7 @@
 				FA14AACE2BE850A0001C7486 /* XCRemoteSwiftPackageReference "supabase-swift" */,
 				BD1914C8DBDC4BCDB400579F /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 				F3B4EC5C2C1238C4000B80EF /* XCRemoteSwiftPackageReference "rive-ios" */,
+				F31C74F52C1A2C40009023D6 /* XCRemoteSwiftPackageReference "ios" */,
 			);
 			productRefGroup = 18D289E02B9713FE008742FB /* Products */;
 			projectDirPath = "";
@@ -1092,6 +1093,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		F31C74F52C1A2C40009023D6 /* XCRemoteSwiftPackageReference "ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/VapiAI/ios";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		F3B4EC5C2C1238C4000B80EF /* XCRemoteSwiftPackageReference "rive-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rive-app/rive-ios";
@@ -1123,16 +1132,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BD1914C8DBDC4BCDB400579F /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
 			productName = Sentry;
-		};
-		18F7238A2BAC2C17003F44FA /* Vapi */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 18D28A0C2B971574008742FB /* XCRemoteSwiftPackageReference "ios" */;
-			productName = Vapi;
-		};
-		18F7238C2BAC2C3C003F44FA /* Vapi */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 18D28A0C2B971574008742FB /* XCRemoteSwiftPackageReference "ios" */;
-			productName = Vapi;
 		};
 		F3B27D652C12399E00AFCDAD /* RiveRuntime */ = {
 			isa = XCSwiftPackageProductDependency;
