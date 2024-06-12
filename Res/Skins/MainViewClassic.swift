@@ -1,5 +1,5 @@
 //
-//  ResApp.swift
+//  MainViewClassic.swift
 //  Res
 //
 //  Created by Richard Burton on 03/05/2024.
@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 import ActivityKit
 
-struct MainView: View {
+struct MainViewClassic: View {
     @FocusState private var isTextFieldFocused: Bool
     
     @StateObject private var callManager = CallManager()
@@ -74,6 +74,9 @@ struct MainView: View {
                     .scaledToFit()
                     .frame(width: 150, height: 150)
                     .padding(.bottom, 100)
+                
+//                This commented out code might be useful for debugging,
+//                but feel free to delete
                 
 //                Text(callManager.currentTranscript)
 //                    .frame(maxWidth: .infinity, alignment: .center)
@@ -353,7 +356,7 @@ struct MainView: View {
     }
 }
 
-extension MainView {
+extension MainViewClassic {
     
     enum ActiveModal {
         case voiceSettingsModal
@@ -382,7 +385,7 @@ extension MainView {
             withAnimation(.easeInOut(duration: 0.15)) {
                 self.activeModal = nil
             }
-        }, modalHeightMultiplier: MainView.ModalHeightMultiplier.voiceSettingsModal.value
+        }, modalHeightMultiplier: MainViewClassic.ModalHeightMultiplier.voiceSettingsModal.value
         ) {
             VoiceSettingsView(
                 activeModal: $activeModal,
@@ -395,14 +398,14 @@ extension MainView {
 }
 
 #Preview("Main View") {
-    MainView(
+    MainViewClassic(
         isAppSettingsViewShowing: .constant(false),
         isModalStepTwoEnabled: .constant(false)
     )
 }
 
 #Preview("App Settings") {
-    MainView(
+    MainViewClassic(
         isAppSettingsViewShowing: .constant(true),
         isModalStepTwoEnabled: .constant(false)
     )
