@@ -91,7 +91,7 @@ struct AppSettingsTeView: View {
 
                     voiceTypeAndToneSettings()
 
-                    appCustomization()
+                   // appCustomization()
 
                     widgetSettings()
 

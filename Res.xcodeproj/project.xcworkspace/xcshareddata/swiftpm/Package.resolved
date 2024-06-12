@@ -1,0 +1,78 @@
+{
+  "originHash" : "978bf60a157d93d9843420e2b45a9376c9745fe69e5617ed0468faabc36b9ff9",
+  "pins" : [
+    {
+      "identity" : "daily-client-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/daily-co/daily-client-ios",
+      "state" : {
+        "revision" : "62fee5a117795439a22c568dd8271fc5e3a5b8d0",
+        "version" : "0.20.0"
+      }
+    },
+    {
+      "identity" : "ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/VapiAI/ios",
+      "state" : {
+        "branch" : "main",
+        "revision" : "1d07d49e48627c08b3592f4e839832c97a3cf9f8"
+      }
+    },
+    {
+      "identity" : "rive-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/rive-app/rive-ios",
+      "state" : {
+        "revision" : "800afbdfdbc1900ac8b0430eb48fa5eda0bedc58",
+        "version" : "5.13.2"
+      }
+    },
+    {
+      "identity" : "sentry-cocoa",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/getsentry/sentry-cocoa/",
+      "state" : {
+        "revision" : "a62862c99f5bcb28fd78617fab1a5fe29607c06c",
+        "version" : "8.28.0"
+      }
+    },
+    {
+      "identity" : "snapkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SnapKit/SnapKit",
+      "state" : {
+        "revision" : "2842e6e84e82eb9a8dac0100ca90d9444b0307f4",
+        "version" : "5.7.1"
+      }
+    },
+    {
+      "identity" : "supabase-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/supabase/supabase-swift.git",
+      "state" : {
+        "revision" : "40112d26f2f1a58a989fee10dce85de49b0b8e7b",
+        "version" : "2.13.2"
+      }
+    },
+    {
+      "identity" : "swift-concurrency-extras",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-concurrency-extras",
+      "state" : {
+        "revision" : "bb5059bde9022d69ac516803f4f227d8ac967f71",
+        "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "swift-crypto",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-crypto.git",
+      "state" : {
+        "revision" : "bc1c29221f6dfeb0ebbfbc98eb95cd3d4967868e",
+        "version" : "3.4.0"
+      }
+    }
+  ],
+  "version" : 3
+}
