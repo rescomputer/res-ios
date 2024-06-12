@@ -10,17 +10,24 @@ import UIKit
 import ActivityKit
 
 struct MainViewTeenageEng: View {
+    
+    // TextField
     @FocusState private var isTextFieldFocused: Bool
     
+    // Managers
     @StateObject private var callManager = CallManager()
     @StateObject private var keyboardResponder = KeyboardResponder()
     
-    @Binding var isAppSettingsViewShowing: Bool
-    @Binding var isModalStepTwoEnabled: Bool
-    
-    @State private var drawingHeight = true
+    // Modals
     @State private var selectedOption: Option?
     @State private var activeModal: ActiveModal?
+    
+    @Binding var isAppSettingsViewShowing: Bool
+    @Binding var modalStepTwoEnabled: Bool
+    
+    // Audio Level
+    @State private var localAudioLevel: Float = 0
+    @State private var remoteAudioLevel: Float = 0
     
     var body: some View {
         ZStack {
@@ -37,7 +44,6 @@ struct MainViewTeenageEng: View {
             .padding(.bottom)
             
             .overlay(borderShadow)
-            
             .background(backgroundColor)
             
             .overlay(backgroundNoise)
@@ -50,6 +56,14 @@ struct MainViewTeenageEng: View {
         
         .overlay { voiceSetupSheet }
         .overlay { if isAppSettingsViewShowing { appSettingsSheet } }
+        
+        .onChange(of: callManager.vapi?.localAudioLevel) { oldValue, newValue in
+            localAudioLevel = (newValue ?? 0)
+        }
+        
+        .onChange(of: callManager.remoteVolumeLevel) { oldValue, newValue in
+            remoteAudioLevel = newValue
+        }
     }
     
     // Components
@@ -63,24 +77,21 @@ struct MainViewTeenageEng: View {
     }
     
     private var teScreen: some View {
-        ZStack {
-            VStack {
-//                Image(.roboto)
-//                    .resizable()
-//                    .scaledToFit()
-//                    .frame(width: 150, height: 150)
-                
-            }
+        VStack {
+            WaveAnimation(
+                height: .constant(0.25),
+                audioLevel: $remoteAudioLevel,
+                isAssistantSpeaking: $callManager.isAssistantSpeaking
+            )
         }
         .frame(maxWidth: .infinity, maxHeight: 300)
-        .background(LinearGradient( gradient: screenGradient, startPoint: .top, endPoint: .bottom))
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .overlay(
-            Image(.bgNoise)
+        .background(
+            Image(.resScreen)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .opacity(0.5)
+                .opacity(0.7)
         )
+        .background(LinearGradient( gradient: screenGradient, startPoint: .top, endPoint: .bottom))
         .overlay(
             // Inner light stroke
             RoundedRectangle(cornerRadius: 20, style: .continuous)
@@ -119,6 +130,7 @@ struct MainViewTeenageEng: View {
                 .opacity(0.3)
         )
         .shadow(color: Color.black.opacity(0.5), radius: 5, x: 0, y: 3)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
     }
     
     private var screenGradient: Gradient {
@@ -313,7 +325,7 @@ struct MainViewTeenageEng: View {
             isPresented: $isAppSettingsViewShowing,
             activeModal: $activeModal,
             selectedOption: $selectedOption,
-            isModalStepTwoEnabled: $isModalStepTwoEnabled,
+            isModalStepTwoEnabled: $modalStepTwoEnabled,
             callManager: callManager,
             keyboardResponder: keyboardResponder
         )
@@ -360,6 +372,13 @@ struct MainViewTeenageEng: View {
             .aspectRatio(contentMode: .fill)
             .opacity(0.5)
     }
+
+    private var resScreen: some View {
+        Image(.resScreen)
+            .resizable()
+            .scaledToFill()
+            .aspectRatio(contentMode: .fill)
+    }
     
     private var whiteBorder: some View {
         RoundedRectangle(cornerRadius: 25)
@@ -400,7 +419,7 @@ extension MainViewTeenageEng {
             VoiceSettingsTeView(
                 activeModal: $activeModal,
                 selectedOption: $selectedOption,
-                isModalStepTwoEnabled: $isModalStepTwoEnabled,
+                isModalStepTwoEnabled: $modalStepTwoEnabled,
                 callManager: callManager,
                 keyboardResponder: keyboardResponder)
         }
@@ -410,14 +429,13 @@ extension MainViewTeenageEng {
 #Preview("Main View") {
     MainViewTeenageEng(
         isAppSettingsViewShowing: .constant(false),
-        isModalStepTwoEnabled: .constant(false)
+        modalStepTwoEnabled: .constant(false)
     )
 }
 
 #Preview("App Settings") {
     MainViewTeenageEng(
         isAppSettingsViewShowing: .constant(true),
-        isModalStepTwoEnabled: .constant(false)
+        modalStepTwoEnabled: .constant(false)
     )
 }
-

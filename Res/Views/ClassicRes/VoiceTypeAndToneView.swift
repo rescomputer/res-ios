@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct VoiceTypeAndToneView: View {
-    @Binding var activeModal: MainView.ActiveModal?
+    @Binding var activeModal: MainViewClassic.ActiveModal?
     @Binding var selectedOption: Option?
     @ObservedObject var callManager: CallManager
     @ObservedObject var keyboardResponder: KeyboardResponder

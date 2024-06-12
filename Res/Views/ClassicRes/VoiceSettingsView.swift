@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct VoiceSettingsView: View {
-    @Binding var activeModal: MainView.ActiveModal?
+    @Binding var activeModal: MainViewClassic.ActiveModal?
     @Binding var selectedOption: Option?
     @Binding var isModalStepTwoEnabled: Bool
     @ObservedObject var callManager: CallManager
