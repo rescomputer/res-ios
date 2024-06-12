@@ -17,7 +17,6 @@ struct ResApp: App {
     @State private var isModalStepTwoEnabled = false
     @State private var hasCompletedOnboarding = false 
     @State private var isLaunchScreenPresented = true
-    //@State private var hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
     let isDebugMode = Config.buildConfiguration == .debug
 
     init() {
@@ -40,13 +39,17 @@ struct ResApp: App {
                 MainViewTeenageEng(
                     isChangelogViewShowing: $isChangelogViewShowing,
                     isAppSettingsViewShowing: $isAppSettingsViewShowing,
-                    isModalStepTwoEnabled: $isModalStepTwoEnabled, 
-                    modalStepTwoEnabled: $isModalStepTwoEnabled
+                    isModalStepTwoEnabled: $isModalStepTwoEnabled
                 )
                 //.statusBarHidden(true)
                 .persistentSystemOverlays(.hidden)
             } else {
-                AuthView(isChangelogViewShowing: $isChangelogViewShowing, isAppSettingsViewShowing: $isAppSettingsViewShowing, isModalStepTwoEnabled: $isModalStepTwoEnabled, isDebugMode: isDebugMode)
+                AuthView(
+                    isChangelogViewShowing: $isChangelogViewShowing,
+                    isAppSettingsViewShowing: $isAppSettingsViewShowing,
+                    isModalStepTwoEnabled: $isModalStepTwoEnabled,
+                    isDebugMode: isDebugMode
+                )
             }
         }
         .environmentObject(resAppModel)

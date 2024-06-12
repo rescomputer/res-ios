@@ -18,7 +18,6 @@ struct MainViewClassic: View {
     @Binding var isAppSettingsViewShowing: Bool
     @Binding var isModalStepTwoEnabled: Bool
     
-    @State private var drawingHeight = true
     @State private var selectedOption: Option?
     @State private var activeModal: ActiveModal?
     

@@ -18,8 +18,7 @@ struct LaunchScreenView: View {
              MainViewTeenageEng(
                  isChangelogViewShowing: $isChangelogViewShowing, 
                  isAppSettingsViewShowing: $isAppSettingsViewShowing,
-                 isModalStepTwoEnabled: $isModalStepTwoEnabled, 
-                 modalStepTwoEnabled: $isModalStepTwoEnabled
+                 isModalStepTwoEnabled: $isModalStepTwoEnabled
              )
              .zIndex(0)
                 RiveViewModel(fileName: "res_unboxing").view()

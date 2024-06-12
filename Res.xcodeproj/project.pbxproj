@@ -38,7 +38,6 @@
 		F31C74A92C16B2FA009023D6 /* ChangelogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C74A82C16B2FA009023D6 /* ChangelogView.swift */; };
 		F31C74ED2C17483D009023D6 /* CustomizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C74EC2C17483D009023D6 /* CustomizationView.swift */; };
 		F31C74F72C1A3A47009023D6 /* res_unboxing.riv in Resources */ = {isa = PBXBuildFile; fileRef = F31C74F62C1A3A47009023D6 /* res_unboxing.riv */; };
-		F3B27D662C12399E00AFCDAD /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = F3B27D652C12399E00AFCDAD /* RiveRuntime */; };
 		F3B4EC5E2C1238F0000B80EF /* OnboardingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4EC5D2C1238F0000B80EF /* OnboardingAnimation.swift */; };
 		F3B5AB182BACDB8A009CDBB5 /* HalfModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */; };
 		F3B5AB1A2BACE488009CDBB5 /* XMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */; };
@@ -66,6 +65,7 @@
 		FA9576502BEA4C3100EC2FA4 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		FA9576522BEA4CDD00EC2FA4 /* SentryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9576512BEA4CDD00EC2FA4 /* SentryManager.swift */; };
 		FA9576972BEC099700EC2FA4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9576962BEC099700EC2FA4 /* XCTest.framework */; platformFilter = ios; };
+		FAB04A3F2C1A468D0081AF59 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = FAB04A3E2C1A468D0081AF59 /* RiveRuntime */; };
 		FACDDA392C17C3CE006395BE /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = FACDDA382C17C3CE006395BE /* Vapi */; };
 		FACDDA3C2C18BFAF006395BE /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = FACDDA3B2C18BFAF006395BE /* Vapi */; };
 /* End PBXBuildFile section */
@@ -175,11 +175,11 @@
 			files = (
 				FACDDA392C17C3CE006395BE /* Vapi in Frameworks */,
 				FA5550A32BEDD4AF00C7648B /* Sentry in Frameworks */,
+				FAB04A3F2C1A468D0081AF59 /* RiveRuntime in Frameworks */,
 				FA14AAD42BE850A0001C7486 /* Supabase in Frameworks */,
 				18F723892BAC2695003F44FA /* ActivityKit.framework in Frameworks */,
 				FACDDA3C2C18BFAF006395BE /* Vapi in Frameworks */,
 				FA14AAD22BE850A0001C7486 /* Functions in Frameworks */,
-				F3B27D662C12399E00AFCDAD /* RiveRuntime in Frameworks */,
 				FA14AAD02BE850A0001C7486 /* Auth in Frameworks */,
 				FA5550A22BEDD4AF00C7648B /* (null) in Frameworks */,
 			);
@@ -414,7 +414,7 @@
 				FA14AAD12BE850A0001C7486 /* Functions */,
 				FA14AAD32BE850A0001C7486 /* Supabase */,
 				00571768FCC847B5B370CACD /* Sentry */,
-				F3B27D652C12399E00AFCDAD /* RiveRuntime */,
+				FAB04A3E2C1A468D0081AF59 /* RiveRuntime */,
 			);
 			productName = Her;
 			productReference = 18D289DF2B9713FE008742FB /* Res.app */;
@@ -516,8 +516,8 @@
 				18F07E032BD1C1A300E5B28D /* XCRemoteSwiftPackageReference "SnapKit" */,
 				FA14AACE2BE850A0001C7486 /* XCRemoteSwiftPackageReference "supabase-swift" */,
 				BD1914C8DBDC4BCDB400579F /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
-				F3B4EC5C2C1238C4000B80EF /* XCRemoteSwiftPackageReference "rive-ios" */,
 				F31C74F52C1A2C40009023D6 /* XCRemoteSwiftPackageReference "ios" */,
+				FAB04A3D2C1A468D0081AF59 /* XCRemoteSwiftPackageReference "rive-ios" */,
 			);
 			productRefGroup = 18D289E02B9713FE008742FB /* Products */;
 			projectDirPath = "";
@@ -1101,20 +1101,20 @@
 				kind = branch;
 			};
 		};
-		F3B4EC5C2C1238C4000B80EF /* XCRemoteSwiftPackageReference "rive-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/rive-app/rive-ios";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.13.0;
-			};
-		};
 		FA14AACE2BE850A0001C7486 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/supabase/supabase-swift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.5.1;
+			};
+		};
+		FAB04A3D2C1A468D0081AF59 /* XCRemoteSwiftPackageReference "rive-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rive-app/rive-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.13.2;
 			};
 		};
 		FACDDA3A2C18BFAF006395BE /* XCRemoteSwiftPackageReference "ios" */ = {
@@ -1133,11 +1133,6 @@
 			package = BD1914C8DBDC4BCDB400579F /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
 			productName = Sentry;
 		};
-		F3B27D652C12399E00AFCDAD /* RiveRuntime */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F3B4EC5C2C1238C4000B80EF /* XCRemoteSwiftPackageReference "rive-ios" */;
-			productName = RiveRuntime;
-		};
 		FA14AACF2BE850A0001C7486 /* Auth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FA14AACE2BE850A0001C7486 /* XCRemoteSwiftPackageReference "supabase-swift" */;
@@ -1152,6 +1147,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA14AACE2BE850A0001C7486 /* XCRemoteSwiftPackageReference "supabase-swift" */;
 			productName = Supabase;
+		};
+		FAB04A3E2C1A468D0081AF59 /* RiveRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FAB04A3D2C1A468D0081AF59 /* XCRemoteSwiftPackageReference "rive-ios" */;
+			productName = RiveRuntime;
 		};
 		FACDDA382C17C3CE006395BE /* Vapi */ = {
 			isa = XCSwiftPackageProductDependency;

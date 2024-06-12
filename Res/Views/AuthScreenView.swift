@@ -15,8 +15,7 @@ struct AuthView: View {
             MainViewTeenageEng(
                 isChangelogViewShowing: $isChangelogViewShowing,
                 isAppSettingsViewShowing: $isAppSettingsViewShowing,
-                isModalStepTwoEnabled: $isModalStepTwoEnabled,
-                modalStepTwoEnabled: $isModalStepTwoEnabled
+                isModalStepTwoEnabled: $isModalStepTwoEnabled
             )
             .zIndex(0)
 

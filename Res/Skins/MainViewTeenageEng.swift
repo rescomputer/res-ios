@@ -22,12 +22,9 @@ struct MainViewTeenageEng: View {
     @Binding var isAppSettingsViewShowing: Bool
     @Binding var isModalStepTwoEnabled: Bool
     
-    @State private var drawingHeight = true
     @State private var selectedOption: Option?
     @State private var activeModal: ActiveModal?
-    
-    @Binding var modalStepTwoEnabled: Bool
-    
+
     // Audio Level
     @State private var localAudioLevel: Float = 0
     @State private var remoteAudioLevel: Float = 0
@@ -329,7 +326,7 @@ struct MainViewTeenageEng: View {
             isPresented: $isAppSettingsViewShowing,
             activeModal: $activeModal,
             selectedOption: $selectedOption,
-            isModalStepTwoEnabled: $modalStepTwoEnabled,
+            isModalStepTwoEnabled: $isModalStepTwoEnabled,
             callManager: callManager,
             keyboardResponder: keyboardResponder
         )
@@ -443,7 +440,7 @@ extension MainViewTeenageEng {
             VoiceSettingsTeView(
                 activeModal: $activeModal,
                 selectedOption: $selectedOption,
-                isModalStepTwoEnabled: $modalStepTwoEnabled,
+                isModalStepTwoEnabled: $isModalStepTwoEnabled,
                 callManager: callManager,
                 keyboardResponder: keyboardResponder)
         }
@@ -454,8 +451,7 @@ extension MainViewTeenageEng {
     MainViewTeenageEng(
         isChangelogViewShowing: .constant(false),
         isAppSettingsViewShowing: .constant(false), 
-        isModalStepTwoEnabled: .constant(false),
-        modalStepTwoEnabled: .constant(false)
+        isModalStepTwoEnabled: .constant(false)
     )
 }
 
@@ -463,7 +459,6 @@ extension MainViewTeenageEng {
     MainViewTeenageEng(
         isChangelogViewShowing: .constant(false),
         isAppSettingsViewShowing: .constant(true), 
-        isModalStepTwoEnabled: .constant(false),
-        modalStepTwoEnabled: .constant(false)
+        isModalStepTwoEnabled: .constant(false)
     )
 }
