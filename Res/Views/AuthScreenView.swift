@@ -35,9 +35,10 @@ struct AuthView: View {
                             .padding(.top, 30)
 
                     } else {
-                        appleSignInButton
+                        // appleSignInButton
+                        //     .padding(.top, 30)
+                        SignInWithDevEmail
                             .padding(.top, 30)
-
                     }
                 }
                 .padding(.horizontal, 30)

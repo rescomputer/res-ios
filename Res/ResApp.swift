@@ -37,7 +37,7 @@ struct ResApp: App {
                             }
                         }
                     }
-            } else if resAppModel.isAuthenticated || !isDebugMode {
+            } else if resAppModel.isAuthenticated || isDebugMode {
                 MainViewTeenageEng(
                     isChangelogViewShowing: $isChangelogViewShowing,
                     isAppSettingsViewShowing: $isAppSettingsViewShowing,
