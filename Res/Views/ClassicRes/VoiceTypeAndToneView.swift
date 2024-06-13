@@ -13,7 +13,7 @@ struct VoiceTypeAndToneView: View {
     @ObservedObject var callManager: CallManager
     @ObservedObject var keyboardResponder: KeyboardResponder
     @State private var currentStep: Int = 1
-    
+
     var showSaveButton: Bool
     var saveSettingsAction: () -> Void
     var backgroundContext: BackgroundContext

@@ -11,6 +11,7 @@ import UIKit
 import AVFoundation
 
 struct AppSettingsTeView: View {
+    @EnvironmentObject var callManager: CallManager
     @Binding var isPresented: Bool
 
     @State private var isPrivacyModeEnabled = false
@@ -23,7 +24,7 @@ struct AppSettingsTeView: View {
     @Binding var selectedOption: Option?
     @Binding var isModalStepTwoEnabled: Bool
 
-    @ObservedObject var callManager: CallManager
+    //@ObservedObject var callManager: CallManager
     @ObservedObject var keyboardResponder: KeyboardResponder
 
     let isDebugMode = Config.buildConfiguration == .debug
@@ -276,8 +277,8 @@ extension AppSettingsTeView {
                     VStack{
                         CustomToggle(
                             title: "Privacy Mode",
-                            systemImageName: isPrivacyModeEnabled ? "eye.slash.fill" : "eye.fill",
-                            isOn: $isPrivacyModeEnabled,
+                            systemImageName: callManager.hipaaEnabled ? "eye.slash.fill" : "eye.fill",
+                            isOn: $callManager.hipaaEnabled,
                             infoAction: {
                                 self.infoModal = .privacyResModal
                             }
@@ -812,7 +813,7 @@ extension AppSettingsTeView {
         activeModal: .constant(nil), // Set to nil if there's no appropriate case
         selectedOption: .constant(nil),
         isModalStepTwoEnabled: .constant(false),
-        callManager: CallManager(),
+        //callManager: CallManager(),
         keyboardResponder: KeyboardResponder()
     )
 }
