@@ -364,11 +364,11 @@ struct MainViewTeenageEng: View {
                 Text("1.0.12")
                     .font(.system(size: 14, design: .monospaced))
                     .fontWeight(.bold)
-                    .foregroundColor(.black.opacity(0.3))    
+                    .foregroundColor(.black.opacity(0.5))
+                    .frame(minWidth: 50, minHeight: 25)
             }
         }
-        .padding(.horizontal, 20)
-        
+        .padding(.horizontal, 10)
     }
     
     // Shadows, borders, etc
@@ -453,6 +453,7 @@ extension MainViewTeenageEng {
         isAppSettingsViewShowing: .constant(false), 
         isModalStepTwoEnabled: .constant(false)
     )
+    .environmentObject(CallManager())
 }
 
 #Preview("App Settings") {
@@ -461,4 +462,5 @@ extension MainViewTeenageEng {
         isAppSettingsViewShowing: .constant(true), 
         isModalStepTwoEnabled: .constant(false)
     )
+    .environmentObject(CallManager())
 }

@@ -20,7 +20,7 @@ struct ChangelogView: View {
     var dismissAction: () -> Void
 
     let steps: [ChangelogStep] = [
-        ChangelogStep(version: "1.0.12", description: "RES gets a make over for WWDC24. New Testflight is here!", bulletPoints: ["New brand, new skin", "sign in with apple", "privacy mode", "Multiple App Icons", "performance improvements"], imageName: "", isLastStep: true),
+        ChangelogStep(version: "1.0.12", description: "RES gets a make over for WWDC24. New Testflight is here!", bulletPoints: ["privacy mode enabled by HIPAA compliance", "Added visualizer for voice activity", "GPT 4o base model", "Performance improvements ;)" ], imageName: "", isLastStep: true),
     ]
 
     var body: some View {
@@ -96,7 +96,9 @@ struct ChangelogView: View {
                                     .fixedSize(horizontal: false, vertical: true)
                                     .foregroundColor(Color.white.opacity(0.5))
                                  Button(action: {
-                                    // link to github repo
+                                    if let url = URL(string: "https://github.com/rescomputer/res-ios") {
+                                        UIApplication.shared.open(url)
+                                    }
                                     let impactMed = UIImpactFeedbackGenerator(style: .soft)
                                     impactMed.impactOccurred()
                                 }) {
