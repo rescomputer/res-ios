@@ -70,7 +70,7 @@ struct AuthView: View {
     
 
     private var SignInWithDevEmail: some View {
-        Button("Sign In with dev email") {
+        Button("Start Talking") {
             Task {
                 do {
                     let user = try await SupabaseManager.shared.signInWithDevEmail()
