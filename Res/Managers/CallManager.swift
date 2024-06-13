@@ -202,7 +202,7 @@ import AVFoundation
         let assistant = [
             "model": [
                 "provider": "openai",
-                "model": "gpt-4-0613",
+                "model": "gpt-4o",
                 "fallbackModels" : [
                     "gpt-4-0125-preview",
                     "gpt-4-1106-preview"
