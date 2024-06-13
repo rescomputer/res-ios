@@ -327,7 +327,7 @@ struct MainViewTeenageEng: View {
             activeModal: $activeModal,
             selectedOption: $selectedOption,
             isModalStepTwoEnabled: $isModalStepTwoEnabled,
-            callManager: callManager,
+            //callManager: callManager,
             keyboardResponder: keyboardResponder
         )
         .frame(maxWidth: .infinity, maxHeight: .infinity)

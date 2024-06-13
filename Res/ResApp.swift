@@ -12,6 +12,8 @@ import Supabase
 @main
 struct ResApp: App {
     @StateObject private var resAppModel = ResAppModel()
+    @StateObject private var callManager = CallManager()
+
     @State private var isChangelogViewShowing = false
     @State private var isAppSettingsViewShowing = false
     @State private var isModalStepTwoEnabled = false
@@ -53,6 +55,7 @@ struct ResApp: App {
             }
         }
         .environmentObject(resAppModel)
+        .environmentObject(callManager)
     }
 }
 

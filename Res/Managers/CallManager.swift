@@ -15,7 +15,19 @@ import AVFoundation
     var audioPlayer: AVAudioPlayer?
     
     @Published var currentTranscript: String = ""
-    
+    @Published var hipaaEnabled: Bool {
+        didSet {
+            UserDefaults.standard.set(hipaaEnabled, forKey: "hipaaEnabled")
+            let savedValue = UserDefaults.standard.bool(forKey: "hipaaEnabled")
+            print("Saved hipaaEnabled to UserDefaults: \(savedValue)")
+        }
+    }
+
+    init() {
+        self.hipaaEnabled = UserDefaults.standard.bool(forKey: "hipaaEnabled")
+        print("hipaaEnabled initialized to: \(hipaaEnabled)")
+    }
+
     enum CallState: String {
         case started, loading, ended
     }
@@ -145,11 +157,6 @@ import AVFoundation
         UserDefaults.standard.set(enteredText, forKey: "enteredText")
     }
     
-    func playVoicePreview() {
-        // Implementation depends on the capabilities of Vapi or another audio library.
-        // This method should generate and play a short audio clip using the selected voice and speed settings.
-    }
-    
     func handleCallAction() async {
         if callState == .ended {
             await initializeVapiAndStartCall()
@@ -195,7 +202,7 @@ import AVFoundation
         let assistant = [
             "model": [
                 "provider": "openai",
-                "model": "gpt-4-0613",
+                "model": "gpt-4o",
                 "fallbackModels" : [
                     "gpt-4-0125-preview",
                     "gpt-4-1106-preview"
@@ -206,6 +213,7 @@ import AVFoundation
                 ],
                 "maxTokens": 1000, //Maximum
             ],
+            "hipaaEnabled": UserDefaults.standard.bool(forKey: "hipaaEnabled"),
             "silenceTimeoutSeconds": 120,
             "maxDurationSeconds": 1800, //Maximum
             "numWordsToInterruptAssistant": 1,
