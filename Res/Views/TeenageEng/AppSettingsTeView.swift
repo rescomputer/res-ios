@@ -12,15 +12,20 @@ import AVFoundation
 
 struct AppSettingsTeView: View {
     @Binding var isPresented: Bool
+
+    @State private var isPrivacyModeEnabled = false
     @State private var isMicrophoneEnabled = false
     @State private var showingSettingsAlert = false
     @State private var infoModal: InfoModal?
     @State private var selectedSetting: SettingType?
+
     @Binding var activeModal: MainViewTeenageEng.ActiveModal?
     @Binding var selectedOption: Option?
     @Binding var isModalStepTwoEnabled: Bool
+
     @ObservedObject var callManager: CallManager
     @ObservedObject var keyboardResponder: KeyboardResponder
+
     let isDebugMode = Config.buildConfiguration == .debug
     
     var body: some View {
@@ -69,7 +74,7 @@ struct AppSettingsTeView: View {
                         impactMed.impactOccurred()
                     }) {
                         HStack {
-                            Image(systemName: "info.circle.fill")
+                            Image(systemName: "info.circle")
                                 .font(.system(size: 20))
                                 .bold()
                                 .foregroundColor(.white.opacity(0.3))
@@ -82,7 +87,11 @@ struct AppSettingsTeView: View {
 
                     micPermissions()
 
+                    privacySettings()
+
                     voiceTypeAndToneSettings()
+
+                   // appCustomization()
 
                     widgetSettings()
 
@@ -126,6 +135,8 @@ struct AppSettingsTeView: View {
                     showAboutResModal()
                 case .recordingResModal:
                     showRecordingResModal()
+                case .privacyResModal:
+                    showPrivacyResModal()
                 }
             }
             if let selectedSetting = selectedSetting {
@@ -158,42 +169,30 @@ struct AppSettingsTeView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .edgesIgnoringSafeArea(.all)
                     .transition(.opacity)
-                }
+                case .appCustomization:
+                    CustomizationView(dismissAction: {
+                        self.selectedSetting = nil
+                    })
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .edgesIgnoringSafeArea(.all)
+                    .transition(.opacity)
+                }   
             }
         }
     }
 }
 
 extension AppSettingsTeView {
-    private func signOutButton() -> some View {
-        Button("sign out") {
-            Task {
-                do {
-                    try await SupabaseManager.shared.signOut()
-                    isPresented = false
-                    print("Signed out")
-                } catch {
-                    print("Signout failed: \(error.localizedDescription)")
-                }
-            }
-        }
-        .frame(maxWidth: .infinity)
-        .frame(height: 44)
-        .background(Color.gray.opacity(0.3))
-        .foregroundColor(.white)
-        .cornerRadius(10)
-        .font(.system(size: 17, weight: .semibold))
-        .padding()
-    }
 
      enum SettingType: Identifiable {
-         case homeScreen, lockScreen, voiceTypeAndTone
+         case homeScreen, lockScreen, voiceTypeAndTone, appCustomization
 
          var id: Int {
              switch self {
              case .homeScreen: return 0
              case .lockScreen: return 1
              case .voiceTypeAndTone: return 2
+             case .appCustomization: return 3
              }
          }
      }
@@ -201,30 +200,55 @@ extension AppSettingsTeView {
     enum InfoModal {
         case aboutResModal
         case recordingResModal
+        case privacyResModal
     }
 
     enum ModalHeightMultiplier {
         case aboutResModal
         case recordingResModal
+        case privacyResModal
 
         var value: CGFloat {
             switch self {
             case .aboutResModal: return -0.02
             case .recordingResModal: return -0.02
+            case .privacyResModal: return -0.02
             }
         }
     }
 
-     private func voiceTypeAndToneSettings() -> some View {
+    private func signOutButton() -> some View {
+        Button("Sign Out") {
+            Task {
+                do {
+                    try await SupabaseManager.shared.signOut()
+                    isPresented = false
+                    print("Signed Out")
+                } catch {
+                    print("Signout failed: \(error.localizedDescription)")
+                }
+            }
+        }
+        .pressAnimation()
+        .frame(maxWidth: .infinity)
+        .frame(height: 54)
+        .background(Color.red.opacity(0.4))
+        .foregroundColor(.white)
+        .cornerRadius(15)
+        .font(.system(size: 17, weight: .semibold))
+        .padding(.bottom, 20)
+    }
+
+    private func voiceTypeAndToneSettings() -> some View {
         VStack {
                 HStack {
                     Text("Voice")
                         .bold()
-                        .font(.system(size: 16))
+                        .font(.system(size: 12))
                         .foregroundColor(Color.white.opacity(0.7))
                     Spacer()
                 }
-                CustomLinkView(iconName: "face.dashed.fill", title: "Type & Speed", action: {}, navigateTo: {
+                CustomLinkView(iconName: "person.wave.2.fill", title: "Accents, Gender, Speed", action: {}, navigateTo: {
                     self.selectedSetting = .voiceTypeAndTone
                 }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
         }
@@ -232,12 +256,49 @@ extension AppSettingsTeView {
 
     }
 
+        private func appCustomization() -> some View {
+        VStack {
+                HStack {
+                    Text("Customization")
+                        .bold()
+                        .font(.system(size: 12))
+                        .foregroundColor(Color.white.opacity(0.7))
+                    Spacer()
+                }
+                CustomLinkView(iconName: "theatermask.and.paintbrush.fill", title: "Skins, Icons, and More", action: {}, navigateTo: {
+                    self.selectedSetting = .appCustomization
+                }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
+        }
+        .padding(.bottom, 20)
+
+    }
+
+    private func privacySettings() -> some View {
+                    VStack{
+                        CustomToggle(
+                            title: "Privacy Mode",
+                            systemImageName: isPrivacyModeEnabled ? "eye.slash.fill" : "eye.fill",
+                            isOn: $isPrivacyModeEnabled,
+                            infoAction: {
+                                self.infoModal = .privacyResModal
+                            }
+                            )
+                            .contentTransition(.symbolEffect(.replace.offUp.byLayer))
+                            // .onChange(of: isMicrophoneEnabled) { oldValue ,newValue in
+                            //     handleMicrophonePermission(isEnabled: newValue)
+                            // }
+
+                    }
+                    .padding(.bottom, 20)
+
+    }
+
     private func widgetSettings() -> some View {
         VStack {
                 HStack {
-                    Text("Widgets")
+                    Text("Tutorials")
                         .bold()
-                        .font(.system(size: 16))
+                        .font(.system(size: 12))
                         .foregroundColor(Color.white.opacity(0.7))
                     Spacer()
                 }
@@ -257,38 +318,23 @@ extension AppSettingsTeView {
                         HStack {
                             Text("Permissions")
                                 .bold()
-                                .font(.system(size: 16))
+                                .font(.system(size: 12))
                                 .foregroundColor(Color.white.opacity(0.7))
                             Spacer()
                         }
                         CustomToggle(
                             title: "Microphone",
                             systemImageName: isMicrophoneEnabled ? "mic.fill" : "mic.slash.fill",
-                            isOn: $isMicrophoneEnabled
+                            isOn: $isMicrophoneEnabled,
+                            infoAction: {
+                                self.infoModal = .recordingResModal
+                            }
                             )
                             .contentTransition(.symbolEffect(.replace.offUp.byLayer))
                             .onChange(of: isMicrophoneEnabled) { oldValue ,newValue in
                                 handleMicrophonePermission(isEnabled: newValue)
                             }
-                        Button(action: {
-                            self.infoModal = .recordingResModal
-                            let impactMed = UIImpactFeedbackGenerator(style: .soft)
-                            impactMed.impactOccurred()
-                        }) {
-                            HStack {
-                                Text("How does audio recording work?")
-                                    .font(.system(size: 14))
-                                    .foregroundColor(Color.white.opacity(0.3))
-                                Image(systemName: "info.circle")
-                                    .font(.system(size: 14))
-                                    .foregroundColor(.white.opacity(0.3))
-                            }
-                            .padding(.vertical, 10)
-
-                        }
-                        .pressAnimation()
                     }
-                    .padding(.bottom, 20)
     }
 
     private func showRecordingResModal() -> some View {
@@ -321,7 +367,7 @@ extension AppSettingsTeView {
 
                         
                             VStack(alignment: .leading) {
-                                Text("Audio Permissions & Privacy")
+                                Text("Audio Permissions")
                                     .font(.system(size: 20, design: .rounded))
                                     .bold()
                                     .foregroundColor(Color.black.opacity(1))
@@ -472,23 +518,6 @@ extension AppSettingsTeView {
                     .frame(maxHeight: 300)
                     .padding(.horizontal, 20)
                     // .applyScrollViewEdgeFadeLight()
-
-                // Got it Button
-                    // Button {
-                    //     self.infoModal = nil
-                    // } label: {
-                    //     Text("Got it!")
-                    //         .font(.system(.title2, design: .rounded))
-                    //         .fontWeight(.bold)
-                    //         .foregroundColor(.white)
-                    //         .padding()
-                    //         .frame(maxWidth: .infinity)
-                    //         .background(Color(red: 0.106, green: 0.149, blue: 0.149))
-                    //         .cornerRadius(50)
-                    // }
-                    // .padding(.horizontal)
-                    // .pressAnimation()
-                    // .buttonStyle(PlainButtonStyle())
                     
                     // Got it Button
                     VStack{
@@ -496,7 +525,6 @@ extension AppSettingsTeView {
                                 RoundedRectangle(cornerRadius: 50)
                                     .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
                                     .frame(height: 60)
-                                    .animation(nil)
                                 Text("Got it!")
                                     .font(.system(.title2, design: .rounded))
                                     .fontWeight(.bold)
@@ -540,7 +568,7 @@ extension AppSettingsTeView {
                     HStack {
                         ZStack {
                             HStack {
-                                Image(systemName: "info.circle.fill")
+                                Image(systemName: "party.popper.fill")
                                     .resizable()
                                     .foregroundColor(.black.opacity(0.05))
                                     .frame(width: 85, height: 85)
@@ -603,24 +631,6 @@ extension AppSettingsTeView {
                          }
                          .frame(height: 150)
                          .padding(.horizontal, 20)
-
-                    
-                    // Got it Button
-                    // Button {
-                    //     self.infoModal = nil
-                    // } label: {
-                    //     Text("Got it!")
-                    //         .font(.system(.title2, design: .rounded))
-                    //         .fontWeight(.bold)
-                    //         .foregroundColor(.white)
-                    //         .padding()
-                    //         .frame(maxWidth: .infinity)
-                    //         .background(Color(red: 0.106, green: 0.149, blue: 0.149))
-                    //         .cornerRadius(50)
-                    // }
-                    // .padding(.horizontal)
-                    // .pressAnimation()
-                    // .buttonStyle(PlainButtonStyle())
                     
                     // Got it Button
                     VStack{
@@ -628,7 +638,121 @@ extension AppSettingsTeView {
                                 RoundedRectangle(cornerRadius: 50)
                                     .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
                                     .frame(height: 60)
-                                    .animation(nil)
+                                Text("Got it!")
+                                    .font(.system(.title2, design: .rounded))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            }
+                            .onTapGesture {
+                                self.infoModal = nil
+                            }
+                            .padding(.top, 5)
+                            .pressAnimation()
+                            .opacity(1)
+                    }
+                    .padding(.horizontal, 20)
+
+                    
+            }
+            .padding(.vertical)
+            .background(
+                    RoundedRectangle(cornerRadius: 40)
+                        .fill(Color.white)
+            )
+        }
+    }
+
+    private func showPrivacyResModal() -> some View {
+
+        HalfModalView(isShown: Binding<Bool>(
+            get: { self.infoModal == .privacyResModal },
+            set: { newValue in
+                if !newValue {
+                    self.infoModal = nil
+                }
+            }
+        ), onDismiss: {
+            withAnimation(.easeInOut(duration: 0.15)) {
+                self.infoModal = nil
+            }
+        }, modalHeightMultiplier: AppSettingsView.ModalHeightMultiplier.aboutResModal.value
+        ) {
+            VStack{
+                ZStack {
+                    HStack {
+                        ZStack {
+                            HStack {
+                                Image(systemName: "eye.slash.fill")
+                                    .resizable()
+                                    .foregroundColor(.black.opacity(0.05))
+                                    .frame(width: 85, height: 85)
+                                Spacer()
+                            }
+                            .offset(x: 10, y: -15)
+
+                        
+                            VStack(alignment: .leading) {
+                                Text("Your Privacy is Paramount")
+                                    .font(.system(size: 20, design: .rounded))
+                                    .bold()
+                                    .foregroundColor(Color.black.opacity(1))
+                                    .padding(.bottom, 2)
+                                Text("Learn more about how Res handles privacy with HIPPA")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(Color.black.opacity(0.5))
+
+                            }
+                            .padding(.horizontal, 20)
+                            .offset(x: UIScreen.isLargeDevice ? -20 : 0)
+
+                        }
+                    }
+                    .overlay(
+                        Rectangle()
+                            .frame(height: 1)
+                            .foregroundColor(Color.black.opacity(0.1)),
+                        alignment: .bottom
+                    )
+                }
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .fill(Color.black.opacity(0.05))
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 130),
+                        alignment: .bottom
+                    )
+                .overlay(
+                    XMarkButton {
+                        withAnimation(.easeOut(duration: 0.15)) {
+                            self.infoModal = nil
+                        }
+                    }
+                    .offset(x: -20, y: 0),
+                    alignment: .topTrailing
+                    )
+                
+                        VStack(alignment:.leading, spacing: 10) {
+                             Text("""
+                                Res is HIPPA enabled out of the box. Meaning that all conversations are able to be protected with HIPPA compliance. No recordings, no data is stored, and no data is shared.
+                                """)
+                            .font(.footnote)
+                            .bold()
+                            .foregroundColor(.black.opacity(0.6))
+
+                            Text("The goal is to create a application where users can engage in meaningful conversations with the latest AI models with out the need to worry about whether their data or conversations are being stored or how they would be used. ")
+                            .font(.footnote)
+                            .foregroundColor(.black.opacity(0.6))
+                         }
+                         .frame(height: 150)
+                         .padding(.horizontal, 20)
+
+                    
+                    // Got it Button
+                    VStack{
+                        ZStack {
+                                RoundedRectangle(cornerRadius: 50)
+                                    .foregroundColor(Color(red: 0.106, green: 0.149, blue: 0.149))
+                                    .frame(height: 60)
                                 Text("Got it!")
                                     .font(.system(.title2, design: .rounded))
                                     .fontWeight(.bold)

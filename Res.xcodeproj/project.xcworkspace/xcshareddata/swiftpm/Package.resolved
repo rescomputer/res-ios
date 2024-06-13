@@ -1,5 +1,5 @@
 {
-  "originHash" : "db9d30212719c1fd654e323ba314ac74f7d7862124ee02e21a8a4e2e3868e173",
+  "originHash" : "978bf60a157d93d9843420e2b45a9376c9745fe69e5617ed0468faabc36b9ff9",
   "pins" : [
     {
       "identity" : "daily-client-ios",
@@ -20,12 +20,12 @@
       }
     },
     {
-      "identity" : "keychainaccess",
+      "identity" : "rive-ios",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/kishikawakatsumi/KeychainAccess",
+      "location" : "https://github.com/rive-app/rive-ios",
       "state" : {
-        "revision" : "84e546727d66f1adc5439debad16270d0fdd04e7",
-        "version" : "4.2.2"
+        "revision" : "800afbdfdbc1900ac8b0430eb48fa5eda0bedc58",
+        "version" : "5.13.2"
       }
     },
     {

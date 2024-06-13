@@ -12,8 +12,11 @@ import Supabase
 @main
 struct ResApp: App {
     @StateObject private var resAppModel = ResAppModel()
+    @State private var isChangelogViewShowing = false
     @State private var isAppSettingsViewShowing = false
     @State private var isModalStepTwoEnabled = false
+    @State private var hasCompletedOnboarding = false 
+    @State private var isLaunchScreenPresented = true
     let isDebugMode = Config.buildConfiguration == .debug
 
     init() {
@@ -23,16 +26,38 @@ struct ResApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if resAppModel.isAuthenticated || !isDebugMode {
-                MainViewTeenageEng(isAppSettingsViewShowing: $isAppSettingsViewShowing, modalStepTwoEnabled: $isModalStepTwoEnabled)
+            if isLaunchScreenPresented && !resAppModel.isAuthenticated {
+                LaunchScreenView(isChangelogViewShowing: .constant(false), isAppSettingsViewShowing: .constant(false), isModalStepTwoEnabled: .constant(false))
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                            withAnimation {
+                                isLaunchScreenPresented = false
+                            }
+                        }
+                    }
+            } else if resAppModel.isAuthenticated || !isDebugMode {
+                MainViewTeenageEng(
+                    isChangelogViewShowing: $isChangelogViewShowing,
+                    isAppSettingsViewShowing: $isAppSettingsViewShowing,
+                    isModalStepTwoEnabled: $isModalStepTwoEnabled
+                )
+                //.statusBarHidden(true)
+                .persistentSystemOverlays(.hidden)
             } else {
-                AuthView(isDebugMode: isDebugMode)
+                AuthView(
+                    isChangelogViewShowing: $isChangelogViewShowing,
+                    isAppSettingsViewShowing: $isAppSettingsViewShowing,
+                    isModalStepTwoEnabled: $isModalStepTwoEnabled,
+                    isDebugMode: isDebugMode
+                )
             }
         }
+        .environmentObject(resAppModel)
     }
 }
 
 class ResAppModel: ObservableObject {
+    @AppStorage("active_icon") var activeAppIcon: String = "AppIcon"
     @Published var isAuthenticated = false
     private var authStateChangesTask: Task<Void, Never>? = nil
 

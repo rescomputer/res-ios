@@ -18,13 +18,13 @@ struct MainViewTeenageEng: View {
     @StateObject private var callManager = CallManager()
     @StateObject private var keyboardResponder = KeyboardResponder()
     
-    // Modals
+    @Binding var isChangelogViewShowing: Bool
+    @Binding var isAppSettingsViewShowing: Bool
+    @Binding var isModalStepTwoEnabled: Bool
+    
     @State private var selectedOption: Option?
     @State private var activeModal: ActiveModal?
-    
-    @Binding var isAppSettingsViewShowing: Bool
-    @Binding var modalStepTwoEnabled: Bool
-    
+
     // Audio Level
     @State private var localAudioLevel: Float = 0
     @State private var remoteAudioLevel: Float = 0
@@ -56,6 +56,7 @@ struct MainViewTeenageEng: View {
         
         .overlay { voiceSetupSheet }
         .overlay { if isAppSettingsViewShowing { appSettingsSheet } }
+        .overlay { if isChangelogViewShowing { changelogSheet } }
         
         .onChange(of: callManager.vapi?.localAudioLevel) { oldValue, newValue in
             localAudioLevel = (newValue ?? 0)
@@ -325,10 +326,21 @@ struct MainViewTeenageEng: View {
             isPresented: $isAppSettingsViewShowing,
             activeModal: $activeModal,
             selectedOption: $selectedOption,
-            isModalStepTwoEnabled: $modalStepTwoEnabled,
+            isModalStepTwoEnabled: $isModalStepTwoEnabled,
             callManager: callManager,
             keyboardResponder: keyboardResponder
         )
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .edgesIgnoringSafeArea(.all)
+        .fadeInEffect()
+    }
+
+    private var changelogSheet: some View {
+        ChangelogView(dismissAction: {
+            withAnimation(.easeInOut(duration: 0.15)) {
+                isChangelogViewShowing = false
+            }
+        })
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.all)
         .fadeInEffect()
@@ -341,10 +353,19 @@ struct MainViewTeenageEng: View {
                 .scaledToFit()
                 .frame( height:12)
             Spacer()
-            Text("1.0.12")
-                .font(.system(size: 14, design: .monospaced))
-                .fontWeight(.bold)
-                .foregroundColor(.black.opacity(0.3))
+            Button(action: {
+                withAnimation(.easeInOut(duration: 0.15)) {
+                    isChangelogViewShowing = true
+                    print("isChangelogViewShowing set to true")
+                }
+                let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                impactMed.impactOccurred()
+            }) {
+                Text("1.0.12")
+                    .font(.system(size: 14, design: .monospaced))
+                    .fontWeight(.bold)
+                    .foregroundColor(.black.opacity(0.3))    
+            }
         }
         .padding(.horizontal, 20)
         
@@ -419,7 +440,7 @@ extension MainViewTeenageEng {
             VoiceSettingsTeView(
                 activeModal: $activeModal,
                 selectedOption: $selectedOption,
-                isModalStepTwoEnabled: $modalStepTwoEnabled,
+                isModalStepTwoEnabled: $isModalStepTwoEnabled,
                 callManager: callManager,
                 keyboardResponder: keyboardResponder)
         }
@@ -428,14 +449,16 @@ extension MainViewTeenageEng {
 
 #Preview("Main View") {
     MainViewTeenageEng(
-        isAppSettingsViewShowing: .constant(false),
-        modalStepTwoEnabled: .constant(false)
+        isChangelogViewShowing: .constant(false),
+        isAppSettingsViewShowing: .constant(false), 
+        isModalStepTwoEnabled: .constant(false)
     )
 }
 
 #Preview("App Settings") {
     MainViewTeenageEng(
-        isAppSettingsViewShowing: .constant(true),
-        modalStepTwoEnabled: .constant(false)
+        isChangelogViewShowing: .constant(false),
+        isAppSettingsViewShowing: .constant(true), 
+        isModalStepTwoEnabled: .constant(false)
     )
 }
