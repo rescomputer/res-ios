@@ -206,6 +206,7 @@ import AVFoundation
                 ],
                 "maxTokens": 1000, //Maximum
             ],
+            "hipaaEnabled": true,
             "silenceTimeoutSeconds": 120,
             "maxDurationSeconds": 1800, //Maximum
             "numWordsToInterruptAssistant": 1,

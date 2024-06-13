@@ -95,7 +95,6 @@ struct AppSettingsTeView: View {
 
                     widgetSettings()
 
-
                     }
                     Spacer()
                     Spacer()
