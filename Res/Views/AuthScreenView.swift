@@ -8,7 +8,8 @@ struct AuthView: View {
     
     var isDebugMode: Bool
     @State private var showAuthContent = false
-    @State private var isLoggedIn = false
+    @State private var isAuthenticating = false
+    @State private var errorMessage: String = ""
 
     var body: some View {
         ZStack {
@@ -29,29 +30,33 @@ struct AuthView: View {
 
                 VStack {
                     FeaturesText
-
                     if isDebugMode {
                         SignInWithDevEmail
-                            .padding(.top, 30)
+                            .padding(.top, 10)
+                            .padding(.horizontal)
 
                     } else {
                         // appleSignInButton
                         //     .padding(.top, 30)
                         SignInWithDevEmail
-                            .padding(.top, 30)
+                            .padding(.top, 10)
+                            .padding(.horizontal)
                     }
+                    ErrorMessageView(errorMessage: $errorMessage)
+                        .zIndex(3)
                 }
                 .padding(.horizontal, 30)
-                .onAppear {
-                    print("isDebugMode:", isDebugMode)
-                    print("Build Configuration:", Config.buildConfiguration)
-                }
                 .zIndex(2)
             }
             .slideDown()
             .zIndex(2)
         }
+        .onAppear {
+            print("isDebugMode:", isDebugMode)
+            print("Build Configuration:", Config.buildConfiguration)
+        }
     }
+
 
     private var FeaturesText: some View {
          VStack(alignment: .leading, spacing: 10) {
@@ -71,14 +76,25 @@ struct AuthView: View {
     
 
     private var SignInWithDevEmail: some View {
-        Button("Start Talking") {
+        Button(action: {
+            isAuthenticating = true
             Task {
                 do {
                     let user = try await SupabaseManager.shared.signInWithDevEmail()
                     print("Signed in as \(user.uid)")
+                    isAuthenticating = false
                 } catch {
                     print("Development sign-in failed: \(error.localizedDescription)")
+                    errorMessage = error.localizedDescription
+                    isAuthenticating = false
                 }
+            }
+        }) {
+            if isAuthenticating {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+            } else {
+                Text("Start Talking")
             }
         }
         .frame(height: 54)
@@ -90,41 +106,79 @@ struct AuthView: View {
                 .stroke(Color.black, lineWidth: 2)
         )
         .font(.system(size: 17, weight: .semibold))
-        .padding()
     }
 
     private var appleSignInButton: some View {
-        SignInWithAppleButton(
-            .signIn,
-            onRequest: { request in
-                request.requestedScopes = [.fullName, .email]
-            },
-            onCompletion: { result in
-                switch result {
-                case .success(let auth):
-                    Task {
-                        do {
-                            let user = try await SupabaseManager.shared.signInWithApple(authorization: auth)
-                            print("Signed in as \(user.uid)")
-                        } catch {
-                            print("Authentication failed: \(error.localizedDescription)")
-                        }
-                    }
-                case .failure(let error):
-                    print("Authentication error: \(error.localizedDescription)")
+        Button(action: {
+            isAuthenticating = true
+            Task {
+                do {
+                    // Call your sign-in method here
+                    // let user = try await SupabaseManager.shared.signInWithApple(authorization: auth)
+                    // Simulate a network call
+                    try await Task.sleep(nanoseconds: 2_000_000_000)
+                    print("Signed in with Apple")
+                    isAuthenticating = false
+                } catch {
+                    print("Authentication failed: \(error.localizedDescription)")
+                    errorMessage = error.localizedDescription
+                    isAuthenticating = false
                 }
             }
-        )
-        .frame(height: 54)
-        .frame(maxWidth: .infinity)
-        .background(Color.clear)
-        .foregroundColor(.black)
-        .overlay(
-            RoundedRectangle(cornerRadius: 15)
-                .stroke(Color.black, lineWidth: 2)
-        )
-        .font(.system(size: 17, weight: .semibold))
-        .padding()
+        }) {
+            if isAuthenticating {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+            } else {
+                SignInWithAppleButton(
+                    .signIn,
+                    onRequest: { request in
+                        request.requestedScopes = [.fullName, .email]
+                    },
+                    onCompletion: { result in
+                        switch result {
+                        case .success(let auth):
+                            Task {
+                                do {
+                                    let user = try await SupabaseManager.shared.signInWithApple(authorization: auth)
+                                    print("Signed in as \(user.uid)")
+                                    isAuthenticating = false
+                                } catch {
+                                    print("Authentication failed: \(error.localizedDescription)")
+                                    errorMessage = error.localizedDescription
+                                    isAuthenticating = false
+                                }
+                            }
+                        case .failure(let error):
+                            print("Authentication error: \(error.localizedDescription)")
+                            errorMessage = error.localizedDescription
+                            isAuthenticating = false
+                        }
+                    }
+                )
+                .frame(height: 54)
+                .frame(maxWidth: .infinity)
+                .background(Color.clear)
+                .foregroundColor(.black)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 15)
+                        .stroke(Color.black, lineWidth: 2)
+                )
+                .font(.system(size: 17, weight: .semibold))
+            }
+        }
+    }
+}
+
+struct ErrorMessageView: View {
+    @Binding var errorMessage: String
+
+    var body: some View {
+        if !errorMessage.isEmpty {
+            Text(errorMessage)
+                .foregroundColor(.red)
+                .padding(.horizontal)
+        }
     }
 }
 
