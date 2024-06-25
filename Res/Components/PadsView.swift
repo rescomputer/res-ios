@@ -15,11 +15,9 @@ struct PadsView: View {
                         let index = row * columns + column
                         if index < personas.count {
                             PadButton(selectedPersonaId: $selectedPersonaId, persona: personas[index])
-                                .aspectRatio(5/3, contentMode: .fit)
                             
                         } else {
                             BlankPad()  // Renders a blank pad if there are not enough personas
-                                .aspectRatio(5/3, contentMode: .fit)
                         }
                     }
                 }
@@ -32,7 +30,7 @@ struct PadsView: View {
 struct BlankPad: View {
     var body: some View {
         PadButton.defaultPadBackground
-            .aspectRatio(5/3, contentMode: .fit)  // Ensure the aspect ratio matches the persona pads
+            .aspectRatio(7/4, contentMode: .fit)  // Ensure the aspect ratio matches the persona pads
     }
 }
 
@@ -47,7 +45,7 @@ struct PadButton: View {
             textView
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-        .aspectRatio(5/3, contentMode: .fit)  // Enforces aspect ratio strictly
+        .aspectRatio(7/4, contentMode: .fit)  // Enforces aspect ratio strictly
         .contentShape(Rectangle()) // Makes the entire ZStack tappable
         .onTapGesture {
             self.selectedPersonaId = persona.id

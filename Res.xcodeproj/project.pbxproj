@@ -54,11 +54,14 @@
 		FA14AAD02BE850A0001C7486 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = FA14AACF2BE850A0001C7486 /* Auth */; };
 		FA14AAD22BE850A0001C7486 /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = FA14AAD12BE850A0001C7486 /* Functions */; };
 		FA14AAD42BE850A0001C7486 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = FA14AAD32BE850A0001C7486 /* Supabase */; };
+		FA1ECBE82C2A7C6400B79D7E /* CallManagerNewDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1ECBE72C2A7C6400B79D7E /* CallManagerNewDirection.swift */; };
 		FA5550A22BEDD4AF00C7648B /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		FA5550A32BEDD4AF00C7648B /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 00571768FCC847B5B370CACD /* Sentry */; };
 		FA5550A52BEDD4CF00C7648B /* AuthScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5550A42BEDD4CF00C7648B /* AuthScreenView.swift */; };
 		FA6140CE2C29422E00424953 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6140CD2C29422E00424953 /* Color+Extensions.swift */; };
-		FA6C0E1B2C27D58900D9F7A2 /* Pads.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C0E1A2C27D58900D9F7A2 /* Pads.swift */; };
+		FA6140D22C2948B200424953 /* MainViewNewDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6140D12C2948B200424953 /* MainViewNewDirection.swift */; };
+		FA6140D42C29490D00424953 /* CallScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6140D32C29490D00424953 /* CallScreen.swift */; };
+		FA6C0E1B2C27D58900D9F7A2 /* PadsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C0E1A2C27D58900D9F7A2 /* PadsView.swift */; };
 		FA6C0E1D2C28C8F800D9F7A2 /* PadsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C0E1C2C28C8F800D9F7A2 /* PadsScreen.swift */; };
 		FA6C0E202C28E79200D9F7A2 /* DefaultPersonas.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C0E1F2C28E79200D9F7A2 /* DefaultPersonas.swift */; };
 		FA6C0E252C2917BA00D9F7A2 /* digital-7.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA6C0E242C2917BA00D9F7A2 /* digital-7.ttf */; };
@@ -164,9 +167,12 @@
 		F3E72E512BF9632A001FB6E4 /* AppSettingsTeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsTeView.swift; sourceTree = "<group>"; };
 		FA14AACA2BE80E0B001C7486 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		FA14AACC2BE84F43001C7486 /* SupabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseManager.swift; sourceTree = "<group>"; };
+		FA1ECBE72C2A7C6400B79D7E /* CallManagerNewDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManagerNewDirection.swift; sourceTree = "<group>"; };
 		FA5550A42BEDD4CF00C7648B /* AuthScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthScreenView.swift; sourceTree = "<group>"; };
 		FA6140CD2C29422E00424953 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
-		FA6C0E1A2C27D58900D9F7A2 /* Pads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pads.swift; sourceTree = "<group>"; };
+		FA6140D12C2948B200424953 /* MainViewNewDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewNewDirection.swift; sourceTree = "<group>"; };
+		FA6140D32C29490D00424953 /* CallScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallScreen.swift; sourceTree = "<group>"; };
+		FA6C0E1A2C27D58900D9F7A2 /* PadsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadsView.swift; sourceTree = "<group>"; };
 		FA6C0E1C2C28C8F800D9F7A2 /* PadsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadsScreen.swift; sourceTree = "<group>"; };
 		FA6C0E1F2C28E79200D9F7A2 /* DefaultPersonas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPersonas.swift; sourceTree = "<group>"; };
 		FA6C0E242C2917BA00D9F7A2 /* digital-7.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "digital-7.ttf"; sourceTree = "<group>"; };
@@ -305,7 +311,7 @@
 				F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */,
 				F3B5AB242BAE91E3009CDBB5 /* CustomLinkView.swift */,
 				F31C494A2BC37C080075477D /* Loader.swift */,
-				FA6C0E1A2C27D58900D9F7A2 /* Pads.swift */,
+				FA6C0E1A2C27D58900D9F7A2 /* PadsView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -335,6 +341,7 @@
 				B95D2F322BA4EAF5003C7C17 /* CallManager.swift */,
 				FA14AACC2BE84F43001C7486 /* SupabaseManager.swift */,
 				FA9576512BEA4CDD00EC2FA4 /* SentryManager.swift */,
+				FA1ECBE72C2A7C6400B79D7E /* CallManagerNewDirection.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -342,6 +349,7 @@
 		F3B5AB232BAD35BD009CDBB5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FA6140CF2C2947AB00424953 /* NewDirection */,
 				F3E72E482BF960D5001FB6E4 /* ClassicRes */,
 				F3E72E472BF960CB001FB6E4 /* TeenageEng */,
 				FA5550A42BEDD4CF00C7648B /* AuthScreenView.swift */,
@@ -365,7 +373,6 @@
 				F3E72E4D2BF96240001FB6E4 /* CustomTextPromptTeView.swift */,
 				F3E72E4B2BF9620B001FB6E4 /* VoiceTypeAndToneTeView.swift */,
 				F3E72E492BF961B6001FB6E4 /* VoiceTypeAndToneSettingsTeView.swift */,
-				FA6C0E1C2C28C8F800D9F7A2 /* PadsScreen.swift */,
 			);
 			path = TeenageEng;
 			sourceTree = "<group>";
@@ -387,8 +394,18 @@
 			children = (
 				18D289E42B9713FE008742FB /* MainViewClassic.swift */,
 				F3E72E452BF95FA6001FB6E4 /* MainViewTeenageEng.swift */,
+				FA6140D12C2948B200424953 /* MainViewNewDirection.swift */,
 			);
 			path = Skins;
+			sourceTree = "<group>";
+		};
+		FA6140CF2C2947AB00424953 /* NewDirection */ = {
+			isa = PBXGroup;
+			children = (
+				FA6C0E1C2C28C8F800D9F7A2 /* PadsScreen.swift */,
+				FA6140D32C29490D00424953 /* CallScreen.swift */,
+			);
+			path = NewDirection;
 			sourceTree = "<group>";
 		};
 		FA6C0E1E2C28E77B00D9F7A2 /* Data */ = {
@@ -624,6 +641,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA1ECBE82C2A7C6400B79D7E /* CallManagerNewDirection.swift in Sources */,
 				F3B5AB212BAD08F1009CDBB5 /* AnimationUtility.swift in Sources */,
 				F31C49472BC0DDC60075477D /* AudioVisualizerView.swift in Sources */,
 				1849A5472BBDD68A00A4BCF1 /* UIScreen+Extensions.swift in Sources */,
@@ -632,6 +650,7 @@
 				FA6140CE2C29422E00424953 /* Color+Extensions.swift in Sources */,
 				F3E72E4C2BF9620B001FB6E4 /* VoiceTypeAndToneTeView.swift in Sources */,
 				F31C74ED2C17483D009023D6 /* CustomizationView.swift in Sources */,
+				FA6140D22C2948B200424953 /* MainViewNewDirection.swift in Sources */,
 				F3E72E4A2BF961B6001FB6E4 /* VoiceTypeAndToneSettingsTeView.swift in Sources */,
 				B953528C2BFE771600C1E32C /* WaveAnimation.swift in Sources */,
 				F31C494B2BC37C080075477D /* Loader.swift in Sources */,
@@ -639,7 +658,7 @@
 				F31C49412BBE75C70075477D /* VoiceSettingsView.swift in Sources */,
 				18D289E32B9713FE008742FB /* ResApp.swift in Sources */,
 				F3B5AB1E2BAD062D009CDBB5 /* AppSettingsView.swift in Sources */,
-				FA6C0E1B2C27D58900D9F7A2 /* Pads.swift in Sources */,
+				FA6C0E1B2C27D58900D9F7A2 /* PadsView.swift in Sources */,
 				FA5550A52BEDD4CF00C7648B /* AuthScreenView.swift in Sources */,
 				FA14AACD2BE84F43001C7486 /* SupabaseManager.swift in Sources */,
 				FA6C0E202C28E79200D9F7A2 /* DefaultPersonas.swift in Sources */,
@@ -655,6 +674,7 @@
 				F3B4EC5E2C1238F0000B80EF /* OnboardingAnimation.swift in Sources */,
 				FA6C0E272C29182400D9F7A2 /* UIFont+Extensions.swift in Sources */,
 				FA6C0E1D2C28C8F800D9F7A2 /* PadsScreen.swift in Sources */,
+				FA6140D42C29490D00424953 /* CallScreen.swift in Sources */,
 				F31C49492BC111180075477D /* VoiceTypeAndToneSettingsView.swift in Sources */,
 				F31C49452BBF86950075477D /* VoiceTypeAndToneView.swift in Sources */,
 				B91C79312C011C3E00D45290 /* WaveTest.swift in Sources */,
