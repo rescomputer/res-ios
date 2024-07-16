@@ -23,8 +23,8 @@ struct CallScreen: View {
         .edgesIgnoringSafeArea(.all)
         .onAppear {
             callManager.selectedPersonaSystemPrompt = selectedPersona.systemPrompt // Set the system prompt
-            callManager.setupVapi()
-            Task { await callManager.handleCallAction() }
+            callManager.selectedPersonaVoice = selectedPersona.voice // Set the voice configuration
+            Task { await callManager.initializeVapiAndStartCall() }
         }
     }
 
@@ -57,7 +57,7 @@ struct CallScreen: View {
                         VStack(alignment: .leading) {
                             Text(selectedPersona.name)
                                 .foregroundColor(.white)
-                            Text(selectedPersona.systemPrompt)
+                            Text(selectedPersona.description)
                                 .foregroundColor(.gray)
                                 .font(.system(size: 16))
                         }
@@ -78,30 +78,20 @@ struct CallScreen: View {
     @ViewBuilder
     private func actionButtons() -> some View {
         VStack {
-            Button(action: {
-                Task {
-                    if callEnded {
-                        await callManager.handleStartCall()
-                        callEnded = false
-                    } else {
-                        await callManager.endCall() // End the call
-                        callEnded = true
-                        self.presentationMode.wrappedValue.dismiss() // Navigate back
-                    }
-                }
-                let impactMed = UIImpactFeedbackGenerator(style: .soft)
-                impactMed.impactOccurred()
-            }) {
-                Text(callEnded ? "start call" : "end call")
-                    .foregroundColor(.white)
-                    .font(.headline)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(callEnded ? Color.green : Color.red)
-                    .cornerRadius(25)
-                    .padding(.horizontal)
-                    .padding(.vertical, 20)
-            }
+            CallButton(callEnded: callEnded) {
+                            Task {
+                                if callEnded {
+                                    await callManager.handleStartCall()
+                                    callEnded = false
+                                } else {
+                                    await callManager.endCall() // End the call
+                                    callEnded = true
+                                    self.presentationMode.wrappedValue.dismiss() // Navigate back
+                                }
+                            }
+                            let impactMed = UIImpactFeedbackGenerator(style: .soft)
+                            impactMed.impactOccurred()
+                        }
 
             HStack {
                 Button(action: {
@@ -133,4 +123,106 @@ struct CallScreen: View {
 
 #Preview("Call Screen") {
     CallScreen(selectedPersona: defaultPersonas.first!)
+}
+
+
+struct CallButton: View {
+    var callEnded: Bool
+    var action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Text(callEnded ? "start call" : "end call")
+                .foregroundColor(.white)
+                .font(.headline)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(
+                    RoundedRectangle(cornerRadius: 25)
+                        .fill(
+                            LinearGradient(
+                                gradient: Gradient(colors: callEnded ? [Color(hex: "EE8243"), Color(hex: "DE5731")] : [Color.red.opacity(0.8), Color.red.opacity(0.6)]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 25)
+                                .stroke(Color(hex: "666666"), lineWidth: 1)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                                        .blur(radius: 1)
+                                        .offset(x: -1, y: -1)
+                                        .mask(
+                                            RoundedRectangle(cornerRadius: 25)
+                                                .fill(LinearGradient(
+                                                    gradient: Gradient(colors: [Color.clear, Color.white]),
+                                                    startPoint: .bottomTrailing,
+                                                    endPoint: .topLeading
+                                                ))
+                                        )
+                                )
+                        )
+                        .overlay(
+                            // Inner light stroke
+                            RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                .strokeBorder(
+                                    LinearGradient(
+                                        colors: [
+                                            Color.white.opacity(0.3),
+                                            Color.white.opacity(0),
+                                            Color(hex: "EE7D48").opacity(0.5)
+                                        ],
+                                        startPoint: .top,
+                                        endPoint: .bottom
+                                    ),
+                                    lineWidth: 2
+                                )
+                                .blendMode(.overlay)
+                        )
+                        .shadow(color: Color(hex: "EE7D48").opacity(0.8), radius: 5, x: 0, y: 0)
+                        .shadow(color: Color(hex: "EE7D48").opacity(0.3), radius: 5, x: 0, y: 5)
+                        .shadow(color: Color.black.opacity(0.2), radius: 3, x: 0, y: 3)
+                        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+                )
+                .cornerRadius(25)
+                .padding(.horizontal)
+                .padding(.vertical, 20)
+        }
+    }
+}
+
+
+
+private var activePadBackground: some View {
+    RoundedRectangle(cornerRadius: 15)
+        .stroke(Color(hex: "704518"), lineWidth: 1)
+        .fill(
+            RadialGradient(
+                gradient: Gradient(colors: [Color(hex: "EE7D48"), Color(hex: "F7CD8B")]),
+                center: .center,
+                startRadius: 10,
+                endRadius: 70
+            )
+        )
+        .overlay(
+            // Inner light stroke
+            RoundedRectangle(cornerRadius: 15, style: .continuous)
+                .strokeBorder(
+                    LinearGradient(
+                        colors: [
+                            Color.white.opacity(0.3),
+                            Color.white.opacity(0),
+                            Color(hex: "EE7D48").opacity(0.5)
+                        ],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    ),
+                    lineWidth: 2
+                )
+                .blendMode(.overlay)
+        )
+        .shadow(color: Color(hex: "EE7D48").opacity(0.8), radius: 5, x: 0, y: 0)
+        .shadow(color: Color(hex: "EE7D48").opacity(0.3), radius: 5, x: 0, y: 5)
 }

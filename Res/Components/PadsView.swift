@@ -15,7 +15,6 @@ struct PadsView: View {
                         let index = row * columns + column
                         if index < personas.count {
                             PadButton(selectedPersonaId: $selectedPersonaId, persona: personas[index])
-                            
                         } else {
                             BlankPad()  // Renders a blank pad if there are not enough personas
                         }
@@ -24,6 +23,7 @@ struct PadsView: View {
             }
         }
         .padding(spacing)
+        .background(Color.white) // Ensures the entire view background is white
     }
 }
 
@@ -31,6 +31,7 @@ struct BlankPad: View {
     var body: some View {
         PadButton.defaultPadBackground
             .aspectRatio(7/4, contentMode: .fit)  // Ensure the aspect ratio matches the persona pads
+            .background(Color.white) // Ensures the blank pad background is white
     }
 }
 
@@ -53,6 +54,7 @@ struct PadButton: View {
         .onLongPressGesture(minimumDuration: 0.05, pressing: { isPressing in
             self.isTouched = isPressing
         }, perform: {})
+        .background(Color.white) // Ensures the pad button background is white
     }
 
     private var padBackground: some View {
@@ -68,12 +70,11 @@ struct PadButton: View {
     }
 
     private var textView: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Text(persona.name)
                 .font(.caption)
-                .lineLimit(1)  // Ensures text does not wrap to multiple lines
                 .truncationMode(.tail)
-                .frame(maxWidth: 70)  // Constrain text width
+                .padding(.horizontal, 8)
                 .foregroundColor(
                     Color(
                         hex: selectedPersonaId == persona.id
@@ -115,7 +116,6 @@ struct PadButton: View {
             )
             .shadow(color: Color(hex: "EE7D48").opacity(0.8), radius: 5, x: 0, y: 0)
             .shadow(color: Color(hex: "EE7D48").opacity(0.3), radius: 5, x: 0, y: 5)
-
     }
 
     private var touchedPadBackground: some View {
@@ -175,13 +175,7 @@ struct PadButton: View {
     static var defaultPadBackground: some View {
         RoundedRectangle(cornerRadius: 15)
             .stroke(Color(hex: "666666"), lineWidth: 1)
-            .fill(
-                LinearGradient(
-                    gradient: Gradient(colors: [Color(hex: "EEEEEE"), Color(hex: "EFEFEF")]),
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-            )
+            .fill(Color.white)
             .shadow(color: Color.black.opacity(0.2), radius: 3, x: 0, y: 3)
             .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
             .overlay(

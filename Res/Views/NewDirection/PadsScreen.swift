@@ -3,7 +3,8 @@ import SwiftUI
 struct PadsScreen: View {
     @State private var selectedPersonaId: UUID?
     @State private var showCallScreen = false
-
+    @State private var showAlert = false
+    
     init() {
         if let firstPersonaId = defaultPersonas.first?.id {
             _selectedPersonaId = State(initialValue: firstPersonaId)
@@ -36,7 +37,7 @@ struct PadsScreen: View {
     private func renderButtons() -> some View {
         HStack(spacing: 20) {
             Button(action: {
-                print("Message tapped")
+                self.showAlert = true
             }) {
                 Text("Message")
                     .font(.system(size: 14))
@@ -48,6 +49,7 @@ struct PadsScreen: View {
                             .stroke(Color.gray, lineWidth: 1)
                     )
             }
+
 
             NavigationLink(destination: selectedPersonaView()) {
                 Text("Call")
@@ -84,8 +86,6 @@ struct PadsScreen: View {
                                 .foregroundColor(.white)
                             Text(selectedPersona.description)
                                 .foregroundColor(.white)
-                            Text(selectedPersona.systemPrompt)
-                                .foregroundColor(.gray)
                         }
                         .padding(.bottom)
                     }

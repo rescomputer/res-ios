@@ -22,28 +22,22 @@ struct ResApp: App {
     let isDebugMode = Config.buildConfiguration == .debug
 
     init() {
-        // if enableDebugLogging is true, log to sentry during local development
         SentryManager.shared.start(enableDebugLogging: false)
     }
     
     var body: some Scene {
         WindowGroup {
             if isLaunchScreenPresented && !resAppModel.isAuthenticated {
-                LaunchScreenView(isChangelogViewShowing: .constant(false), isAppSettingsViewShowing: .constant(false), isModalStepTwoEnabled: .constant(false))
+                LaunchScreenView()
                     .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                             withAnimation {
                                 isLaunchScreenPresented = false
                             }
                         }
                     }
             } else if resAppModel.isAuthenticated || isDebugMode {
-                MainViewTeenageEng(
-                    isChangelogViewShowing: $isChangelogViewShowing,
-                    isAppSettingsViewShowing: $isAppSettingsViewShowing,
-                    isModalStepTwoEnabled: $isModalStepTwoEnabled
-                )
-                //.statusBarHidden(true)
+                PadsScreen()
                 .persistentSystemOverlays(.hidden)
             } else {
                 AuthView(

@@ -1,10 +1,3 @@
-//
-//  CallManager.swift
-//  Res
-//
-//  Created by Daniel Berezhnoy on 3/15/24.
-//
-
 import Combine
 import SwiftUI
 import Vapi
@@ -13,7 +6,6 @@ import AVFoundation
 
 @MainActor class CallManagerNewDirection: ObservableObject {
     var audioPlayer: AVAudioPlayer?
-
     @Published var currentTranscript: String = ""
     @Published var hipaaEnabled: Bool {
         didSet {
@@ -43,6 +35,7 @@ import AVFoundation
     @Published var activity: Activity<Res_ExtensionAttributesNew>?
 
     var selectedPersonaSystemPrompt: String = "" // Add this property
+    var selectedPersonaVoice: (model: String, provider: String, id: String)? // Add this property
 
     /// used for wavelength view
     var remoteVolumeLevel: Float {
@@ -113,7 +106,7 @@ import AVFoundation
         await initializeVapiAndStartCall()
     }
     
-    private func initializeVapiAndStartCall() async {
+    func initializeVapiAndStartCall() async {
         callState = .loading
         playDialUpSound()
         
@@ -140,7 +133,7 @@ import AVFoundation
     }
     
     private func startCall() async {
-        guard let vapi = vapi else {
+        guard let vapi = vapi, let selectedPersonaVoice = selectedPersonaVoice else {
             callState = .ended
             return
         }
@@ -167,9 +160,9 @@ import AVFoundation
             "llmRequestDelaySeconds": 0,
             "firstMessage": "What's up?",
             "voice": [
-                "provider": "openai",
-                "voiceId": "alloy",
-                "speed": 1.0
+                "model": selectedPersonaVoice.model,
+                "provider": selectedPersonaVoice.provider,
+                "voiceId": selectedPersonaVoice.id
             ],
             "transcriber": [
                 "language": "en",
