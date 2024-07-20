@@ -10,6 +10,8 @@
 	<string>$(DEBUG_USER_EMAIL)</string>
 	<key>DEBUG_USER_PASSWORD</key>
 	<string>$(DEBUG_USER_PASSWORD)</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>Live</key>
 	<string></string>
 	<key>SENTRY_DSN</key>
