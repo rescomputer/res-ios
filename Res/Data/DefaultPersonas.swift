@@ -25,6 +25,12 @@ let chillFriendImage = UIImage(named: "chiller")!
 let educatorImage = UIImage(named: "educator")!
 let guruImage = UIImage(named: "guru")!
 let trainerImage = UIImage(named: "trainer")!
+let justchatImage = UIImage(named: "justchat")!
+let justchatImage2 = UIImage(named: "justchat2")!
+let justchatImage3 = UIImage(named: "justchat3")!
+let justchatImage4 = UIImage(named: "justchat4")!
+let justchatImage7 = UIImage(named: "justchat7")!
+
 
 let defaultPersonas: [Persona] = [
     Persona(
@@ -48,7 +54,7 @@ let defaultPersonas: [Persona] = [
 
         Ultimately, my purpose as an educator is to facilitate your growth and development. By providing clear explanations, interactive engagement, and personalized support, I aim to help you build confidence in your abilities and achieve your learning objectives. I am here to be a reliable and enthusiastic guide on your educational journey, committed to your success and continuous improvement.
         """,
-        image: educatorImage,
+        image: justchatImage,
         voice: (model: "mist", provider: "rime-ai", id: "kevin")
     ),
     Persona(
