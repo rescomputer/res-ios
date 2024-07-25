@@ -9,7 +9,7 @@ import SwiftUI
 
 struct VoiceSettingsTeView: View {
     @Binding var activeModal: MainViewTeenageEng.ActiveModal?
-    @Binding var selectedOption: Option?
+    @Binding var selectedOption: OptionTe?
     @Binding var isModalStepTwoEnabled: Bool
     @ObservedObject var callManager: CallManager
     @ObservedObject var keyboardResponder: KeyboardResponder

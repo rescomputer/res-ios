@@ -21,7 +21,7 @@ struct AppSettingsTeView: View {
     @State private var selectedSetting: SettingType?
 
     @Binding var activeModal: MainViewTeenageEng.ActiveModal?
-    @Binding var selectedOption: Option?
+    @Binding var selectedOption: OptionTe?
     @Binding var isModalStepTwoEnabled: Bool
 
     //@ObservedObject var callManager: CallManager
@@ -349,7 +349,7 @@ extension AppSettingsTeView {
             withAnimation(.easeInOut(duration: 0.15)) {
                 self.infoModal = nil
             }
-        }, modalHeightMultiplier: AppSettingsView.ModalHeightMultiplier.recordingResModal.value
+        }, modalHeightMultiplier: AppSettingsTeView.ModalHeightMultiplier.recordingResModal.value
         ) {
 
             VStack {
@@ -561,7 +561,7 @@ extension AppSettingsTeView {
             withAnimation(.easeInOut(duration: 0.15)) {
                 self.infoModal = nil
             }
-        }, modalHeightMultiplier: AppSettingsView.ModalHeightMultiplier.aboutResModal.value
+        }, modalHeightMultiplier: AppSettingsTeView.ModalHeightMultiplier.aboutResModal.value
         ) {
             VStack{
                 ZStack {
@@ -675,7 +675,7 @@ extension AppSettingsTeView {
             withAnimation(.easeInOut(duration: 0.15)) {
                 self.infoModal = nil
             }
-        }, modalHeightMultiplier: AppSettingsView.ModalHeightMultiplier.aboutResModal.value
+        }, modalHeightMultiplier: AppSettingsTeView.ModalHeightMultiplier.aboutResModal.value
         ) {
             VStack{
                 ZStack {
@@ -818,3 +818,9 @@ extension AppSettingsTeView {
     )
 }
 
+struct Option: Identifiable, Equatable, Hashable {
+    let id = UUID()
+    let icon: String
+    let title: String
+    let description: String
+}

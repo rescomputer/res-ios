@@ -9,6 +9,7 @@ import SwiftUI
 import UIKit
 import ActivityKit
 
+
 struct MainViewTeenageEng: View {
     
     // TextField
@@ -22,7 +23,7 @@ struct MainViewTeenageEng: View {
     @Binding var isAppSettingsViewShowing: Bool
     @Binding var isModalStepTwoEnabled: Bool
     
-    @State private var selectedOption: Option?
+    @State private var selectedOption: OptionTe?
     @State private var activeModal: ActiveModal?
 
     // Audio Level

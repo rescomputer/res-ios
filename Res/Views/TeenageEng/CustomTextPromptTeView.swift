@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CustomTextPromptTeView: View {
     @Binding var activeModal: MainViewTeenageEng.ActiveModal?
-    @Binding var selectedOption: Option?
+    @Binding var selectedOption: OptionTe?
     @Binding var isModalStepTwoEnabled: Bool
     @ObservedObject var callManager: CallManager
     @ObservedObject var keyboardResponder: KeyboardResponder
@@ -102,8 +102,8 @@ struct OptionTe: Identifiable, Equatable, Hashable {
 }
 
 struct OptionRowTe: View {
-    let option: Option
-    @Binding var selectedOption: Option?
+    let option: OptionTe
+    @Binding var selectedOption: OptionTe?
 
     var body: some View {
         VStack(spacing: 2) {
@@ -142,20 +142,20 @@ struct OptionRowTe: View {
 
 struct OptionsMenuTe: View {
     let options = [
-        Option(icon: "atom", title: "Assistant", description: "A helpful assistant that gets to the point. No bullet points. Answer in less than 5 sentences."),
-        Option(icon: "graduationcap.fill", title: "Educator", description: "A teacher that deeply understands topics and wants to help you learn. Break things down step by step."),
-        Option(icon: "figure.run", title: "Trainer", description: "You are a fitness instructor trying to help me get fitter & stronger. You can give me advice on how to be healthy."),
-        Option(icon: "person.fill.questionmark", title: "Debater", description: "You always argue the opposite of what I say. You provide the other side of the argument. You push back on everything with an alternate perspective."),
-        Option(icon: "person.and.background.dotted", title: "Guru", description: "You are an empathetic listener. You hear what I am sharing and try to offer useful advice. You help me with important decisions in life.")
+        OptionTe(icon: "atom", title: "Assistant", description: "A helpful assistant that gets to the point. No bullet points. Answer in less than 5 sentences."),
+        OptionTe(icon: "graduationcap.fill", title: "Educator", description: "A teacher that deeply understands topics and wants to help you learn. Break things down step by step."),
+        OptionTe(icon: "figure.run", title: "Trainer", description: "You are a fitness instructor trying to help me get fitter & stronger. You can give me advice on how to be healthy."),
+        OptionTe(icon: "person.fill.questionmark", title: "Debater", description: "You always argue the opposite of what I say. You provide the other side of the argument. You push back on everything with an alternate perspective."),
+        OptionTe(icon: "person.and.background.dotted", title: "Guru", description: "You are an empathetic listener. You hear what I am sharing and try to offer useful advice. You help me with important decisions in life.")
     ]
-    
-    @Binding var selectedOption: Option?
-    
+
+    @Binding var selectedOption: OptionTe?
+
     var body: some View {
         ScrollView(.horizontal) {
             HStack(spacing: 11) {
                 ForEach(options) { option in
-                    OptionRow(option: option, selectedOption: $selectedOption)
+                    OptionRowTe(option: option, selectedOption: $selectedOption)
                         .onTapGesture {
                             selectedOption = option
                         }

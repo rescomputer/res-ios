@@ -9,7 +9,7 @@ import SwiftUI
 
 struct VoiceTypeAndToneTeView: View {
     @Binding var activeModal: MainViewTeenageEng.ActiveModal?
-    @Binding var selectedOption: Option?
+    @Binding var selectedOption: OptionTe?
     @ObservedObject var callManager: CallManager
     @ObservedObject var keyboardResponder: KeyboardResponder
     @State private var currentStep: Int = 1
