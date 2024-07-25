@@ -268,33 +268,33 @@ extension CustomizationView {
                                     GridItem(.adaptive(minimum: 80))
                                 ]
 
-                                LazyVGrid(columns: columns, spacing: 10) {
-                                    ForEach(["AppIcon", "retro", "simple", "vaporwave", "testflight", "classic", "futurism", "8-bit", "apple-retro"], id: \.self) { icon in
-                                        VStack {
-                                            Image(uiImage: UIImage(named: icon) ?? UIImage())
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fit)
-                                                .frame(width: 70, height: 70)
-                                                .clipShape(RoundedRectangle(cornerRadius: 17))
-                                                .shadow(color: Color.black.opacity(0.2), radius: 3)
-                                                .background(
-                                                    RoundedRectangle(cornerRadius: 17)
-                                                        .stroke(resAppModel.activeAppIcon == icon ? Color.blue : Color.clear, lineWidth: 4)
-                                                )
-                                                .onTapGesture {
-                                                    if icon == "AppIcon" {
-                                                        UIApplication.shared.setAlternateIconName(nil)
-                                                    } else {
-                                                        UIApplication.shared.setAlternateIconName(icon)
-                                                    }
-                                                    resAppModel.activeAppIcon = icon
-                                                }
-                                            Text(icon)
-                                                .font(.caption)
-                                        }
-                                    }
-                                }
-                                .padding()
+//                                LazyVGrid(columns: columns, spacing: 10) {
+//                                    ForEach(["AppIcon", "retro", "simple", "vaporwave", "testflight", "classic", "futurism", "8-bit", "apple-retro"], id: \.self) { icon in
+//                                        VStack {
+//                                            Image(uiImage: UIImage(named: icon) ?? UIImage())
+//                                                .resizable()
+//                                                .aspectRatio(contentMode: .fit)
+//                                                .frame(width: 70, height: 70)
+//                                                .clipShape(RoundedRectangle(cornerRadius: 17))
+//                                                .shadow(color: Color.black.opacity(0.2), radius: 3)
+//                                                .background(
+//                                                    RoundedRectangle(cornerRadius: 17)
+//                                                        .stroke(resAppModel.activeAppIcon == icon ? Color.blue : Color.clear, lineWidth: 4)
+//                                                )
+//                                                .onTapGesture {
+//                                                    if icon == "AppIcon" {
+//                                                        UIApplication.shared.setAlternateIconName(nil)
+//                                                    } else {
+//                                                        UIApplication.shared.setAlternateIconName(icon)
+//                                                    }
+//                                                    resAppModel.activeAppIcon = icon
+//                                                }
+//                                            Text(icon)
+//                                                .font(.caption)
+//                                        }
+//                                    }
+//                                }
+//                                .padding()
                             }
                             .frame(height: 290)
                 
