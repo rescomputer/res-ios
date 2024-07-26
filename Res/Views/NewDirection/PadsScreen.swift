@@ -4,13 +4,18 @@ import BottomSheet
 struct PadsScreen: View {
     @State private var selectedPersonaId: UUID?
     @State private var showCallScreen = false
-    @State private var bottomSheetPosition: BottomSheetPosition = .relative(0.4)
+    @State private var bottomSheetPosition: BottomSheetPosition = .relative(0.45)
     @State private var scrollOffset: CGFloat = 0
     @State private var isAtTop: Bool = true
     @State private var animationValue: Animation? = nil
     @State private var bioButtonText: String = "View Bio"
     @State private var additionalInfo: String = ""
 
+    private static let topPosition: BottomSheetPosition = .relative(0.2)
+    private static let SHEET_POSITION_MIDDLE: BottomSheetPosition = .relative(0.45)
+    private static let SHEET_POSITION_TOP: BottomSheetPosition = .relative(0.7)
+    private static let SHEET_POSITION_BOTTOM: BottomSheetPosition = .absolute(100)
+    
     init() {
         if let firstPersonaId = defaultPersonas.first?.id {
             _selectedPersonaId = State(initialValue: firstPersonaId)
@@ -24,18 +29,18 @@ struct PadsScreen: View {
                     screenContents()
                         .edgesIgnoringSafeArea(.top)
                         .bottomSheet(bottomSheetPosition: self.$bottomSheetPosition, switchablePositions: [
-                            .absolute(100),
-                            .relative(0.4),
-                            .relative(0.7)
+                            PadsScreen.SHEET_POSITION_BOTTOM,
+                            PadsScreen.SHEET_POSITION_MIDDLE,
+                            PadsScreen.SHEET_POSITION_TOP
                         ], headerContent: {
                         }, mainContent: {
                             bottomSheetContents(geometry: geometry)
                         })
                         .customBackground(
-                            Color.white
-                                .shadow(color: .white, radius: 0, x: 0, y: 0)
+                            Color.white.cornerRadius(10)
                         )
                         .enableContentDrag(true)
+                        .dragIndicatorColor(.gray)
                         .customAnimation(animationValue)
                 }
             }
@@ -48,9 +53,9 @@ struct PadsScreen: View {
                 )
             }
             .onAppear {
-                self.bottomSheetPosition = .relative(0.4)
+                self.bottomSheetPosition = .relative(0.45)
             }
-            .onChange(of: bottomSheetPosition) { newPosition in
+            .onChange(of: bottomSheetPosition) {
                 updateBioButtonText()
             }
             .navigationDestination(isPresented: $showCallScreen) {
@@ -115,7 +120,8 @@ struct PadsScreen: View {
                 )
             }
             .padding(.horizontal)
-            .padding(.vertical)
+            .padding(.top, 4)
+            .padding(.bottom, 8)
             
             ScrollView {
                 GeometryReader { proxy in
@@ -130,7 +136,7 @@ struct PadsScreen: View {
             .coordinateSpace(name: "scroll")
             .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
                 if value == 0 && !isAtTop {
-                    bottomSheetPosition = .relative(0.4)
+                    bottomSheetPosition = .relative(0.43)
                     isAtTop = true
                 } else if value != 0 && isAtTop {
                     isAtTop = false
@@ -152,10 +158,10 @@ struct PadsScreen: View {
     }
 
     private func toggleBottomSheetPosition() {
-        if bottomSheetPosition == .relative(0.4) {
-            bottomSheetPosition = .absolute(100)
+        if bottomSheetPosition == PadsScreen.SHEET_POSITION_MIDDLE {
+            bottomSheetPosition = PadsScreen.SHEET_POSITION_BOTTOM
         } else {
-            bottomSheetPosition = .relative(0.4)
+            bottomSheetPosition = PadsScreen.SHEET_POSITION_MIDDLE
         }
     }
 
