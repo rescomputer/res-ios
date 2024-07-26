@@ -4,7 +4,7 @@ import BottomSheet
 struct PadsScreen: View {
     @State private var selectedPersonaId: UUID?
     @State private var showCallScreen = false
-    @State private var bottomSheetPosition: BottomSheetPosition = .relative(0.5)
+    @State private var bottomSheetPosition: BottomSheetPosition = .relative(0.4)
     @State private var scrollOffset: CGFloat = 0
     @State private var isAtTop: Bool = true
     @State private var animationValue: Animation? = nil
@@ -94,8 +94,8 @@ struct PadsScreen: View {
                             Text(additionalInfo)
                                 .foregroundColor(.white)
                                 .padding(.bottom, 8)
-                                .opacity(additionalInfoOpacity) // Apply opacity
-                                .animation(.easeInOut, value: additionalInfoOpacity) // Animate opacity changes
+                                .opacity(additionalInfoOpacity)
+                                .animation(.easeInOut, value: additionalInfoOpacity)
                         }
                         .padding(.bottom)
                     }
