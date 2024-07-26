@@ -1,10 +1,16 @@
 import SwiftUI
+import BottomSheet
 
 struct PadsScreen: View {
     @State private var selectedPersonaId: UUID?
     @State private var showCallScreen = false
-    @State private var showAlert = false
-    
+    @State private var bottomSheetPosition: BottomSheetPosition = .relative(0.4)
+    @State private var scrollOffset: CGFloat = 0
+    @State private var isAtTop: Bool = true
+    @State private var animationValue: Animation? = nil
+    @State private var bioButtonText: String = "View Bio"
+    @State private var additionalInfo: String = ""
+
     init() {
         if let firstPersonaId = defaultPersonas.first?.id {
             _selectedPersonaId = State(initialValue: firstPersonaId)
@@ -15,59 +21,40 @@ struct PadsScreen: View {
         NavigationStack {
             GeometryReader { geometry in
                 ZStack {
-                    VStack(spacing: 0) {
-                        screenContents()
-
-                        HStack {
-//                            renderButtons()
-                            CallButtonn(title: "call", isRedBackground: false, action: {
-                                showCallScreen = true
-                            })
-                        }
-                        .padding(.horizontal)
-                        .padding(.top)
-                        .background(Color.white)
-
-                        PadsView(personas: defaultPersonas, selectedPersonaId: $selectedPersonaId)
-                            .padding(.bottom, geometry.safeAreaInsets.bottom)
-                    }
-                    .edgesIgnoringSafeArea(.all)
+                    screenContents()
+                        .edgesIgnoringSafeArea(.top)
+                        .bottomSheet(bottomSheetPosition: self.$bottomSheetPosition, switchablePositions: [
+                            .absolute(100),
+                            .relative(0.4),
+                            .relative(0.7)
+                        ], headerContent: {
+                        }, mainContent: {
+                            bottomSheetContents(geometry: geometry)
+                        })
+                        .customBackground(
+                            Color.white
+                                .shadow(color: .white, radius: 0, x: 0, y: 0)
+                        )
+                        .enableContentDrag(true)
+                        .customAnimation(animationValue)
                 }
             }
-            .tint(Color.white)
+            .task {
+                try? await Task.sleep(for: .seconds(0.25))
+                animationValue = .spring(
+                    response: 0.5,
+                    dampingFraction: 0.75,
+                    blendDuration: 1
+                )
+            }
+            .onAppear {
+                self.bottomSheetPosition = .relative(0.4)
+            }
+            .onChange(of: bottomSheetPosition) { newPosition in
+                updateBioButtonText()
+            }
             .navigationDestination(isPresented: $showCallScreen) {
                 selectedPersonaView()
-            }
-        }
-    }
-
-    @ViewBuilder
-    private func renderButtons() -> some View {
-        HStack(spacing: 20) {
-            Button(action: {
-                self.showAlert = true
-            }) {
-                Text("Message")
-                    .font(.system(size: 14))
-                    .foregroundColor(.gray)
-                    .padding(.all, 12)
-                    .frame(maxWidth: .infinity)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.gray, lineWidth: 1)
-                    )
-            }
-
-            NavigationLink(destination: selectedPersonaView()) {
-                Text("Call")
-                    .font(.system(size: 14))
-                    .foregroundColor(.gray)
-                    .padding(.all, 12)
-                    .frame(maxWidth: .infinity)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.gray, lineWidth: 1)
-                    )
             }
         }
     }
@@ -78,7 +65,8 @@ struct PadsScreen: View {
             .frame(maxHeight: .infinity)
             .overlay(
                 VStack {
-                    if let selectedPersonaId = selectedPersonaId, let selectedPersona = defaultPersonas.first(where: { $0.id == selectedPersonaId }) {
+                    Spacer().frame(height: 150) // Adjust height as needed
+                    if let selectedPersona = selectedPersona {
                         VStack {
                             Image(uiImage: selectedPersona.image)
                                 .resizable()
@@ -93,88 +81,109 @@ struct PadsScreen: View {
                                 .foregroundColor(.white)
                             Text(selectedPersona.description)
                                 .foregroundColor(.white)
+                            Button(action: toggleBottomSheetPosition) {
+                                Text(bioButtonText)
+                                    .fontWeight(.medium)
+                                    .padding(.vertical, 12)
+                                    .padding(.horizontal, 48)
+                                    .background(Color.gray.opacity(0.3))
+                                    .foregroundColor(.white)
+                                    .cornerRadius(32)
+                            }
+                            .padding()
+                            Text(additionalInfo)
+                                .foregroundColor(.white)
+                                .padding(.bottom, 8)
+                                .opacity(additionalInfoOpacity)
+                                .animation(.easeInOut, value: additionalInfoOpacity)
                         }
                         .padding(.bottom)
                     }
+                    Spacer()
                 }
             )
     }
 
+    @ViewBuilder
+    private func bottomSheetContents(geometry: GeometryProxy) -> some View {
+        VStack(spacing: 0) {
+            HStack {
+                PrimaryButton(
+                    title: "Call",
+                    type: .orange,
+                    action: { showCallScreen = true }
+                )
+            }
+            .padding(.horizontal)
+            .padding(.vertical)
+            
+            ScrollView {
+                GeometryReader { proxy in
+                    Color.clear
+                        .preference(key: ScrollOffsetPreferenceKey.self, value: proxy.frame(in: .named("scroll")).minY)
+                }
+                .frame(height: 0)
+
+                PadsView(personas: defaultPersonas, selectedPersonaId: $selectedPersonaId)
+                    .padding(.bottom, geometry.safeAreaInsets.bottom)
+            }
+            .coordinateSpace(name: "scroll")
+            .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
+                if value == 0 && !isAtTop {
+                    bottomSheetPosition = .relative(0.4)
+                    isAtTop = true
+                } else if value != 0 && isAtTop {
+                    isAtTop = false
+                }
+            }
+        }
+    }
+
+    private var selectedPersona: Persona? {
+        defaultPersonas.first(where: { $0.id == selectedPersonaId })
+    }
+
     private func selectedPersonaView() -> some View {
-        if let selectedPersonaId = selectedPersonaId, let selectedPersona = defaultPersonas.first(where: { $0.id == selectedPersonaId }) {
+        if let selectedPersona = selectedPersona {
             return AnyView(CallScreen(selectedPersona: selectedPersona))
         } else {
             return AnyView(EmptyView())
         }
+    }
+
+    private func toggleBottomSheetPosition() {
+        if bottomSheetPosition == .relative(0.4) {
+            bottomSheetPosition = .absolute(100)
+        } else {
+            bottomSheetPosition = .relative(0.4)
+        }
+    }
+
+    private func updateBioButtonText() {
+        if bottomSheetPosition == .absolute(100) {
+            bioButtonText = "Hide Bio"
+            additionalInfo = "Additional info here"
+        } else {
+            bioButtonText = "View Bio"
+            additionalInfo = ""
+
+        }
+    }
+
+    private var additionalInfoOpacity: Double {
+        bottomSheetPosition == .absolute(100) ? 1.0 : 0.0
+    }
+}
+
+struct ScrollOffsetPreferenceKey: PreferenceKey {
+    typealias Value = CGFloat
+    static var defaultValue: CGFloat = 0
+
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
     }
 }
 
 #Preview("Pads Screen") {
     PadsScreen()
 }
-
-
-
-
-struct CallButtonn: View {
-    var title: String
-    var isRedBackground: Bool = false
-    var action: () -> Void // Add this line
-
-    var body: some View {
-        Button(action: {
-            action() // Call the custom action
-        }) {
-            Text(title)
-                .font(.system(size: 18, weight: .medium))
-                .foregroundColor(.white)
-                .padding(.vertical, 12)
-                .frame(maxWidth: .infinity)
-                .background(
-                    Group {
-                        if isRedBackground {
-                            LinearGradient(gradient: Gradient(colors: [Color(red: 1.0, green: 0.4, blue: 0.4), Color(red: 0.9, green: 0.0, blue: 0.0)]), startPoint: .top, endPoint: .bottom)
-                                .cornerRadius(40)
-                                .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 40)
-                                        .stroke(Color(red: 0.8, green: 0.0, blue: 0.0), lineWidth: 1)
-                                )
-                        } else {
-                            LinearGradient(gradient: Gradient(colors: [Color.orange, Color.red]), startPoint: .top, endPoint: .bottom)
-                                .cornerRadius(40)
-                                .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 40)
-                                        .stroke(Color(red: 0.8, green: 0.4, blue: 0.0), lineWidth: 1)
-                                )
-                        }
-                    }
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 40)
-                        .stroke(Color.black.opacity(0.2), lineWidth: 1)
-                        .blur(radius: 1)
-                        .offset(x: 0, y: 1)
-                        .mask(RoundedRectangle(cornerRadius: 40).fill(LinearGradient(gradient: Gradient(colors: [Color.black, Color.clear]), startPoint: .top, endPoint: .bottom)))
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 40)
-                        .stroke(Color.white.opacity(0.2), lineWidth: 1)
-                        .blur(radius: 1)
-                        .offset(x: 0, y: -1)
-                        .mask(RoundedRectangle(cornerRadius: 40).fill(LinearGradient(gradient: Gradient(colors: [Color.clear, Color.white]), startPoint: .top, endPoint: .bottom)))
-                )
-        }
-    }
-}
-
-struct CallButtonn_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            CallButtonn(title: "call", isRedBackground: false, action: { print("Call action") })
-            CallButtonn(title: "end call", isRedBackground: true, action: { print("End call action") })
-        }
-    }
-}
-
