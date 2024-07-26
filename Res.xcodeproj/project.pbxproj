@@ -53,12 +53,9 @@
 		FA5550A52BEDD4CF00C7648B /* AuthScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5550A42BEDD4CF00C7648B /* AuthScreenView.swift */; };
 		FA6140CE2C29422E00424953 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6140CD2C29422E00424953 /* Color+Extensions.swift */; };
 		FA6140D22C2948B200424953 /* MainViewNewDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6140D12C2948B200424953 /* MainViewNewDirection.swift */; };
-		FA6140D42C29490D00424953 /* CallScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6140D32C29490D00424953 /* CallScreen.swift */; };
 		FA6B5B6E2C47A29500544929 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA6B5B6D2C47A29500544929 /* Assets.xcassets */; };
 		FA6C0E1B2C27D58900D9F7A2 /* PadsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C0E1A2C27D58900D9F7A2 /* PadsView.swift */; };
-		FA6C0E1D2C28C8F800D9F7A2 /* PadsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C0E1C2C28C8F800D9F7A2 /* PadsScreen.swift */; };
 		FA6C0E202C28E79200D9F7A2 /* DefaultPersonas.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C0E1F2C28E79200D9F7A2 /* DefaultPersonas.swift */; };
-		FA6C0E252C2917BA00D9F7A2 /* digital-7.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA6C0E242C2917BA00D9F7A2 /* digital-7.ttf */; };
 		FA6C0E272C29182400D9F7A2 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C0E262C29182400D9F7A2 /* UIFont+Extensions.swift */; };
 		FA7944DC2BE6D08C0035EC8B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7944DB2BE6D08C0035EC8B /* Config.swift */; };
 		FA8DCFA12BEC19B800F54DCA /* ResUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8DCF9E2BEC195B00F54DCA /* ResUITests.swift */; };
@@ -68,6 +65,11 @@
 		FA9576502BEA4C3100EC2FA4 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		FA9576522BEA4CDD00EC2FA4 /* SentryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9576512BEA4CDD00EC2FA4 /* SentryManager.swift */; };
 		FA9576972BEC099700EC2FA4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9576962BEC099700EC2FA4 /* XCTest.framework */; platformFilter = ios; };
+		FA976F4E2C520D4E00A66D4F /* digital-7.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA976F4D2C520D4E00A66D4F /* digital-7.ttf */; };
+		FA976F502C520E0800A66D4F /* PadsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976F4F2C520E0800A66D4F /* PadsScreen.swift */; };
+		FA976F522C520E1300A66D4F /* CallScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976F512C520E1300A66D4F /* CallScreen.swift */; };
+		FA976F542C520FB600A66D4F /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976F532C520FB600A66D4F /* PrimaryButton.swift */; };
+		FA976F572C5222CC00A66D4F /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = FA976F562C5222CC00A66D4F /* BottomSheet */; };
 		FAB04A3F2C1A468D0081AF59 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = FAB04A3E2C1A468D0081AF59 /* RiveRuntime */; };
 		FACDDA392C17C3CE006395BE /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = FACDDA382C17C3CE006395BE /* Vapi */; };
 		FACDDA3C2C18BFAF006395BE /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = FACDDA3B2C18BFAF006395BE /* Vapi */; };
@@ -158,12 +160,9 @@
 		FA5550A42BEDD4CF00C7648B /* AuthScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthScreenView.swift; sourceTree = "<group>"; };
 		FA6140CD2C29422E00424953 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		FA6140D12C2948B200424953 /* MainViewNewDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewNewDirection.swift; sourceTree = "<group>"; };
-		FA6140D32C29490D00424953 /* CallScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallScreen.swift; sourceTree = "<group>"; };
 		FA6B5B6D2C47A29500544929 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA6C0E1A2C27D58900D9F7A2 /* PadsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadsView.swift; sourceTree = "<group>"; };
-		FA6C0E1C2C28C8F800D9F7A2 /* PadsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadsScreen.swift; sourceTree = "<group>"; };
 		FA6C0E1F2C28E79200D9F7A2 /* DefaultPersonas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPersonas.swift; sourceTree = "<group>"; };
-		FA6C0E242C2917BA00D9F7A2 /* digital-7.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "digital-7.ttf"; sourceTree = "<group>"; };
 		FA6C0E262C29182400D9F7A2 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		FA7944D82BE636360035EC8B /* Config.template.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.template.xcconfig; sourceTree = "<group>"; };
 		FA7944DB2BE6D08C0035EC8B /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -172,6 +171,10 @@
 		FA8DCF9F2BEC195B00F54DCA /* ResUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		FA9576512BEA4CDD00EC2FA4 /* SentryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentryManager.swift; sourceTree = "<group>"; };
 		FA9576962BEC099700EC2FA4 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		FA976F4D2C520D4E00A66D4F /* digital-7.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "digital-7.ttf"; sourceTree = "<group>"; };
+		FA976F4F2C520E0800A66D4F /* PadsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadsScreen.swift; sourceTree = "<group>"; };
+		FA976F512C520E1300A66D4F /* CallScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallScreen.swift; sourceTree = "<group>"; };
+		FA976F532C520FB600A66D4F /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +187,7 @@
 				FAB04A3F2C1A468D0081AF59 /* RiveRuntime in Frameworks */,
 				FA14AAD42BE850A0001C7486 /* Supabase in Frameworks */,
 				18F723892BAC2695003F44FA /* ActivityKit.framework in Frameworks */,
+				FA976F572C5222CC00A66D4F /* BottomSheet in Frameworks */,
 				FACDDA3C2C18BFAF006395BE /* Vapi in Frameworks */,
 				FA14AAD22BE850A0001C7486 /* Functions in Frameworks */,
 				FA14AAD02BE850A0001C7486 /* Auth in Frameworks */,
@@ -301,6 +305,7 @@
 				F3B5AB242BAE91E3009CDBB5 /* CustomLinkView.swift */,
 				F31C494A2BC37C080075477D /* Loader.swift */,
 				FA6C0E1A2C27D58900D9F7A2 /* PadsView.swift */,
+				FA976F532C520FB600A66D4F /* PrimaryButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -377,8 +382,8 @@
 		FA6140CF2C2947AB00424953 /* NewDirection */ = {
 			isa = PBXGroup;
 			children = (
-				FA6C0E1C2C28C8F800D9F7A2 /* PadsScreen.swift */,
-				FA6140D32C29490D00424953 /* CallScreen.swift */,
+				FA976F512C520E1300A66D4F /* CallScreen.swift */,
+				FA976F4F2C520E0800A66D4F /* PadsScreen.swift */,
 			);
 			path = NewDirection;
 			sourceTree = "<group>";
@@ -394,7 +399,7 @@
 		FA6C0E212C29113100D9F7A2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FA6C0E242C2917BA00D9F7A2 /* digital-7.ttf */,
+				FA976F4D2C520D4E00A66D4F /* digital-7.ttf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -441,6 +446,7 @@
 				FA14AAD32BE850A0001C7486 /* Supabase */,
 				00571768FCC847B5B370CACD /* Sentry */,
 				FAB04A3E2C1A468D0081AF59 /* RiveRuntime */,
+				FA976F562C5222CC00A66D4F /* BottomSheet */,
 			);
 			productName = Her;
 			productReference = 18D289DF2B9713FE008742FB /* Res.app */;
@@ -544,6 +550,7 @@
 				BD1914C8DBDC4BCDB400579F /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 				F31C74F52C1A2C40009023D6 /* XCRemoteSwiftPackageReference "ios" */,
 				FAB04A3D2C1A468D0081AF59 /* XCRemoteSwiftPackageReference "rive-ios" */,
+				FA976F552C5222CC00A66D4F /* XCRemoteSwiftPackageReference "BottomSheet" */,
 			);
 			productRefGroup = 18D289E02B9713FE008742FB /* Products */;
 			projectDirPath = "";
@@ -565,7 +572,7 @@
 				B976AF672BF438CE0014196F /* dial.up.sound.mp3 in Resources */,
 				F31C74F72C1A3A47009023D6 /* res_unboxing.riv in Resources */,
 				FA6B5B6E2C47A29500544929 /* Assets.xcassets in Resources */,
-				FA6C0E252C2917BA00D9F7A2 /* digital-7.ttf in Resources */,
+				FA976F4E2C520D4E00A66D4F /* digital-7.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,6 +634,7 @@
 				FA6140D22C2948B200424953 /* MainViewNewDirection.swift in Sources */,
 				F3E72E4A2BF961B6001FB6E4 /* VoiceTypeAndToneSettingsTeView.swift in Sources */,
 				B953528C2BFE771600C1E32C /* WaveAnimation.swift in Sources */,
+				FA976F522C520E1300A66D4F /* CallScreen.swift in Sources */,
 				F31C494B2BC37C080075477D /* Loader.swift in Sources */,
 				F3E72E502BF962F7001FB6E4 /* VoiceSettingsTeView.swift in Sources */,
 				18D289E32B9713FE008742FB /* ResApp.swift in Sources */,
@@ -645,12 +653,12 @@
 				FA7944DC2BE6D08C0035EC8B /* Config.swift in Sources */,
 				F3B4EC5E2C1238F0000B80EF /* OnboardingAnimation.swift in Sources */,
 				FA6C0E272C29182400D9F7A2 /* UIFont+Extensions.swift in Sources */,
-				FA6C0E1D2C28C8F800D9F7A2 /* PadsScreen.swift in Sources */,
-				FA6140D42C29490D00424953 /* CallScreen.swift in Sources */,
 				B91C79312C011C3E00D45290 /* WaveTest.swift in Sources */,
 				1849A54D2BBDDF7100A4BCF1 /* LaunchScreenViewController.swift in Sources */,
+				FA976F502C520E0800A66D4F /* PadsScreen.swift in Sources */,
 				FA9576522BEA4CDD00EC2FA4 /* SentryManager.swift in Sources */,
 				F3B5AB182BACDB8A009CDBB5 /* HalfModalView.swift in Sources */,
+				FA976F542C520FB600A66D4F /* PrimaryButton.swift in Sources */,
 				F31C74A92C16B2FA009023D6 /* ChangelogView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1138,6 +1146,14 @@
 				minimumVersion = 2.5.1;
 			};
 		};
+		FA976F552C5222CC00A66D4F /* XCRemoteSwiftPackageReference "BottomSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lucaszischka/BottomSheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.1;
+			};
+		};
 		FAB04A3D2C1A468D0081AF59 /* XCRemoteSwiftPackageReference "rive-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rive-app/rive-ios.git";
@@ -1176,6 +1192,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA14AACE2BE850A0001C7486 /* XCRemoteSwiftPackageReference "supabase-swift" */;
 			productName = Supabase;
+		};
+		FA976F562C5222CC00A66D4F /* BottomSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA976F552C5222CC00A66D4F /* XCRemoteSwiftPackageReference "BottomSheet" */;
+			productName = BottomSheet;
 		};
 		FAB04A3E2C1A468D0081AF59 /* RiveRuntime */ = {
 			isa = XCSwiftPackageProductDependency;

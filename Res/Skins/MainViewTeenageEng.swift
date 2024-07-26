@@ -157,7 +157,7 @@ struct MainViewTeenageEng: View {
         HStack {
             brainButton
             Spacer()
-            callButton
+            callButtonTe
             Spacer()
             appSettingsButton
         }
@@ -166,7 +166,7 @@ struct MainViewTeenageEng: View {
         
     }
     
-    private var callButton: some View {
+    private var callButtonTe: some View {
         ZStack {
             // Start Button
             ZStack {
