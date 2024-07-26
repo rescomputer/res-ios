@@ -4,8 +4,6 @@ The goal is simple: create a powerful, open source interface to the best Large L
 
 The current product does a few things well by leveraging [Vapi.ai](https://vapi.ai) which stands for Voice Application Programming Interface.
 
-You can join the TestFlight here: [testflight.apple.com/join/vYkfwoti](https://testflight.apple.com/join/vYkfwoti)
-
 # Development environment setup
 
 ## Requirements
