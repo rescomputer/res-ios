@@ -37,7 +37,7 @@ struct ResApp: App {
                         }
                     }
             } else if resAppModel.isAuthenticated || isDebugMode {
-                PadsScreen()
+                CallScreen()
                 .persistentSystemOverlays(.hidden)
             } else {
                 AuthView(

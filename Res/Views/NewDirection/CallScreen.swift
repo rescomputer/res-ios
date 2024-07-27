@@ -30,9 +30,9 @@ struct CallScreen: View {
                     screenContents()
                         .edgesIgnoringSafeArea(.top)
                         .bottomSheet(bottomSheetPosition: self.$bottomSheetPosition, switchablePositions: [
-                            PadsScreen.SHEET_POSITION_BOTTOM,
-                            PadsScreen.SHEET_POSITION_MIDDLE,
-                            PadsScreen.SHEET_POSITION_TOP
+                            CallScreen.SHEET_POSITION_BOTTOM,
+                            CallScreen.SHEET_POSITION_MIDDLE,
+                            CallScreen.SHEET_POSITION_TOP
                         ], headerContent: {
                         }, mainContent: {
                             bottomSheetContents(geometry: geometry)
@@ -188,10 +188,10 @@ struct CallScreen: View {
     }
 
     private func toggleBottomSheetPosition() {
-        if bottomSheetPosition == PadsScreen.SHEET_POSITION_MIDDLE {
-            bottomSheetPosition = PadsScreen.SHEET_POSITION_BOTTOM
+        if bottomSheetPosition == CallScreen.SHEET_POSITION_MIDDLE {
+            bottomSheetPosition = CallScreen.SHEET_POSITION_BOTTOM
         } else {
-            bottomSheetPosition = PadsScreen.SHEET_POSITION_MIDDLE
+            bottomSheetPosition = CallScreen.SHEET_POSITION_MIDDLE
         }
     }
 
@@ -214,7 +214,7 @@ struct CallScreen: View {
         if let selectedPersona = selectedPersona {
             callManager.selectedPersonaSystemPrompt = selectedPersona.systemPrompt
             callManager.selectedPersonaVoice = selectedPersona.voice
-            bottomSheetPosition = PadsScreen.SHEET_POSITION_BOTTOM
+            bottomSheetPosition = CallScreen.SHEET_POSITION_BOTTOM
 
             Task {
                 await callManager.initializeVapiAndStartCall()
@@ -226,7 +226,7 @@ struct CallScreen: View {
         isInCall = false
         Task {
             await callManager.endCall()
-            bottomSheetPosition = PadsScreen.SHEET_POSITION_MIDDLE
+            bottomSheetPosition = CallScreen.SHEET_POSITION_MIDDLE
         }
     }
 }
