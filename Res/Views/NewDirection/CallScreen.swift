@@ -1,102 +1,236 @@
 import SwiftUI
-import UIKit
+import BottomSheet
 
 struct CallScreen: View {
-    var selectedPersona: Persona
-
+    @State private var selectedPersonaId: UUID?
+    @State private var bottomSheetPosition: BottomSheetPosition = .relative(0.45)
+    @State private var scrollOffset: CGFloat = 0
+    @State private var isAtTop: Bool = true
+    @State private var animationValue: Animation? = nil
+    @State private var bioButtonText: String = "View Bio"
+    @State private var additionalInfo: String = ""
+    @State private var isInCall = false
     @StateObject private var callManager = CallManagerNewDirection()
-    @Environment(\.presentationMode) var presentationMode
 
-    @State private var callEnded = false
+    private static let topPosition: BottomSheetPosition = .relative(0.2)
+    private static let SHEET_POSITION_MIDDLE: BottomSheetPosition = .relative(0.42)
+    private static let SHEET_POSITION_TOP: BottomSheetPosition = .relative(0.7)
+    private static let SHEET_POSITION_BOTTOM: BottomSheetPosition = .absolute(100)
+    
+    init() {
+        if let firstPersonaId = defaultPersonas.first?.id {
+            _selectedPersonaId = State(initialValue: firstPersonaId)
+        }
+    }
 
     var body: some View {
-        VStack(spacing: 0) {
-            screenContents()
-                .frame(maxHeight: .infinity)
-
-            actionButtons()
-                .padding(.horizontal)
-                .padding(.bottom, 20)
-                .padding(.top, 30)
-                .background(Color.white)
-        }
-        .edgesIgnoringSafeArea(.all)
-        .onAppear {
-            callManager.selectedPersonaSystemPrompt = selectedPersona.systemPrompt // Set the system prompt
-            callManager.selectedPersonaVoice = selectedPersona.voice // Set the voice configuration
-            Task { await callManager.initializeVapiAndStartCall() }
+        NavigationStack {
+            GeometryReader { geometry in
+                ZStack {
+                    screenContents()
+                        .edgesIgnoringSafeArea(.top)
+                        .bottomSheet(bottomSheetPosition: self.$bottomSheetPosition, switchablePositions: [
+                            PadsScreen.SHEET_POSITION_BOTTOM,
+                            PadsScreen.SHEET_POSITION_MIDDLE,
+                            PadsScreen.SHEET_POSITION_TOP
+                        ], headerContent: {
+                        }, mainContent: {
+                            bottomSheetContents(geometry: geometry)
+                        })
+                        .customBackground(
+                            Color.white.cornerRadius(10)
+                        )
+                        .enableContentDrag(true)
+                        .dragIndicatorColor(.gray)
+                        .customAnimation(animationValue)
+                }
+            }
+            .task {
+                try? await Task.sleep(for: .seconds(0.25))
+                animationValue = .spring(
+                    response: 0.5,
+                    dampingFraction: 0.75,
+                    blendDuration: 1
+                )
+            }
+            .onAppear {
+                self.bottomSheetPosition = .relative(0.45)
+            }
+            .onChange(of: bottomSheetPosition) {
+                updateBioButtonText()
+            }
         }
     }
 
     @ViewBuilder
     private func screenContents() -> some View {
-        GeometryReader { geometry in
-            ZStack {
-                Image(uiImage: selectedPersona.image)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: geometry.size.width, height: geometry.size.height)
-                    .clipped()
-                    .blur(radius: 20)
-                    .overlay(
-                        Color.black.opacity(0.4)
-                            .edgesIgnoringSafeArea(.all)
-                    )
+        if isInCall, let selectedPersona = selectedPersona {
+            GeometryReader { geometry in
+                ZStack {
+                    Image(uiImage: selectedPersona.image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .clipped()
+                        .blur(radius: 20)
+                        .overlay(
+                            Color.black.opacity(0.4)
+                                .edgesIgnoringSafeArea(.all)
+                        )
 
-                VStack {
-                    // Adding padding to account for the status bar and navigation bar
-                    Spacer().frame(height: geometry.safeAreaInsets.top + 112) // Adjust the height if needed
-                    
-                    HStack(alignment: .top) {
-                        Image(uiImage: selectedPersona.image)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 58, height: 58)
-                            .clipShape(Circle())
+                    VStack {
+                        Spacer().frame(height: geometry.safeAreaInsets.top + 112) // Adjust the height if needed
+                        
+                        HStack(alignment: .top) {
+                            Image(uiImage: selectedPersona.image)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 58, height: 58)
+                                .clipShape(Circle())
 
-                        VStack(alignment: .leading) {
-                            Text(selectedPersona.name)
-                                .foregroundColor(.white)
-                            Text(selectedPersona.description)
-                                .foregroundColor(.gray)
-                                .font(.system(size: 16))
+                            VStack(alignment: .leading) {
+                                Text(selectedPersona.name)
+                                    .foregroundColor(.white)
+                                Text(selectedPersona.description)
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: 16))
+                            }
+                            .padding(.leading, 8)
+
+                            Spacer()
                         }
-                        .padding(.leading, 8)
-
+                        .padding(.horizontal)
+                        
                         Spacer()
                     }
-                    .padding(.horizontal)
-                    
-                    Spacer() // Spacer at the bottom to push the content to the top
+                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height, alignment: .top) // Ensure the VStack takes the full height and aligns content to the top
             }
+            .edgesIgnoringSafeArea(.all)
+        } else {
+            Color.black
+                .frame(maxHeight: .infinity)
+                .overlay(
+                    VStack {
+                        Spacer().frame(height: 150) // Adjust height as needed
+                        if let selectedPersona = selectedPersona {
+                            VStack {
+                                Image(uiImage: selectedPersona.image)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 140, height: 140)
+                                    .clipShape(Circle())
+                                    .shadow(color: Color.white.opacity(0.45), radius: 10, x: 0, y: 0)
+                                    .padding(.bottom, 16)
+                                Text(selectedPersona.name)
+                                    .font(.system(size: 28))
+                                    .padding(.bottom, 12)
+                                    .foregroundColor(.white)
+                                Text(selectedPersona.description)
+                                    .foregroundColor(.white)
+                                Button(action: toggleBottomSheetPosition) {
+                                    Text(bioButtonText)
+                                        .fontWeight(.medium)
+                                        .padding(.vertical, 12)
+                                        .padding(.horizontal, 48)
+                                        .background(Color.gray.opacity(0.3))
+                                        .foregroundColor(.white)
+                                        .cornerRadius(32)
+                                }
+                                .padding()
+                                Text(additionalInfo)
+                                    .foregroundColor(.white)
+                                    .padding(.bottom, 8)
+                                    .opacity(additionalInfoOpacity)
+                                    .animation(.easeInOut, value: additionalInfoOpacity)
+                            }
+                            .padding(.bottom)
+                        }
+                        Spacer()
+                    }
+                )
         }
-        .edgesIgnoringSafeArea(.all) // Ensure the background image covers the entire screen
     }
 
     @ViewBuilder
-    private func actionButtons() -> some View {
-        VStack {
-            PrimaryButton(title: "end call", type: .red, action: {
-                Task {
-                    if callEnded {
-                        await callManager.handleStartCall()
-                        callEnded = false
-                    } else {
-                        await callManager.endCall() // End the call
-                        callEnded = true
-                        self.presentationMode.wrappedValue.dismiss() // Navigate back
-                    }
+    private func bottomSheetContents(geometry: GeometryProxy) -> some View {
+        VStack(spacing: 0) {
+            HStack {
+                if isInCall {
+                    PrimaryButton(
+                        title: "End Call",
+                        type: .red,
+                        action: endCall
+                    )
+                } else {
+                    PrimaryButton(
+                        title: "Call",
+                        type: .orange,
+                        action: startCall
+                    )
                 }
-                let impactMed = UIImpactFeedbackGenerator(style: .soft)
-                impactMed.impactOccurred()
-            })
-            .padding(.bottom, 30)
+            }
+            .padding(.horizontal)
+            .padding(.top, 4)
+            .padding(.bottom, 8)
+            
+            if !isInCall {
+                ScrollView {
+                    PadsView(personas: defaultPersonas, selectedPersonaId: $selectedPersonaId)
+                        .padding(.bottom, geometry.safeAreaInsets.bottom)
+                }
+            }
+        }
+    }
+
+    private var selectedPersona: Persona? {
+        defaultPersonas.first(where: { $0.id == selectedPersonaId })
+    }
+
+    private func toggleBottomSheetPosition() {
+        if bottomSheetPosition == PadsScreen.SHEET_POSITION_MIDDLE {
+            bottomSheetPosition = PadsScreen.SHEET_POSITION_BOTTOM
+        } else {
+            bottomSheetPosition = PadsScreen.SHEET_POSITION_MIDDLE
+        }
+    }
+
+    private func updateBioButtonText() {
+        if bottomSheetPosition == .absolute(100) {
+            bioButtonText = "Hide Bio"
+            additionalInfo = "Additional info here"
+        } else {
+            bioButtonText = "View Bio"
+            additionalInfo = ""
+        }
+    }
+
+    private var additionalInfoOpacity: Double {
+        bottomSheetPosition == .absolute(100) ? 1.0 : 0.0
+    }
+
+    private func startCall() {
+        isInCall = true
+        if let selectedPersona = selectedPersona {
+            callManager.selectedPersonaSystemPrompt = selectedPersona.systemPrompt
+            callManager.selectedPersonaVoice = selectedPersona.voice
+            bottomSheetPosition = PadsScreen.SHEET_POSITION_BOTTOM
+
+            Task {
+                await callManager.initializeVapiAndStartCall()
+            }
+        }
+    }
+
+    private func endCall() {
+        isInCall = false
+        Task {
+            await callManager.endCall()
+            bottomSheetPosition = PadsScreen.SHEET_POSITION_MIDDLE
         }
     }
 }
 
 #Preview("Call Screen") {
-    CallScreen(selectedPersona: defaultPersonas.first!)
+    CallScreen()
 }
