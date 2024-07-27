@@ -66,7 +66,6 @@
 		FA9576522BEA4CDD00EC2FA4 /* SentryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9576512BEA4CDD00EC2FA4 /* SentryManager.swift */; };
 		FA9576972BEC099700EC2FA4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9576962BEC099700EC2FA4 /* XCTest.framework */; platformFilter = ios; };
 		FA976F4E2C520D4E00A66D4F /* digital-7.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA976F4D2C520D4E00A66D4F /* digital-7.ttf */; };
-		FA976F502C520E0800A66D4F /* PadsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976F4F2C520E0800A66D4F /* PadsScreen.swift */; };
 		FA976F522C520E1300A66D4F /* CallScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976F512C520E1300A66D4F /* CallScreen.swift */; };
 		FA976F542C520FB600A66D4F /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976F532C520FB600A66D4F /* PrimaryButton.swift */; };
 		FA976F572C5222CC00A66D4F /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = FA976F562C5222CC00A66D4F /* BottomSheet */; };
@@ -172,7 +171,6 @@
 		FA9576512BEA4CDD00EC2FA4 /* SentryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentryManager.swift; sourceTree = "<group>"; };
 		FA9576962BEC099700EC2FA4 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		FA976F4D2C520D4E00A66D4F /* digital-7.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "digital-7.ttf"; sourceTree = "<group>"; };
-		FA976F4F2C520E0800A66D4F /* PadsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadsScreen.swift; sourceTree = "<group>"; };
 		FA976F512C520E1300A66D4F /* CallScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallScreen.swift; sourceTree = "<group>"; };
 		FA976F532C520FB600A66D4F /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -383,7 +381,6 @@
 			isa = PBXGroup;
 			children = (
 				FA976F512C520E1300A66D4F /* CallScreen.swift */,
-				FA976F4F2C520E0800A66D4F /* PadsScreen.swift */,
 			);
 			path = NewDirection;
 			sourceTree = "<group>";
@@ -655,7 +652,6 @@
 				FA6C0E272C29182400D9F7A2 /* UIFont+Extensions.swift in Sources */,
 				B91C79312C011C3E00D45290 /* WaveTest.swift in Sources */,
 				1849A54D2BBDDF7100A4BCF1 /* LaunchScreenViewController.swift in Sources */,
-				FA976F502C520E0800A66D4F /* PadsScreen.swift in Sources */,
 				FA9576522BEA4CDD00EC2FA4 /* SentryManager.swift in Sources */,
 				F3B5AB182BACDB8A009CDBB5 /* HalfModalView.swift in Sources */,
 				FA976F542C520FB600A66D4F /* PrimaryButton.swift in Sources */,
