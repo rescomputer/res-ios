@@ -34,10 +34,8 @@ import AVFoundation
 
     @Published var activity: Activity<Res_ExtensionAttributesNew>?
 
-    var selectedPersonaSystemPrompt: String = "" // Add this property
-    var selectedPersonaVoice: (model: String, provider: String, id: String)? // Add this property
+    var selectedPersona: Persona?
 
-    /// used for wavelength view
     var remoteVolumeLevel: Float {
         vapi?.remoteAudioLevel ?? 0
     }
@@ -133,9 +131,18 @@ import AVFoundation
     }
     
     private func startCall() async {
-        guard let vapi = vapi, let selectedPersonaVoice = selectedPersonaVoice else {
+        guard let vapi = vapi, let selectedPersona = selectedPersona else {
             callState = .ended
             return
+        }
+        
+        var voiceDictionary: [String: Any] = [
+            "provider": selectedPersona.voice.provider,
+            "voiceId": selectedPersona.voice.id
+        ]
+
+        if let model = selectedPersona.voice.model {
+            voiceDictionary["model"] = model
         }
         
         let assistant = [
@@ -148,7 +155,7 @@ import AVFoundation
                 ],
                 "messages": [
                     ["role": "system",
-                     "content": selectedPersonaSystemPrompt] // Use the selected persona's system prompt
+                     "content": selectedPersona.systemPrompt]
                 ],
                 "maxTokens": 1000, // Maximum
             ],
@@ -158,12 +165,8 @@ import AVFoundation
             "numWordsToInterruptAssistant": 1,
             "responseDelaySeconds": 0,
             "llmRequestDelaySeconds": 0,
-            "firstMessage": "What's up?",
-            "voice": [
-                "model": selectedPersonaVoice.model,
-                "provider": selectedPersonaVoice.provider,
-                "voiceId": selectedPersonaVoice.id
-            ],
+            "firstMessage": selectedPersona.firstMessage,
+            "voice": voiceDictionary,
             "transcriber": [
                 "language": "en",
                 "model": "nova-2",
@@ -233,7 +236,7 @@ import AVFoundation
     }
     
     private func playDialUpSound() {
-        guard let path = Bundle.main.path(forResource: "dial.up.sound", ofType: "mp3") else {
+        guard let path = Bundle.main.path(forResource: "dial.up.sound", ofType: "m4a") else {
             return
         }
         
@@ -251,6 +254,7 @@ import AVFoundation
         audioPlayer?.stop()
     }
 }
+
 
 extension CallManagerNewDirection {
     var callStateText: String {
