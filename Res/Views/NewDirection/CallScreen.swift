@@ -3,7 +3,7 @@ import BottomSheet
 
 struct CallScreen: View {
     @State private var selectedPersonaId: UUID?
-    @State private var bottomSheetPosition: BottomSheetPosition = .relative(0.45)
+    @State private var bottomSheetPosition: BottomSheetPosition = CallScreen.SHEET_POSITION_MIDDLE
     @State private var scrollOffset: CGFloat = 0
     @State private var isAtTop: Bool = true
     @State private var animationValue: Animation? = nil
@@ -212,8 +212,7 @@ struct CallScreen: View {
     private func startCall() {
         isInCall = true
         if let selectedPersona = selectedPersona {
-            callManager.selectedPersonaSystemPrompt = selectedPersona.systemPrompt
-            callManager.selectedPersonaVoice = selectedPersona.voice
+            callManager.selectedPersona = selectedPersona
             bottomSheetPosition = CallScreen.SHEET_POSITION_BOTTOM
 
             Task {
