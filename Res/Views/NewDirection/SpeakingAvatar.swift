@@ -1,7 +1,7 @@
 import SwiftUI
 import Combine
 
-struct VapiButton: View {
+struct SpeakingAvatar: View {
     let audioLevel: Float
     @Binding var callState: CallManagerNewDirection.CallState
     @Binding var conversationState: CallManagerNewDirection.ConversationState
@@ -71,9 +71,13 @@ struct VapiButton: View {
                     .frame(width: baseSize + 45, height: baseSize + 45)
                     .blur(radius: 3)
                     .rotationEffect(Angle(degrees: isAnimating ? 360 : 0))
-                    .animation(Animation.linear(duration: 1.5).repeatForever(autoreverses: false), value: isAnimating)
                     .onAppear {
-                        self.isAnimating = true
+                        withAnimation(Animation.linear(duration: 1.5).repeatForever(autoreverses: false)) {
+                            isAnimating = true
+                        }
+                    }
+                    .onDisappear {
+                        isAnimating = false
                     }
             }
         }
@@ -98,7 +102,7 @@ struct ContentView: View {
 
             VStack {
                 VStack {
-                    VapiButton(
+                    SpeakingAvatar(
                         audioLevel: audioLevel,
                         callState: .constant(isLoading ? .loading : .started),
                         conversationState: .constant(.assistantSpeaking),
@@ -126,6 +130,6 @@ struct ContentView: View {
     }
 }
 
-#Preview("Vapi Button Preview") {
+#Preview("Speaking Avatar Preview") {
     ContentView()
 }

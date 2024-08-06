@@ -49,6 +49,7 @@
 		FA5550A22BEDD4AF00C7648B /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		FA5550A32BEDD4AF00C7648B /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 00571768FCC847B5B370CACD /* Sentry */; };
 		FA5550A52BEDD4CF00C7648B /* AuthScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5550A42BEDD4CF00C7648B /* AuthScreenView.swift */; };
+		FA6002442C621E6E00E58B10 /* ConversationStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6002432C621E6E00E58B10 /* ConversationStateView.swift */; };
 		FA6140CE2C29422E00424953 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6140CD2C29422E00424953 /* Color+Extensions.swift */; };
 		FA6140D22C2948B200424953 /* MainViewNewDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6140D12C2948B200424953 /* MainViewNewDirection.swift */; };
 		FA6B5B6E2C47A29500544929 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA6B5B6D2C47A29500544929 /* Assets.xcassets */; };
@@ -68,7 +69,7 @@
 		FA976F542C520FB600A66D4F /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976F532C520FB600A66D4F /* PrimaryButton.swift */; };
 		FA976F572C5222CC00A66D4F /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = FA976F562C5222CC00A66D4F /* BottomSheet */; };
 		FA976F5A2C5769B600A66D4F /* dial.up.sound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = FA976F592C5769B600A66D4F /* dial.up.sound.m4a */; };
-		FA976F622C5CB48900A66D4F /* VapiButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976F612C5CB48900A66D4F /* VapiButton.swift */; };
+		FA976F622C5CB48900A66D4F /* SpeakingAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976F612C5CB48900A66D4F /* SpeakingAvatar.swift */; };
 		FAB04A3F2C1A468D0081AF59 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = FAB04A3E2C1A468D0081AF59 /* RiveRuntime */; };
 		FACDDA392C17C3CE006395BE /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = FACDDA382C17C3CE006395BE /* Vapi */; };
 		FACDDA3C2C18BFAF006395BE /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = FACDDA3B2C18BFAF006395BE /* Vapi */; };
@@ -155,6 +156,7 @@
 		FA14AACC2BE84F43001C7486 /* SupabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseManager.swift; sourceTree = "<group>"; };
 		FA1ECBE72C2A7C6400B79D7E /* CallManagerNewDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManagerNewDirection.swift; sourceTree = "<group>"; };
 		FA5550A42BEDD4CF00C7648B /* AuthScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthScreenView.swift; sourceTree = "<group>"; };
+		FA6002432C621E6E00E58B10 /* ConversationStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationStateView.swift; sourceTree = "<group>"; };
 		FA6140CD2C29422E00424953 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		FA6140D12C2948B200424953 /* MainViewNewDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewNewDirection.swift; sourceTree = "<group>"; };
 		FA6B5B6D2C47A29500544929 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -172,7 +174,7 @@
 		FA976F512C520E1300A66D4F /* CallScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallScreen.swift; sourceTree = "<group>"; };
 		FA976F532C520FB600A66D4F /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		FA976F592C5769B600A66D4F /* dial.up.sound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = dial.up.sound.m4a; sourceTree = "<group>"; };
-		FA976F612C5CB48900A66D4F /* VapiButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VapiButton.swift; sourceTree = "<group>"; };
+		FA976F612C5CB48900A66D4F /* SpeakingAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakingAvatar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -380,7 +382,8 @@
 			isa = PBXGroup;
 			children = (
 				FA976F512C520E1300A66D4F /* CallScreen.swift */,
-				FA976F612C5CB48900A66D4F /* VapiButton.swift */,
+				FA976F612C5CB48900A66D4F /* SpeakingAvatar.swift */,
+				FA6002432C621E6E00E58B10 /* ConversationStateView.swift */,
 			);
 			path = NewDirection;
 			sourceTree = "<group>";
@@ -640,7 +643,8 @@
 				FA6C0E202C28E79200D9F7A2 /* DefaultPersonas.swift in Sources */,
 				1849A54A2BBDD6FF00A4BCF1 /* LockScreenWidgetGuideView.swift in Sources */,
 				F3E72E4E2BF96240001FB6E4 /* CustomTextPromptTeView.swift in Sources */,
-				FA976F622C5CB48900A66D4F /* VapiButton.swift in Sources */,
+				FA976F622C5CB48900A66D4F /* SpeakingAvatar.swift in Sources */,
+				FA6002442C621E6E00E58B10 /* ConversationStateView.swift in Sources */,
 				F3B5AB1A2BACE488009CDBB5 /* XMarkButton.swift in Sources */,
 				1849A54B2BBDD6FF00A4BCF1 /* HomeScreenWidgetGuideView.swift in Sources */,
 				B95D2F332BA4EAF5003C7C17 /* CallManager.swift in Sources */,

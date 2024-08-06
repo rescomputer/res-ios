@@ -58,9 +58,7 @@ import AVFoundation
                     self?.callState = .ended
                     self?.conversationState = .null
                 case .speechUpdate(let speechUpdate):
-                    print("###")
                     print(speechUpdate)
-                    print("###")
                     if speechUpdate.role == .assistant {
                         if speechUpdate.status == .started {
                             self?.conversationState = .assistantSpeaking
@@ -69,30 +67,20 @@ import AVFoundation
                         }
                     } else if (speechUpdate.role == .user) {
                         if speechUpdate.status == .started {
-                            print("😀😀😀")
                             self?.conversationState = .userSpeaking
                         } else {
-                            print("😐😐😐")
                             self?.conversationState = .assistantThinking
                         }
                     }
                 case .conversationUpdate(let conversationUpdateEventt):
-                    print("---")
                     print(conversationUpdateEventt)
-                    print("---")
                 case .functionCall:
-                    print("***")
                     print(event)
-                    print("***")
                 case .hang:
-                    print("(((")
                     print(event)
-                    print("(((")
 
                 case .metadata:
-                    print(")))")
                     print(event)
-                    print(")))")
                 case .transcript(let transcriptEvent):
                     DispatchQueue.main.async {
                         self?.currentTranscript = transcriptEvent.transcript

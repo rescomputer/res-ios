@@ -83,7 +83,7 @@ struct CallScreen: View {
                         Spacer().frame(height: geometry.safeAreaInsets.top + 112)
                         .padding(.horizontal)
                         
-                        VapiButton(
+                        SpeakingAvatar(
                             audioLevel: callManager.remoteAudioLevel,
                             callState: $callManager.callState,
                             conversationState: $callManager.conversationState,
@@ -94,7 +94,12 @@ struct CallScreen: View {
                         Text(selectedPersona.name)
                             .font(.digital7(size: 28))
                             .foregroundColor(.white)
-                        Spacer()
+                            .padding(.bottom)
+                        ConversationStateView(
+                            callState: $callManager.callState,
+                            conversationState: $callManager.conversationState,
+                            personaName: selectedPersona.name
+                        )
                     }
                     .frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
                 }
