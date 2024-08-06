@@ -22,22 +22,21 @@ import AVFoundation
     enum CallState: String {
         case started, loading, ended
     }
+    enum ConversationState: String {
+        case assistantSpeaking, assistantThinking, userSpeaking, null
+    }
     
     @Published var callState: CallState = .ended
+    @Published var conversationState: ConversationState = .null
+    
     var vapiEvents = [Vapi.Event]()
     private var cancellables = Set<AnyCancellable>()
     var vapi: Vapi?
-
-    var isAssistantSpeaking = false
     
-    @Published var enteredText = ""
-
-    @Published var activity: Activity<Res_ExtensionAttributesNew>?
-
     var selectedPersona: Persona?
 
-    var remoteVolumeLevel: Float {
-        vapi?.remoteAudioLevel ?? 0
+    public var remoteAudioLevel: Float {
+        self.conversationState == .assistantSpeaking ? (vapi?.remoteAudioLevel ?? 0) : 0
     }
 
     func setupVapi() {
@@ -57,23 +56,43 @@ import AVFoundation
                     self?.callState = .started
                 case .callDidEnd:
                     self?.callState = .ended
-                    self?.isAssistantSpeaking = false
+                    self?.conversationState = .null
                 case .speechUpdate(let speechUpdate):
-                    print(event)
-                    if (speechUpdate.status == .stopped && speechUpdate.role == .assistant)
-                        || speechUpdate.role == .user {
-                        self?.isAssistantSpeaking = false
-                    } else {
-                        self?.isAssistantSpeaking = true
+                    print("###")
+                    print(speechUpdate)
+                    print("###")
+                    if speechUpdate.role == .assistant {
+                        if speechUpdate.status == .started {
+                            self?.conversationState = .assistantSpeaking
+                        } else {
+                            self?.conversationState = .null
+                        }
+                    } else if (speechUpdate.role == .user) {
+                        if speechUpdate.status == .started {
+                            print("😀😀😀")
+                            self?.conversationState = .userSpeaking
+                        } else {
+                            print("😐😐😐")
+                            self?.conversationState = .assistantThinking
+                        }
                     }
-                case .conversationUpdate:
-                    print(event)
+                case .conversationUpdate(let conversationUpdateEventt):
+                    print("---")
+                    print(conversationUpdateEventt)
+                    print("---")
                 case .functionCall:
+                    print("***")
                     print(event)
+                    print("***")
                 case .hang:
+                    print("(((")
                     print(event)
+                    print("(((")
+
                 case .metadata:
+                    print(")))")
                     print(event)
+                    print(")))")
                 case .transcript(let transcriptEvent):
                     DispatchQueue.main.async {
                         self?.currentTranscript = transcriptEvent.transcript
@@ -81,15 +100,8 @@ import AVFoundation
                 case .error(let error):
                     SentryManager.shared.captureError(error, description: "VAPI reported an error")
                 }
-                self?.updateLiveActivity()
             }
             .store(in: &cancellables)
-        
-        if let savedText = UserDefaults.standard.string(forKey: "enteredText"), !savedText.isEmpty {
-            enteredText = savedText
-        } else {
-            enteredText = "A helpful assistant that gets to the point. Does not speak in bullet points. Answers clearly."
-        }
     }
     
     func handleCallAction() async {
@@ -185,38 +197,9 @@ import AVFoundation
             
             setupVapi()
             stopPlayingSounds()
-            
-            // Start the live activity
-            let activityAttributes = Res_ExtensionAttributesNew(name: "Conversation")
-            let initialContentState = Res_ExtensionAttributesNew.ContentState(sfSymbolName: "ellipsis")
-            
-            activity = try Activity<Res_ExtensionAttributesNew>.request(attributes: activityAttributes, contentState: initialContentState)
-            
         } catch {
             SentryManager.shared.captureError(error, description: "Error starting call")
             callState = .ended
-        }
-    }
-    
-    func updateLiveActivity() {
-        switch callState {
-        case .started:
-            let sfSymbolName = "waveform.and.person.filled"
-            let updatedContentState = Res_ExtensionAttributesNew.ContentState(sfSymbolName: sfSymbolName)
-            Task {
-                await activity?.update(using: updatedContentState)
-            }
-        case .loading:
-            let sfSymbolName = "ellipsis"
-            let updatedContentState = Res_ExtensionAttributesNew.ContentState(sfSymbolName: sfSymbolName)
-            Task {
-                await activity?.update(using: updatedContentState)
-            }
-        case .ended:
-            Task {
-                await activity?.end(dismissalPolicy: .immediate)
-                activity = nil
-            }
         }
     }
 
@@ -227,12 +210,6 @@ import AVFoundation
         }
         
         vapi.stop()
-        Task {
-            await activity?.end(dismissalPolicy: .immediate)
-            DispatchQueue.main.async {
-                self.activity = nil
-            }
-        }
     }
     
     private func playDialUpSound() {
@@ -253,55 +230,4 @@ import AVFoundation
     func stopPlayingSounds() {
         audioPlayer?.stop()
     }
-}
-
-
-extension CallManagerNewDirection {
-    var callStateText: String {
-        switch callState {
-        case .started:
-            "Connected"
-        case .loading:
-            "Connecting..."
-        case .ended:
-            "Chat with an AI back-and-forth"
-        }
-    }
-    
-    var buttonGradient: LinearGradient {
-        switch callState {
-        case .loading:
-            LinearGradient(gradient: Gradient(colors: [Color(red: 0.957, green: 0.522, blue: 0), Color(red: 0.961, green: 0.282, blue: 0)]), startPoint: .top, endPoint: .bottom)
-        case .ended:
-            LinearGradient(gradient: Gradient(colors: [Color(red: 0.957, green: 0.522, blue: 0), Color(red: 0.961, green: 0.282, blue: 0)]), startPoint: .top, endPoint: .bottom)
-        case .started:
-            LinearGradient(gradient: Gradient(colors: [Color(red: 0.957, green: 0.231, blue: 0), Color(red: 0.961, green: 0, blue: 0)]), startPoint: .top, endPoint: .bottom)
-        }
-    }
-    
-    @ViewBuilder
-    var buttonText: some View {
-        switch callState {
-        case .loading:
-            Loader()
-                .frame(width: 42, height: 42)
-                .scaleUpAnimation()
-        case .ended:
-            Image(systemName: "phone.fill")
-                .foregroundStyle(.white.opacity(0.8))
-                .scaleUpAnimation()
-        case .started:
-            Image(systemName: "phone.down.fill")
-                .foregroundStyle(.white.opacity(0.8))
-                .scaleUpAnimation()
-        }
-    }
-}
-
-struct Res_ExtensionAttributesNew: ActivityAttributes {
-    struct ContentState: Codable, Hashable {
-        var sfSymbolName: String
-    }
-    
-    var name: String
 }

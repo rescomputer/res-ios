@@ -26,7 +26,6 @@
 		B953528C2BFE771600C1E32C /* WaveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B953528B2BFE771600C1E32C /* WaveAnimation.swift */; };
 		B95D2F332BA4EAF5003C7C17 /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F322BA4EAF5003C7C17 /* CallManager.swift */; };
 		B95D2F352BA4EB32003C7C17 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */; };
-		F31C49472BC0DDC60075477D /* AudioVisualizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C49462BC0DDC60075477D /* AudioVisualizerView.swift */; };
 		F31C494B2BC37C080075477D /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C494A2BC37C080075477D /* Loader.swift */; };
 		F31C74A92C16B2FA009023D6 /* ChangelogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C74A82C16B2FA009023D6 /* ChangelogView.swift */; };
 		F31C74ED2C17483D009023D6 /* CustomizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C74EC2C17483D009023D6 /* CustomizationView.swift */; };
@@ -69,6 +68,7 @@
 		FA976F542C520FB600A66D4F /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976F532C520FB600A66D4F /* PrimaryButton.swift */; };
 		FA976F572C5222CC00A66D4F /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = FA976F562C5222CC00A66D4F /* BottomSheet */; };
 		FA976F5A2C5769B600A66D4F /* dial.up.sound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = FA976F592C5769B600A66D4F /* dial.up.sound.m4a */; };
+		FA976F622C5CB48900A66D4F /* VapiButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA976F612C5CB48900A66D4F /* VapiButton.swift */; };
 		FAB04A3F2C1A468D0081AF59 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = FAB04A3E2C1A468D0081AF59 /* RiveRuntime */; };
 		FACDDA392C17C3CE006395BE /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = FACDDA382C17C3CE006395BE /* Vapi */; };
 		FACDDA3C2C18BFAF006395BE /* Vapi in Frameworks */ = {isa = PBXBuildFile; productRef = FACDDA3B2C18BFAF006395BE /* Vapi */; };
@@ -136,7 +136,6 @@
 		B953528B2BFE771600C1E32C /* WaveAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimation.swift; sourceTree = "<group>"; };
 		B95D2F322BA4EAF5003C7C17 /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
-		F31C49462BC0DDC60075477D /* AudioVisualizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioVisualizerView.swift; sourceTree = "<group>"; };
 		F31C494A2BC37C080075477D /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		F31C74A82C16B2FA009023D6 /* ChangelogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangelogView.swift; sourceTree = "<group>"; };
 		F31C74EC2C17483D009023D6 /* CustomizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizationView.swift; sourceTree = "<group>"; };
@@ -173,6 +172,7 @@
 		FA976F512C520E1300A66D4F /* CallScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallScreen.swift; sourceTree = "<group>"; };
 		FA976F532C520FB600A66D4F /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		FA976F592C5769B600A66D4F /* dial.up.sound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = dial.up.sound.m4a; sourceTree = "<group>"; };
+		FA976F612C5CB48900A66D4F /* VapiButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VapiButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,12 +297,12 @@
 		B95D2F3A2BA4F35F003C7C17 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				FA6C0E1A2C27D58900D9F7A2 /* PadsView.swift */,
 				B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */,
 				F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */,
 				F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */,
 				F3B5AB242BAE91E3009CDBB5 /* CustomLinkView.swift */,
 				F31C494A2BC37C080075477D /* Loader.swift */,
-				FA6C0E1A2C27D58900D9F7A2 /* PadsView.swift */,
 				FA976F532C520FB600A66D4F /* PrimaryButton.swift */,
 			);
 			path = Components;
@@ -347,7 +347,6 @@
 				F3B4EC5D2C1238F0000B80EF /* OnboardingAnimation.swift */,
 				F31C74A82C16B2FA009023D6 /* ChangelogView.swift */,
 				1849A5492BBDD6FF00A4BCF1 /* HomeScreenWidgetGuideView.swift */,
-				F31C49462BC0DDC60075477D /* AudioVisualizerView.swift */,
 				1849A5482BBDD6FF00A4BCF1 /* LockScreenWidgetGuideView.swift */,
 				1849A54C2BBDDF7100A4BCF1 /* LaunchScreenViewController.swift */,
 				B953528B2BFE771600C1E32C /* WaveAnimation.swift */,
@@ -381,6 +380,7 @@
 			isa = PBXGroup;
 			children = (
 				FA976F512C520E1300A66D4F /* CallScreen.swift */,
+				FA976F612C5CB48900A66D4F /* VapiButton.swift */,
 			);
 			path = NewDirection;
 			sourceTree = "<group>";
@@ -622,7 +622,6 @@
 			files = (
 				FA1ECBE82C2A7C6400B79D7E /* CallManagerNewDirection.swift in Sources */,
 				F3B5AB212BAD08F1009CDBB5 /* AnimationUtility.swift in Sources */,
-				F31C49472BC0DDC60075477D /* AudioVisualizerView.swift in Sources */,
 				1849A5472BBDD68A00A4BCF1 /* UIScreen+Extensions.swift in Sources */,
 				F3E72E522BF9632A001FB6E4 /* AppSettingsTeView.swift in Sources */,
 				FA6140CE2C29422E00424953 /* Color+Extensions.swift in Sources */,
@@ -641,6 +640,7 @@
 				FA6C0E202C28E79200D9F7A2 /* DefaultPersonas.swift in Sources */,
 				1849A54A2BBDD6FF00A4BCF1 /* LockScreenWidgetGuideView.swift in Sources */,
 				F3E72E4E2BF96240001FB6E4 /* CustomTextPromptTeView.swift in Sources */,
+				FA976F622C5CB48900A66D4F /* VapiButton.swift in Sources */,
 				F3B5AB1A2BACE488009CDBB5 /* XMarkButton.swift in Sources */,
 				1849A54B2BBDD6FF00A4BCF1 /* HomeScreenWidgetGuideView.swift in Sources */,
 				B95D2F332BA4EAF5003C7C17 /* CallManager.swift in Sources */,
