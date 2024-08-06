@@ -55,6 +55,7 @@ struct CallScreen: View {
             }
             .onAppear {
                 self.bottomSheetPosition = .relative(0.45)
+                self.callManager.setupVapi()
             }
             .onChange(of: bottomSheetPosition) {
                 updateBioButtonText()
@@ -79,29 +80,26 @@ struct CallScreen: View {
                         )
 
                     VStack {
-                        Spacer().frame(height: geometry.safeAreaInsets.top + 112) // Adjust the height if needed
-                        
-                        HStack(alignment: .top) {
-                            Image(uiImage: selectedPersona.image)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 58, height: 58)
-                                .clipShape(Circle())
-
-                            VStack(alignment: .leading) {
-                                Text(selectedPersona.name)
-                                    .foregroundColor(.white)
-                                Text(selectedPersona.description)
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 16))
-                            }
-                            .padding(.leading, 8)
-
-                            Spacer()
-                        }
+                        Spacer().frame(height: geometry.safeAreaInsets.top + 212)
                         .padding(.horizontal)
                         
-                        Spacer()
+                        SpeakingAvatar(
+                            audioLevel: callManager.remoteAudioLevel,
+                            callState: $callManager.callState,
+                            conversationState: $callManager.conversationState,
+                            personaImage: selectedPersona.image,
+                            showDebugInfo: false
+
+                        )
+                        Text(selectedPersona.name)
+                            .font(.digital7(size: 28))
+                            .foregroundColor(.white)
+                            .padding(.bottom)
+                        ConversationStateView(
+                            callState: $callManager.callState,
+                            conversationState: $callManager.conversationState,
+                            personaName: selectedPersona.name
+                        )
                     }
                     .frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
                 }
@@ -118,12 +116,12 @@ struct CallScreen: View {
                                 Image(uiImage: selectedPersona.image)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 140, height: 140)
+                                    .frame(width: 124, height: 124)
                                     .clipShape(Circle())
                                     .shadow(color: Color.white.opacity(0.45), radius: 10, x: 0, y: 0)
                                     .padding(.bottom, 16)
                                 Text(selectedPersona.name)
-                                    .font(.system(size: 28))
+                                    .font(.digital7(size: 28))
                                     .padding(.bottom, 12)
                                     .foregroundColor(.white)
                                 Text(selectedPersona.description)

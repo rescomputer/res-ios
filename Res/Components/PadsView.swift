@@ -196,7 +196,7 @@ struct PadButton: View {
 }
 
 struct PadsView_Previews: PreviewProvider {
-    @State static var selectedPersonaId: UUID? = defaultPersonas[2].id // Assuming the third persona is initially selected
+    @State static var selectedPersonaId: UUID? = defaultPersonas[2].id
 
     static var previews: some View {
         PadsView(personas: defaultPersonas, selectedPersonaId: $selectedPersonaId)
