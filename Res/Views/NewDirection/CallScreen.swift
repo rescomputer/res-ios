@@ -80,7 +80,7 @@ struct CallScreen: View {
                         )
 
                     VStack {
-                        Spacer().frame(height: geometry.safeAreaInsets.top + 112)
+                        Spacer().frame(height: geometry.safeAreaInsets.top + 212)
                         .padding(.horizontal)
                         
                         SpeakingAvatar(
