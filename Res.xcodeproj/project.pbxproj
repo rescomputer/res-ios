@@ -46,6 +46,7 @@
 		FA14AAD22BE850A0001C7486 /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = FA14AAD12BE850A0001C7486 /* Functions */; };
 		FA14AAD42BE850A0001C7486 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = FA14AAD32BE850A0001C7486 /* Supabase */; };
 		FA1ECBE82C2A7C6400B79D7E /* CallManagerNewDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1ECBE72C2A7C6400B79D7E /* CallManagerNewDirection.swift */; };
+		FA4713582C6330FB00DD226C /* SpeakingUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4713572C6330FB00DD226C /* SpeakingUser.swift */; };
 		FA5550A22BEDD4AF00C7648B /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		FA5550A32BEDD4AF00C7648B /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 00571768FCC847B5B370CACD /* Sentry */; };
 		FA5550A52BEDD4CF00C7648B /* AuthScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5550A42BEDD4CF00C7648B /* AuthScreenView.swift */; };
@@ -155,6 +156,7 @@
 		FA14AACA2BE80E0B001C7486 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		FA14AACC2BE84F43001C7486 /* SupabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseManager.swift; sourceTree = "<group>"; };
 		FA1ECBE72C2A7C6400B79D7E /* CallManagerNewDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManagerNewDirection.swift; sourceTree = "<group>"; };
+		FA4713572C6330FB00DD226C /* SpeakingUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakingUser.swift; sourceTree = "<group>"; };
 		FA5550A42BEDD4CF00C7648B /* AuthScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthScreenView.swift; sourceTree = "<group>"; };
 		FA6002432C621E6E00E58B10 /* ConversationStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationStateView.swift; sourceTree = "<group>"; };
 		FA6140CD2C29422E00424953 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 				FA976F512C520E1300A66D4F /* CallScreen.swift */,
 				FA976F612C5CB48900A66D4F /* SpeakingAvatar.swift */,
 				FA6002432C621E6E00E58B10 /* ConversationStateView.swift */,
+				FA4713572C6330FB00DD226C /* SpeakingUser.swift */,
 			);
 			path = NewDirection;
 			sourceTree = "<group>";
@@ -637,6 +640,7 @@
 				F31C494B2BC37C080075477D /* Loader.swift in Sources */,
 				F3E72E502BF962F7001FB6E4 /* VoiceSettingsTeView.swift in Sources */,
 				18D289E32B9713FE008742FB /* ResApp.swift in Sources */,
+				FA4713582C6330FB00DD226C /* SpeakingUser.swift in Sources */,
 				FA6C0E1B2C27D58900D9F7A2 /* PadsView.swift in Sources */,
 				FA5550A52BEDD4CF00C7648B /* AuthScreenView.swift in Sources */,
 				FA14AACD2BE84F43001C7486 /* SupabaseManager.swift in Sources */,

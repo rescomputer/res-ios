@@ -38,6 +38,9 @@ import AVFoundation
     public var remoteAudioLevel: Float {
         self.conversationState == .assistantSpeaking ? (vapi?.remoteAudioLevel ?? 0) : 0
     }
+    public var localAudioLevel: Float {
+        self.conversationState == .userSpeaking ? (vapi?.localAudioLevel ?? 0) : 0
+    }
 
     func setupVapi() {
         guard let vapi else {
@@ -119,12 +122,21 @@ import AVFoundation
 
         Task {
             await startObservingRemoteAudioLevel()
+            await startObservingLocalAudioLevel()
         }
     }
     
     func startObservingRemoteAudioLevel() async {
         do {
             try await vapi?.startRemoteParticipantsAudioLevelObserver()
+        } catch {
+            print(error)
+        }
+    }
+    
+    func startObservingLocalAudioLevel() async {
+        do {
+            try await vapi?.startLocalAudioLevelObserver()
         } catch {
             print(error)
         }

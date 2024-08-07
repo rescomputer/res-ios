@@ -1,7 +1,7 @@
 import SwiftUI
 import Combine
 
-struct SpeakingAvatar: View {
+struct SpeakingUser: View {
     let audioLevel: Float
     @Binding var callState: CallManagerNewDirection.CallState
     @Binding var conversationState: CallManagerNewDirection.ConversationState
@@ -13,27 +13,39 @@ struct SpeakingAvatar: View {
     @State private var timeBetweenChanges: Double = 0.0
 
     var body: some View {
-        let baseSize: CGFloat = 140
+        let baseSize: CGFloat = 160
         let adjustedAudioLevel = min(audioLevel * 10, 1.0)
-        let dynamicSize: CGFloat = baseSize + CGFloat(adjustedAudioLevel * 70)  // Dynamic size for the overlay
-        let dynamicBlur: CGFloat = 5 + CGFloat(adjustedAudioLevel * 15)  // Dynamic blur radius
+        let blurRadius: CGFloat = 5  // Constant blur radius
+        let semiCircleHeight: CGFloat = baseSize + 80  // Adjust as needed for semi-circle height
 
         ZStack {
-            // remote audio level indicator
-            if callState == .started && conversationState == .assistantSpeaking {
-                Circle()
-                    .stroke(.white, lineWidth: 12)
-                    .frame(width: dynamicSize + 45, height: dynamicSize + 45)
-                    .blur(radius: dynamicBlur)
-                    .opacity(0.5)
-                    .animation(.easeOut(duration: 0.4), value: adjustedAudioLevel)
+            if callState == .started && (
+                conversationState == .userSpeaking || conversationState == .assistantThinking
+                ) {
+                // Largest semi-circle
+                HalfCircle()
+                    .stroke(Color.white, lineWidth: 16)
+                    .frame(width: baseSize + 80, height: baseSize + 80)
+                    .blur(radius: blurRadius)
+                    .opacity(Double(min(-0.1 + adjustedAudioLevel * 0.7, 0.5)))
+                    .animation(.easeOut(duration: 0.75), value: adjustedAudioLevel)
+                
+                // Middle semi-circle
+                HalfCircle()
+                    .stroke(Color.white, lineWidth: 16)
+                    .frame(width: baseSize, height: baseSize)
+                    .blur(radius: blurRadius)
+                    .opacity(Double(min(0 + adjustedAudioLevel * 0.7, 0.5)))
+                    .animation(.easeOut(duration: 1.5), value: adjustedAudioLevel)
+                
+                // Smallest semi-circle
+                HalfCircle()
+                    .stroke(Color.white, lineWidth: 16)
+                    .frame(width: baseSize - 80, height: baseSize - 80)
+                    .blur(radius: blurRadius)
+                    .opacity(Double(0.2 + adjustedAudioLevel * 0.5))
+                    .animation(.easeOut(duration: 2.25), value: adjustedAudioLevel)
             }
-
-            Image(uiImage: personaImage)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: baseSize, height: baseSize)
-                .clipShape(Circle())
 
             // useful for development
             if showDebugInfo {
@@ -59,29 +71,10 @@ struct SpeakingAvatar: View {
                         .background(Color.black.opacity(0.7))
                         .cornerRadius(8)
                 }
-                .padding(.top, dynamicSize / 2 + 20)  // Adjusted for better placement
-            }
-
-            // loading spinner
-            if callState == .loading || conversationState == .assistantThinking {
-                Circle()
-                    .trim(from: 0.25, to: 1)  // 3/4th circle
-                    .stroke(LinearGradient(gradient: Gradient(colors: [.white, .white.opacity(0)]), startPoint: .leading, endPoint: .trailing), style: StrokeStyle(lineWidth: 10, lineCap: .round))
-                    .opacity(0.5)
-                    .frame(width: baseSize + 45, height: baseSize + 45)
-                    .blur(radius: 3)
-                    .rotationEffect(Angle(degrees: isAnimating ? 360 : 0))
-                    .onAppear {
-                        withAnimation(Animation.linear(duration: 1.5).repeatForever(autoreverses: false)) {
-                            isAnimating = true
-                        }
-                    }
-                    .onDisappear {
-                        isAnimating = false
-                    }
+                .padding(.top, baseSize / 2 + 20)  // Adjusted for better placement
             }
         }
-        .frame(width: baseSize + 50, height: baseSize + 50)  // Overall size adjusted
+        .frame(width: baseSize + 100, height: semiCircleHeight / 2 + 20)  // Set height to match the semi-circle
         .onChange(of: audioLevel) { newValue in
             let currentTime = Date()
             timeBetweenChanges = currentTime.timeIntervalSince(lastUpdateTime) * 1000
@@ -90,7 +83,19 @@ struct SpeakingAvatar: View {
     }
 }
 
-struct ContentView: View {
+struct HalfCircle: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.addArc(center: CGPoint(x: rect.midX, y: rect.midY),
+                    radius: rect.width / 2,
+                    startAngle: .degrees(180),
+                    endAngle: .degrees(0),
+                    clockwise: false)
+        return path
+    }
+}
+
+struct SpeakingUserPreview: View {
     @StateObject private var callManager = CallManagerNewDirection()
     @State private var audioLevel: Float = 0.0
     @State private var showDebugInfo: Bool = true
@@ -102,10 +107,10 @@ struct ContentView: View {
 
             VStack {
                 VStack {
-                    SpeakingAvatar(
+                    SpeakingUser(
                         audioLevel: audioLevel,
                         callState: .constant(isLoading ? .loading : .started),
-                        conversationState: .constant(.assistantSpeaking),
+                        conversationState: .constant(.userSpeaking),
                         personaImage: UIImage(imageLiteralResourceName: "chiller"),
                         showDebugInfo: showDebugInfo
                     )
@@ -130,6 +135,6 @@ struct ContentView: View {
     }
 }
 
-#Preview("Speaking Avatar Preview") {
-    ContentView()
+#Preview("Speaking User Preview") {
+    SpeakingUserPreview()
 }

@@ -13,7 +13,7 @@ struct CallScreen: View {
     @StateObject private var callManager = CallManagerNewDirection()
 
     private static let topPosition: BottomSheetPosition = .relative(0.2)
-    private static let SHEET_POSITION_MIDDLE: BottomSheetPosition = .relative(0.42)
+    private static let SHEET_POSITION_MIDDLE: BottomSheetPosition = .relative(0.31)
     private static let SHEET_POSITION_TOP: BottomSheetPosition = .relative(0.7)
     private static let SHEET_POSITION_BOTTOM: BottomSheetPosition = .absolute(100)
     
@@ -54,7 +54,7 @@ struct CallScreen: View {
                 )
             }
             .onAppear {
-                self.bottomSheetPosition = .relative(0.45)
+                self.bottomSheetPosition = CallScreen.SHEET_POSITION_MIDDLE
                 self.callManager.setupVapi()
             }
             .onChange(of: bottomSheetPosition) {
@@ -89,7 +89,6 @@ struct CallScreen: View {
                             conversationState: $callManager.conversationState,
                             personaImage: selectedPersona.image,
                             showDebugInfo: false
-
                         )
                         Text(selectedPersona.name)
                             .font(.digital7(size: 28))
@@ -100,6 +99,14 @@ struct CallScreen: View {
                             conversationState: $callManager.conversationState,
                             personaName: selectedPersona.name
                         )
+                        Spacer()
+                        SpeakingUser(
+                            audioLevel: callManager.localAudioLevel,
+                            callState: $callManager.callState,
+                            conversationState: $callManager.conversationState,
+                            personaImage: selectedPersona.image,
+                            showDebugInfo: false
+                        ).padding(.bottom, 20)
                     }
                     .frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
                 }
@@ -204,7 +211,7 @@ struct CallScreen: View {
     }
 
     private var additionalInfoOpacity: Double {
-        bottomSheetPosition == .absolute(100) ? 1.0 : 0.0
+        bottomSheetPosition == CallScreen.SHEET_POSITION_BOTTOM ? 1.0 : 0.0
     }
 
     private func startCall() {
