@@ -43,6 +43,7 @@ struct CallScreen: View {
                         .enableContentDrag(true)
                         .dragIndicatorColor(.gray)
                         .customAnimation(animationValue)
+                        .sheetWidth(.relative(1))
                 }
             }
             .task {
