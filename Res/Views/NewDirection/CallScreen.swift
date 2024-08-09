@@ -12,10 +12,10 @@ struct CallScreen: View {
     @State private var isInCall = false
     @StateObject private var callManager = CallManagerNewDirection()
 
-    private static let topPosition: BottomSheetPosition = .relative(0.2)
+    private static let SHEET_POSITION_BOTTOM_FLOAT = CGFloat(100)
     private static let SHEET_POSITION_MIDDLE: BottomSheetPosition = .relative(0.31)
     private static let SHEET_POSITION_TOP: BottomSheetPosition = .relative(0.7)
-    private static let SHEET_POSITION_BOTTOM: BottomSheetPosition = .absolute(100)
+    private static let SHEET_POSITION_BOTTOM: BottomSheetPosition = .absolute(SHEET_POSITION_BOTTOM_FLOAT)
     
     init() {
         if let firstPersonaId = defaultPersonas.first?.id {
@@ -106,7 +106,7 @@ struct CallScreen: View {
                             conversationState: $callManager.conversationState,
                             personaImage: selectedPersona.image,
                             showDebugInfo: false
-                        ).padding(.bottom, 20)
+                        ).padding(.bottom, CallScreen.SHEET_POSITION_BOTTOM_FLOAT)
                     }
                     .frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
                 }

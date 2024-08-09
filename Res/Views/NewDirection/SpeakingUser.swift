@@ -16,35 +16,41 @@ struct SpeakingUser: View {
         let baseSize: CGFloat = 160
         let adjustedAudioLevel = min(audioLevel * 10, 1.0)
         let blurRadius: CGFloat = 5  // Constant blur radius
-        let semiCircleHeight: CGFloat = baseSize + 80  // Adjust as needed for semi-circle height
 
-        ZStack {
+        ZStack(alignment: .bottom) {
             if callState == .started && (
                 conversationState == .userSpeaking || conversationState == .assistantThinking
                 ) {
-                // Largest semi-circle
-                HalfCircle()
-                    .stroke(Color.white, lineWidth: 16)
-                    .frame(width: baseSize + 80, height: baseSize + 80)
-                    .blur(radius: blurRadius)
-                    .opacity(Double(min(-0.1 + adjustedAudioLevel * 0.7, 0.5)))
-                    .animation(.easeOut(duration: 0.75), value: adjustedAudioLevel)
-                
-                // Middle semi-circle
-                HalfCircle()
-                    .stroke(Color.white, lineWidth: 16)
-                    .frame(width: baseSize, height: baseSize)
-                    .blur(radius: blurRadius)
-                    .opacity(Double(min(0 + adjustedAudioLevel * 0.7, 0.5)))
-                    .animation(.easeOut(duration: 1.5), value: adjustedAudioLevel)
-                
-                // Smallest semi-circle
-                HalfCircle()
-                    .stroke(Color.white, lineWidth: 16)
-                    .frame(width: baseSize - 80, height: baseSize - 80)
-                    .blur(radius: blurRadius)
-                    .opacity(Double(0.2 + adjustedAudioLevel * 0.5))
-                    .animation(.easeOut(duration: 2.25), value: adjustedAudioLevel)
+                GeometryReader { geometry in
+                    ZStack {
+                        // Largest semi-circle
+                        HalfCircle()
+                            .stroke(Color.white, lineWidth: 16)
+                            .frame(width: baseSize + 80, height:  baseSize + 80)
+                            .blur(radius: blurRadius)
+                            .opacity(Double(min(-0.1 + adjustedAudioLevel * 0.7, 0.5)))
+                            .animation(.easeOut(duration: 0.75), value: adjustedAudioLevel)
+                            .position(x: geometry.size.width / 2, y: (geometry.size.height / 2))
+                        
+                        // Middle semi-circle
+                        HalfCircle()
+                            .stroke(Color.white, lineWidth: 16)
+                            .frame(width: baseSize, height: baseSize / 2 + 80)
+                            .blur(radius: blurRadius)
+                            .opacity(Double(min(0 + adjustedAudioLevel * 0.7, 0.5)))
+                            .animation(.easeOut(duration: 1.5), value: adjustedAudioLevel)
+                            .position(x: geometry.size.width / 2, y: (geometry.size.height / 2) + 40)
+                        
+                        // Smallest semi-circle
+                        HalfCircle()
+                            .stroke(Color.white, lineWidth: 16)
+                            .frame(width: baseSize - 80, height: (baseSize - 80))
+                            .blur(radius: blurRadius)
+                            .opacity(Double(0.2 + adjustedAudioLevel * 0.5))
+                            .animation(.easeOut(duration: 2.25), value: adjustedAudioLevel)
+                            .position(x: geometry.size.width / 2, y: (geometry.size.height) - 40)
+                    }
+                }
             }
 
             // useful for development
@@ -74,7 +80,7 @@ struct SpeakingUser: View {
                 .padding(.top, baseSize / 2 + 20)  // Adjusted for better placement
             }
         }
-        .frame(width: baseSize + 100, height: semiCircleHeight / 2 + 20)  // Set height to match the semi-circle
+        .frame(width: baseSize + 100, height: baseSize + 80)  // Adjust height to match the semi-circle
         .onChange(of: audioLevel) { newValue in
             let currentTime = Date()
             timeBetweenChanges = currentTime.timeIntervalSince(lastUpdateTime) * 1000
@@ -86,7 +92,7 @@ struct SpeakingUser: View {
 struct HalfCircle: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
-        path.addArc(center: CGPoint(x: rect.midX, y: rect.midY),
+        path.addArc(center: CGPoint(x: rect.midX, y: rect.height),
                     radius: rect.width / 2,
                     startAngle: .degrees(180),
                     endAngle: .degrees(0),
@@ -106,17 +112,13 @@ struct SpeakingUserPreview: View {
             Color.black.ignoresSafeArea()  // Setting the background to black
 
             VStack {
-                VStack {
-                    SpeakingUser(
-                        audioLevel: audioLevel,
-                        callState: .constant(isLoading ? .loading : .started),
-                        conversationState: .constant(.userSpeaking),
-                        personaImage: UIImage(imageLiteralResourceName: "chiller"),
-                        showDebugInfo: showDebugInfo
-                    )
-                }
-                .padding(.vertical, 32)
-                
+                SpeakingUser(
+                    audioLevel: audioLevel,
+                    callState: .constant(isLoading ? .loading : .started),
+                    conversationState: .constant(.userSpeaking),
+                    personaImage: UIImage(imageLiteralResourceName: "chiller"),
+                    showDebugInfo: showDebugInfo
+                )
                 Slider(value: $audioLevel, in: 0...0.1)
                     .padding()
                     .onChange(of: audioLevel) { newValue in
