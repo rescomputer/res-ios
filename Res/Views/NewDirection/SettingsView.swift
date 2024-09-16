@@ -28,6 +28,18 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             Form {
+                Section(header: Text("Membership")) {
+                    Button(action: {
+                        // Action for RES Pro (to be implemented)
+                    }) {
+                        HStack {
+                            Text("RES Pro")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                    }
+                }
                 Section(header: HStack {
                     Text("Speech Speed")
                     Spacer()
