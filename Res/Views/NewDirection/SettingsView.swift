@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SettingsView: View {
     @Binding var isActive: Bool
+    @Environment(\.openURL) var openURL
+
     @ObservedObject var callManager: CallManagerNewDirection
     @State private var selectedVoiceProvider = "default"
     @State private var selectedAIModel = "gpt-4o"
@@ -17,6 +19,7 @@ struct SettingsView: View {
     @State private var maxCallDuration = 1800.0
     @State private var wordsToInterrupt = 1.0
     @State private var voiceSpeed = 1.0
+    @State private var buildNumber: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "Unknown"
     
     let voiceProviders = ["default", "elevenlabs", "azure"] 
     let aiModels = ["gpt-4o", "gpt-4-0125-preview", "gpt-4-1106-preview"]
@@ -45,7 +48,7 @@ struct SettingsView: View {
                 }
 
                 Section(header: Text("Model Settings")) {
-                    Toggle("Privacy Mode", isOn: $callManager.privacyMode)
+                    Toggle("Privacy Mode", isOn: $callManager.hipaaEnabled)
                         .tint(.orange)
 
                     Picker("Voice Provider", selection: $selectedVoiceProvider) {
@@ -104,6 +107,46 @@ struct SettingsView: View {
                     }
                     Slider(value: $wordsToInterrupt, in: 1...10, step: 1)
                 }
+
+                Section(header: Text("About")) {
+                    Button("Contact Us") {
+                        // Implement contact action (e.g., open email)
+                        if let url = URL(string: "mailto:support@resapp.com") {
+                            openURL(url)
+                        }
+                    }
+                    
+                    Button("Twitter") {
+                        if let url = URL(string: "https://twitter.com/resapp") {
+                            openURL(url)
+                        }
+                    }
+                    
+                    Button("Discord") {
+                        if let url = URL(string: "https://discord.gg/resapp") {
+                            openURL(url)
+                        }
+                    }
+                    
+                    Button("Privacy Policy") {
+                        if let url = URL(string: "https://resapp.com/privacy") {
+                            openURL(url)
+                        }
+                    }
+                    
+                    Button("Terms of Use") {
+                        if let url = URL(string: "https://resapp.com/terms") {
+                            openURL(url)
+                        }
+                    }
+                    
+                    HStack {
+                        Text("Build Number")
+                        Spacer()
+                        Text(buildNumber)
+                            .foregroundColor(.secondary)
+                    }
+                }
             }
             .background(Color(red: 0.945, green: 0.945, blue: 0.918))
             .scrollContentBackground(.hidden) 
@@ -122,8 +165,8 @@ struct SettingsView: View {
                 }
                 ToolbarItem(placement: .principal) {
                     Text("Settings")
-                        .font(.system(size: 24, weight: .regular, design: .rounded))
-                        .foregroundColor(.black)
+                        .font(.system(size: 18, weight: .bold, design: .rounded))
+                        .foregroundColor(Color(red: 0.271, green: 0.267, blue: 0.2))
                 }
             }
         }
