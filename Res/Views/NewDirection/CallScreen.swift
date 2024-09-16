@@ -2,6 +2,7 @@ import SwiftUI
 import BottomSheet
 
 struct CallScreen: View {
+    @StateObject private var personaData = PersonaData()
     @State private var selectedPersonaId: UUID?
     @State private var bottomSheetPosition: BottomSheetPosition = CallScreen.SHEET_POSITION_MIDDLE
     @State private var scrollOffset: CGFloat = 0
@@ -19,12 +20,18 @@ struct CallScreen: View {
     private static let SHEET_POSITION_TOP: BottomSheetPosition = .relative(0.7)
     private static let SHEET_POSITION_FULL: BottomSheetPosition = .relative(1)
     private static let SHEET_POSITION_BOTTOM: BottomSheetPosition = .absolute(SHEET_POSITION_BOTTOM_FLOAT)
+
+    // State Variables for Image Picker
+    @State private var showingImagePicker = false
+    @State private var personaToUpdate: Persona? = nil
+    @State private var selectedImage: UIImage?
+
     
-    init() {
-        if let firstPersonaId = defaultPersonas.first?.id {
-            _selectedPersonaId = State(initialValue: firstPersonaId)
-        }
-    }
+    // init() {
+    //     if let firstPersonaId = defaultPersonas.first?.id {
+    //         _selectedPersonaId = State(initialValue: firstPersonaId)
+    //     }
+    // }
 
     var body: some View {
         NavigationStack {
@@ -50,6 +57,15 @@ struct CallScreen: View {
                         .sheetWidth(.relative(1))
                 }
             }
+            .environmentObject(personaData)
+            .sheet(isPresented: $showingImagePicker) {
+                ImagePicker { image in
+                    if let image = image, let persona = personaToUpdate {
+                        selectedImage = image
+                        personaData.saveImage(image, for: persona)
+                    }
+                }
+            }
             .task {
                 try? await Task.sleep(for: .seconds(0.25))
                 animationValue = .spring(
@@ -59,6 +75,9 @@ struct CallScreen: View {
                 )
             }
             .onAppear {
+                if selectedPersonaId == nil, let firstPersona = personaData.defaultPersonas.first {
+                    selectedPersonaId = firstPersona.id
+                }
                 self.bottomSheetPosition = CallScreen.SHEET_POSITION_MIDDLE
                 self.callManager.setupVapi()
             }
@@ -90,6 +109,10 @@ struct CallScreen: View {
                             Color.black.opacity(0.4)
                                 .edgesIgnoringSafeArea(.all)
                         )
+                        .onTapGesture {
+                            personaToUpdate = selectedPersona
+                            showingImagePicker = true
+                        }
 
                     VStack {
                         Spacer().frame(height: geometry.safeAreaInsets.top + 212)
@@ -139,6 +162,10 @@ struct CallScreen: View {
                                     .clipShape(Circle())
                                     .shadow(color: Color.white.opacity(0.45), radius: 10, x: 0, y: 0)
                                     .padding(.bottom, 16)
+                                    .onTapGesture {
+                                        personaToUpdate = selectedPersona
+                                        showingImagePicker = true
+                                    }
                                 Text(selectedPersona.name)
                                     .font(.digital7(size: 28))
                                     .padding(.bottom, 12)
@@ -200,7 +227,7 @@ private func bottomSheetContents(geometry: GeometryProxy) -> some View {
                             .foregroundColor(Color(red: 0.224, green: 0.216, blue: 0.161))
                             .padding(.top, 6)
                             .padding(.leading, 15)
-                        PadsView(personas: defaultPersonas, selectedPersonaId: $selectedPersonaId)
+                        PadsView(selectedPersonaId: $selectedPersonaId)
                         Text("options")
                             .font(.system(size: 24, weight: .regular, design: .rounded))
                             .foregroundColor(Color(red: 0.224, green: 0.216, blue: 0.161))
@@ -241,9 +268,8 @@ private func bottomSheetContents(geometry: GeometryProxy) -> some View {
 }
 
     private var selectedPersona: Persona? {
-        defaultPersonas.first(where: { $0.id == selectedPersonaId })
+        personaData.defaultPersonas.first(where: { $0.id == selectedPersonaId })
     }
-
     private func toggleBottomSheetPosition() {
         if bottomSheetPosition == CallScreen.SHEET_POSITION_MIDDLE {
             bottomSheetPosition = CallScreen.SHEET_POSITION_BOTTOM

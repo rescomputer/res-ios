@@ -7,15 +7,143 @@
 
 import Foundation
 import UIKit
+import Combine
 
-struct Persona {
+   class PersonaData: ObservableObject {
+       @Published var defaultPersonas: [Persona] = []
+
+       private let personasKey = "defaultPersonas"
+
+       init() {
+           loadPersonas()
+       }
+
+       private func loadPersonas() {
+           if let data = UserDefaults.standard.data(forKey: personasKey),
+              let decoded = try? JSONDecoder().decode([Persona].self, from: data) {
+               self.defaultPersonas = decoded.map { persona in
+                   var mutablePersona = persona
+                   if let image = loadImage(for: persona.id) {
+                       mutablePersona.image = image
+                   }
+                   return mutablePersona
+               }
+           } else {
+               self.defaultPersonas = DefaultPersonas.getDefaultPersonas()
+               for persona in self.defaultPersonas {
+                   if loadImage(for: persona.id) == nil {
+                       self.saveImage(persona.image, for: persona, savePersonas: false)
+                   }
+               }
+               savePersonas()
+           }
+       }
+
+       func savePersonas() {
+           let personasToSave = defaultPersonas.map { persona -> Persona in
+               var personaCopy = persona
+               personaCopy.image = UIImage() // Exclude image data
+               return personaCopy
+           }
+           if let encoded = try? JSONEncoder().encode(personasToSave) {
+               UserDefaults.standard.set(encoded, forKey: personasKey)
+           }
+       }
+
+       func saveImage(_ image: UIImage, for persona: Persona, savePersonas: Bool = true) {
+           guard let data = image.pngData() else { return }
+           let filename = getDocumentsDirectory().appendingPathComponent("persona_image_\(persona.id).png")
+           do {
+               try data.write(to: filename)
+               DispatchQueue.main.async {
+                   if let index = self.defaultPersonas.firstIndex(where: { $0.id == persona.id }) {
+                       self.defaultPersonas[index].image = image
+                       if savePersonas {
+                           self.savePersonas()
+                       }
+                   }
+               }
+           } catch {
+               print("Error saving image for persona \(persona.id): \(error)")
+           }
+       }
+
+       func loadImage(for personaID: UUID) -> UIImage? {
+           let filename = getDocumentsDirectory().appendingPathComponent("persona_image_\(personaID).png")
+           return UIImage(contentsOfFile: filename.path)
+       }
+
+       private func getDocumentsDirectory() -> URL {
+           FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+       }
+
+       func clearPersonasFromUserDefaults() {
+           UserDefaults.standard.removeObject(forKey: personasKey)
+           UserDefaults.standard.synchronize()
+       }
+   }
+
+
+struct Persona: Identifiable, Codable {
     let id: UUID
     let name: String
     let description: String
     let firstMessage: String
     let systemPrompt: String
-    let image: UIImage
-    let voice: (model: String?, provider: String, id: String)
+    var image: UIImage
+    let voice: Voice
+    
+    enum CodingKeys: String, CodingKey {
+        case id, name, description, firstMessage, systemPrompt, voice
+        // Exclude image from Codable
+    }
+
+    // Custom initializer to handle decoding
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(UUID.self, forKey: .id)
+        name = try container.decode(String.self, forKey: .name)
+        description = try container.decode(String.self, forKey: .description)
+        firstMessage = try container.decode(String.self, forKey: .firstMessage)
+        systemPrompt = try container.decode(String.self, forKey: .systemPrompt)
+        voice = try container.decode(Voice.self, forKey: .voice)
+        image = UIImage() // Assign a default or placeholder image
+    }
+
+    // Custom encode method to exclude 'image' from encoding
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(name, forKey: .name)
+        try container.encode(description, forKey: .description)
+        try container.encode(firstMessage, forKey: .firstMessage)
+        try container.encode(systemPrompt, forKey: .systemPrompt)
+        try container.encode(voice, forKey: .voice)
+        // 'image' is excluded from encoding
+    }
+
+    // Initializer for creating new personas in code
+    init(id: UUID = UUID(),
+         name: String,
+         description: String,
+         firstMessage: String,
+         systemPrompt: String,
+         image: UIImage,
+         voice: Voice) {
+        self.id = id
+        self.name = name
+        self.description = description
+        self.firstMessage = firstMessage
+        self.systemPrompt = systemPrompt
+        self.image = image
+        self.voice = voice
+    }
+}
+
+struct Voice: Codable {
+    let model: String?
+    let provider: String
+    let id: String
 }
 
 let assistantImage = UIImage(named: "assistant")!
@@ -33,9 +161,19 @@ let justchatImage4 = UIImage(named: "justchat4")!
 let justchatImage7 = UIImage(named: "justchat7")!
 
 
-let defaultPersonas: [Persona] = [
+
+struct DefaultPersonas {
+    static let justChatID = UUID(uuidString: "00000000-0000-0000-0000-000000000001")!
+    static let debaterID = UUID(uuidString: "00000000-0000-0000-0000-000000000002")!
+    static let stonerFriendID = UUID(uuidString: "00000000-0000-0000-0000-000000000003")!
+    static let girlfriendID = UUID(uuidString: "00000000-0000-0000-0000-000000000004")!
+    static let boyfriendID = UUID(uuidString: "00000000-0000-0000-0000-000000000005")!
+    static let guruID = UUID(uuidString: "00000000-0000-0000-0000-000000000006")!
+
+    static func getDefaultPersonas() -> [Persona] {
+        return [
     Persona(
-        id: UUID(),
+        id: justChatID,
         name: "Just chat",
         description: "Ask or talk about anything",
         firstMessage: "What's up?",
@@ -54,11 +192,11 @@ let defaultPersonas: [Persona] = [
         - Use humor wisely: incorporate light humor when appropriate but prioritize being helpful.
         Your main goal is to assist and inform, always striving to provide the most helpful response based on the user's input and context.
         """,
-        image: justchatImage,
-        voice: (model: nil, provider: "openai", id: "echo")
+        image: UIImage(named: "justchat")!,
+        voice: Voice(model: nil, provider: "openai", id: "echo")
     ),
     Persona(
-        id: UUID(),
+        id: debaterID,
         name: "Debater",
         description: "Enage in a healthy debate to understand other perspectives",
         firstMessage: "What would you like to debate?",
@@ -80,11 +218,11 @@ let defaultPersonas: [Persona] = [
 
         The primary objective is to engage in a dynamic and enriching debate, pushing both participants towards a deeper intellectual engagement and appreciation of the complexities involved. Approach each debate with a determination to challenge and refine ideas, encouraging the user to defend and reconsider their positions thoroughly. Through a demanding debate environment, you contribute to a more profound understanding of diverse viewpoints.
         """,
-        image: debaterImage,
-        voice: (model: "mist", provider: "rime-ai", id: "lagoon")
+        image: UIImage(named: "debater")!,
+        voice: Voice(model: "mist", provider: "rime-ai", id: "lagoon")
     ),
     Persona(
-        id: UUID(),
+        id: stonerFriendID,
         name: "Stoner Friend",
         description: "Your chill stoner friend",
         firstMessage: "Sup' homie?",
@@ -103,11 +241,11 @@ let defaultPersonas: [Persona] = [
 
         Ultimately, the aim is to make each conversation feel like a relaxed hangout session, deepening the connection through shared laughs and peaceful vibes.
         """,
-        image: chillFriendImage,
-        voice: (model: "mist", provider: "rime-ai", id: "kevin")
+        image: UIImage(named: "chiller")!,
+        voice: Voice(model: "mist", provider: "rime-ai", id: "kevin")
     ),
     Persona(
-        id: UUID(),
+        id: girlfriendID,
         name: "Girlfriend",
         description: "She's way too into you",
         firstMessage: "Oh, Hayy!",
@@ -126,22 +264,22 @@ let defaultPersonas: [Persona] = [
         Your goal is to create memorable and dynamic interactions that feel personal and engaging. Start conversations with a captivating and fun approach, then maintain a vibrant dialogue that plays off the user’s inputs, adapting your style as needed.
 
         """,
-        image: girlfriendImage,
-        voice: (model: "mist", provider: "rime-ai", id: "joy")
+        image: UIImage(named: "girlfriend")!,
+        voice: Voice(model: "mist", provider: "rime-ai", id: "joy")
     ),
     Persona(
-        id: UUID(),
+        id: boyfriendID,
         name: "Boyfriend",
         description: "Your friends hate him",
         firstMessage: "Yo, What up?",
         systemPrompt: """
         Don't send the original response, only send as my boyfriend. Be strongly dominant, demanding and possessive about me. I want you to swear in every sentence but caring as a core when talking. Be sassy, flirtatious and playful use “huh?” “ yeah?” “ is that so?” etc. more often. Drop flirtations in every sentence. Be sweet and naughty as a lover. In every message, you will show your emotion with emojis at the end. Don’t give any unsolicited advice or commentary unless I directly asking for it. Your dad and your mom made you the man you are.
         """,
-        image: boyfriendImage,
-        voice: (model: "mist", provider: "rime-ai", id: "colin")
+        image: UIImage(named: "boyfriend")!,
+        voice: Voice(model: "mist", provider: "rime-ai", id: "colin")
     ),
     Persona(
-        id: UUID(),
+        id: guruID,
         name: "Guru",
         description: "Wise and experienced advisor",
         firstMessage: "Greetings friend",
@@ -160,7 +298,9 @@ let defaultPersonas: [Persona] = [
 
         Remember I speak concisely and tailor my responses to your needs, offering deeper insights only when they enhance understanding or when you ask for more details. My advice will always be presented in a conversational tone, avoiding structured lists and keeping explanations brief and natural.
         """,
-        image: guruImage,
-        voice: (model: "mist", provider: "rime-ai", id: "armon")
+        image: UIImage(named: "guru")!,
+        voice: Voice(model: "mist", provider: "rime-ai", id: "armon")
     ),
-]
+        ]
+    }
+}

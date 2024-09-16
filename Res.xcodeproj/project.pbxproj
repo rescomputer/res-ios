@@ -44,6 +44,7 @@
 		F3EFEBF22C97B1D9005471CF /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EFEBF12C97B1D9005471CF /* OnboardingView.swift */; };
 		F3EFEBF42C97B6E3005471CF /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EFEBF32C97B6E3005471CF /* SecondaryButton.swift */; };
 		F3EFEBF62C97F0F2005471CF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EFEBF52C97F0F2005471CF /* SettingsView.swift */; };
+		F3EFEBFA2C989BBA005471CF /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EFEBF92C989BBA005471CF /* ImagePicker.swift */; };
 		FA14AACD2BE84F43001C7486 /* SupabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA14AACC2BE84F43001C7486 /* SupabaseManager.swift */; };
 		FA14AAD02BE850A0001C7486 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = FA14AACF2BE850A0001C7486 /* Auth */; };
 		FA14AAD22BE850A0001C7486 /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = FA14AAD12BE850A0001C7486 /* Functions */; };
@@ -159,6 +160,7 @@
 		F3EFEBF12C97B1D9005471CF /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		F3EFEBF32C97B6E3005471CF /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
 		F3EFEBF52C97F0F2005471CF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		F3EFEBF92C989BBA005471CF /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		FA14AACA2BE80E0B001C7486 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		FA14AACC2BE84F43001C7486 /* SupabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseManager.swift; sourceTree = "<group>"; };
 		FA1ECBE72C2A7C6400B79D7E /* CallManagerNewDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManagerNewDirection.swift; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 				F3B5AB202BAD08F1009CDBB5 /* AnimationUtility.swift */,
 				FA6C0E262C29182400D9F7A2 /* UIFont+Extensions.swift */,
 				FA6140CD2C29422E00424953 /* Color+Extensions.swift */,
+				F3EFEBF92C989BBA005471CF /* ImagePicker.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				FA1ECBE82C2A7C6400B79D7E /* CallManagerNewDirection.swift in Sources */,
 				F3B5AB212BAD08F1009CDBB5 /* AnimationUtility.swift in Sources */,
 				1849A5472BBDD68A00A4BCF1 /* UIScreen+Extensions.swift in Sources */,
+				F3EFEBFA2C989BBA005471CF /* ImagePicker.swift in Sources */,
 				F3E72E522BF9632A001FB6E4 /* AppSettingsTeView.swift in Sources */,
 				FA6140CE2C29422E00424953 /* Color+Extensions.swift in Sources */,
 				F3EFEBF62C97F0F2005471CF /* SettingsView.swift in Sources */,

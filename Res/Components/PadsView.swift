@@ -1,8 +1,9 @@
 import SwiftUI
 
 struct PadsView: View {
-    let personas: [Persona]
+    @EnvironmentObject var personaData: PersonaData
     @Binding var selectedPersonaId: UUID?
+    
     let spacing: CGFloat = 14
     let rows: Int = 3
     let columns: Int = 3
@@ -13,10 +14,11 @@ struct PadsView: View {
                 HStack(spacing: spacing) {
                     ForEach(0..<columns, id: \.self) { column in
                         let index = row * columns + column
-                        if index < personas.count {
-                            PadButton(selectedPersonaId: $selectedPersonaId, persona: personas[index])
+                        if index < personaData.defaultPersonas.count {
+                            let persona = personaData.defaultPersonas[index]
+                            PadButton(selectedPersonaId: $selectedPersonaId, persona: persona)
                         } else {
-                            BlankPad()  // Renders a blank pad if there are not enough personas
+                            BlankPad()
                         }
                     }
                 }
@@ -203,9 +205,10 @@ struct PadButton: View {
 }
 
 struct PadsView_Previews: PreviewProvider {
-    @State static var selectedPersonaId: UUID? = defaultPersonas[2].id
+    @State static var selectedPersonaId: UUID? = DefaultPersonas.getDefaultPersonas().first?.id
 
     static var previews: some View {
-        PadsView(personas: defaultPersonas, selectedPersonaId: $selectedPersonaId)
+        PadsView(selectedPersonaId: $selectedPersonaId)
+            .environmentObject(PersonaData())
     }
 }
