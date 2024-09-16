@@ -65,6 +65,9 @@ struct CallScreen: View {
                         personaData.saveImage(image, for: persona)
                     }
                 }
+                .edgesIgnoringSafeArea(.all)
+                .presentationDetents([.large])
+                .presentationDragIndicator(.hidden)
             }
             .task {
                 try? await Task.sleep(for: .seconds(0.25))
@@ -101,7 +104,7 @@ struct CallScreen: View {
                 ZStack {
                     Image(uiImage: selectedPersona.image)
                         .resizable()
-                        .scaledToFill()
+                        .aspectRatio(contentMode: .fill)
                         .frame(width: geometry.size.width, height: geometry.size.height)
                         .clipped()
                         .blur(radius: 20)
@@ -157,7 +160,7 @@ struct CallScreen: View {
                             VStack {
                                 Image(uiImage: selectedPersona.image)
                                     .resizable()
-                                    .scaledToFit()
+                                    .aspectRatio(contentMode: .fill)
                                     .frame(width: 124, height: 124)
                                     .clipShape(Circle())
                                     .shadow(color: Color.white.opacity(0.45), radius: 10, x: 0, y: 0)

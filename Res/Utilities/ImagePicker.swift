@@ -7,43 +7,41 @@
 
 import SwiftUI
 
-   struct ImagePicker: UIViewControllerRepresentable {
-       @Environment(\.presentationMode) var presentationMode
-       var completion: (UIImage?) -> Void
+struct ImagePicker: UIViewControllerRepresentable {
+    @Environment(\.presentationMode) var presentationMode
+    var completion: (UIImage?) -> Void
 
-       class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-           let parent: ImagePicker
+    func makeUIViewController(context: Context) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.delegate = context.coordinator
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = false
+        return picker
+    }
 
-           init(_ parent: ImagePicker) {
-               self.parent = parent
-           }
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
 
-           func imagePickerController(
-               _ picker: UIImagePickerController,
-               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
-           ) {
-               let image = info[.originalImage] as? UIImage
-               parent.completion(image)
-               parent.presentationMode.wrappedValue.dismiss()
-           }
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
 
-           func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-               parent.completion(nil)
-               parent.presentationMode.wrappedValue.dismiss()
-           }
-       }
+    class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+        let parent: ImagePicker
 
-       func makeCoordinator() -> Coordinator {
-           Coordinator(self)
-       }
+        init(_ parent: ImagePicker) {
+            self.parent = parent
+        }
 
-       func makeUIViewController(context: Context) -> UIImagePickerController {
-           let picker = UIImagePickerController()
-           picker.delegate = context.coordinator
-           picker.sourceType = .photoLibrary
-           picker.allowsEditing = false
-           return picker
-       }
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            if let image = info[.originalImage] as? UIImage {
+                parent.completion(image)
+            }
+            parent.presentationMode.wrappedValue.dismiss()
+        }
 
-       func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
-   }
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            parent.completion(nil)
+            parent.presentationMode.wrappedValue.dismiss()
+        }
+    }
+}
