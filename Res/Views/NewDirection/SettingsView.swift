@@ -29,6 +29,7 @@ struct SettingsView: View {
                     Text("Speech Speed")
                     Spacer()
                     Text(String(format: "%.1fx", voiceSpeed))
+                        .font(.system(size: 16, weight: .regular, design: .rounded))
                         .contentTransition(.numericText())
                         .transaction { t in
                             t.animation = .default
@@ -43,7 +44,7 @@ struct SettingsView: View {
                     }
                 }
 
-                Section(header: Text("General Settings")) {
+                Section(header: Text("Model Settings")) {
                     Toggle("HIPAA Compliance", isOn: $callManager.hipaaEnabled)
                         .tint(.orange)
 
@@ -66,11 +67,16 @@ struct SettingsView: View {
                     }
                 }
                 
-                Section(header: Text("Call Settings")) {
+                Section(header: Text("Advanced Settings")) {
                     HStack {
                         Text("Silence Timeout")
                         Spacer()
                         Text("\(Int(silenceTimeout)) seconds")
+                            .font(.system(size: 16, weight: .regular, design: .rounded))
+                            .contentTransition(.numericText())
+                            .transaction { t in
+                                t.animation = .default
+                        } 
                     }
                     Slider(value: $silenceTimeout, in: 30...300, step: 10)
                     
@@ -78,6 +84,11 @@ struct SettingsView: View {
                         Text("Max Call Duration")
                         Spacer()
                         Text("\(Int(maxCallDuration / 60)) minutes")
+                            .font(.system(size: 16, weight: .regular, design: .rounded))
+                            .contentTransition(.numericText())
+                            .transaction { t in
+                                t.animation = .default
+                        } 
                     }
                     Slider(value: $maxCallDuration, in: 300...3600, step: 60)
                     
@@ -85,6 +96,11 @@ struct SettingsView: View {
                         Text("Words to Interrupt")
                         Spacer()
                         Text("\(Int(wordsToInterrupt))")
+                            .font(.system(size: 16, weight: .regular, design: .rounded))
+                            .contentTransition(.numericText())
+                            .transaction { t in
+                                t.animation = .default
+                        } 
                     }
                     Slider(value: $wordsToInterrupt, in: 1...10, step: 1)
                 }
