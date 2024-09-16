@@ -182,8 +182,35 @@ struct CallScreen: View {
             
             if !isInCall {
                 ScrollView {
-                    PadsView(personas: defaultPersonas, selectedPersonaId: $selectedPersonaId)
-                        .padding(.bottom, geometry.safeAreaInsets.bottom)
+                    VStack(alignment: .leading) {
+                        Text("contacts")
+                            .font(.system(size: 24, weight: .regular, design: .rounded))
+                            .foregroundColor(Color(red: 0.224, green: 0.216, blue: 0.161))
+                            .padding(.top, 6)
+                            .padding(.leading, 15)
+                        PadsView(personas: defaultPersonas, selectedPersonaId: $selectedPersonaId)
+                        Text("options")
+                            .font(.system(size: 24, weight: .regular, design: .rounded))
+                            .foregroundColor(Color(red: 0.224, green: 0.216, blue: 0.161))
+                            .padding(.bottom, 6)
+                            .padding(.leading, 15)
+                        CustomLinkView(
+                            iconName: "gear",
+                            title: "Settings",
+                            action: {
+                                // Add action here if needed
+                            },
+                            navigateTo: {
+                                // Add navigation action here
+                            },
+                            screenSize: geometry.size,
+                            offset: geometry.frame(in: .global).minY,
+                            minHeight: 100
+                        )
+                        .padding(.horizontal, 15)
+                    }
+                    .padding(.bottom, geometry.safeAreaInsets.bottom)
+
                 }
             }
         }

@@ -16,7 +16,7 @@ struct PrimaryButton: View {
             Text(title)
                 .font(.system(size: 18, weight: .medium))
                 .foregroundColor(.white)
-                .padding(.vertical, 12)
+                .padding(.vertical, 16)
                 .frame(maxWidth: .infinity)
                 .background(
                     Group {

@@ -65,7 +65,6 @@ struct CustomToggle: View {
 struct CustomLinkView: View {
     var iconName: String
     var title: String
-    var description: String
     var action: () -> Void
     var navigateTo: () -> Void?
     var screenSize: CGSize
@@ -86,33 +85,19 @@ struct CustomLinkView: View {
             self.navigateTo()
         }) {
         HStack(alignment: .center) {
-            HStack(alignment: description.isEmpty ? .center : .top) {
-                ZStack {
-                    Circle()
-                        .fill(Color.white.opacity(0.1))
-                        .frame(width: 36, height: 36)
-                    
-                    Image(systemName: iconName)
-                        .font(.system(size: 16))
-                        .bold()
-                        .foregroundColor(.white.opacity(0.6))
-                }
-                .padding(.trailing, 5)
+            HStack(alignment: .center) {
+                Image(systemName: iconName)
+                    .font(.system(size: 16))
+                    .bold()
+                    .foregroundColor(.black.opacity(0.3))
+                    .padding(.trailing, 5)
                 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(title)
                         .fontDesign(.rounded)
                         .font(.system(size: 16))
-                        .foregroundColor(.white)
+                        .foregroundColor(.black.opacity(0.8))
                         .bold()
-                    
-                    if !description.isEmpty {
-                        Text(description)
-                            .fontDesign(.monospaced)
-                            .font(.system(size: 12))
-                            .foregroundColor(.white.opacity(0.6))
-                            .multilineTextAlignment(.leading)
-                    }
                 }
             }
             
@@ -121,20 +106,32 @@ struct CustomLinkView: View {
              Image(systemName: chevronIconName)
                 .font(.system(size: 16))
                 .bold()
-                .foregroundColor(.white.opacity(0.3))
+                .foregroundColor(.black.opacity(0.3))
                 .rotationEffect(rotateChevron ? .degrees(90) : .degrees(0))
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(Color(hex: "666666"), lineWidth: 1)
+                    .fill(Color.white)
+                    .shadow(color: Color.black.opacity(0.2), radius: 3, x: 0, y: 3)
+                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                            .blur(radius: 1)
+                            .offset(x: -1, y: -1)
+                            .mask(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .fill(LinearGradient(
+                                        gradient: Gradient(colors: [Color.clear, Color.white]),
+                                        startPoint: .bottomTrailing,
+                                        endPoint: .topLeading
+                                    ))
+                            )
+                    )
+            )
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .foregroundColor(Color.white.opacity(0.07))
-        )
-        // .overlay(
-        //         RoundedRectangle(cornerRadius: 16)
-        //             .stroke(Color.white.opacity(0.1), lineWidth: 1)
-        //     )
-        }
-        .pressAnimation()
     }
 }
 
