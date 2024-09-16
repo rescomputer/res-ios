@@ -248,9 +248,9 @@ extension AppSettingsTeView {
                         .foregroundColor(Color.white.opacity(0.7))
                     Spacer()
                 }
-            CustomLinkView(iconName: "person.wave.2.fill", title: "Accents, Gender, Speed", action: {}, navigateTo: {
-                    self.selectedSetting = .voiceTypeAndTone
-                }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
+//            CustomLinkView(iconName: "person.wave.2.fill", title: "Accents, Gender, Speed", action: {}, navigateTo: {
+//                    self.selectedSetting = .voiceTypeAndTone
+//                }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
         }
         .padding(.bottom, 20)
 
@@ -265,9 +265,9 @@ extension AppSettingsTeView {
                         .foregroundColor(Color.white.opacity(0.7))
                     Spacer()
                 }
-            CustomLinkView(iconName: "theatermask.and.paintbrush.fill", title: "Skins, Icons, and More", action: {}, navigateTo: {
-                    self.selectedSetting = .appCustomization
-                }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
+//            CustomLinkView(iconName: "theatermask.and.paintbrush.fill", title: "Skins, Icons, and More", action: {}, navigateTo: {
+//                    self.selectedSetting = .appCustomization
+//                }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
         }
         .padding(.bottom, 20)
 
@@ -302,12 +302,12 @@ extension AppSettingsTeView {
                         .foregroundColor(Color.white.opacity(0.7))
                     Spacer()
                 }
-            CustomLinkView(iconName: "rectangle.fill.on.rectangle.angled.fill", title: "Setup Home Screen Widgets", action: {}, navigateTo: {
-                    self.selectedSetting = .homeScreen
-                }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
-            CustomLinkView(iconName: "lock.rectangle.on.rectangle.fill", title: "Setup Lock Screen Widgets", action: {}, navigateTo: {
-                    self.selectedSetting = .lockScreen
-                }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
+//            CustomLinkView(iconName: "rectangle.fill.on.rectangle.angled.fill", title: "Setup Home Screen Widgets", action: {}, navigateTo: {
+//                    self.selectedSetting = .homeScreen
+//                }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
+//            CustomLinkView(iconName: "lock.rectangle.on.rectangle.fill", title: "Setup Lock Screen Widgets", action: {}, navigateTo: {
+//                    self.selectedSetting = .lockScreen
+//                }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
         }
         .padding(.bottom, 20)
 

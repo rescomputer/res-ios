@@ -22,7 +22,8 @@ struct PadsView: View {
                 }
             }
         }
-        .padding(spacing)
+        .padding(.horizontal, 15)
+        .padding(.bottom, 20)
         .background(Color.white) // Ensures the entire view background is white
     }
 }

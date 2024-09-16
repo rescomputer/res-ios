@@ -94,10 +94,8 @@ struct CustomLinkView: View {
                 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(title)
-                        .fontDesign(.rounded)
-                        .font(.system(size: 16))
+                        .font(.system(size: 16, weight: .regular, design: .rounded))
                         .foregroundColor(.black.opacity(0.8))
-                        .bold()
                 }
             }
             

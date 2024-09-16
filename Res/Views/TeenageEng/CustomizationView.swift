@@ -116,16 +116,16 @@ extension CustomizationView {
                         .foregroundColor(Color.white.opacity(0.7))
                     Spacer()
                 }
-            CustomLinkView(iconName: "paintbrush.fill", title: "Choose a Skin", action: {
-                    self.customizationModal = .skinModal
-                }, navigateTo: {
-                    self.customizationModal = .skinModal
-                }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
-            CustomLinkView(iconName: "app.gift.fill", title: "Pick your App Icon", action: {
-                    self.customizationModal = .iconModal
-                }, navigateTo: {
-                    self.customizationModal = .iconModal
-                }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
+//            CustomLinkView(iconName: "paintbrush.fill", title: "Choose a Skin", action: {
+//                    self.customizationModal = .skinModal
+//                }, navigateTo: {
+//                    self.customizationModal = .skinModal
+//                }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
+//            CustomLinkView(iconName: "app.gift.fill", title: "Pick your App Icon", action: {
+//                    self.customizationModal = .iconModal
+//                }, navigateTo: {
+//                    self.customizationModal = .iconModal
+//                }, screenSize: UIScreen.main.bounds.size, offset: 0, minHeight: 100)
         }
         .padding(.bottom, 20)
 

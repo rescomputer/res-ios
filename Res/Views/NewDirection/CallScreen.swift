@@ -1,6 +1,40 @@
 import SwiftUI
 import BottomSheet
 
+struct SettingsView: View {
+    @Binding var isActive: Bool
+    
+        var body: some View {
+            NavigationView {
+                VStack {
+                    Text("Settings")
+                        .font(.system(size: 24, weight: .regular, design: .rounded))
+                        .foregroundColor(.black)
+                        .padding()
+                    
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.white)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(action: {
+                            isActive = false
+                        }) {
+                            Image(systemName: "chevron.left")
+                                .foregroundColor(.orange)
+                            Text("RES")
+                                .font(.system(size: 16, weight: .regular, design: .rounded))
+                                .foregroundColor(.orange)
+                        }
+                    }
+                }
+            }
+            .accentColor(.black)
+    }
+}
+
 struct CallScreen: View {
     @State private var selectedPersonaId: UUID?
     @State private var bottomSheetPosition: BottomSheetPosition = CallScreen.SHEET_POSITION_MIDDLE
@@ -10,8 +44,10 @@ struct CallScreen: View {
     @State private var bioButtonText: String = "View Bio"
     @State private var additionalInfo: String = ""
     @State private var isInCall = false
-    @StateObject private var callManager = CallManagerNewDirection()
+    @State private var isSettingsActive = false
 
+    @StateObject private var callManager = CallManagerNewDirection()
+    @State private var settingsOffset: CGFloat = UIScreen.main.bounds.width
     private static let SHEET_POSITION_BOTTOM_FLOAT = CGFloat(100)
     private static let SHEET_POSITION_MIDDLE: BottomSheetPosition = .relative(0.31)
     private static let SHEET_POSITION_TOP: BottomSheetPosition = .relative(0.7)
@@ -38,7 +74,7 @@ struct CallScreen: View {
                             bottomSheetContents(geometry: geometry)
                         })
                         .customBackground(
-                            Color.white.cornerRadius(10)
+                            Color.white.cornerRadius(15)
                         )
                         .enableContentDrag(true)
                         .dragIndicatorColor(.gray)
@@ -60,6 +96,13 @@ struct CallScreen: View {
             }
             .onChange(of: bottomSheetPosition) {
                 updateBioButtonText()
+            }
+            .onChange(of: isSettingsActive) { newValue in
+                if newValue {
+                    bottomSheetPosition = CallScreen.SHEET_POSITION_TOP
+                } else {
+                    bottomSheetPosition = CallScreen.SHEET_POSITION_MIDDLE
+                }
             }
         }
     }
@@ -158,8 +201,9 @@ struct CallScreen: View {
         }
     }
 
-    @ViewBuilder
-    private func bottomSheetContents(geometry: GeometryProxy) -> some View {
+@ViewBuilder
+private func bottomSheetContents(geometry: GeometryProxy) -> some View {
+    ZStack {
         VStack(spacing: 0) {
             HStack {
                 if isInCall {
@@ -198,11 +242,14 @@ struct CallScreen: View {
                             iconName: "gear",
                             title: "Settings",
                             action: {
-                                // Add action here if needed
+
                             },
                             navigateTo: {
-                                // Add navigation action here
-                            },
+                                withAnimation(.spring(response: 0.3, dampingFraction: 0.8, blendDuration: 0)) {
+                                    isSettingsActive = true
+                                    settingsOffset = 0
+                                }
+                             },
                             screenSize: geometry.size,
                             offset: geometry.frame(in: .global).minY,
                             minHeight: 100
@@ -210,11 +257,20 @@ struct CallScreen: View {
                         .padding(.horizontal, 15)
                     }
                     .padding(.bottom, geometry.safeAreaInsets.bottom)
-
                 }
             }
         }
+        .opacity(isSettingsActive ? 0 : 1)
+
+        SettingsView(isActive: $isSettingsActive)
+            .offset(x: settingsOffset, y: 0)
+            .onChange(of: isSettingsActive) { newValue in
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.8, blendDuration: 0)) {
+                    settingsOffset = newValue ? 0 : UIScreen.main.bounds.width
+                }
+            }
     }
+}
 
     private var selectedPersona: Persona? {
         defaultPersonas.first(where: { $0.id == selectedPersonaId })
@@ -256,6 +312,7 @@ struct CallScreen: View {
 
     private func endCall() {
         isInCall = false
+        isSettingsActive = false
         Task {
             await callManager.endCall()
             bottomSheetPosition = CallScreen.SHEET_POSITION_MIDDLE
