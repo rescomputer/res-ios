@@ -111,7 +111,16 @@ struct CustomLinkView: View {
             .background(
                 RoundedRectangle(cornerRadius: 15)
                     .stroke(Color(hex: "666666"), lineWidth: 1)
-                    .fill(Color.white)
+                    .fill(
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                Color(red: 0.973, green: 0.973, blue: 0.949),
+                                Color(red: 0.953, green: 0.953, blue: 0.914)
+                            ]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )                   
                     .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 3)
                     .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 5)
                     .overlay(

@@ -121,7 +121,7 @@ struct PadButton: View {
             .stroke(Color(hex: "666666"), lineWidth: 1)
             .fill(
                 LinearGradient(
-                    gradient: Gradient(colors: [Color(hex: "EFEFEF"), Color(hex: "FDFDFD")]),
+                    gradient: Gradient(colors: [Color(red: 0.906, green: 0.906, blue: 0.867), Color(red: 0.863, green: 0.863, blue: 0.816)]),
                     startPoint: .top,
                     endPoint: .bottom
                 )
@@ -173,12 +173,21 @@ struct PadButton: View {
     static var defaultPadBackground: some View {
         RoundedRectangle(cornerRadius: 15)
             .stroke(Color(hex: "666666"), lineWidth: 1)
-            .fill(Color.white)
+            .fill(
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color(red: 0.973, green: 0.973, blue: 0.949),
+                        Color(red: 0.953, green: 0.953, blue: 0.914)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
             .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 3)
             .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 5)
             .overlay(
                 RoundedRectangle(cornerRadius: 15)
-                    .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                    .stroke(Color.white.opacity(1), lineWidth: 2)
                     .blur(radius: 1)
                     .offset(x: -1, y: -1)
                     .mask(

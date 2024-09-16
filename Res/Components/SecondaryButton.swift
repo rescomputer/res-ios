@@ -21,7 +21,7 @@ struct SecondaryButton: View {
                 .padding(.vertical, 16)
                 .frame(maxWidth: .infinity)
                 .background(
-                    LinearGradient(gradient: Gradient(colors: [Color(red: 0.914, green: 0.914, blue: 0.878), Color(red: 0.914, green: 0.914, blue: 0.878)]), startPoint: .top, endPoint: .bottom)
+                    LinearGradient(gradient: Gradient(colors: [Color(red: 0.973, green: 0.973, blue: 0.949), Color(red: 0.953, green: 0.953, blue: 0.914)]), startPoint: .top, endPoint: .bottom)
                         .cornerRadius(40)
                        // .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
                 )

@@ -16,17 +16,37 @@ struct SettingsView: View {
     @State private var silenceTimeout = 120.0
     @State private var maxCallDuration = 1800.0
     @State private var wordsToInterrupt = 1.0
+    @State private var voiceSpeed = 1.0
     
-    let voiceProviders = ["default", "elevenlabs", "azure"] // Add more as needed
+    let voiceProviders = ["default", "elevenlabs", "azure"] 
     let aiModels = ["gpt-4o", "gpt-4-0125-preview", "gpt-4-1106-preview"]
-    let languages = ["en", "es", "fr", "de"] // Add more as needed
-    
+    let languages = ["en", "es", "fr", "de"] 
+
     var body: some View {
         NavigationView {
             Form {
+                Section(header: HStack {
+                    Text("Speech Speed")
+                    Spacer()
+                    Text(String(format: "%.1fx", voiceSpeed))
+                        .contentTransition(.numericText())
+                        .transaction { t in
+                            t.animation = .default
+                        }  
+                }) {
+                    HStack {
+                        Image(systemName: "tortoise.fill")
+                            .foregroundColor(.black.opacity(0.3))
+                        Slider(value: $voiceSpeed, in: 0.5...2.0, step: 0.1)
+                        Image(systemName: "hare.fill")
+                            .foregroundColor(.black.opacity(0.3))
+                    }
+                }
+
                 Section(header: Text("General Settings")) {
                     Toggle("HIPAA Compliance", isOn: $callManager.hipaaEnabled)
-                    
+                        .tint(.orange)
+
                     Picker("Voice Provider", selection: $selectedVoiceProvider) {
                         ForEach(voiceProviders, id: \.self) {
                             Text($0)
@@ -91,6 +111,7 @@ struct SettingsView: View {
                 }
             }
         }
-        .accentColor(.black)
+        .accentColor(.orange)
+        .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
     }
 }
