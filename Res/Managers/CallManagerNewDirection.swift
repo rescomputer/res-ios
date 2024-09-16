@@ -14,9 +14,41 @@ import AVFoundation
             print("Saved hipaaEnabled to UserDefaults: \(savedValue)")
         }
     }
-
-    init() {
-        self.hipaaEnabled = UserDefaults.standard.bool(forKey: "hipaaEnabled")
+        
+    @Published var model: String {
+        didSet {
+            UserDefaults.standard.set(model, forKey: "model")
+        }
+    }
+    
+    @Published var fallbackModels: [String] {
+        didSet {
+            UserDefaults.standard.set(fallbackModels, forKey: "fallbackModels")
+        }
+    }
+    
+    @Published var firstMessage: String {
+        didSet {
+            UserDefaults.standard.set(firstMessage, forKey: "firstMessage")
+        }
+    }
+    
+    @Published var voiceProvider: String {
+        didSet {
+            UserDefaults.standard.set(voiceProvider, forKey: "voiceProvider")
+        }
+    }
+    
+    @Published var voiceId: String {
+        didSet {
+            UserDefaults.standard.set(voiceId, forKey: "voiceId")
+        }
+    }
+    
+    @Published var voiceModel: String? {
+        didSet {
+            UserDefaults.standard.set(voiceModel, forKey: "voiceModel")
+        }
     }
 
     enum CallState: String {
@@ -40,6 +72,16 @@ import AVFoundation
     }
     public var localAudioLevel: Float {
         self.conversationState == .userSpeaking ? (vapi?.localAudioLevel ?? 0) : 0
+    }
+
+    init() {
+        self.hipaaEnabled = UserDefaults.standard.bool(forKey: "hipaaEnabled")
+        self.model = UserDefaults.standard.string(forKey: "model") ?? "gpt-4o"
+        self.fallbackModels = UserDefaults.standard.stringArray(forKey: "fallbackModels") ?? ["gpt-4-0125-preview", "gpt-4-1106-preview"]
+        self.firstMessage = UserDefaults.standard.string(forKey: "firstMessage") ?? "Hello!"
+        self.voiceProvider = UserDefaults.standard.string(forKey: "voiceProvider") ?? "defaultProvider"
+        self.voiceId = UserDefaults.standard.string(forKey: "voiceId") ?? "defaultVoiceId"
+        self.voiceModel = UserDefaults.standard.string(forKey: "voiceModel")
     }
 
     func setupVapi() {
@@ -157,34 +199,31 @@ import AVFoundation
             voiceDictionary["model"] = model
         }
         
-        let assistant = [
+        let assistant: [String: Any] = [
             "model": [
                 "provider": "openai",
-                "model": "gpt-4o",
-                "fallbackModels": [
-                    "gpt-4-0125-preview",
-                    "gpt-4-1106-preview"
-                ],
+                "model": model,
+                "fallbackModels": fallbackModels,
                 "messages": [
                     ["role": "system",
                      "content": selectedPersona.systemPrompt]
                 ],
-                "maxTokens": 1000, // Maximum
+                "maxTokens": 1000
             ],
-            "hipaaEnabled": UserDefaults.standard.bool(forKey: "hipaaEnabled"),
+            "hipaaEnabled": hipaaEnabled,
             "silenceTimeoutSeconds": 120,
-            "maxDurationSeconds": 1800, // Maximum
+            "maxDurationSeconds": 1800,
             "numWordsToInterruptAssistant": 1,
             "responseDelaySeconds": 0,
             "llmRequestDelaySeconds": 0,
-            "firstMessage": selectedPersona.firstMessage,
+            "firstMessage": firstMessage,
             "voice": voiceDictionary,
             "transcriber": [
                 "language": "en",
                 "model": "nova-2",
                 "provider": "deepgram"
             ]
-        ] as [String: Any]
+        ]
         
         do {
             let call = try await vapi.start(assistant: assistant)

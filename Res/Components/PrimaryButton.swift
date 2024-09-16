@@ -62,6 +62,23 @@ struct PrimaryButton: View {
                         .offset(x: 0, y: -1)
                         .mask(RoundedRectangle(cornerRadius: 40).fill(LinearGradient(gradient: Gradient(colors: [Color.clear, Color.white]), startPoint: .top, endPoint: .bottom)))
                 )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 40, style: .continuous)
+                        .strokeBorder(
+                            LinearGradient(
+                                colors: [
+                                    Color.white.opacity(0.8),
+                                    Color.white.opacity(0),
+                                    Color.black.opacity(0.5)
+                                ],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            ),
+                            lineWidth: 1
+                        )
+                        .blendMode(.overlay)
+                        .blur(radius: 1.0)
+                )
         }
     }
 }
