@@ -23,7 +23,7 @@ struct SecondaryButton: View {
                 .background(
                     LinearGradient(gradient: Gradient(colors: [Color(red: 0.914, green: 0.914, blue: 0.878), Color(red: 0.914, green: 0.914, blue: 0.878)]), startPoint: .top, endPoint: .bottom)
                         .cornerRadius(40)
-                        .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 1)
+                       // .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 40)

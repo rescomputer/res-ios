@@ -42,6 +42,8 @@ struct ResApp: App {
             } else {
                 CallScreen()
                     .persistentSystemOverlays(.hidden)
+                    .statusBarHidden(true)
+                    .preferredColorScheme(.light)
             }
         }
         .environmentObject(resAppModel)

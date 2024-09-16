@@ -24,7 +24,6 @@ struct PadsView: View {
         }
         .padding(.horizontal, 15)
         .padding(.bottom, 20)
-        .background(Color.white) // Ensures the entire view background is white
     }
 }
 
@@ -32,7 +31,6 @@ struct BlankPad: View {
     var body: some View {
         PadButton.defaultPadBackground
             .aspectRatio(7/4, contentMode: .fit)  // Ensure the aspect ratio matches the persona pads
-            .background(Color.white) // Ensures the blank pad background is white
     }
 }
 
@@ -55,7 +53,6 @@ struct PadButton: View {
         .onLongPressGesture(minimumDuration: 0.05, pressing: { isPressing in
             self.isTouched = isPressing
         }, perform: {})
-        .background(Color.white) // Ensures the pad button background is white
     }
 
     private var padBackground: some View {
@@ -177,8 +174,8 @@ struct PadButton: View {
         RoundedRectangle(cornerRadius: 15)
             .stroke(Color(hex: "666666"), lineWidth: 1)
             .fill(Color.white)
-            .shadow(color: Color.black.opacity(0.2), radius: 3, x: 0, y: 3)
-            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+            .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 3)
+            .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 5)
             .overlay(
                 RoundedRectangle(cornerRadius: 15)
                     .stroke(Color.white.opacity(0.5), lineWidth: 1)

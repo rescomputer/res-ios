@@ -1,0 +1,96 @@
+//
+//  SettingsView.swift
+//  Res
+//
+//  Created by Steven Sarmiento on 9/15/24.
+//
+
+import SwiftUI
+
+struct SettingsView: View {
+    @Binding var isActive: Bool
+    @ObservedObject var callManager: CallManagerNewDirection
+    @State private var selectedVoiceProvider = "default"
+    @State private var selectedAIModel = "gpt-4o"
+    @State private var selectedLanguage = "en"
+    @State private var silenceTimeout = 120.0
+    @State private var maxCallDuration = 1800.0
+    @State private var wordsToInterrupt = 1.0
+    
+    let voiceProviders = ["default", "elevenlabs", "azure"] // Add more as needed
+    let aiModels = ["gpt-4o", "gpt-4-0125-preview", "gpt-4-1106-preview"]
+    let languages = ["en", "es", "fr", "de"] // Add more as needed
+    
+    var body: some View {
+        NavigationView {
+            Form {
+                Section(header: Text("General Settings")) {
+                    Toggle("HIPAA Compliance", isOn: $callManager.hipaaEnabled)
+                    
+                    Picker("Voice Provider", selection: $selectedVoiceProvider) {
+                        ForEach(voiceProviders, id: \.self) {
+                            Text($0)
+                        }
+                    }
+                    
+                    Picker("AI Model", selection: $selectedAIModel) {
+                        ForEach(aiModels, id: \.self) {
+                            Text($0)
+                        }
+                    }
+                    
+                    Picker("Transcriber Language", selection: $selectedLanguage) {
+                        ForEach(languages, id: \.self) {
+                            Text($0)
+                        }
+                    }
+                }
+                
+                Section(header: Text("Call Settings")) {
+                    HStack {
+                        Text("Silence Timeout")
+                        Spacer()
+                        Text("\(Int(silenceTimeout)) seconds")
+                    }
+                    Slider(value: $silenceTimeout, in: 30...300, step: 10)
+                    
+                    HStack {
+                        Text("Max Call Duration")
+                        Spacer()
+                        Text("\(Int(maxCallDuration / 60)) minutes")
+                    }
+                    Slider(value: $maxCallDuration, in: 300...3600, step: 60)
+                    
+                    HStack {
+                        Text("Words to Interrupt")
+                        Spacer()
+                        Text("\(Int(wordsToInterrupt))")
+                    }
+                    Slider(value: $wordsToInterrupt, in: 1...10, step: 1)
+                }
+            }
+            .background(Color(red: 0.945, green: 0.945, blue: 0.918))
+            .scrollContentBackground(.hidden) 
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        isActive = false
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.orange)
+                        Text("RES")
+                            .font(.system(size: 16, weight: .regular, design: .rounded))
+                            .foregroundColor(.orange)
+                    }
+                }
+                ToolbarItem(placement: .principal) {
+                    Text("Settings")
+                        .font(.system(size: 24, weight: .regular, design: .rounded))
+                        .foregroundColor(.black)
+                }
+            }
+        }
+        .accentColor(.black)
+    }
+}

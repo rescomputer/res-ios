@@ -1,40 +1,6 @@
 import SwiftUI
 import BottomSheet
 
-struct SettingsView: View {
-    @Binding var isActive: Bool
-    
-        var body: some View {
-            NavigationView {
-                VStack {
-                    Text("Settings")
-                        .font(.system(size: 24, weight: .regular, design: .rounded))
-                        .foregroundColor(.black)
-                        .padding()
-                    
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color.white)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button(action: {
-                            isActive = false
-                        }) {
-                            Image(systemName: "chevron.left")
-                                .foregroundColor(.orange)
-                            Text("RES")
-                                .font(.system(size: 16, weight: .regular, design: .rounded))
-                                .foregroundColor(.orange)
-                        }
-                    }
-                }
-            }
-            .accentColor(.black)
-    }
-}
-
 struct CallScreen: View {
     @State private var selectedPersonaId: UUID?
     @State private var bottomSheetPosition: BottomSheetPosition = CallScreen.SHEET_POSITION_MIDDLE
@@ -75,7 +41,7 @@ struct CallScreen: View {
                             bottomSheetContents(geometry: geometry)
                         })
                         .customBackground(
-                            Color.white.cornerRadius(15)
+                            Color(red: 0.945, green: 0.945, blue: 0.918).cornerRadius(15)
                         )
                         .enableContentDrag(true)
                         .dragIndicatorColor(.gray)
@@ -263,7 +229,7 @@ private func bottomSheetContents(geometry: GeometryProxy) -> some View {
         }
         .opacity(isSettingsActive ? 0 : 1)
 
-        SettingsView(isActive: $isSettingsActive)
+        SettingsView(isActive: $isSettingsActive, callManager: callManager)
             .offset(x: settingsOffset, y: 0)
             .onChange(of: isSettingsActive) { newValue in
                 withAnimation(.spring(response: 0.3, dampingFraction: 0.8, blendDuration: 0)) {

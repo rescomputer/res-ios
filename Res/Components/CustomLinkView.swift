@@ -112,8 +112,8 @@ struct CustomLinkView: View {
                 RoundedRectangle(cornerRadius: 15)
                     .stroke(Color(hex: "666666"), lineWidth: 1)
                     .fill(Color.white)
-                    .shadow(color: Color.black.opacity(0.2), radius: 3, x: 0, y: 3)
-                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+                    .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 3)
+                    .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 5)
                     .overlay(
                         RoundedRectangle(cornerRadius: 15)
                             .stroke(Color.white.opacity(0.5), lineWidth: 1)
