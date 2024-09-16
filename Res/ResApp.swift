@@ -14,12 +14,13 @@ struct ResApp: App {
     @StateObject private var resAppModel = ResAppModel()
     @StateObject private var callManager = CallManager()
 
-    @State private var isChangelogViewShowing = false
-    @State private var isAppSettingsViewShowing = false
-    @State private var isModalStepTwoEnabled = false
-    @State private var hasCompletedOnboarding = false 
+    // @State private var isChangelogViewShowing = false
+    // @State private var isAppSettingsViewShowing = false
+    // @State private var isModalStepTwoEnabled = false
+    // @State private var hasCompletedOnboarding = false 
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
     @State private var isLaunchScreenPresented = true
-    let isDebugMode = Config.buildConfiguration == .debug
+    // let isDebugMode = Config.buildConfiguration == .debug
 
     init() {
         SentryManager.shared.start(enableDebugLogging: false)
@@ -27,7 +28,7 @@ struct ResApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if isLaunchScreenPresented && !resAppModel.isAuthenticated {
+            if isLaunchScreenPresented {
                 LaunchScreenView()
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -36,21 +37,43 @@ struct ResApp: App {
                             }
                         }
                     }
-            } else if resAppModel.isAuthenticated || isDebugMode {
-                CallScreen()
-                .persistentSystemOverlays(.hidden)
+            } else if !hasCompletedOnboarding {
+                OnboardingView(hasCompletedOnboarding: $hasCompletedOnboarding)
             } else {
-                AuthView(
-                    isChangelogViewShowing: $isChangelogViewShowing,
-                    isAppSettingsViewShowing: $isAppSettingsViewShowing,
-                    isModalStepTwoEnabled: $isModalStepTwoEnabled,
-                    isDebugMode: isDebugMode
-                )
+                CallScreen()
+                    .persistentSystemOverlays(.hidden)
             }
         }
         .environmentObject(resAppModel)
         .environmentObject(callManager)
     }
+    
+    // var body: some Scene {
+    //     WindowGroup {
+    //         if isLaunchScreenPresented && !resAppModel.isAuthenticated {
+    //             LaunchScreenView()
+    //                 .onAppear {
+    //                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+    //                         withAnimation {
+    //                             isLaunchScreenPresented = false
+    //                         }
+    //                     }
+    //                 }
+    //         } else if resAppModel.isAuthenticated || isDebugMode {
+    //             CallScreen()
+    //                 .persistentSystemOverlays(.hidden)
+    //         } else {
+    //             AuthView(
+    //                 isChangelogViewShowing: $isChangelogViewShowing,
+    //                 isAppSettingsViewShowing: $isAppSettingsViewShowing,
+    //                 isModalStepTwoEnabled: $isModalStepTwoEnabled,
+    //                 isDebugMode: isDebugMode
+    //             )
+    //         }
+    //     }
+    //     .environmentObject(resAppModel)
+    //     .environmentObject(callManager)
+    // }
 }
 
 class ResAppModel: ObservableObject {
