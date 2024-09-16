@@ -43,7 +43,7 @@ struct CallScreen: View {
                         .customBackground(
                             Color(red: 0.945, green: 0.945, blue: 0.918).cornerRadius(15)
                         )
-                        .enableContentDrag(true)
+                        .enableContentDrag(isSettingsActive ? false : true)
                         .dragIndicatorColor(.gray)
                         .showDragIndicator(isSettingsActive ? false : true)
                         .customAnimation(animationValue)
