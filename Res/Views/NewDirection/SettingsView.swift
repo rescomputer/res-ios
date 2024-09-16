@@ -45,7 +45,7 @@ struct SettingsView: View {
                 }
 
                 Section(header: Text("Model Settings")) {
-                    Toggle("HIPAA Compliance", isOn: $callManager.hipaaEnabled)
+                    Toggle("Privacy Mode", isOn: $callManager.privacyMode)
                         .tint(.orange)
 
                     Picker("Voice Provider", selection: $selectedVoiceProvider) {
