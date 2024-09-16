@@ -51,6 +51,7 @@ struct CallScreen: View {
     private static let SHEET_POSITION_BOTTOM_FLOAT = CGFloat(100)
     private static let SHEET_POSITION_MIDDLE: BottomSheetPosition = .relative(0.31)
     private static let SHEET_POSITION_TOP: BottomSheetPosition = .relative(0.7)
+    private static let SHEET_POSITION_FULL: BottomSheetPosition = .relative(1)
     private static let SHEET_POSITION_BOTTOM: BottomSheetPosition = .absolute(SHEET_POSITION_BOTTOM_FLOAT)
     
     init() {
@@ -99,9 +100,9 @@ struct CallScreen: View {
             }
             .onChange(of: isSettingsActive) { newValue in
                 if newValue {
-                    bottomSheetPosition = CallScreen.SHEET_POSITION_TOP
+                    self.bottomSheetPosition = CallScreen.SHEET_POSITION_FULL
                 } else {
-                    bottomSheetPosition = CallScreen.SHEET_POSITION_MIDDLE
+                    self.bottomSheetPosition = CallScreen.SHEET_POSITION_TOP
                 }
             }
         }
