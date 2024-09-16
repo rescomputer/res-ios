@@ -71,39 +71,41 @@ struct ScaleUpAnimation: ViewModifier {
 struct SlideUp: ViewModifier {
     @State private var slideUpAnimation = false
     @State private var isShowing = false
+    @State private var blurAmount: CGFloat = 10
 
     func body(content: Content) -> some View {
-        content
-            .offset(y: slideUpAnimation ? 0 : 10)
-            .opacity(isShowing ? 1 : 0)
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    withAnimation(.easeOut(duration: 0.1)) {
+        GeometryReader { geometry in
+            content
+                .offset(y: slideUpAnimation ? 0 : 50)
+                .blur(radius: blurAmount)
+                .opacity(isShowing ? 1 : 0)
+                .onAppear {
+                    withAnimation(Animation.spring(response: 0.18, dampingFraction: 0.60, blendDuration: 0)) {
                         self.slideUpAnimation = true
-                        isShowing = true
-
+                        self.isShowing = true
+                        self.blurAmount = 0
                     }
                 }
-            }
+        }
     }
 }
 
 struct SlideDown: ViewModifier {
     @State private var slideDownAnimation = false
     @State private var isShowing = false
+    @State private var blurAmount: CGFloat = 10
 
     func body(content: Content) -> some View {
         content
-            .offset(y: slideDownAnimation ? 0 : -20)
+            .offset(y: slideDownAnimation ? 0 : -50)
             .opacity(isShowing ? 1 : 0)
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    withAnimation(.easeIn(duration: 0.1)) {
+                    withAnimation(Animation.spring(response: 0.18, dampingFraction: 0.60, blendDuration: 0)) {
                         self.slideDownAnimation = true
+                        self.blurAmount = 0
                         isShowing = true
 
                     }
-                }
             }
     }
 }
@@ -111,18 +113,17 @@ struct SlideDown: ViewModifier {
 struct SlideLeft: ViewModifier {
     @State private var slideLeftAnimation = false
     @State private var isShowing = false
+    @State private var blurAmount: CGFloat = 10
 
     func body(content: Content) -> some View {
         content
-            .offset(x: slideLeftAnimation ? 0 : 20)
+            .offset(x: slideLeftAnimation ? 0 : 50)
             .opacity(isShowing ? 1 : 0)
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                    withAnimation(.easeIn(duration: 0.1)) {
+                    withAnimation(Animation.spring(response: 0.18, dampingFraction: 0.60, blendDuration: 0)) {
                         self.slideLeftAnimation = true
+                        self.blurAmount = 0
                         isShowing = true
-
-                    }
                 }
             }
         }
@@ -131,21 +132,21 @@ struct SlideLeft: ViewModifier {
 struct SlideRight: ViewModifier {
     @State private var slideRightAnimation = false
     @State private var isShowing = false
+    @State private var blurAmount: CGFloat = 10
 
     func body(content: Content) -> some View {
         content
-            .offset(x: slideRightAnimation ? 0 : -20)
+            .offset(x: slideRightAnimation ? 0 : -50)
             .opacity(isShowing ? 1 : 0)
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                    withAnimation(.easeOut(duration: 0.1)) {
-                        self.slideRightAnimation = true
-                        isShowing = true
-                    }
+                withAnimation(Animation.spring(response: 0.18, dampingFraction: 0.60, blendDuration: 0)) {
+                    self.slideRightAnimation = true
+                    self.blurAmount = 0
+                    isShowing = true
+                }
                 }
             }
         }
-    }
 
 
 struct PressAnimation: ViewModifier {
@@ -153,7 +154,7 @@ struct PressAnimation: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .scaleEffect(isPressed ? 0.98 : 1)
+            .scaleEffect(isPressed ? 0.90 : 1)
             .animation(.easeInOut(duration: 0.1), value: isPressed)
             .onLongPressGesture(minimumDuration: .infinity, pressing: { pressing in
                 withAnimation { isPressed = pressing }
@@ -184,12 +185,10 @@ struct ScrollViewEdgeFadeDark: ViewModifier {
             .overlay(
                 LinearGradient(
                     gradient: Gradient(stops: [
-                        .init(color: Color(red: 0.047, green: 0.071, blue: 0.071), location: 0),
-                        .init(color: Color(red: 0.047, green: 0.071, blue: 0.071).opacity(0.03), location: 0.03),
-                        .init(color: Color(red: 0.047, green: 0.071, blue: 0.071).opacity(0.01), location: 0.95),
-                        .init(color: Color(red: 0.047, green: 0.071, blue: 0.071).opacity(0.01), location: 0.95),
-                        .init(color: Color(red: 0.047, green: 0.071, blue: 0.071).opacity(0.03), location: 0.97),
-                        .init(color: .clear, location: 1)
+                        .init(color: .black, location: 0),
+                        .init(color: .black.opacity(0.05), location: 0.05),
+                        .init(color: .black.opacity(0.05), location: 0.95),
+                        .init(color: .black, location: 1)
                     ]),
                     startPoint: .top,
                     endPoint: .bottom
@@ -216,6 +215,58 @@ struct ScrollViewEdgeFadeLight: ViewModifier {
                 )
                 .allowsHitTesting(false),
                 alignment: .center
+            )
+    }
+}
+
+struct HorizontalEdgeFade: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .overlay(
+                HStack(spacing: 0) {
+                    LinearGradient(
+                        gradient: Gradient(colors: [Color(red: 0.094, green: 0.094, blue: 0.094), Color.clear]),
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                    .frame(width: 77)
+                    
+                    Spacer()
+                    
+                    LinearGradient(
+                        gradient: Gradient(colors: [Color.clear, Color(red: 0.094, green: 0.094, blue: 0.094)]),
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                    .frame(width: 77)
+                }
+                .allowsHitTesting(false)
+            )
+    }
+}
+
+struct HorizontalEdgeBlackFade: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .overlay(
+                HStack(spacing: 0) {
+                    LinearGradient(
+                        gradient: Gradient(colors: [Color.black, Color.clear]),
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                    .frame(width: 57)
+                    
+                    Spacer()
+                    
+                    LinearGradient(
+                        gradient: Gradient(colors: [Color.clear, Color.black]),
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                    .frame(width: 57)
+                }
+                .allowsHitTesting(false)
             )
     }
 }

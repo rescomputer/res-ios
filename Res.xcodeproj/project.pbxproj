@@ -41,6 +41,8 @@
 		F3E72E4E2BF96240001FB6E4 /* CustomTextPromptTeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E72E4D2BF96240001FB6E4 /* CustomTextPromptTeView.swift */; };
 		F3E72E502BF962F7001FB6E4 /* VoiceSettingsTeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E72E4F2BF962F7001FB6E4 /* VoiceSettingsTeView.swift */; };
 		F3E72E522BF9632A001FB6E4 /* AppSettingsTeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E72E512BF9632A001FB6E4 /* AppSettingsTeView.swift */; };
+		F3EFEBF22C97B1D9005471CF /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EFEBF12C97B1D9005471CF /* OnboardingView.swift */; };
+		F3EFEBF42C97B6E3005471CF /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EFEBF32C97B6E3005471CF /* SecondaryButton.swift */; };
 		FA14AACD2BE84F43001C7486 /* SupabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA14AACC2BE84F43001C7486 /* SupabaseManager.swift */; };
 		FA14AAD02BE850A0001C7486 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = FA14AACF2BE850A0001C7486 /* Auth */; };
 		FA14AAD22BE850A0001C7486 /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = FA14AAD12BE850A0001C7486 /* Functions */; };
@@ -153,6 +155,8 @@
 		F3E72E4D2BF96240001FB6E4 /* CustomTextPromptTeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextPromptTeView.swift; sourceTree = "<group>"; };
 		F3E72E4F2BF962F7001FB6E4 /* VoiceSettingsTeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceSettingsTeView.swift; sourceTree = "<group>"; };
 		F3E72E512BF9632A001FB6E4 /* AppSettingsTeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsTeView.swift; sourceTree = "<group>"; };
+		F3EFEBF12C97B1D9005471CF /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		F3EFEBF32C97B6E3005471CF /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
 		FA14AACA2BE80E0B001C7486 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		FA14AACC2BE84F43001C7486 /* SupabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseManager.swift; sourceTree = "<group>"; };
 		FA1ECBE72C2A7C6400B79D7E /* CallManagerNewDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManagerNewDirection.swift; sourceTree = "<group>"; };
@@ -302,12 +306,14 @@
 			isa = PBXGroup;
 			children = (
 				FA6C0E1A2C27D58900D9F7A2 /* PadsView.swift */,
+				F3EFEBF12C97B1D9005471CF /* OnboardingView.swift */,
 				B95D2F342BA4EB32003C7C17 /* CustomTextEditor.swift */,
 				F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */,
 				F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */,
 				F3B5AB242BAE91E3009CDBB5 /* CustomLinkView.swift */,
 				F31C494A2BC37C080075477D /* Loader.swift */,
 				FA976F532C520FB600A66D4F /* PrimaryButton.swift */,
+				F3EFEBF32C97B6E3005471CF /* SecondaryButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -646,10 +652,12 @@
 				FA14AACD2BE84F43001C7486 /* SupabaseManager.swift in Sources */,
 				FA6C0E202C28E79200D9F7A2 /* DefaultPersonas.swift in Sources */,
 				1849A54A2BBDD6FF00A4BCF1 /* LockScreenWidgetGuideView.swift in Sources */,
+				F3EFEBF42C97B6E3005471CF /* SecondaryButton.swift in Sources */,
 				F3E72E4E2BF96240001FB6E4 /* CustomTextPromptTeView.swift in Sources */,
 				FA976F622C5CB48900A66D4F /* SpeakingAvatar.swift in Sources */,
 				FA6002442C621E6E00E58B10 /* ConversationStateView.swift in Sources */,
 				F3B5AB1A2BACE488009CDBB5 /* XMarkButton.swift in Sources */,
+				F3EFEBF22C97B1D9005471CF /* OnboardingView.swift in Sources */,
 				1849A54B2BBDD6FF00A4BCF1 /* HomeScreenWidgetGuideView.swift in Sources */,
 				B95D2F332BA4EAF5003C7C17 /* CallManager.swift in Sources */,
 				F3E72E462BF95FA6001FB6E4 /* MainViewTeenageEng.swift in Sources */,
@@ -863,7 +871,7 @@
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -909,7 +917,7 @@
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
