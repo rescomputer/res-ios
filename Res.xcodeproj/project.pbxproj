@@ -47,6 +47,7 @@
 		F3EFEBFA2C989BBA005471CF /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EFEBF92C989BBA005471CF /* ImagePicker.swift */; };
 		F3EFEBFC2C98E6E1005471CF /* ManageSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EFEBFB2C98E6E1005471CF /* ManageSubscriptionView.swift */; };
 		F3EFEBFE2C98E6F3005471CF /* AppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EFEBFD2C98E6F3005471CF /* AppIconView.swift */; };
+		F3F891632C992ACE00A4639E /* PaywallScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F891622C992ACE00A4639E /* PaywallScrollView.swift */; };
 		FA14AACD2BE84F43001C7486 /* SupabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA14AACC2BE84F43001C7486 /* SupabaseManager.swift */; };
 		FA14AAD02BE850A0001C7486 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = FA14AACF2BE850A0001C7486 /* Auth */; };
 		FA14AAD22BE850A0001C7486 /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = FA14AAD12BE850A0001C7486 /* Functions */; };
@@ -165,6 +166,7 @@
 		F3EFEBF92C989BBA005471CF /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F3EFEBFB2C98E6E1005471CF /* ManageSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageSubscriptionView.swift; sourceTree = "<group>"; };
 		F3EFEBFD2C98E6F3005471CF /* AppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconView.swift; sourceTree = "<group>"; };
+		F3F891622C992ACE00A4639E /* PaywallScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallScrollView.swift; sourceTree = "<group>"; };
 		FA14AACA2BE80E0B001C7486 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		FA14AACC2BE84F43001C7486 /* SupabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseManager.swift; sourceTree = "<group>"; };
 		FA1ECBE72C2A7C6400B79D7E /* CallManagerNewDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManagerNewDirection.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 			isa = PBXGroup;
 			children = (
 				FA976F512C520E1300A66D4F /* CallScreen.swift */,
+				F3F891622C992ACE00A4639E /* PaywallScrollView.swift */,
 				F3EFEBF52C97F0F2005471CF /* SettingsView.swift */,
 				FA976F612C5CB48900A66D4F /* SpeakingAvatar.swift */,
 				FA6002432C621E6E00E58B10 /* ConversationStateView.swift */,
@@ -670,6 +673,7 @@
 				F3EFEBF42C97B6E3005471CF /* SecondaryButton.swift in Sources */,
 				F3E72E4E2BF96240001FB6E4 /* CustomTextPromptTeView.swift in Sources */,
 				FA976F622C5CB48900A66D4F /* SpeakingAvatar.swift in Sources */,
+				F3F891632C992ACE00A4639E /* PaywallScrollView.swift in Sources */,
 				FA6002442C621E6E00E58B10 /* ConversationStateView.swift in Sources */,
 				F3B5AB1A2BACE488009CDBB5 /* XMarkButton.swift in Sources */,
 				F3EFEBFC2C98E6E1005471CF /* ManageSubscriptionView.swift in Sources */,

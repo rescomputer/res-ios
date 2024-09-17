@@ -13,7 +13,9 @@ struct SettingsView: View {
 
     @ObservedObject var callManager: CallManagerNewDirection
 
-    @State private var isSubscribed: Bool = true
+    @State private var isSubscribed: Bool = false
+    @State private var showPaywallSheet = false
+
     // @State private var selectedVoiceProvider = "default"
     // @State private var selectedAIModel = "gpt-4o"
     // @State private var selectedLanguage = "en"
@@ -133,7 +135,7 @@ struct SettingsView: View {
                 Section(header: Text("Community")) {
                     
                     Button(action: {
-                        if let url = URL(string: "https://twitter.com/resapp") {
+                        if let url = URL(string: "https://x.com/res_computer") {
                             openURL(url)
                         }
                     }) {
@@ -148,7 +150,7 @@ struct SettingsView: View {
                         }
                 
                     Button(action: {
-                        if let url = URL(string: "https://discord.gg/resapp") {
+                        if let url = URL(string: "https://discord.gg/Fjf2mRkqsV") {
                             openURL(url)
                         }
                     }) {
@@ -201,7 +203,7 @@ struct SettingsView: View {
 
                 Section(header: Text("Legal")) {
                     Button(action: {
-                        if let url = URL(string: "https://resapp.com/privacy") {
+                        if let url = URL(string: "https://res.computer/privacy-policy") {
                             openURL(url)
                         }
                     }) {
@@ -216,7 +218,7 @@ struct SettingsView: View {
                         }
                     
                     Button(action: {
-                        if let url = URL(string: "https://resapp.com/terms") {
+                        if let url = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") {
                             openURL(url)
                         }
                     }) {
@@ -339,7 +341,7 @@ struct SettingsView: View {
                     Image("logo-res")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 80, height: 40)
+                        .frame(width: 80, height: 35)
                         .zIndex(1)
                     Text("Pro")
                         .font(.system(size: 16, weight: .bold, design: .rounded))
@@ -394,6 +396,19 @@ struct SettingsView: View {
                         lineWidth: 1
                     )
             )
+            .onTapGesture {
+                showPaywallSheet = true
+            }
+            .sheet(isPresented: $showPaywallSheet) {
+                PaywallScrollView(
+                    dismissAction: { showPaywallSheet = false },
+                    onSuccessfulPurchase: {
+                        // Handle successful purchase here
+                        showPaywallSheet = false
+                    }
+                )
+                //.environmentObject(userViewModel) // Make sure to pass the userViewModel
+            }
             // .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 5)    
             // .padding(.vertical, 10)
         }
