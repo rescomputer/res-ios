@@ -221,6 +221,7 @@ private func bottomSheetContents(geometry: GeometryProxy) -> some View {
             .padding(.horizontal)
             .padding(.top, 4)
             .padding(.bottom, 8)
+            Spacer()
             
             if !isInCall {
                 ScrollView {

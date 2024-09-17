@@ -111,10 +111,22 @@ struct SettingsView: View {
                     HStack {
                         Image(systemName: "tortoise.fill")
                             .foregroundColor(.black.opacity(0.3))
-                        Slider(value: $voiceSpeed, in: 0.5...2.0, step: 0.1)
+                        Slider(value: $callManager.voiceSpeed, in: 0.5...2.0, step: 0.1) { changing in
+                                if !changing {
+                                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                                    generator.impactOccurred()
+                                    UserDefaults.standard.set(callManager.voiceSpeed, forKey: "voiceSpeed")
+                                }
+                            }
                         Image(systemName: "hare.fill")
                             .foregroundColor(.black.opacity(0.3))
                     }
+                }
+                
+                Section(header: Text("Privacy")) {
+                    Toggle("Privacy Mode", isOn: $callManager.hipaaEnabled)
+                        .tint(.orange)
+
                 }
                
 

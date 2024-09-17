@@ -50,6 +50,11 @@ import AVFoundation
             UserDefaults.standard.set(voiceModel, forKey: "voiceModel")
         }
     }
+    @Published var voiceSpeed: Double {
+        didSet {
+            UserDefaults.standard.set(voiceSpeed, forKey: "voiceSpeed")
+        }
+    }
 
     enum CallState: String {
         case started, loading, ended
@@ -82,6 +87,7 @@ import AVFoundation
         self.voiceProvider = UserDefaults.standard.string(forKey: "voiceProvider") ?? "defaultProvider"
         self.voiceId = UserDefaults.standard.string(forKey: "voiceId") ?? "defaultVoiceId"
         self.voiceModel = UserDefaults.standard.string(forKey: "voiceModel")
+        self.voiceSpeed = UserDefaults.standard.double(forKey: "voiceSpeed") != 0 ? UserDefaults.standard.double(forKey: "voiceSpeed") : 1.0
     }
 
     func setupVapi() {
@@ -192,7 +198,8 @@ import AVFoundation
         
         var voiceDictionary: [String: Any] = [
             "provider": selectedPersona.voice.provider,
-            "voiceId": selectedPersona.voice.id
+            "voiceId": selectedPersona.voice.id,
+            //"voiceSpeed": voiceSpeed
         ]
 
         if let model = selectedPersona.voice.model {
