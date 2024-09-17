@@ -7,6 +7,8 @@ import AVFoundation
 @MainActor class CallManagerNewDirection: ObservableObject {
     var audioPlayer: AVAudioPlayer?
     @Published var isMuted: Bool = false
+    private var audioSession: AVAudioSession { AVAudioSession.sharedInstance() }
+
     @Published var currentTranscript: String = ""
     @Published var hipaaEnabled: Bool {
         didSet {
@@ -145,15 +147,29 @@ import AVFoundation
     }
 
     func toggleMute() {
+        // Immediately update the UI
         isMuted.toggle()
-        if isMuted {
-            // Implement mute functionality here
-            // For example, if you're using AVAudioEngine:
-            // audioEngine.inputNode.volume = 0
-        } else {
-            // Implement unmute functionality here
-            // For example, if you're using AVAudioEngine:
-            // audioEngine.inputNode.volume = 1
+        
+        // Perform audio session change in the background
+        Task {
+            await setAudioSessionMute(isMuted)
+        }
+    }
+    
+    private func setAudioSessionMute(_ mute: Bool) async {
+        do {
+            if mute {
+                try await audioSession.setCategory(.playback, mode: .default)
+            } else {
+                try await audioSession.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .mixWithOthers])
+            }
+            try await audioSession.setActive(true)
+        } catch {
+            print("Failed to set audio session: \(error.localizedDescription)")
+            // Revert the mute state if there was an error
+            await MainActor.run {
+                self.isMuted = !mute
+            }
         }
     }
     

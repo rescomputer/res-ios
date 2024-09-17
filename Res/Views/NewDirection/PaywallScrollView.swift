@@ -37,7 +37,7 @@ struct PaywallScrollView: View {
                         .cornerRadius(2.5)
                         .padding(.top, 12)
                     Spacer()
-                        .frame(height: 80)
+                        .frame(height: 120)
                     paywallScrollContent()
                     Spacer()
                 }

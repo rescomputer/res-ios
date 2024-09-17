@@ -14,6 +14,7 @@ struct CallScreen: View {
     @State private var isSettingsActive = false
 
     @StateObject private var callManager = CallManagerNewDirection()
+    @State private var isLocalMuted: Bool = false
     @State private var settingsOffset: CGFloat = UIScreen.main.bounds.width
     private static let SHEET_POSITION_BOTTOM_FLOAT = CGFloat(100)
     private static let SHEET_POSITION_MIDDLE: BottomSheetPosition = .relative(0.31)
@@ -211,10 +212,10 @@ private func bottomSheetContents(geometry: GeometryProxy) -> some View {
                         action: endCall
                     )
                     .frame(maxWidth: .infinity)
-                    
                     SecondaryCircleButton(
-                        iconName: callManager.isMuted ? "speaker.wave.3" : "speaker.slash",
+                        iconName: isLocalMuted ? "mic.slash.fill" : "mic.fill",
                         action: {
+                            isLocalMuted.toggle()
                             callManager.toggleMute()
                         }
                     )
