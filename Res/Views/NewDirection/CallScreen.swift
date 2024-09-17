@@ -129,10 +129,17 @@ struct CallScreen: View {
                             personaImage: selectedPersona.image,
                             showDebugInfo: false
                         )
-                        Text(selectedPersona.name)
-                            .font(.digital7(size: 28))
-                            .foregroundColor(.white)
-                            .padding(.bottom)
+                        ZStack {
+                            Text(selectedPersona.name)
+                                .font(.digital7(size: 28))
+                                .foregroundColor(.white)
+                                .padding(.bottom)
+                                .blur(radius: 5)
+                            Text(selectedPersona.name)
+                                .font(.digital7(size: 28))
+                                .foregroundColor(.white)
+                                .padding(.bottom)
+                        }
                         ConversationStateView(
                             callState: $callManager.callState,
                             conversationState: $callManager.conversationState,
@@ -170,10 +177,17 @@ struct CallScreen: View {
                                         personaToUpdate = selectedPersona
                                         showingImagePicker = true
                                     }
-                                Text(selectedPersona.name)
-                                    .font(.digital7(size: 28))
-                                    .padding(.bottom, 12)
-                                    .foregroundColor(.white)
+                                ZStack {
+                                    Text(selectedPersona.name)
+                                        .font(.digital7(size: 28))
+                                        .padding(.bottom, 12)
+                                        .foregroundColor(.white)
+                                        .blur(radius: 5)
+                                    Text(selectedPersona.name)
+                                        .font(.digital7(size: 28))
+                                        .padding(.bottom, 12)
+                                        .foregroundColor(.white)
+                                }
                                 Text(selectedPersona.description)
                                     .foregroundColor(.white)
                                 Button(action: toggleBottomSheetPosition) {
@@ -213,7 +227,7 @@ private func bottomSheetContents(geometry: GeometryProxy) -> some View {
                     )
                     .frame(maxWidth: .infinity)
                     SecondaryCircleButton(
-                        iconName: isLocalMuted ? "mic.slash.fill" : "mic.fill",
+                        iconName: isLocalMuted ? "speaker.slash" : "speaker",
                         action: {
                             isLocalMuted.toggle()
                             callManager.toggleMute()
