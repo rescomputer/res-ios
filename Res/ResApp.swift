@@ -28,7 +28,7 @@ struct ResApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if isLaunchScreenPresented {
+            if isLaunchScreenPresented && !hasCompletedOnboarding {
                 LaunchScreenView()
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
