@@ -210,6 +210,14 @@ private func bottomSheetContents(geometry: GeometryProxy) -> some View {
                         type: .red,
                         action: endCall
                     )
+                    .frame(maxWidth: .infinity)
+                    
+                    SecondaryCircleButton(
+                        iconName: callManager.isMuted ? "speaker.wave.3" : "speaker.slash",
+                        action: {
+                            callManager.toggleMute()
+                        }
+                    )
                 } else {
                     PrimaryButton(
                         title: "Call",

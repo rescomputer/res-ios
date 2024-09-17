@@ -6,6 +6,7 @@ import AVFoundation
 
 @MainActor class CallManagerNewDirection: ObservableObject {
     var audioPlayer: AVAudioPlayer?
+    @Published var isMuted: Bool = false
     @Published var currentTranscript: String = ""
     @Published var hipaaEnabled: Bool {
         didSet {
@@ -141,6 +142,19 @@ import AVFoundation
                 }
             }
             .store(in: &cancellables)
+    }
+
+    func toggleMute() {
+        isMuted.toggle()
+        if isMuted {
+            // Implement mute functionality here
+            // For example, if you're using AVAudioEngine:
+            // audioEngine.inputNode.volume = 0
+        } else {
+            // Implement unmute functionality here
+            // For example, if you're using AVAudioEngine:
+            // audioEngine.inputNode.volume = 1
+        }
     }
     
     func handleCallAction() async {
