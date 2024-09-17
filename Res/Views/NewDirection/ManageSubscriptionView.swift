@@ -19,7 +19,8 @@ struct ManageSubscriptionView: View {
                     }
                 }) {
                     Image(systemName: "chevron.left")
-                        .foregroundColor(.black)
+                        .foregroundColor(.orange)
+                        .font(.system(size: 16, weight: .bold, design: .rounded))
                 }
                 Spacer()
                 Text("Manage Subscription")
