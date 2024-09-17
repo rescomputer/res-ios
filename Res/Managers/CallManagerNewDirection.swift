@@ -6,6 +6,9 @@ import AVFoundation
 
 @MainActor class CallManagerNewDirection: ObservableObject {
     var audioPlayer: AVAudioPlayer?
+    @Published var isMuted: Bool = false
+    private var audioSession: AVAudioSession { AVAudioSession.sharedInstance() }
+
     @Published var currentTranscript: String = ""
     @Published var hipaaEnabled: Bool {
         didSet {
@@ -14,9 +17,46 @@ import AVFoundation
             print("Saved hipaaEnabled to UserDefaults: \(savedValue)")
         }
     }
-
-    init() {
-        self.hipaaEnabled = UserDefaults.standard.bool(forKey: "hipaaEnabled")
+        
+    @Published var model: String {
+        didSet {
+            UserDefaults.standard.set(model, forKey: "model")
+        }
+    }
+    
+    @Published var fallbackModels: [String] {
+        didSet {
+            UserDefaults.standard.set(fallbackModels, forKey: "fallbackModels")
+        }
+    }
+    
+    @Published var firstMessage: String {
+        didSet {
+            UserDefaults.standard.set(firstMessage, forKey: "firstMessage")
+        }
+    }
+    
+    @Published var voiceProvider: String {
+        didSet {
+            UserDefaults.standard.set(voiceProvider, forKey: "voiceProvider")
+        }
+    }
+    
+    @Published var voiceId: String {
+        didSet {
+            UserDefaults.standard.set(voiceId, forKey: "voiceId")
+        }
+    }
+    
+    @Published var voiceModel: String? {
+        didSet {
+            UserDefaults.standard.set(voiceModel, forKey: "voiceModel")
+        }
+    }
+    @Published var voiceSpeed: Double {
+        didSet {
+            UserDefaults.standard.set(voiceSpeed, forKey: "voiceSpeed")
+        }
     }
 
     enum CallState: String {
@@ -40,6 +80,17 @@ import AVFoundation
     }
     public var localAudioLevel: Float {
         self.conversationState == .userSpeaking ? (vapi?.localAudioLevel ?? 0) : 0
+    }
+
+    init() {
+        self.hipaaEnabled = UserDefaults.standard.bool(forKey: "hipaaEnabled")
+        self.model = UserDefaults.standard.string(forKey: "model") ?? "gpt-4o"
+        self.fallbackModels = UserDefaults.standard.stringArray(forKey: "fallbackModels") ?? ["gpt-4-0125-preview", "gpt-4-1106-preview"]
+        self.firstMessage = UserDefaults.standard.string(forKey: "firstMessage") ?? "Hello!"
+        self.voiceProvider = UserDefaults.standard.string(forKey: "voiceProvider") ?? "defaultProvider"
+        self.voiceId = UserDefaults.standard.string(forKey: "voiceId") ?? "defaultVoiceId"
+        self.voiceModel = UserDefaults.standard.string(forKey: "voiceModel")
+        self.voiceSpeed = UserDefaults.standard.double(forKey: "voiceSpeed") != 0 ? UserDefaults.standard.double(forKey: "voiceSpeed") : 1.0
     }
 
     func setupVapi() {
@@ -93,6 +144,33 @@ import AVFoundation
                 }
             }
             .store(in: &cancellables)
+    }
+
+    func toggleMute() {
+        // Immediately update the UI
+        isMuted.toggle()
+        
+        // Perform audio session change in the background
+        Task {
+            await setAudioSessionMute(isMuted)
+        }
+    }
+    
+    private func setAudioSessionMute(_ mute: Bool) async {
+        do {
+            if mute {
+                try await audioSession.setCategory(.playback, mode: .default)
+            } else {
+                try await audioSession.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .mixWithOthers])
+            }
+            try await audioSession.setActive(true)
+        } catch {
+            print("Failed to set audio session: \(error.localizedDescription)")
+            // Revert the mute state if there was an error
+            await MainActor.run {
+                self.isMuted = !mute
+            }
+        }
     }
     
     func handleCallAction() async {
@@ -150,41 +228,39 @@ import AVFoundation
         
         var voiceDictionary: [String: Any] = [
             "provider": selectedPersona.voice.provider,
-            "voiceId": selectedPersona.voice.id
+            "voiceId": selectedPersona.voice.id,
+            //"voiceSpeed": voiceSpeed
         ]
 
         if let model = selectedPersona.voice.model {
             voiceDictionary["model"] = model
         }
         
-        let assistant = [
+        let assistant: [String: Any] = [
             "model": [
                 "provider": "openai",
-                "model": "gpt-4o",
-                "fallbackModels": [
-                    "gpt-4-0125-preview",
-                    "gpt-4-1106-preview"
-                ],
+                "model": model,
+                "fallbackModels": fallbackModels,
                 "messages": [
                     ["role": "system",
                      "content": selectedPersona.systemPrompt]
                 ],
-                "maxTokens": 1000, // Maximum
+                "maxTokens": 1000
             ],
-            "hipaaEnabled": UserDefaults.standard.bool(forKey: "hipaaEnabled"),
+            "hipaaEnabled": hipaaEnabled,
             "silenceTimeoutSeconds": 120,
-            "maxDurationSeconds": 1800, // Maximum
+            "maxDurationSeconds": 1800,
             "numWordsToInterruptAssistant": 1,
             "responseDelaySeconds": 0,
             "llmRequestDelaySeconds": 0,
-            "firstMessage": selectedPersona.firstMessage,
+            "firstMessage": firstMessage,
             "voice": voiceDictionary,
             "transcriber": [
                 "language": "en",
                 "model": "nova-2",
                 "provider": "deepgram"
             ]
-        ] as [String: Any]
+        ]
         
         do {
             let call = try await vapi.start(assistant: assistant)

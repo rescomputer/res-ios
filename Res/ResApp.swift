@@ -28,7 +28,7 @@ struct ResApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if isLaunchScreenPresented {
+            if isLaunchScreenPresented && !hasCompletedOnboarding {
                 LaunchScreenView()
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -42,6 +42,8 @@ struct ResApp: App {
             } else {
                 CallScreen()
                     .persistentSystemOverlays(.hidden)
+                    .statusBarHidden(true)
+                    .preferredColorScheme(.light)
             }
         }
         .environmentObject(resAppModel)

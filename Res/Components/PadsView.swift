@@ -1,8 +1,9 @@
 import SwiftUI
 
 struct PadsView: View {
-    let personas: [Persona]
+    @EnvironmentObject var personaData: PersonaData
     @Binding var selectedPersonaId: UUID?
+    
     let spacing: CGFloat = 14
     let rows: Int = 3
     let columns: Int = 3
@@ -13,17 +14,18 @@ struct PadsView: View {
                 HStack(spacing: spacing) {
                     ForEach(0..<columns, id: \.self) { column in
                         let index = row * columns + column
-                        if index < personas.count {
-                            PadButton(selectedPersonaId: $selectedPersonaId, persona: personas[index])
+                        if index < personaData.defaultPersonas.count {
+                            let persona = personaData.defaultPersonas[index]
+                            PadButton(selectedPersonaId: $selectedPersonaId, persona: persona)
                         } else {
-                            BlankPad()  // Renders a blank pad if there are not enough personas
+                            BlankPad()
                         }
                     }
                 }
             }
         }
-        .padding(spacing)
-        .background(Color.white) // Ensures the entire view background is white
+        .padding(.horizontal, 15)
+        .padding(.bottom, 20)
     }
 }
 
@@ -31,7 +33,6 @@ struct BlankPad: View {
     var body: some View {
         PadButton.defaultPadBackground
             .aspectRatio(7/4, contentMode: .fit)  // Ensure the aspect ratio matches the persona pads
-            .background(Color.white) // Ensures the blank pad background is white
     }
 }
 
@@ -54,7 +55,6 @@ struct PadButton: View {
         .onLongPressGesture(minimumDuration: 0.05, pressing: { isPressing in
             self.isTouched = isPressing
         }, perform: {})
-        .background(Color.white) // Ensures the pad button background is white
     }
 
     private var padBackground: some View {
@@ -123,7 +123,7 @@ struct PadButton: View {
             .stroke(Color(hex: "666666"), lineWidth: 1)
             .fill(
                 LinearGradient(
-                    gradient: Gradient(colors: [Color(hex: "EFEFEF"), Color(hex: "FDFDFD")]),
+                    gradient: Gradient(colors: [Color(red: 0.906, green: 0.906, blue: 0.867), Color(red: 0.863, green: 0.863, blue: 0.816)]),
                     startPoint: .top,
                     endPoint: .bottom
                 )
@@ -175,12 +175,21 @@ struct PadButton: View {
     static var defaultPadBackground: some View {
         RoundedRectangle(cornerRadius: 15)
             .stroke(Color(hex: "666666"), lineWidth: 1)
-            .fill(Color.white)
-            .shadow(color: Color.black.opacity(0.2), radius: 3, x: 0, y: 3)
-            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+            .fill(
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color(red: 0.973, green: 0.973, blue: 0.949),
+                        Color(red: 0.953, green: 0.953, blue: 0.914)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
+            .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 3)
+            .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 5)
             .overlay(
                 RoundedRectangle(cornerRadius: 15)
-                    .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                    .stroke(Color.white.opacity(1), lineWidth: 2)
                     .blur(radius: 1)
                     .offset(x: -1, y: -1)
                     .mask(
@@ -196,9 +205,10 @@ struct PadButton: View {
 }
 
 struct PadsView_Previews: PreviewProvider {
-    @State static var selectedPersonaId: UUID? = defaultPersonas[2].id
+    @State static var selectedPersonaId: UUID? = DefaultPersonas.getDefaultPersonas().first?.id
 
     static var previews: some View {
-        PadsView(personas: defaultPersonas, selectedPersonaId: $selectedPersonaId)
+        PadsView(selectedPersonaId: $selectedPersonaId)
+            .environmentObject(PersonaData())
     }
 }

@@ -7,6 +7,62 @@
 
 import SwiftUI
 
+struct SecondaryCircleButton: View {
+    var iconName: String
+    var action: () -> Void
+
+    var body: some View {
+        Button(action: {
+            action()
+        }) {
+            Image(systemName: iconName)
+                .font(.system(size: 20))
+                .symbolRenderingMode(.hierarchical)
+                .foregroundColor(Color(red: 0.224, green: 0.216, blue: 0.161))
+                .frame(width: 44, height: 44)
+                .background(
+                    LinearGradient(gradient: Gradient(colors: [Color(red: 0.973, green: 0.973, blue: 0.949), Color(red: 0.953, green: 0.953, blue: 0.914)]), startPoint: .top, endPoint: .bottom)
+                        .cornerRadius(22)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 50)
+                        .stroke(Color.black.opacity(0.2), lineWidth: 1)
+                        .blur(radius: 1)
+                        .offset(x: 0, y: 1)
+                        .mask(RoundedRectangle(cornerRadius: 40).fill(LinearGradient(gradient: Gradient(colors: [Color.black, Color.clear]), startPoint: .top, endPoint: .bottom)))
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 50)
+                        .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                        .blur(radius: 1)
+                        .offset(x: 0, y: -1)
+                        .mask(RoundedRectangle(cornerRadius: 40).fill(LinearGradient(gradient: Gradient(colors: [Color.clear, Color.white]), startPoint: .top, endPoint: .bottom)))
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 40, style: .continuous)
+                        .strokeBorder(
+                            LinearGradient(
+                                colors: [
+                                    Color.white.opacity(0.5),
+                                    Color.white.opacity(0),
+                                    Color.black.opacity(0.5)
+                                ],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            ),
+                            lineWidth: 1
+                        )
+                        .blendMode(.overlay)
+                        .blur(radius: 1.0)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 50)
+                        .stroke(Color.black.opacity(0.4), lineWidth: 1)
+                )
+        }
+    }
+}
+
 struct SecondaryButton: View {
     var title: String
     var action: () -> Void
@@ -21,9 +77,9 @@ struct SecondaryButton: View {
                 .padding(.vertical, 16)
                 .frame(maxWidth: .infinity)
                 .background(
-                    LinearGradient(gradient: Gradient(colors: [Color(red: 0.914, green: 0.914, blue: 0.878), Color(red: 0.914, green: 0.914, blue: 0.878)]), startPoint: .top, endPoint: .bottom)
+                    LinearGradient(gradient: Gradient(colors: [Color(red: 0.973, green: 0.973, blue: 0.949), Color(red: 0.953, green: 0.953, blue: 0.914)]), startPoint: .top, endPoint: .bottom)
                         .cornerRadius(40)
-                        .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 1)
+                       // .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 40)
@@ -38,6 +94,23 @@ struct SecondaryButton: View {
                         .blur(radius: 1)
                         .offset(x: 0, y: -1)
                         .mask(RoundedRectangle(cornerRadius: 40).fill(LinearGradient(gradient: Gradient(colors: [Color.clear, Color.white]), startPoint: .top, endPoint: .bottom)))
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 40, style: .continuous)
+                        .strokeBorder(
+                            LinearGradient(
+                                colors: [
+                                    Color.white.opacity(0.5),
+                                    Color.white.opacity(0),
+                                    Color.black.opacity(0.5)
+                                ],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            ),
+                            lineWidth: 1
+                        )
+                        .blendMode(.overlay)
+                        .blur(radius: 1.0)
                 )
         }
     }
