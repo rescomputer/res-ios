@@ -13,7 +13,7 @@ struct SettingsView: View {
 
     @ObservedObject var callManager: CallManagerNewDirection
 
-    @State private var isSubscribed: Bool = false
+    @State private var isSubscribed: Bool = true
     // @State private var selectedVoiceProvider = "default"
     // @State private var selectedAIModel = "gpt-4o"
     // @State private var selectedLanguage = "en"
@@ -22,13 +22,73 @@ struct SettingsView: View {
     // @State private var wordsToInterrupt = 1.0
     @State private var voiceSpeed = 1.0
     @State private var buildNumber: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "Unknown"
+
+    @State private var isManageSubscriptionActive = false
+    @State private var isAppIconSelectionActive = false
+    @State private var subscriptionOffset: CGFloat = UIScreen.main.bounds.width
+    @State private var appIconOffset: CGFloat = UIScreen.main.bounds.width
     
     // let voiceProviders = ["default", "elevenlabs", "azure"] 
     // let aiModels = ["gpt-4o", "gpt-4-0125-preview", "gpt-4-1106-preview"]
     // let languages = ["en", "es", "fr", "de"] 
-
     var body: some View {
-        NavigationView {
+        ZStack {
+            mainSettingsView
+                .opacity(isManageSubscriptionActive || isAppIconSelectionActive ? 0 : 1)
+
+            ManageSubscriptionView(isActive: $isManageSubscriptionActive)
+                .offset(x: subscriptionOffset, y: 0)
+
+            AppIconView(isActive: $isAppIconSelectionActive)
+                .offset(x: appIconOffset, y: 0)
+        }
+        .accentColor(.orange)
+        .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+        .onChange(of: isManageSubscriptionActive) { newValue in
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.8, blendDuration: 0)) {
+                subscriptionOffset = newValue ? 0 : UIScreen.main.bounds.width
+            }
+        }
+        .onChange(of: isAppIconSelectionActive) { newValue in
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.8, blendDuration: 0)) {
+                appIconOffset = newValue ? 0 : UIScreen.main.bounds.width
+            }
+        }
+    }
+
+    private var mainSettingsView: some View {
+
+        VStack(spacing: 0) {
+            // Custom navigation bar
+            HStack {
+                Button(action: {
+                    isActive = false
+                }) {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                        // Text("RES")
+                    }
+                    .foregroundColor(.orange)
+                    .font(.system(size: 16, weight: .bold, design: .rounded))
+                }
+                Spacer()
+                Text("Settings")
+                    .font(.system(size: 16, weight: .bold, design: .rounded))
+                    .foregroundColor(Color(red: 0.271, green: 0.267, blue: 0.2))
+                Spacer()
+                Button(action: {
+                    // feedback flow
+                }) {
+                    HStack {
+                        Image(systemName: "questionmark.bubble")
+                        // Text("RES")
+                    }
+                    .foregroundColor(.orange)
+                    .font(.system(size: 16, weight: .bold, design: .rounded))
+                }
+            }
+            .padding()
+            .background(Color(red: 0.945, green: 0.945, blue: 0.918))
             Form {
                 if isSubscribed {
                     membershipSection
@@ -56,38 +116,7 @@ struct SettingsView: View {
                             .foregroundColor(.black.opacity(0.3))
                     }
                 }
-
-
-                Section(header: Text("Support")) {
-                    Button(action: {
-                        if let url = URL(string: "mailto:support@resapp.com") {
-                            openURL(url)
-                        }
-                    }) {
-                        HStack {
-                            Text("Feedback")
-                                .font(.system(size: 16, weight: .regular, design: .rounded))
-                                .foregroundColor(.black)
-                            Spacer()
-                            Image(systemName: "ellipsis")
-                                    .rotationEffect(.degrees(90))
-                                    .foregroundColor(.gray)
-                        }       
-                    }
-
-                    Button(action: {
-                        // RATE REZ
-                    }) {
-                        HStack {
-                            Text("Review RES")
-                                .font(.system(size: 16, weight: .regular, design: .rounded))
-                                .foregroundColor(.black)
-                            Spacer()
-                            Image(systemName: "link")
-                                    .foregroundColor(.gray)
-                            }
-                        }
-                }                
+               
 
                 Section(header: Text("Community")) {
                     
@@ -113,6 +142,19 @@ struct SettingsView: View {
                     }) {
                         HStack {
                             Text("Discord")
+                                .font(.system(size: 16, weight: .regular, design: .rounded))
+                                .foregroundColor(.black)
+                            Spacer()
+                            Image(systemName: "link")
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                    
+                    Button(action: {
+                        // RATE REZ
+                    }) {
+                        HStack {
+                            Text("Review RES")
                                 .font(.system(size: 16, weight: .regular, design: .rounded))
                                 .foregroundColor(.black)
                             Spacer()
@@ -241,55 +283,42 @@ struct SettingsView: View {
             }
             .background(Color(red: 0.945, green: 0.945, blue: 0.918))
             .scrollContentBackground(.hidden) 
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        isActive = false
-                    }) {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(.orange)
-                        Text("RES")
-                            .font(.system(size: 16, weight: .regular, design: .rounded))
-                            .foregroundColor(.orange)
-                    }
-                }
-                ToolbarItem(placement: .principal) {
-                    Text("Settings")
-                        .font(.system(size: 18, weight: .bold, design: .rounded))
-                        .foregroundColor(Color(red: 0.271, green: 0.267, blue: 0.2))
-                }
-            }
         }
-        .accentColor(.orange)
-        .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
-    }
+   }
 
     private var membershipSection: some View {
-        Section(header: Text("Membership")) {
+        Section(header: Text("RES Pro")) {
             Button(action: {
-                // Action for RES Pro (to be implemented)
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.8, blendDuration: 0)) {
+                    isManageSubscriptionActive = true
+                    subscriptionOffset = 0
+                }
             }) {
                 HStack {
-                    Text("RES Pro")
+                    Text("Manage Subscription")
                         .font(.system(size: 16, weight: .regular, design: .rounded))
                         .foregroundColor(.black)
                     Spacer()
                     Image(systemName: "chevron.right")
-                            .foregroundColor(.gray)
-                    }
+                        .foregroundColor(.gray)
                 }
-            Button(action: {
-                    // Action for RES Pro (to be implemented)
-                }) {
-                    HStack {
-                        Text("App Icon")
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.gray)
-                        }
-                    }
             }
+            Button(action: {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.8, blendDuration: 0)) {
+                    isAppIconSelectionActive = true
+                    appIconOffset = 0
+                }
+            }) {
+                HStack {
+                    Text("App Icon")
+                        .font(.system(size: 16, weight: .regular, design: .rounded))
+                        .foregroundColor(.black)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(.gray)
+                }
+            }
+        }
     }
     
     private var subscriptionCard: some View {
