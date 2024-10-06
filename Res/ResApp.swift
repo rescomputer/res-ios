@@ -5,27 +5,66 @@
 //  Created by Richard Burton on 03/05/2024.
 //
 
-import SwiftUI
+import RevenueCat
+import RevenueCatUI
 import Sentry
 import Supabase
+import SwiftUI
+
+class PurchasesDelegateHandler: NSObject, PurchasesDelegate {
+    var userViewModel: UserViewModel
+
+    init(userViewModel: UserViewModel) {
+        self.userViewModel = userViewModel
+    }
+
+    func purchases(_ purchases: Purchases, receivedUpdated customerInfo: CustomerInfo) {
+        DispatchQueue.main.async {
+            self.userViewModel.updateSubscriptionStatus(force: true)
+        }
+    }
+}
 
 @main
 struct ResApp: App {
     @StateObject private var resAppModel = ResAppModel()
     @StateObject private var callManager = CallManager()
+    @StateObject var userViewModel = UserViewModel()
+
+    private let purchasesDelegateHandler: PurchasesDelegateHandler
 
     // @State private var isChangelogViewShowing = false
     // @State private var isAppSettingsViewShowing = false
     // @State private var isModalStepTwoEnabled = false
-    // @State private var hasCompletedOnboarding = false 
+    // @State private var hasCompletedOnboarding = false
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
     @State private var isLaunchScreenPresented = true
     // let isDebugMode = Config.buildConfiguration == .debug
 
     init() {
         SentryManager.shared.start(enableDebugLogging: false)
+
+        // Configure RevenueCat first
+        Purchases.configure(
+            with: Configuration.Builder(withAPIKey: Constants.apiKey)
+                .with(usesStoreKit2IfAvailable: true)
+                .build()
+        )
+
+        // Enable debug logs for RevenueCat (remove in production)
+        Purchases.logLevel = .debug
+
+        // Initialize UserViewModel
+        let userVM = UserViewModel()
+        self._userViewModel = StateObject(wrappedValue: userVM)
+
+        // Create PurchasesDelegateHandler
+        self.purchasesDelegateHandler = PurchasesDelegateHandler(userViewModel: userVM)
+
+        // Set the delegate after configuration
+        Purchases.shared.delegate = self.purchasesDelegateHandler
     }
-    
+
     var body: some Scene {
         WindowGroup {
             if isLaunchScreenPresented && !hasCompletedOnboarding {
@@ -48,8 +87,18 @@ struct ResApp: App {
         }
         .environmentObject(resAppModel)
         .environmentObject(callManager)
+        .environmentObject(userViewModel)
+
     }
-    
+
+    // MARK: - PurchasesDelegate Methods
+    func purchases(_ purchases: Purchases, receivedUpdated customerInfo: CustomerInfo) {
+        // Handle updated customer info
+        DispatchQueue.main.async {
+            userViewModel.updateSubscriptionStatus(force: true)
+        }
+    }
+
     // var body: some Scene {
     //     WindowGroup {
     //         if isLaunchScreenPresented && !resAppModel.isAuthenticated {

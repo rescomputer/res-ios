@@ -5,6 +5,7 @@
 //  Created by Steven Sarmiento on 9/15/24.
 //
 
+import MessageUI
 import SwiftUI
 
 struct SettingsView: View {
@@ -30,6 +31,11 @@ struct SettingsView: View {
     @State private var isAppIconSelectionActive = false
     @State private var subscriptionOffset: CGFloat = UIScreen.main.bounds.width
     @State private var appIconOffset: CGFloat = UIScreen.main.bounds.width
+    @State private var isFeedbackFlowActive = false
+    @State private var feedbackOffset: CGFloat = UIScreen.main.bounds.width
+
+    @State private var isShowingMailView = false
+    @State private var mailResult: Result<MFMailComposeResult, Error>?
 
     // let voiceProviders = ["default", "elevenlabs", "azure"]
     // let aiModels = ["gpt-4o", "gpt-4-0125-preview", "gpt-4-1106-preview"]
@@ -44,6 +50,9 @@ struct SettingsView: View {
 
             AppIconView(isActive: $isAppIconSelectionActive)
                 .offset(x: appIconOffset, y: 0)
+
+            // FeedbackFlow(isPresented: $isFeedbackFlowActive)
+            //     .offset(x: feedbackOffset, y: 0)
         }
         .accentColor(.orange)
         .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
@@ -57,6 +66,11 @@ struct SettingsView: View {
                 appIconOffset = newValue ? 0 : UIScreen.main.bounds.width
             }
         }
+        // .onChange(of: isFeedbackFlowActive) { newValue in
+        //     withAnimation(.spring(response: 0.3, dampingFraction: 0.8, blendDuration: 0)) {
+        //         feedbackOffset = newValue ? 0 : UIScreen.main.bounds.width
+        //     }
+        // }
     }
 
     private var mainSettingsView: some View {
@@ -80,7 +94,9 @@ struct SettingsView: View {
                     .foregroundColor(Color(red: 0.271, green: 0.267, blue: 0.2))
                 Spacer()
                 Button(action: {
-                    // feedback flow
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8, blendDuration: 0)) {
+                        isShowingMailView = true
+                    }
                 }) {
                     HStack {
                         Image(systemName: "questionmark.bubble")
@@ -414,9 +430,72 @@ struct SettingsView: View {
                     showPaywallSheet = false
                 }
             )
+            .paywallFooter()
             //.environmentObject(userViewModel) // Make sure to pass the userViewModel
         }
-        // .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 5)
-        // .padding(.vertical, 10)
+        .sheet(isPresented: $isShowingMailView) {
+            MailView(
+                isShowing: $isShowingMailView, result: $mailResult,
+                subject: "RES Feedback",
+                messageBody: "I'd like to report a bug or suggest a feature.",
+                toRecipients: ["support@artificialtechnologycorp.com"])
+        }
     }
+}
+
+struct MailView: UIViewControllerRepresentable {
+    @Binding var isShowing: Bool
+    @Binding var result: Result<MFMailComposeResult, Error>?
+
+    let subject: String
+    let messageBody: String
+    let toRecipients: [String]
+
+    class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
+        @Binding var isShowing: Bool
+        @Binding var result: Result<MFMailComposeResult, Error>?
+
+        init(isShowing: Binding<Bool>, result: Binding<Result<MFMailComposeResult, Error>?>) {
+            _isShowing = isShowing
+            _result = result
+        }
+
+        func mailComposeController(
+            _ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult,
+            error: Error?
+        ) {
+            defer {
+                isShowing = false
+            }
+            if let error = error {
+                self.result = .failure(error)
+            } else {
+                self.result = .success(result)
+            }
+        }
+    }
+
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(isShowing: $isShowing, result: $result)
+    }
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<MailView>)
+        -> MFMailComposeViewController
+    {
+        let vc = MFMailComposeViewController()
+        vc.mailComposeDelegate = context.coordinator
+        vc.setSubject(subject)
+        vc.setMessageBody(messageBody, isHTML: false)
+        vc.setToRecipients(toRecipients)
+
+        // Set the modal presentation style to full screen
+        vc.modalPresentationStyle = .fullScreen
+
+        return vc
+    }
+
+    func updateUIViewController(
+        _ uiViewController: MFMailComposeViewController,
+        context: UIViewControllerRepresentableContext<MailView>
+    ) {}
 }
