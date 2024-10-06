@@ -82,7 +82,7 @@ struct AppIconView: View {
                             ]
 
                             LazyVGrid(columns: columns, spacing: 20) {
-                                ForEach(["AppIcon", "retro", "simple", "vaporwave", "testflight", "classic", "futurism", "8-bit", "apple-retro", "intelligence"], id: \.self) { icon in
+                                ForEach(["AppIcon", "retro", "simple", "vaporwave", "testflight", "classic", "futurism", "apple-retro", "intelligence", "bit"], id: \.self) { icon in
                                     VStack {
                                         Image(uiImage: UIImage(named: icon) ?? UIImage())
                                             .resizable()

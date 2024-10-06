@@ -30,6 +30,11 @@
 		F31C74A92C16B2FA009023D6 /* ChangelogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C74A82C16B2FA009023D6 /* ChangelogView.swift */; };
 		F31C74ED2C17483D009023D6 /* CustomizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31C74EC2C17483D009023D6 /* CustomizationView.swift */; };
 		F31C74F72C1A3A47009023D6 /* res_unboxing.riv in Resources */ = {isa = PBXBuildFile; fileRef = F31C74F62C1A3A47009023D6 /* res_unboxing.riv */; };
+		F32F58642C9D270A00B79E73 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = F32F58632C9D270A00B79E73 /* RevenueCat */; };
+		F32F58662C9D270A00B79E73 /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = F32F58652C9D270A00B79E73 /* RevenueCatUI */; };
+		F32F58682C9D27CE00B79E73 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32F58672C9D27C900B79E73 /* Constants.swift */; };
+		F32F586C2C9D290900B79E73 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32F586B2C9D290400B79E73 /* UserViewModel.swift */; };
+		F32F586E2C9D384D00B79E73 /* FeedbackFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32F586D2C9D384600B79E73 /* FeedbackFlow.swift */; };
 		F3B4EC5E2C1238F0000B80EF /* OnboardingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4EC5D2C1238F0000B80EF /* OnboardingAnimation.swift */; };
 		F3B5AB182BACDB8A009CDBB5 /* HalfModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */; };
 		F3B5AB1A2BACE488009CDBB5 /* XMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */; };
@@ -149,6 +154,9 @@
 		F31C74A82C16B2FA009023D6 /* ChangelogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangelogView.swift; sourceTree = "<group>"; };
 		F31C74EC2C17483D009023D6 /* CustomizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizationView.swift; sourceTree = "<group>"; };
 		F31C74F62C1A3A47009023D6 /* res_unboxing.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = res_unboxing.riv; sourceTree = "<group>"; };
+		F32F58672C9D27C900B79E73 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F32F586B2C9D290400B79E73 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		F32F586D2C9D384600B79E73 /* FeedbackFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackFlow.swift; sourceTree = "<group>"; };
 		F3B4EC5D2C1238F0000B80EF /* OnboardingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAnimation.swift; sourceTree = "<group>"; };
 		F3B5AB172BACDB8A009CDBB5 /* HalfModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalView.swift; sourceTree = "<group>"; };
 		F3B5AB192BACE488009CDBB5 /* XMarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMarkButton.swift; sourceTree = "<group>"; };
@@ -202,9 +210,11 @@
 				FA5550A32BEDD4AF00C7648B /* Sentry in Frameworks */,
 				FAB04A3F2C1A468D0081AF59 /* RiveRuntime in Frameworks */,
 				FA14AAD42BE850A0001C7486 /* Supabase in Frameworks */,
+				F32F58642C9D270A00B79E73 /* RevenueCat in Frameworks */,
 				18F723892BAC2695003F44FA /* ActivityKit.framework in Frameworks */,
 				FA976F572C5222CC00A66D4F /* BottomSheet in Frameworks */,
 				FACDDA3C2C18BFAF006395BE /* Vapi in Frameworks */,
+				F32F58662C9D270A00B79E73 /* RevenueCatUI in Frameworks */,
 				FA14AAD22BE850A0001C7486 /* Functions in Frameworks */,
 				FA14AAD02BE850A0001C7486 /* Auth in Frameworks */,
 				FA5550A22BEDD4AF00C7648B /* (null) in Frameworks */,
@@ -268,6 +278,7 @@
 		18D289E12B9713FE008742FB /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				F32F586A2C9D28FC00B79E73 /* Models */,
 				FA976F592C5769B600A66D4F /* dial.up.sound.m4a */,
 				FA6B5B6D2C47A29500544929 /* Assets.xcassets */,
 				FA6C0E212C29113100D9F7A2 /* Resources */,
@@ -326,6 +337,14 @@
 				F3EFEBF32C97B6E3005471CF /* SecondaryButton.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		F32F586A2C9D28FC00B79E73 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F32F586B2C9D290400B79E73 /* UserViewModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		F3B27D672C1240E000AFCDAD /* Rive Files */ = {
@@ -405,6 +424,7 @@
 				F3EFEBF52C97F0F2005471CF /* SettingsView.swift */,
 				FA976F612C5CB48900A66D4F /* SpeakingAvatar.swift */,
 				FA6002432C621E6E00E58B10 /* ConversationStateView.swift */,
+				F32F586D2C9D384600B79E73 /* FeedbackFlow.swift */,
 				FA4713572C6330FB00DD226C /* SpeakingUser.swift */,
 				F3EFEBFB2C98E6E1005471CF /* ManageSubscriptionView.swift */,
 				F3EFEBFD2C98E6F3005471CF /* AppIconView.swift */,
@@ -415,6 +435,7 @@
 		FA6C0E1E2C28E77B00D9F7A2 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				F32F58672C9D27C900B79E73 /* Constants.swift */,
 				FA6C0E1F2C28E79200D9F7A2 /* DefaultPersonas.swift */,
 			);
 			path = Data;
@@ -471,6 +492,8 @@
 				00571768FCC847B5B370CACD /* Sentry */,
 				FAB04A3E2C1A468D0081AF59 /* RiveRuntime */,
 				FA976F562C5222CC00A66D4F /* BottomSheet */,
+				F32F58632C9D270A00B79E73 /* RevenueCat */,
+				F32F58652C9D270A00B79E73 /* RevenueCatUI */,
 			);
 			productName = Her;
 			productReference = 18D289DF2B9713FE008742FB /* Res.app */;
@@ -541,7 +564,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
-				LastUpgradeCheck = 1530;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					18D289DE2B9713FE008742FB = {
 						CreatedOnToolsVersion = 15.2;
@@ -575,6 +598,7 @@
 				F31C74F52C1A2C40009023D6 /* XCRemoteSwiftPackageReference "ios" */,
 				FAB04A3D2C1A468D0081AF59 /* XCRemoteSwiftPackageReference "rive-ios" */,
 				FA976F552C5222CC00A66D4F /* XCRemoteSwiftPackageReference "BottomSheet" */,
+				F32F58622C9D270A00B79E73 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */,
 			);
 			productRefGroup = 18D289E02B9713FE008742FB /* Products */;
 			projectDirPath = "";
@@ -666,6 +690,7 @@
 				FA4713582C6330FB00DD226C /* SpeakingUser.swift in Sources */,
 				FA6C0E1B2C27D58900D9F7A2 /* PadsView.swift in Sources */,
 				FA5550A52BEDD4CF00C7648B /* AuthScreenView.swift in Sources */,
+				F32F586C2C9D290900B79E73 /* UserViewModel.swift in Sources */,
 				FA14AACD2BE84F43001C7486 /* SupabaseManager.swift in Sources */,
 				FA6C0E202C28E79200D9F7A2 /* DefaultPersonas.swift in Sources */,
 				F3EFEBFE2C98E6F3005471CF /* AppIconView.swift in Sources */,
@@ -676,6 +701,7 @@
 				F3F891632C992ACE00A4639E /* PaywallScrollView.swift in Sources */,
 				FA6002442C621E6E00E58B10 /* ConversationStateView.swift in Sources */,
 				F3B5AB1A2BACE488009CDBB5 /* XMarkButton.swift in Sources */,
+				F32F58682C9D27CE00B79E73 /* Constants.swift in Sources */,
 				F3EFEBFC2C98E6E1005471CF /* ManageSubscriptionView.swift in Sources */,
 				F3EFEBF22C97B1D9005471CF /* OnboardingView.swift in Sources */,
 				1849A54B2BBDD6FF00A4BCF1 /* HomeScreenWidgetGuideView.swift in Sources */,
@@ -687,6 +713,7 @@
 				F3B4EC5E2C1238F0000B80EF /* OnboardingAnimation.swift in Sources */,
 				FA6C0E272C29182400D9F7A2 /* UIFont+Extensions.swift in Sources */,
 				B91C79312C011C3E00D45290 /* WaveTest.swift in Sources */,
+				F32F586E2C9D384D00B79E73 /* FeedbackFlow.swift in Sources */,
 				1849A54D2BBDDF7100A4BCF1 /* LaunchScreenViewController.swift in Sources */,
 				FA9576522BEA4CDD00EC2FA4 /* SentryManager.swift in Sources */,
 				F3B5AB182BACDB8A009CDBB5 /* HalfModalView.swift in Sources */,
@@ -867,22 +894,22 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA14AACA2BE80E0B001C7486 /* Config.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "retro futurism classic testflight simple vaporwave 8-bit apple-retro intelligence";
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "retro futurism classic testflight simple vaporwave apple-retro intelligence bit";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = GZ2BM4VMQU;
+				DEVELOPMENT_TEAM = 7Z8DGQQN87;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Res/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Res;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_NSCameraUsageDescription = "The camera is needed for some of the audio libraries.";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "The app needs to access your microphone to chat.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Res needs access to your microphone to enable voice conversations with AI personas.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Res needs access to your photo library to allow you to upload persona images.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -891,13 +918,13 @@
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mikejonas.res;
+				PRODUCT_BUNDLE_IDENTIFIER = com.artificialtechnologycorp.res;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -913,22 +940,22 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA14AACA2BE80E0B001C7486 /* Config.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "retro futurism classic testflight simple vaporwave 8-bit apple-retro intelligence";
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "retro futurism classic testflight simple vaporwave apple-retro intelligence bit";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = GZ2BM4VMQU;
+				DEVELOPMENT_TEAM = 7Z8DGQQN87;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Res/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Res;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_NSCameraUsageDescription = "The camera is needed for some of the audio libraries.";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "The app needs to access your microphone to chat.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Res needs access to your microphone to enable voice conversations with AI personas.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Res needs access to your photo library to allow you to upload persona images.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -937,13 +964,13 @@
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mikejonas.res;
+				PRODUCT_BUNDLE_IDENTIFIER = com.artificialtechnologycorp.res;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -961,11 +988,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Q5W3Y6NXEB;
+				DEVELOPMENT_TEAM = 7Z8DGQQN87;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mikejonas.res.tests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.artificialtechnologycorp.res.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -980,11 +1007,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Q5W3Y6NXEB;
+				DEVELOPMENT_TEAM = 7Z8DGQQN87;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mikejonas.res.tests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.artificialtechnologycorp.res.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -996,14 +1023,13 @@
 		18D28A0A2B9713FF008742FB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Q5W3Y6NXEB;
+				DEVELOPMENT_TEAM = 7Z8DGQQN87;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mikejonas.res.uitests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.artificialtechnologycorp.res.uitests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1015,14 +1041,13 @@
 		18D28A0B2B9713FF008742FB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Q5W3Y6NXEB;
+				DEVELOPMENT_TEAM = 7Z8DGQQN87;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mikejonas.res.uitests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.artificialtechnologycorp.res.uitests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1038,7 +1063,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GZ2BM4VMQU;
+				DEVELOPMENT_TEAM = 7Z8DGQQN87;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Res Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Res AI";
@@ -1050,7 +1075,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mikejonas.res.extension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.artificialtechnologycorp.res.extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1070,7 +1095,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GZ2BM4VMQU;
+				DEVELOPMENT_TEAM = 7Z8DGQQN87;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Res Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Res AI";
@@ -1082,7 +1107,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mikejonas.res.extension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.artificialtechnologycorp.res.extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1170,6 +1195,14 @@
 				kind = branch;
 			};
 		};
+		F32F58622C9D270A00B79E73 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.3.4;
+			};
+		};
 		FA14AACE2BE850A0001C7486 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/supabase/supabase-swift.git";
@@ -1209,6 +1242,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BD1914C8DBDC4BCDB400579F /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
 			productName = Sentry;
+		};
+		F32F58632C9D270A00B79E73 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F32F58622C9D270A00B79E73 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCat;
+		};
+		F32F58652C9D270A00B79E73 /* RevenueCatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F32F58622C9D270A00B79E73 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCatUI;
 		};
 		FA14AACF2BE850A0001C7486 /* Auth */ = {
 			isa = XCSwiftPackageProductDependency;
